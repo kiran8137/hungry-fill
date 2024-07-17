@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1043826955704",
+    "project_id": "hungry-fill",
+    "storage_bucket": "hungry-fill.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1043826955704:android:3f600614f28170c86c6b4d",
+        "android_client_info": {
+          "package_name": "com.example.hungry_fill"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkw6SrHz-CB059KeFP7ukROEy2LnMb874"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

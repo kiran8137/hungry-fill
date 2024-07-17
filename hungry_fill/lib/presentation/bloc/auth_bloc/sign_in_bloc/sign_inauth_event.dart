@@ -1,0 +1,60 @@
+ 
+
+import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+
+@immutable
+sealed class AuthEvent extends Equatable{
+
+ @override
+   
+  List<Object?> get props => [];
+}
+
+class SendOtpEvent extends AuthEvent{
+
+  final String? phonenumber;
+  final BuildContext context;
+  final String? username;
+  final String? useremail;
+   
+  SendOtpEvent( {this.username, this.useremail, required this.phonenumber , required this.context});
+
+  @override
+  
+  List<Object?> get props => [phonenumber];
+}
+
+
+class VerifyOtpEvent extends AuthEvent{
+
+   
+  final String otpCode;
+  final String verificationid;
+  final String? username;
+  final String? useremail;
+   
+
+  VerifyOtpEvent({required this.otpCode, required this.verificationid , required this.username , required this.useremail});
+
+  @override
+  
+  List<Object?> get props => [otpCode , verificationid ];
+  
+
+}
+
+class UserLoggedStatusEvent extends AuthEvent{}
+
+// class UserAlreadyRegisteredEvent extends AuthEvent{
+
+//   final String phonenumber;
+
+//   UserAlreadyRegisteredEvent({required this.phonenumber});
+// }
+
+class UserRegisteredEvent extends AuthEvent{
+   final String phonenumber;
+
+   UserRegisteredEvent({required this.phonenumber});
+}
