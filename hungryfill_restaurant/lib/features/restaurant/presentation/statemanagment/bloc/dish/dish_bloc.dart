@@ -56,7 +56,9 @@ class DishBloc extends Bloc<DishEvent, DishState> {
 
   FutureOr<void> deleteDish(DeleteDishEvent event, Emitter<DishState> emit) async{
     try{
+      emit(DishInitial());
       await dishrepository.deleteDish(dishid: event.dishid);
+      emit(DeleteDishSuccesState());
     }
     catch(error){
 

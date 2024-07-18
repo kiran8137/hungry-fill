@@ -14,7 +14,7 @@ class DishModel extends DishEntity{
   super.imageurl
  }
  ){
-   print(" dish model : $dishname");
+   print(" dish model : $dishname  dishid: $dishid ,  ");
  }
 
 factory DishModel.fromJson({ required Map<String , dynamic> json}){

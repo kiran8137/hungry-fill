@@ -9,7 +9,7 @@ import 'package:hungry_fill/presentation/pages/main_pages/main_page.dart';
  
 
 class OtpScreen extends StatelessWidget {
-  const OtpScreen({super.key, required this.otpdata, required this.username, required this.useremail});
+  const OtpScreen({super.key, required this.otpdata,   this.username,   this.useremail});
 
   final OTPModel otpdata;
   final String? username;

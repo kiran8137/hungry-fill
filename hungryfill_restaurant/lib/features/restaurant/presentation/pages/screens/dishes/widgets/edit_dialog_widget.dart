@@ -63,7 +63,7 @@ class _DishEditWidgetState extends State<DishEditWidget> {
                         onTap: () {
 
                             DishModel? dish = DishModel(
-                              
+                              dishid: widget.dish.dishid,
                               dishname: dishnamecontroller.text,
                               dishprice: dishpricecontroller.text,
                               stock: dishstockcontroller.text,
@@ -72,6 +72,7 @@ class _DishEditWidgetState extends State<DishEditWidget> {
                             );
 
                             BlocProvider.of<DishBloc>(context).add(DishUpdateEvent(updatedDish: dish));
+                            BlocProvider.of<DishBloc>(context).add(GetDishesEvent());
                             Navigator.pop(context);
 
                           // if (dishnamecontroller.text.isEmpty ||

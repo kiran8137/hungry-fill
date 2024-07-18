@@ -8,3 +8,14 @@ sealed class LogInBlocState extends Equatable {
 }
 
 final class LogInBlocInitial extends LogInBlocState {}
+
+final class OtpSentStateLogin extends LogInBlocState{}
+
+final class OtpVerifiedStateLogin extends LogInBlocState{
+
+}
+
+final class UserNotRegisteredStateLogin extends LogInBlocState{}
+
+
+

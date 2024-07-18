@@ -108,6 +108,7 @@ class DishDetailWidget extends StatelessWidget {
                      
                     return   DishEditWidget(
                       dish: DishModel(
+                        dishid: dish.dishid,
                         dishname: dish.dishname,
                         dishprice: dish.dishprice,
                         stock: dish.stock,

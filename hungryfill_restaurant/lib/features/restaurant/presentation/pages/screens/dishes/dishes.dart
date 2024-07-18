@@ -139,9 +139,41 @@ class DishScreen extends StatelessWidget {
               )
              );
             }
+
+
+            
+
+
+            if(state is DeleteDishSuccesState){
+               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Center(
+                      child: Text(
+                          style: GoogleFonts.aBeeZee(fontSize: 15),
+                          "Dish Deleted Successfully"),
+                    ),
+                  ),
+                ),
+                behavior: SnackBarBehavior.floating,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+              )
+             );
+            }
             
           },
           builder: (context, state) {
+
+            if(state is DishInitial){
+              return const Center(child: CircularProgressIndicator(),);
+            }
+
             if(state is GetDishesSuccessState){
               final dishes = state.dishes;
               return SizedBox(

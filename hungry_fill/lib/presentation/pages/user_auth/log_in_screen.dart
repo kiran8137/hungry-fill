@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
+import 'package:hungry_fill/presentation/bloc/auth_bloc/login_bloc/log_in_bloc_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/auth_bloc/sign_in_bloc/sign_in_bloc.dart';
+import 'package:hungry_fill/presentation/pages/user_auth/sign_in_screen.dart';
 import 'package:hungry_fill/presentation/pages/user_auth/widgets/text_form.dart';
 
 class LogInScreen extends StatefulWidget {
@@ -27,8 +31,54 @@ class _LogInScreenState extends State<LogInScreen> {
           child: Padding(
         padding: const EdgeInsets.all(15.0),
         child: BlocConsumer<AuthBloc, AuthState>(
+
           listener: (context, state) {
-            // TODO: implement listener
+
+            if(state is UserNotRegisteredStateLogin){
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Center(
+                      child: Text(
+                          style: GoogleFonts.aBeeZee(fontSize: 15),
+                          "No user found in this number"),
+                    ),
+                  ),
+                ),
+                behavior: SnackBarBehavior.floating,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+              ),
+              );
+            }
+
+             if(state is OtpSentStateLogin){
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Center(
+                      child: Text(
+                          style: GoogleFonts.aBeeZee(fontSize: 15),
+                          "OTP Sent Successfully"),
+                    ),
+                  ),
+                ),
+                behavior: SnackBarBehavior.floating,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+              ),
+              );
+             }
           },
           builder: (context, state) {
             return Column(
@@ -76,6 +126,8 @@ class _LogInScreenState extends State<LogInScreen> {
                           ),
                           GestureDetector(
                             onTap: () {
+                              log("tapped log in");
+                              BlocProvider.of<LogInBloc>(context).add(SendOtpEventLogin(phonenumber: mobilecontrollerlogin.text, context: context));
                               setState(() {
                                 isotpsend = true;
                               });
@@ -111,7 +163,9 @@ class _LogInScreenState extends State<LogInScreen> {
                             color: Color.fromARGB(255, 118, 118, 118))),
                     const SizedBox(width: 10),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> const SignInScreen()));
+                      },
                       child: const Text("Sign Up",
                           style: TextStyle(
                             fontSize: 15,

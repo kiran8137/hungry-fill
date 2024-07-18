@@ -107,7 +107,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       if(result == false){
         emit(UserNotRegistered());
       }else{
-         await authrepository.sendOtpLogInPage(phonenumber: event.phonenumber);
+        // await authrepository.sendOtpLogInPage(phonenumber: event.phonenumber);
          emit(AuthOtpSent());
       }
     }

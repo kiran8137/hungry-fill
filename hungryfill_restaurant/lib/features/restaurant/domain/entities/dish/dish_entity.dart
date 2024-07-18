@@ -24,5 +24,5 @@ class DishEntity extends Equatable {
 
   @override
    
-  List<Object?> get props => [dishname , dishprice , stock , serve , category , imageurl];
+  List<Object?> get props => [dishid , dishname , dishprice , stock , serve , category , imageurl];
 }
