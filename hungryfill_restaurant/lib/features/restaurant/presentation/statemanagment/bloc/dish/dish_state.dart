@@ -26,3 +26,5 @@ const  GetDishesSuccessState({required this.dishes});
 
 
 }
+
+final class DeleteDishSuccesState extends DishState{}

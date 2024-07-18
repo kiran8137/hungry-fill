@@ -46,4 +46,15 @@ class AuthRepoImplementation extends AuthRepository{
      }
   }
   
+  @override
+  Future<void> resetPassword({required String email}) async {
+     
+     try{
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+
+     }catch(error){
+      log(error.toString());
+     }
+  }
+  
 }

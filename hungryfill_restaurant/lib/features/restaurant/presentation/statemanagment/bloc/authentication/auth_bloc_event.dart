@@ -50,3 +50,12 @@ class ResDetailAddEvent extends AuthEvent{
 
 
 class SignOutEvent extends AuthEvent{}
+
+class ResetPasswordEvent extends AuthEvent{
+
+ final String? email;
+
+ const ResetPasswordEvent({required this.email});
+
+  
+}

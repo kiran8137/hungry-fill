@@ -27,3 +27,7 @@ final class LogInSuccessState extends AuthState{}
 final class ResDetailSuccessState extends AuthState{}
 
 final class SignOutSuccesState extends AuthState{}
+
+final class ResetPassowrdEmailSendState extends AuthState{}
+
+final class ResetPasswordSuccesState extends AuthState{}

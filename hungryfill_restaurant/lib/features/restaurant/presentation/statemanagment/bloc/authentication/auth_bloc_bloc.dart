@@ -21,6 +21,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<LogInEvent>(logIn);
     on<ResDetailAddEvent>(addResDetail);
     on<SignOutEvent>(signOut);
+    on<ResetPasswordEvent>(resetPassword);
+
   }
 
   FutureOr<void> signIn(SignInEvent event, Emitter<AuthState> emit) async {
@@ -77,6 +79,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     }catch(error){
       emit(const ErrorState());
+      log(error.toString());
+    }
+  }
+
+  FutureOr<void> resetPassword(ResetPasswordEvent event, Emitter<AuthState> emit) async{
+
+    try{
+      await authRepository.resetPassword(email: event.email!);
+      emit(ResetPassowrdEmailSendState());
+    }catch(error){
+      emit(ErrorState());
       log(error.toString());
     }
   }

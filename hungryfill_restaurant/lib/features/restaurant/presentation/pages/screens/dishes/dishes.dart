@@ -106,7 +106,7 @@ class DishScreen extends StatelessWidget {
           ),
         ),
         // SizedBox(height: 45,),
-        DishHeader(),
+        const DishHeader(),
        // DishDetailWidget()
       //  Container(
       //   color: Colors.red,
@@ -152,7 +152,7 @@ class DishScreen extends StatelessWidget {
                      width: 1280,
                    height: 600,
                     child: ListView.separated(
-                      separatorBuilder: (context , index)=> Divider(),
+                      separatorBuilder: (context , index)=> const Divider(),
                        
                       itemCount: dishes.length,
                       itemBuilder: (context , index){
@@ -164,7 +164,7 @@ class DishScreen extends StatelessWidget {
               );
             } else{
                
-              return Center(child: CircularProgressIndicator(),);
+              return const Center(child:  Text("No dishes Available"),);
             
             }
            

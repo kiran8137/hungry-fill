@@ -32,3 +32,13 @@ class DishUpdateEvent extends DishEvent{
 }
 
 class GetDishesEvent extends DishEvent{}
+
+class DeleteDishEvent extends DishEvent{
+  final String? dishid;
+
+ const DeleteDishEvent({required this.dishid});
+
+  
+}
+
+

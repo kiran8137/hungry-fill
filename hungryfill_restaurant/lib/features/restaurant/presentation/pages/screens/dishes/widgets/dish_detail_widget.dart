@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/dish/dish_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/dishes/widgets/dish_header.dart';
+import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/dishes/widgets/edit_dialog_widget.dart';
+import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/dish/dish_bloc.dart';
 
 class DishDetailWidget extends StatelessWidget {
    const  DishDetailWidget({
@@ -96,15 +99,36 @@ class DishDetailWidget extends StatelessWidget {
     
                   SizedBox(width: 60,),
     
-                   Container(
-                        height: 30,
-                        width: 30,
-                        decoration: const BoxDecoration(
-                            
-                            //color: Colors.green,
-                            image: DecorationImage(
-                                image: AssetImage("assets/pencil (1).png"),
-                                fit: BoxFit.contain)),
+                   GestureDetector(
+                    onTap: (){
+                      showDialog(
+                  barrierDismissible: false,
+                  context: context, 
+                  builder: (context){
+                     
+                    return   DishEditWidget(
+                      dish: DishModel(
+                        dishname: dish.dishname,
+                        dishprice: dish.dishprice,
+                        stock: dish.stock,
+                        serve: dish.serve,
+                        category: dish.category,
+
+                      ),
+                    );
+                  }
+                  );
+                    },
+                     child: Container(
+                          height: 30,
+                          width: 30,
+                          decoration: const BoxDecoration(
+                              
+                              //color: Colors.green,
+                              image: DecorationImage(
+                                  image: AssetImage("assets/pencil (1).png"),
+                                  fit: BoxFit.contain)),
+                     ),
                    ),
                      const SizedBox(width: 80,),
                    GestureDetector(
@@ -120,7 +144,11 @@ class DishDetailWidget extends StatelessWidget {
                                 child: const Text("cancel")
                                 ),
                                  TextButton(
-                                onPressed: (){}, 
+                                onPressed: (){
+                                  BlocProvider.of<DishBloc>(context).add(DeleteDishEvent(dishid:  dish.dishid));
+                                  Navigator.pop(context);
+                                  BlocProvider.of<DishBloc>(context).add(GetDishesEvent());
+                                }, 
                                 child: const Text("Ok")
                                 )
                             ],

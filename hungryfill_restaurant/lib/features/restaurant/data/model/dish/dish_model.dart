@@ -32,6 +32,7 @@ factory DishModel.fromJson({ required Map<String , dynamic> json}){
 Map<String , dynamic> toJson(){
 
   return {
+    "dishId" : dishid,
     "dishName" : dishname,
     "dishPrice" : dishprice,
     "stock" : stock,
@@ -40,6 +41,33 @@ Map<String , dynamic> toJson(){
     "imageUrl" : imageurl
   };
 }
+
+
+DishModel copywith({
+    
+   
+  final String? dishid,
+  final String? dishname,
+  final String? dishprice,
+  final String? stock,
+  final String? serve,
+  final String? category,
+  final String? imageurl,
+
+  
+   }){
+    return DishModel(
+      
+      dishid: dishid ?? this.dishid,
+      dishname: dishname ?? this.dishname,
+      dishprice: dishprice ?? this.dishprice,
+      stock: stock ?? stock,
+      serve: serve ?? serve,
+      category: category ?? category,
+      imageurl: imageurl ?? imageurl
+      
+    );
+   }
  
 
 }
