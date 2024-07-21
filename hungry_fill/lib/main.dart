@@ -12,6 +12,7 @@ import 'package:hungry_fill/presentation/bloc/auth_bloc/sign_in_bloc/sign_in_blo
 import 'package:hungry_fill/presentation/bloc/restaurant_bloc/restaurant_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/user_bloc/users_bloc.dart';
 import 'package:hungry_fill/presentation/pages/splashscreen/splash_screen.dart';
+import 'package:hungry_fill/presentation/pages/user_auth/otp_screen.dart';
 import 'package:hungry_fill/presentation/pages/user_auth/sign_in_screen.dart';
 
 void main() async {

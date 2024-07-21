@@ -54,4 +54,6 @@ class UserAlreadyRegistered extends AuthState{}
 
 class UserNotRegistered extends AuthState{}
 
+class ResentOtpSentState extends AuthState{}
+
    

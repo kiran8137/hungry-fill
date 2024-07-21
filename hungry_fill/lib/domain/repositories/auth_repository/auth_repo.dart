@@ -42,4 +42,14 @@ Future<bool> checkUserAlreadyRegistered({required String? phonenumber});
 
 Future<void> sendOtpLogin({required String phonenumber ,  required BuildContext context,});
 
+
+Future<void> resentOtpSent({
+   required String phoneNumber,
+   required String? username,
+   required String? useremail,
+   required int? forceresendingtoken
+});
+
+
+
 }

@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hungryfill_restaurant/core/theme/color.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/dish/dish_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/dish/dish_bloc.dart';
+ 
 
 class DishAddDialog extends StatelessWidget {
   DishAddDialog({super.key});
@@ -40,18 +41,19 @@ class DishAddDialog extends StatelessWidget {
                               dishpricecontroller.text.isEmpty ||
                               dishstockcontroller.text.isEmpty ||
                               dishservecontroller.text.isEmpty ||
-                              dishcategorycontroller.text.isEmpty){
-                                return ;
-                              }
-                            DishModel dish = DishModel(
-                                dishname: dishnamecontroller.text,
-                                dishprice: dishpricecontroller.text,
-                                stock: dishstockcontroller.text,
-                                serve: dishservecontroller.text,
-                                category: dishcategorycontroller.text);
+                              dishcategorycontroller.text.isEmpty) {
+                            return;
+                          }
+                          DishModel dish = DishModel(
+                              dishname: dishnamecontroller.text,
+                              dishprice: dishpricecontroller.text,
+                              stock: dishstockcontroller.text,
+                              serve: dishservecontroller.text,
+                              category: dishcategorycontroller.text);
                           BlocProvider.of<DishBloc>(context)
                               .add(DishAddEvent(dishmodel: dish));
-                              BlocProvider.of<DishBloc>(context).add(GetDishesEvent());
+                          BlocProvider.of<DishBloc>(context)
+                              .add(GetDishesEvent());
                           Navigator.pop(context);
                         },
                         child: Container(
@@ -106,12 +108,40 @@ class DishAddDialog extends StatelessWidget {
             Positioned(
                 top: 40,
                 left: 20,
-                child: Container(
-                  height: 120,
-                  width: 180,
-                  decoration: BoxDecoration(
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.circular(10)),
+                child: GestureDetector(
+                  onTap: () {
+                    BlocProvider.of<DishBloc>(context).add(DishImagePicker());
+                  },
+                  child: BlocConsumer<DishBloc, DishState>(
+                    listener: (context, state) {
+                      // TODO: implement listener
+                    },
+                    builder: (context, state) {
+
+                      if(state is DishImagPickerLoaded){
+                        return Container(
+                        height: 120,
+                        width: 180,
+                        decoration: BoxDecoration(
+                           // color: Colors.grey,
+                            borderRadius: BorderRadius.circular(10)
+                            ),
+
+                            // child: Image.memory(state.file!.bytes!),
+                      );
+                      }else{
+                        return Container(
+                           height: 120,
+                        width: 180,
+                        decoration: BoxDecoration(
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.circular(10)
+                            ),
+                        );
+                      }
+                      
+                    },
+                  ),
                 )),
             Positioned(
                 left: 230,

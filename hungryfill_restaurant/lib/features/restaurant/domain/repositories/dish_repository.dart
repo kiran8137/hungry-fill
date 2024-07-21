@@ -1,4 +1,5 @@
 
+import 'package:file_picker/file_picker.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/dish/dish_model.dart';
 
 abstract class DishRepository {
@@ -11,4 +12,7 @@ abstract class DishRepository {
   Future<void> deleteDish({required String? dishid});
 
   Future<void> updateDish({required DishModel dish});
+
+
+  Future<PlatformFile?> dishImagePicker();
 }

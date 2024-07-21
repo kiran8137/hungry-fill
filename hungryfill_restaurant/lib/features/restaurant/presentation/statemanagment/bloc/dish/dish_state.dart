@@ -28,3 +28,10 @@ const  GetDishesSuccessState({required this.dishes});
 }
 
 final class DeleteDishSuccesState extends DishState{}
+
+final class DishImagPickerLoaded extends DishState{
+ final PlatformFile? file;
+
+ const DishImagPickerLoaded({this.file});
+ 
+}

@@ -21,6 +21,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
      on<VerifyOtpEvent>(verifyOtp);
      on<UserLoggedStatusEvent>(getUserLoggedStatus);
      on<UserRegisteredEvent>(checkUserRegistered);
+     on<ResentOtpEvent>(resentOtp);
 
   }
 
@@ -115,5 +116,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       log(error.toString());
       
     }
+  }
+
+  FutureOr<void> resentOtp(ResentOtpEvent event, Emitter<AuthState> emit) async {
+
+    await authrepository.resentOtpSent(phoneNumber: event.phonenumber!, username: event.username, useremail: event.useremail, forceresendingtoken: event.forceresendingtoken);
+    
   }
 }

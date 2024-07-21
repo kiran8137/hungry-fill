@@ -34,6 +34,7 @@ class AuthenticationRepoImplement extends AuthRepository {
             print(error.toString());
           },
           codeSent: (verificationId, forceResendingToken) {
+            log(forceResendingToken.toString());
             //navigate to the otp page
             Navigator.push(
                 context,
@@ -42,6 +43,7 @@ class AuthenticationRepoImplement extends AuthRepository {
                           username: username,
                           useremail: useremail,
                           otpdata: OTPModel(
+                            phonenumber: phoneNumber,
                               verificationId: verificationId,
                               forceResendingToken: forceResendingToken),
                         )))));
@@ -142,5 +144,31 @@ class AuthenticationRepoImplement extends AuthRepository {
     } catch (error) {
       log(error.toString());
     }
+  }
+  
+  @override
+  Future<void> resentOtpSent({required String phoneNumber, required String? username, required String? useremail , required int? forceresendingtoken}) async{
+     
+     try{
+      await firebaseauth.verifyPhoneNumber(
+        forceResendingToken: forceresendingtoken,
+        phoneNumber: phoneNumber,
+          verificationCompleted: (phoneAuthCredential) {},
+          verificationFailed: (error) {
+            print(error.toString());
+          },
+          codeSent: (verificationId, forceResendingtoken) {
+             log(forceResendingtoken.toString());
+
+             
+            
+
+          },
+            codeAutoRetrievalTimeout: (verificationId) {}
+      );
+     }catch(error){
+      throw Exception(error.toString());
+
+     }
   }
 }

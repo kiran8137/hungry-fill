@@ -42,3 +42,4 @@ class DeleteDishEvent extends DishEvent{
 }
 
 
+class DishImagePicker extends DishEvent{}

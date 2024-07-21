@@ -1,19 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/core/otp_model/otp_model.dart';
+import 'package:hungry_fill/presentation/bloc/auth_bloc/login_bloc/log_in_bloc_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/auth_bloc/sign_in_bloc/sign_in_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/auth_bloc/sign_in_bloc/sign_inauth_event.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/main_page.dart';
  
+ 
 
-class OtpScreen extends StatelessWidget {
-  const OtpScreen({super.key, required this.otpdata,   this.username,   this.useremail});
+class OtpScreen extends StatefulWidget {
+    OtpScreen({super.key,   this.otpdata,   this.username,   this.useremail});
 
-  final OTPModel otpdata;
+  final OTPModel? otpdata;
   final String? username;
   final String? useremail;
+
+  @override
+  State<OtpScreen> createState() => _OtpScreenState();
+}
+
+class _OtpScreenState extends State<OtpScreen> {
+  bool isresend = false;
 
   @override
   Widget build(BuildContext context) {
@@ -35,11 +45,11 @@ class OtpScreen extends StatelessWidget {
             },
             builder: (context, state) {
 
-                  if(state is AuthInitial){
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-              }
+              //     if(state is AuthInitial){
+              //     return const Center(
+              //       child: CircularProgressIndicator(),
+              //     );
+              // }
 
               return Column(
                 children: [
@@ -88,10 +98,10 @@ class OtpScreen extends StatelessWidget {
                             onTap: () {
                               BlocProvider.of<AuthBloc>(context).add(
                                   VerifyOtpEvent(
-                                    username: username,
-                                    useremail: useremail,
+                                    username: widget.username,
+                                    useremail: widget.useremail,
                                       otpCode: otpcontroller.text,
-                                      verificationid: otpdata.verificationId!));
+                                      verificationid: widget.otpdata!.verificationId!));
                             },
                             child: Container(
                               decoration: BoxDecoration(
@@ -112,10 +122,39 @@ class OtpScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+                  SizedBox(height: 5,),
+
+                  TimerCountdown(
+                    format: CountDownTimerFormat.minutesSeconds,
+                    enableDescriptions: false,
+                    endTime: DateTime.now().add(Duration(seconds: 30)),
+
+                    onEnd: (){
+                       setState(() {
+                         isresend = !isresend;
+                       });
+                    },
+                    ),
+                  
                   const SizedBox(height: 20),
-                  Text(
-                    "Didn't get the OTP?",
-                    style: GoogleFonts.aBeeZee(color: Colors.grey),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Didn't get the OTP?",
+                        style: GoogleFonts.aBeeZee(color: Colors.grey),
+                      ),
+                      SizedBox(width: 5,),
+                      Visibility(
+                        visible: isresend,
+                        child: GestureDetector(
+                          onTap: (){
+                            BlocProvider.of<AuthBloc>(context).add(ResentOtpEvent(username: widget.username , useremail: widget.useremail,forceresendingtoken: widget.otpdata?.forceResendingToken , phonenumber: widget.otpdata?.phonenumber));
+                          },
+                          child: Text("Resend OTP")
+                          )
+                          )
+                    ],
                   ),
                 ],
               );

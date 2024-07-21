@@ -57,4 +57,22 @@ class UserRegisteredEvent extends AuthEvent{
    final String phonenumber;
 
    UserRegisteredEvent({required this.phonenumber});
+
+
+   @override
+  // TODO: implement props
+  List<Object?> get props => [phonenumber];
+}
+
+class ResentOtpEvent extends AuthEvent{
+  final int? forceresendingtoken ;
+  final String? username;
+  final String? useremail;
+  final String? phonenumber;
+
+  ResentOtpEvent({this.username, this.useremail, this.forceresendingtoken , this.phonenumber});
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [forceresendingtoken];
 }

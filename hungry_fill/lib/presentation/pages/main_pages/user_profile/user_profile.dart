@@ -6,6 +6,7 @@ import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/data/repository/auth_repo_impl/authentication_repo.dart';
 import 'package:hungry_fill/data/user_model/user_model.dart';
 import 'package:hungry_fill/presentation/bloc/user_bloc/users_bloc.dart';
+import 'package:hungry_fill/presentation/pages/main_pages/user_profile/components/components.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/user_profile/user_detail_page.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/widgets/profile_menu_widget.dart';
 import 'package:hungry_fill/presentation/pages/user_auth/log_in_screen.dart';
@@ -20,7 +21,8 @@ class UserProfileScreen extends StatelessWidget {
     SharedPreferences sharedpref = await SharedPreferences.getInstance();
     sharedpref.setBool(userloggedkey, false);
   FirebaseAuth.instance.signOut();
-
+  
+  
    
 }
 
@@ -34,6 +36,10 @@ class UserProfileScreen extends StatelessWidget {
             const SizedBox(
               height: 35,
             ),
+
+
+
+
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: GestureDetector(
@@ -50,72 +56,24 @@ class UserProfileScreen extends StatelessWidget {
                                 BlocProvider.of<UsersBloc>(context).add(UserGetEvent());
                               });
                 },
-                child: Container(
-                  height: 135,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      color: primarycolor,
-                      borderRadius: BorderRadius.circular(20)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 95,
-                          height: 95,
-                          decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.white,
-                              image: DecorationImage(
-                                  image: AssetImage("assets/userprofile.jpg"))),
-                        ),
-                        const SizedBox(width: 25),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            SizedBox(
-                              width: 120,
-                              child: Text(
-                                userinfo!.username!,
-                                style: GoogleFonts.abhayaLibre(
-                                    fontSize: 26, color: Colors.white),
-                                    overflow: TextOverflow.ellipsis,
-                                    softWrap: true,
-                                    
-                              ),
-                            ),
-                            Text(
-                              "Edit Profile >",
-                              style: GoogleFonts.aBeeZee(
-                                  fontSize: 12, color: Colors.white),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+                child: userProfileCard(userinfo: userinfo),
               ),
             ),
+
+
             const SizedBox(
               height: 10,
             ),
+
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Column(
                   children: [
-                    Container(
-                      width: 50,
-                      height: 50,
-                      decoration: const BoxDecoration(
-                          //shape: BoxShape.circle,
-                          color: Colors.white,
-                          image: DecorationImage(
-                              image: AssetImage("assets/paper-bag.png"))),
+                    GestureDetector(
+                      onTap: (){},
+                      child: ordersSection(),
                     ),
                     Text(
                       "Orders",
@@ -127,15 +85,7 @@ class UserProfileScreen extends StatelessWidget {
                 //SizedBox(width: 170,),
                 Column(
                   children: [
-                    Container(
-                      width: 50,
-                      height: 50,
-                      decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white,
-                          image: DecorationImage(
-                              image: AssetImage("assets/userprofile.jpg"))),
-                    ),
+                    totalAmountSection(),
                     Text(
                       "1000",
                       style: GoogleFonts.aBeeZee(fontWeight: FontWeight.w500),
@@ -144,6 +94,8 @@ class UserProfileScreen extends StatelessWidget {
                 )
               ],
             ),
+
+
             const SizedBox(
               height: 10,
             ),
@@ -236,6 +188,12 @@ class UserProfileScreen extends StatelessWidget {
       ),
     );
   }
+
+  
+
+ 
+
+  
 }
 
  

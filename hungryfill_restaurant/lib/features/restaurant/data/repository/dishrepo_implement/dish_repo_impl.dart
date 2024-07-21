@@ -3,6 +3,8 @@ import 'dart:js_interop_unsafe';
  
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:file_picker/src/platform_file.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/dish/dish_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/domain/repositories/dish_repository.dart';
@@ -87,6 +89,30 @@ class DishRepoImplementation extends DishRepository {
       log(error.toString());
      }
   }
+
+  @override
+  Future<PlatformFile?> dishImagePicker() async{
+    
+    try{
+      final result = await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: ['jpg', 'jpeg', 'png']
+
+      );
+      if(result !=null && result.files.isNotEmpty){
+        return result.files.first;
+      }
+    }catch(error){
+      
+      log(error.toString());
+      throw Exception(error.toString());
+       
+    }
+     
+  }
+
+
+  
 
 
   

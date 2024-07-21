@@ -14,6 +14,7 @@ class SendOtpEventLogin extends LogInBlocEvent{
   final BuildContext context;
    
    
+   
  const SendOtpEventLogin( { required this.phonenumber , required this.context});
 
   @override
@@ -23,11 +24,11 @@ class SendOtpEventLogin extends LogInBlocEvent{
    
 }
 
-class VerifyOtpEvent extends LogInBlocEvent{
+// class VerifyOtpEvent extends LogInBlocEvent{
 
-   final String otpCode;
-  final String verificationid;
+//    final String otpCode;
+//   final String verificationid;
 
- const VerifyOtpEvent({required this.otpCode, required this.verificationid});
+//  const VerifyOtpEvent({required this.otpCode, required this.verificationid});
 
-}
+// }

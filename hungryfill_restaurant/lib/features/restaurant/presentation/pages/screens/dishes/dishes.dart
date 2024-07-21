@@ -145,6 +145,7 @@ class DishScreen extends StatelessWidget {
 
 
             if(state is DeleteDishSuccesState){
+              
                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 content: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -165,6 +166,7 @@ class DishScreen extends StatelessWidget {
                 elevation: 0,
               )
              );
+             BlocProvider.of<DishBloc>(context).add(GetDishesEvent());
             }
             
           },

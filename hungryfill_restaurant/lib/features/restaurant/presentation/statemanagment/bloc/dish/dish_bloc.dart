@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/dish/dish_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/domain/repositories/dish_repository.dart';
@@ -19,6 +21,7 @@ class DishBloc extends Bloc<DishEvent, DishState> {
     on<GetDishesEvent>(getDishes);
     on<DeleteDishEvent>(deleteDish);
     on<DishUpdateEvent>(updateDish);
+    on<DishImagePicker>(getDishImage);
   }
 
   FutureOr<void> addDish(DishAddEvent event, Emitter<DishState> emit) async {
@@ -82,6 +85,24 @@ class DishBloc extends Bloc<DishEvent, DishState> {
       );
 
       await dishrepository.updateDish(dish: dish);
+
+    }catch(error){
+      log(error.toString());
+    }
+  }
+
+  FutureOr<void> getDishImage(DishImagePicker event, Emitter<DishState> emit) async {
+
+    try{
+
+      final imagefile = await dishrepository.dishImagePicker();
+
+      if(imagefile!=null){
+        
+        emit(DishImagPickerLoaded(file: imagefile));
+      }else{
+        emit(ErrorState());
+      }
 
     }catch(error){
       log(error.toString());

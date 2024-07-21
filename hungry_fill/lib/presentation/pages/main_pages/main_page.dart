@@ -1,4 +1,6 @@
 
+import 'dart:developer';
+
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +9,7 @@ import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/data/user_model/user_model.dart';
 import 'package:hungry_fill/presentation/bloc/restaurant_bloc/restaurant_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/user_bloc/users_bloc.dart';
+import 'package:hungry_fill/presentation/pages/main_pages/components_main_page/components.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/home_page/home_page.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/recent_orders/recent_order.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/reciepe_page/reciepe.dart';
@@ -46,39 +49,7 @@ UserModel? currentuserinfo;
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        
-          shape:   const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(50)
-            )
-          ),
-          bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(4),
-          child: Container(
-            color:  const Color.fromARGB(189, 14, 9, 45),
-            height: 1,
-          ),
-          ),
-
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('Location',
-              style: GoogleFonts.abhayaLibre(),
-              ),
-              Transform(
-                alignment: FractionalOffset.center,
-                transform: Matrix4.rotationZ(
-                          6.1415926535897932 / 4,
-                        ),
-                child: const ImageIcon(AssetImage("assets/next.png"),color: Colors.black,))
-              
-            ],
-          ),
-          centerTitle: true,
-      ),
+      appBar: appBar(),
 
       
 
@@ -112,6 +83,8 @@ UserModel? currentuserinfo;
         
     );
   }
+
+  
 }
 
 
