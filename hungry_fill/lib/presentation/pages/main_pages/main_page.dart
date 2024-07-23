@@ -11,7 +11,7 @@ import 'package:hungry_fill/presentation/bloc/restaurant_bloc/restaurant_bloc.da
 import 'package:hungry_fill/presentation/bloc/user_bloc/users_bloc.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/components_main_page/components.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/home_page/home_page.dart';
-import 'package:hungry_fill/presentation/pages/main_pages/recent_orders/recent_order.dart';
+import 'package:hungry_fill/presentation/pages/main_pages/recent_orders_page/recent_order.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/reciepe_page/reciepe.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/user_profile/user_profile.dart';
 
@@ -49,7 +49,7 @@ UserModel? currentuserinfo;
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: appBar(),
+      appBar: appBarMain(),
 
       
 

@@ -15,6 +15,8 @@ class DishAddDialog extends StatelessWidget {
   final TextEditingController dishservecontroller = TextEditingController();
   final TextEditingController dishcategorycontroller = TextEditingController();
 
+  List<bool> isSelected = [false, false];
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -22,6 +24,7 @@ class DishAddDialog extends StatelessWidget {
         height: 550,
         width: 1000,
         decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
             color: Colors.white,
             border: Border.all(color: Colors.black, width: 1)),
         child: Stack(
@@ -127,7 +130,7 @@ class DishAddDialog extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10)
                             ),
 
-                            // child: Image.memory(state.file!.bytes!),
+                             child: Image.memory(state.file!.bytes!),
                       );
                       }else{
                         return Container(
@@ -223,12 +226,26 @@ class DishAddDialog extends StatelessWidget {
                       ),
                       SizedBox(
                         height: 37,
-                        width: 100,
-                        child: TextFormField(
+                        width: 120,
+                        child: 
+                        TextFormField(
                           controller: dishcategorycontroller,
                           decoration: const InputDecoration(
                               border: OutlineInputBorder()),
                         ),
+
+                        // ToggleButtons(
+                        //   isSelected: isSelected,
+                        //   children: const [
+                        //      Text("Veg"),
+                        //     Text("NonVeg")
+                        //   ],
+                        //   onPressed: (int index){
+                        //     isSelected[index] = !isSelected[index];
+                        //   },
+                        //    color: primarycolor,
+                        //   selectedColor: Colors.red
+                        //   )
                       ),
                       const SizedBox(
                         height: 22,

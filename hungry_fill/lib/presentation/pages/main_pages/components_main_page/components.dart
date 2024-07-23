@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-AppBar appBar() {
+AppBar appBarMain() {
     return AppBar(
       
       backgroundColor: Colors.white,

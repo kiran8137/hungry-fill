@@ -147,7 +147,9 @@ class DishDetailWidget extends StatelessWidget {
                                         "Are you sure want to delete"),
                                     actions: [
                                       TextButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
                                           child: const Text("cancel")),
                                       TextButton(
                                           onPressed: () {

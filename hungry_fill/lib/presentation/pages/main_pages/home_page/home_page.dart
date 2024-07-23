@@ -163,6 +163,7 @@ class HomeScreen extends StatelessWidget {
                                             AssetImage("assets/biriyani.jpg"),
                                         fit: BoxFit.fill,
                                       )),
+                                      
                                 ),
                                 const SizedBox(
                                   width: 3,

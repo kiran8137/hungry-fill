@@ -11,6 +11,7 @@ import 'package:hungry_fill/presentation/bloc/auth_bloc/login_bloc/log_in_bloc_b
 import 'package:hungry_fill/presentation/bloc/auth_bloc/sign_in_bloc/sign_in_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/restaurant_bloc/restaurant_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/user_bloc/users_bloc.dart';
+import 'package:hungry_fill/presentation/pages/cart_page/cart_page.dart';
 import 'package:hungry_fill/presentation/pages/splashscreen/splash_screen.dart';
 import 'package:hungry_fill/presentation/pages/user_auth/otp_screen.dart';
 import 'package:hungry_fill/presentation/pages/user_auth/sign_in_screen.dart';
@@ -56,7 +57,8 @@ class MyApp extends StatelessWidget {
            
         ),
         home: 
-        const SplashScreen()
+        CartPage()
+        //const SplashScreen()
         //MainPage()
         // LogInScreen(),
         //OtpScreen()

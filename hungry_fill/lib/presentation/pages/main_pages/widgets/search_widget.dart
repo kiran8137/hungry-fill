@@ -17,7 +17,7 @@ class SearchWidget extends StatelessWidget {
         hintText: "Search Restaurants , foods",
         hintStyle:  const TextStyle(fontStyle: FontStyle.normal,color: Color.fromARGB(164, 158, 158, 158)),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(17),
+          borderRadius: BorderRadius.circular(15),
           borderSide: const BorderSide(color: Colors.white)
         ),
         fillColor: const Color.fromARGB(62, 207, 204, 204),
