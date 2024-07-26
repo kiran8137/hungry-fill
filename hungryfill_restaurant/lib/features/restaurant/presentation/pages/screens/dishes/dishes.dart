@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungryfill_restaurant/core/theme/color.dart';
+import 'package:hungryfill_restaurant/features/restaurant/data/repository/dishrepo_implement/dish_repo_impl.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/common_widgets/header_widget.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/dishes/widgets/add_dialog_widget.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/dishes/widgets/dish_detail_widget.dart';
@@ -95,10 +96,15 @@ class DishScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Center(
-                  child: Text(
-                    "search",
-                    style: GoogleFonts.inriaSans(
-                        fontSize: 35, fontWeight: FontWeight.bold),
+                  child: GestureDetector(
+                    onTap: (){
+                      getcat();
+                    },
+                    child: Text(
+                      "search",
+                      style: GoogleFonts.inriaSans(
+                          fontSize: 35, fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
               ),

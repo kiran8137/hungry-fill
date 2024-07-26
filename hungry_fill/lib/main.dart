@@ -4,11 +4,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hungry_fill/data/repository/auth_repo_impl/authentication_repo.dart';
+import 'package:hungry_fill/data/repository/dish_repo_imp/dish_repo_impl.dart';
 import 'package:hungry_fill/data/repository/restaurant_repo_impl/restaurant_repo_imp.dart';
 import 'package:hungry_fill/data/repository/user_repo_impl/user_repo.dart';
 import 'package:hungry_fill/firebase_options.dart';
 import 'package:hungry_fill/presentation/bloc/auth_bloc/login_bloc/log_in_bloc_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/auth_bloc/sign_in_bloc/sign_in_bloc.dart';
+import 'package:hungry_fill/presentation/bloc/dish_bloc/dish_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/restaurant_bloc/restaurant_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/user_bloc/users_bloc.dart';
 import 'package:hungry_fill/presentation/pages/cart_page/cart_page.dart';
@@ -45,7 +47,11 @@ class MyApp extends StatelessWidget {
         
          BlocProvider(
           create:(context)=> LogInBloc(AuthenticationRepoImplement(firebaseauth: FirebaseAuth.instance ,firestore: FirebaseFirestore.instance ))
-          )
+          ),
+
+          BlocProvider(
+            create: (context)=> DishBloc(dishrepository: DishRepoImpl())
+            )
         
 
          
@@ -57,8 +63,8 @@ class MyApp extends StatelessWidget {
            
         ),
         home: 
-        CartPage()
-        //const SplashScreen()
+        //CartPage()
+        const SplashScreen()
         //MainPage()
         // LogInScreen(),
         //OtpScreen()

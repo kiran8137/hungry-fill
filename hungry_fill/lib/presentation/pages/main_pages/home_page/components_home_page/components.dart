@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+ 
 import 'package:hungry_fill/presentation/bloc/restaurant_bloc/restaurant_bloc.dart';
 import 'package:hungry_fill/presentation/pages/restaurant/restuarant_screen.dart';
  
@@ -36,10 +37,14 @@ ListView recommendedRestaurans(GetRestaurantSuccessState? state) {
       itemCount: state!.restaurants.length,
       itemBuilder: (context, index) {
         final restaurant = state.restaurants[index];
+        print(restaurant);
 
         return GestureDetector(
           onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>   RestuarantScreen()));
+          
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>   RestuarantScreen(
+              resuerid: restaurant.userid,
+              )));
           },
           child: Container(
             height: 315,

@@ -70,6 +70,8 @@ UserModel? currentuserinfo;
         body:  BlocBuilder<UsersBloc , UsersState>(
           builder:(context,state){
 
+            
+
             if(state is UserLoadedState){
                 currentuserinfo = state.userdetails;
               

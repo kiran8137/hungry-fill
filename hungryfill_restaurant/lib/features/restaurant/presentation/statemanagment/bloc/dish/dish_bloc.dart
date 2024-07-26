@@ -6,6 +6,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:hungryfill_restaurant/features/restaurant/data/model/category/category_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/dish/dish_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/domain/repositories/dish_repository.dart';
 
@@ -22,6 +23,7 @@ class DishBloc extends Bloc<DishEvent, DishState> {
     on<DeleteDishEvent>(deleteDish);
     on<DishUpdateEvent>(updateDish);
     on<DishImagePicker>(getDishImage);
+    on<CreateCategoryEvent>(createCategory);
   }
 
   FutureOr<void> addDish(DishAddEvent event, Emitter<DishState> emit) async {
@@ -104,6 +106,16 @@ class DishBloc extends Bloc<DishEvent, DishState> {
         emit(ErrorState());
       }
 
+    }catch(error){
+      log(error.toString());
+    }
+  }
+
+  FutureOr<void> createCategory(CreateCategoryEvent event, Emitter<DishState> emit) async{
+
+    try{
+
+      dishrepository.createCategory();
     }catch(error){
       log(error.toString());
     }

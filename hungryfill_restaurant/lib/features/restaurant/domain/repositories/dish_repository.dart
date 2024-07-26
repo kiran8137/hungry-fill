@@ -1,5 +1,6 @@
 
 import 'package:file_picker/file_picker.dart';
+import 'package:hungryfill_restaurant/features/restaurant/data/model/category/category_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/dish/dish_model.dart';
 
 abstract class DishRepository {
@@ -15,4 +16,7 @@ abstract class DishRepository {
 
 
   Future<PlatformFile?> dishImagePicker();
+
+
+  Future<void> createCategory();
 }

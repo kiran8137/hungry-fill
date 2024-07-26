@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/presentation/bloc/restaurant_bloc/restaurant_bloc.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/home_page/components_home_page/components.dart';
  
 
 import 'package:hungry_fill/presentation/pages/main_pages/widgets/search_widget.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -51,17 +53,25 @@ class HomeScreen extends StatelessWidget {
                         return SizedBox(
                           height: 160,
                           child: BlocBuilder<RestaurantBloc, RestaurantState>(
+
+
                             builder: (context, state) {
+
+                              
                               if (state is GetRestaurantSuccessState) {
                                 return recommendedRestaurans(state);
                               } else {
-                                return Text("not restaurants");
+                                return Center(
+                                  child: LoadingAnimationWidget.horizontalRotatingDots(color: primarycolor, size: 20),
+                                );
                               }
                             },
                           ),
                         );
                       } else {
-                        return Text("no restaurant found");
+                        return  Center(
+                                  child: LoadingAnimationWidget.horizontalRotatingDots(color: primarycolor, size: 20),
+                                );
                       }
                     },
                   ),

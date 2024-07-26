@@ -7,6 +7,7 @@ import 'package:hungry_fill/domain/entities/restaurant_entity/restaurant_entity.
 class RestaurantModel extends RestaurantEntity {
     RestaurantModel({
         
+        super.userid,
         super.restaurantname,
          
         super.restaurantmobileNo,
@@ -21,7 +22,7 @@ class RestaurantModel extends RestaurantEntity {
   factory RestaurantModel.fromJson({required DocumentSnapshot doc}){
     return RestaurantModel(
       
-       
+      userid: doc["userId"],
       restaurantname: doc["restuarantName"],
      
       restaurantmobileNo: doc["restaurantMobileNo"],

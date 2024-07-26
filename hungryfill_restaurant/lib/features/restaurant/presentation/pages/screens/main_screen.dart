@@ -33,6 +33,8 @@ class _MainScreenState extends State<MainScreen> {
     BlocProvider.of<RestaurantUserBloc>(context)
         .add(GetRestaurantDetailEvent());
     BlocProvider.of<DishBloc>(context).add(GetDishesEvent());
+
+    BlocProvider.of<DishBloc>(context).add(CreateCategoryEvent());
     super.initState();
   }
 

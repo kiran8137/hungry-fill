@@ -38,8 +38,23 @@ class DeleteDishEvent extends DishEvent{
 
  const DeleteDishEvent({required this.dishid});
 
+ @override
+  // TODO: implement props
+  List<Object> get props => [dishid!];
+
   
 }
 
 
 class DishImagePicker extends DishEvent{}
+
+class CreateCategoryEvent extends DishEvent{
+
+//  final CategoryModel categorymodel;
+
+//  const  CreateCategoryEvent({required this.categorymodel});
+
+//  @override
+//   // TODO: implement props
+//   List<Object> get props => [categorymodel];
+}
