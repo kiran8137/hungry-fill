@@ -1,10 +1,8 @@
 
-import 'dart:developer';
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/data/user_model/user_model.dart';
 import 'package:hungry_fill/presentation/bloc/restaurant_bloc/restaurant_bloc.dart';

@@ -24,6 +24,7 @@ class DishBloc extends Bloc<DishEvent, DishState> {
     on<DishUpdateEvent>(updateDish);
     on<DishImagePicker>(getDishImage);
     on<CreateCategoryEvent>(createCategory);
+    on<GetCategoriesEvent>(getCategories);
   }
 
   FutureOr<void> addDish(DishAddEvent event, Emitter<DishState> emit) async {
@@ -49,7 +50,7 @@ class DishBloc extends Bloc<DishEvent, DishState> {
         }
         emit(GetDishesSuccessState(dishes: dishes));
       }else{
-        emit(ErrorState());
+        emit(const ErrorState(errormessage: "no food items found" ));
         log("no food items found");
       }
       
@@ -115,9 +116,23 @@ class DishBloc extends Bloc<DishEvent, DishState> {
 
     try{
 
-      dishrepository.createCategory();
+      dishrepository.createCategory(categories: event.categorymodel);
     }catch(error){
       log(error.toString());
+    }
+  }
+
+  FutureOr<void> getCategories(GetCategoriesEvent event, Emitter<DishState> emit) async{
+
+    try{
+     final categories = await dishrepository.getCategories();
+     if(categories.isNotEmpty){
+      emit(CategorySuccessEvent(categories: categories));
+     }else{
+      emit(ErrorState(errormessage: 'categories are empty'));
+     }
+    }catch(error){
+      log(" getcatbloc error ${error.toString()}");
     }
   }
 }

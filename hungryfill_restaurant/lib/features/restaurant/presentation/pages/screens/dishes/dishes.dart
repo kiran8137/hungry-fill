@@ -19,7 +19,7 @@ class DishScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const HeaderWidget(),
+          HeaderWidget(),
     
         const SizedBox(
           height: 45,
@@ -40,6 +40,8 @@ class DishScreen extends StatelessWidget {
             const SizedBox(width: 1050,),
             GestureDetector(
               onTap: (){
+                  BlocProvider.of<DishBloc>(context)
+                              .add(GetCategoriesEvent());
                 showDialog(
                   barrierDismissible: false,
                   context: context, 
@@ -202,10 +204,12 @@ class DishScreen extends StatelessWidget {
                   ),
                 ),
               );
-            } else{
+            } else if(state is ErrorState){
                
-              return const Center(child:  Text("No dishes Available"),);
+              return Center(child: CircularProgressIndicator(),);
             
+            }else{
+              return const Center(child:  Text("No dishes Available"),);
             }
            
               

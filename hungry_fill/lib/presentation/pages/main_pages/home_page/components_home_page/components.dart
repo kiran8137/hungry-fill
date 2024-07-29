@@ -44,6 +44,9 @@ ListView recommendedRestaurans(GetRestaurantSuccessState? state) {
           
             Navigator.push(context, MaterialPageRoute(builder: (context)=>   RestuarantScreen(
               resuerid: restaurant.userid,
+              restaurantname: restaurant.restaurantname,
+              restaurantdistrict: restaurant.restaurantdistrict,
+              restaurantplace: restaurant.restaurantplace,
               )));
           },
           child: Container(

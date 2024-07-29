@@ -10,7 +10,7 @@ class DishModel extends DishEntity{
   super.dishprice,
   super.stock,
   super.serve,
-  super.category,
+ required super.category,
   super.imageurl
  }
  ){
@@ -51,7 +51,7 @@ DishModel copywith({
   final String? dishprice,
   final String? stock,
   final String? serve,
-  final String? category,
+  required final List<String?> category,
   final String? imageurl,
 
   
@@ -63,7 +63,7 @@ DishModel copywith({
       dishprice: dishprice ?? this.dishprice,
       stock: stock ?? stock,
       serve: serve ?? serve,
-      category: category ?? category,
+      category: category,
       imageurl: imageurl ?? imageurl
       
     );

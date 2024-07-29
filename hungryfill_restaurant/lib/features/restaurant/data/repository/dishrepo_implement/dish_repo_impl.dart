@@ -14,7 +14,7 @@ class DishRepoImplementation extends DishRepository {
   @override
   Future<void> addDish({required DishModel dishmodel}) async {
     try {
-      final resref = FirebaseFirestore.instance
+      final resref =  FirebaseFirestore.instance
           .collection("Restaurants")
           .doc(FirebaseAuth.instance.currentUser?.uid)
           .collection("Dishes")
@@ -28,7 +28,7 @@ class DishRepoImplementation extends DishRepository {
           serve: dishmodel.serve,
           category: dishmodel.category);
 
-      resref.set(dish.toJson());
+      await resref.set(dish.toJson());
       // set(dishmodel.toJson());
 
       log(resref.id);
@@ -42,7 +42,7 @@ class DishRepoImplementation extends DishRepository {
     try {
       final dishessnapshot = await FirebaseFirestore.instance
           .collection("Restaurants")
-          .doc("userid")
+          .doc(userid)
           .collection("Dishes")
           .get();
 
@@ -102,13 +102,22 @@ class DishRepoImplementation extends DishRepository {
   }
 
   @override
-  Future<void> createCategory() async {
+  Future<void> createCategory({required List<CategoryModel> categories}) async {
     try {
       final firestore = FirebaseFirestore.instance;
-      await firestore
+
+      for(var i=0;i<categories.length;i++){
+       final categoryref =   await firestore
       .collection("Restaurants")
       .doc(FirebaseAuth.instance.currentUser?.uid)
       .collection("categories").add({'name':'veg'});
+            CategoryModel category = CategoryModel(
+              categoryid: categoryref.id,
+              categoryname: categories[i].categoryname
+            );
+           await categoryref.set(category.toJson());
+      }
+     
 
 
 
@@ -118,19 +127,57 @@ class DishRepoImplementation extends DishRepository {
       //     .doc(FirebaseAuth.instance.currentUser?.uid)
       //     .collection("categories")
       //     .doc();
+      //      log(categoryref.id);
 
-      //     CategoryModel category = CategoryModel(
-      //       categoryid: categoryref.id,
-      //       categoryname: categorymodel.categoryname
-      //     );
+          // CategoryModel category = CategoryModel(
+          //   categoryid: categoryref.id,
+          //   categoryname: categorymodel.categoryname
+          // );
 
-      //     categoryref.set(category.toJson());
+          // categoryref.set(category.toJson());
+
+          // for(var cat in categories){
+          //   CategoryModel category = CategoryModel(
+          //     categoryid: categoryref.id,
+          //     categoryname: cat.categoryname
+          //   );
+          //  await categoryref.set(category.toJson());
+          // }
+          
 
     } catch (error) {
-      log(error.toString());
+      log("create category error ${error.toString()}");
       throw Exception(error.toString());
     }
   }
+  
+  @override
+  Future<List<CategoryModel>> getCategories() async{
+
+    try{
+
+       final result = await FirebaseFirestore.instance
+      .collection("Restaurants")
+      .doc(FirebaseAuth.instance.currentUser?.uid)
+      .collection("categories")
+      .get();
+
+  List<CategoryModel> category = result.docs
+      .map((cat) =>  CategoryModel(categoryid: cat.id , categoryname: cat['name']))
+      .toList();
+      print(category);
+
+    return category;
+
+    }catch(error){
+      log(" getcategory error ${error.toString()}");
+      throw Exception(error.toString());
+    }
+    
+  }
+
+
+  
 }
 
 Future<void> getcat() async {

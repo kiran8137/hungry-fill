@@ -6,7 +6,7 @@ class DishEntity extends Equatable {
   final String? dishprice;
   final String? stock;
   final String? serve;
-  final String? category;
+  final List<String?> category;
   final String? imageurl;
 
     DishEntity(
@@ -16,7 +16,7 @@ class DishEntity extends Equatable {
         this.dishprice,
         this.stock,
         this.serve,
-        this.category,
+        required this.category,
         this.imageurl
       }) {
         print(" dish enitiy : $dishname");

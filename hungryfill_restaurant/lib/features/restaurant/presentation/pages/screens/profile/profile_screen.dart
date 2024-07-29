@@ -75,7 +75,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const HeaderWidget(),
+          HeaderWidget(),
         const SizedBox(
           height: 45,
         ),

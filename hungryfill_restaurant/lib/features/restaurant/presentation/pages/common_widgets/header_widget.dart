@@ -3,13 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungryfill_restaurant/core/theme/color.dart';
+import 'package:hungryfill_restaurant/features/restaurant/data/model/category/category_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/auth_screens/login.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/authentication/auth_bloc_bloc.dart';
+import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/dish/dish_bloc.dart';
 
 class HeaderWidget extends StatelessWidget {
-  const HeaderWidget({super.key, this.index});
+    HeaderWidget({super.key, this.index});
 
   final int? index;
+
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -91,13 +95,18 @@ class HeaderWidget extends StatelessWidget {
 
         SizedBox(width: 20,),
 
-        Container(
-          height: 45,
-          width: 45,
-          decoration: const BoxDecoration(
-            color: Colors.grey,
-            shape: BoxShape.circle,
-            image: DecorationImage(image: AssetImage("assets/person.png"))
+        GestureDetector(
+          onTap: (){
+           
+          },
+          child: Container(
+            height: 45,
+            width: 45,
+            decoration: const BoxDecoration(
+              color: Colors.grey,
+              shape: BoxShape.circle,
+              image: DecorationImage(image: AssetImage("assets/person.png"))
+            ),
           ),
         ),
 

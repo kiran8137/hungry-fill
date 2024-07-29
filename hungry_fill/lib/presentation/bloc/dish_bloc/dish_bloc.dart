@@ -25,7 +25,7 @@ class DishBloc extends Bloc<DishEvent, DishState> {
       if(dishes.isNotEmpty){
         emit(DishSuccesEvent(dish: dishes));
       }else{
-        emit(DishErrorState());
+        emit(DishErrorState(errormessage: "no dishes available"));
       }
 
     }catch(error){

@@ -1,30 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hungryfill_restaurant/core/categories.dart';
 import 'package:hungryfill_restaurant/core/theme/color.dart';
+import 'package:hungryfill_restaurant/features/restaurant/data/model/category/category_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/dish/dish_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/dish/dish_bloc.dart';
- 
+import 'package:multi_dropdown/multiselect_dropdown.dart';
+import 'package:multi_select_flutter/dialog/mult_select_dialog.dart';
+import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
+import 'package:multi_select_flutter/util/multi_select_item.dart';
 
-class DishAddDialog extends StatelessWidget {
+class DishAddDialog extends StatefulWidget {
   DishAddDialog({super.key});
 
+  @override
+  State<DishAddDialog> createState() => _DishAddDialogState();
+}
+
+class _DishAddDialogState extends State<DishAddDialog> {
   final TextEditingController dishnamecontroller = TextEditingController();
+
   final TextEditingController dishpricecontroller = TextEditingController();
+
   final TextEditingController dishstockcontroller = TextEditingController();
+
   final TextEditingController dishservecontroller = TextEditingController();
+
   final TextEditingController dishcategorycontroller = TextEditingController();
 
-  List<bool> isSelected = [false, false];
+  final MultiSelectController mulitselectorcontoller = MultiSelectController();
 
+  List<ValueItem<String>>  selectedcategories = [];
+
+  List<CategoryModel> categories = [];
+
+  final List<bool> isSelected = [false, false];
+
+  // List<ValueItem> getCategoryValueItems() {
   @override
   Widget build(BuildContext context) {
+    List<ValueItem<dynamic>> selecteditems = [];
     return Dialog(
       child: Container(
         height: 550,
         width: 1000,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(10),
             color: Colors.white,
             border: Border.all(color: Colors.black, width: 1)),
         child: Stack(
@@ -44,15 +66,19 @@ class DishAddDialog extends StatelessWidget {
                               dishpricecontroller.text.isEmpty ||
                               dishstockcontroller.text.isEmpty ||
                               dishservecontroller.text.isEmpty ||
-                              dishcategorycontroller.text.isEmpty) {
+                              selectedcategories.isEmpty) {
                             return;
                           }
+
+                          final selectedcategoryids = selectedcategories.map((category)=> category.value).toList();
+                         
                           DishModel dish = DishModel(
                               dishname: dishnamecontroller.text,
                               dishprice: dishpricecontroller.text,
                               stock: dishstockcontroller.text,
                               serve: dishservecontroller.text,
-                              category: dishcategorycontroller.text);
+                              category: selectedcategoryids,
+                              );
                           BlocProvider.of<DishBloc>(context)
                               .add(DishAddEvent(dishmodel: dish));
                           BlocProvider.of<DishBloc>(context)
@@ -120,29 +146,24 @@ class DishAddDialog extends StatelessWidget {
                       // TODO: implement listener
                     },
                     builder: (context, state) {
-
-                      if(state is DishImagPickerLoaded){
+                      if (state is DishImagPickerLoaded) {
                         return Container(
-                        height: 120,
-                        width: 180,
-                        decoration: BoxDecoration(
-                           // color: Colors.grey,
-                            borderRadius: BorderRadius.circular(10)
-                            ),
-
-                             child: Image.memory(state.file!.bytes!),
-                      );
-                      }else{
+                          height: 120,
+                          width: 180,
+                          decoration: BoxDecoration(
+                              // color: Colors.grey,
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Image.memory(state.file!.bytes!),
+                        );
+                      } else {
                         return Container(
-                           height: 120,
-                        width: 180,
-                        decoration: BoxDecoration(
-                            color: Colors.grey,
-                            borderRadius: BorderRadius.circular(10)
-                            ),
+                          height: 120,
+                          width: 180,
+                          decoration: BoxDecoration(
+                              color: Colors.grey,
+                              borderRadius: BorderRadius.circular(10)),
                         );
                       }
-                      
                     },
                   ),
                 )),
@@ -224,28 +245,27 @@ class DishAddDialog extends StatelessWidget {
                       const SizedBox(
                         height: 20,
                       ),
-                      SizedBox(
-                        height: 37,
-                        width: 120,
-                        child: 
-                        TextFormField(
-                          controller: dishcategorycontroller,
-                          decoration: const InputDecoration(
-                              border: OutlineInputBorder()),
-                        ),
+                      BlocBuilder<DishBloc, DishState>(
+                        builder: (context, state) {
+                          if(state is CategorySuccessEvent){
+                            categories = state.categories;
 
-                        // ToggleButtons(
-                        //   isSelected: isSelected,
-                        //   children: const [
-                        //      Text("Veg"),
-                        //     Text("NonVeg")
-                        //   ],
-                        //   onPressed: (int index){
-                        //     isSelected[index] = !isSelected[index];
-                        //   },
-                        //    color: primarycolor,
-                        //   selectedColor: Colors.red
-                        //   )
+                            return MultiSelectDropDown(
+                             
+                              options: categories.map((category)=> ValueItem(label: category.categoryname! , value: category.categoryid )).toList(),
+                              onOptionSelected: (selectedvalues){
+                                setState(() {
+                                  selectedcategories = selectedvalues;
+                                });
+                              }, 
+                              );
+                          }else{
+                            return Center(child: CircularProgressIndicator(),);
+                          }
+                          
+                          
+                        },
+                        
                       ),
                       const SizedBox(
                         height: 22,

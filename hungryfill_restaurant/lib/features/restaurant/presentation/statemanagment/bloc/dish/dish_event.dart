@@ -50,11 +50,14 @@ class DishImagePicker extends DishEvent{}
 
 class CreateCategoryEvent extends DishEvent{
 
-//  final CategoryModel categorymodel;
+ final List<CategoryModel> categorymodel;
 
-//  const  CreateCategoryEvent({required this.categorymodel});
+ const  CreateCategoryEvent({required this.categorymodel});
 
-//  @override
-//   // TODO: implement props
-//   List<Object> get props => [categorymodel];
+ @override
+  // TODO: implement props
+  List<Object> get props => [categorymodel];
 }
+
+
+class GetCategoriesEvent extends DishEvent{}

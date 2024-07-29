@@ -12,7 +12,15 @@ final class DishInitial extends DishState {}
 
 final class DishAddSuccuessState extends DishState{}
 
-final class ErrorState extends DishState{}
+final class ErrorState extends DishState{
+  final String? errormessage;
+
+  const ErrorState({this.errormessage});
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [errormessage!];
+}
 
 final class GetDishesSuccessState extends DishState{
  final  List<DishModel> dishes;
@@ -34,4 +42,16 @@ final class DishImagPickerLoaded extends DishState{
 
  const DishImagPickerLoaded({this.file});
  
+}
+
+final class CategorySuccessEvent extends DishState{
+  final List<CategoryModel> categories;
+
+ const CategorySuccessEvent({required this.categories});
+
+ @override
+  // TODO: implement props
+  List<Object> get props => [categories];
+
+  
 }

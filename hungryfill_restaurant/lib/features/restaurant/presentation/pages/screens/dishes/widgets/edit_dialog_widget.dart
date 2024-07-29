@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hungryfill_restaurant/core/categories.dart';
 import 'package:hungryfill_restaurant/core/theme/color.dart';
+import 'package:hungryfill_restaurant/features/restaurant/data/model/category/category_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/dish/dish_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/dish/dish_bloc.dart';
+import 'package:multi_dropdown/multiselect_dropdown.dart';
 
 class DishEditWidget extends StatefulWidget {
    const DishEditWidget({super.key, required this.dish , });
@@ -25,6 +28,13 @@ class _DishEditWidgetState extends State<DishEditWidget> {
 
    late TextEditingController dishcategorycontroller;
 
+  late MultiSelectController categorycontroller;
+
+
+  List<ValueItem<String>>  selectedcategories = [];
+
+  List<CategoryModel> categories = [];
+
     @override
   void initState() {
   dishnamecontroller = TextEditingController(text: widget.dish.dishname);
@@ -35,7 +45,8 @@ class _DishEditWidgetState extends State<DishEditWidget> {
 
   dishservecontroller = TextEditingController(text: widget.dish.serve);
 
-  dishcategorycontroller = TextEditingController(text: widget.dish.category);
+  categorycontroller =  MultiSelectController();
+ // dishcategorycontroller = TextEditingController(text: widget.dish.category);
     super.initState();
   }
 
@@ -68,7 +79,7 @@ class _DishEditWidgetState extends State<DishEditWidget> {
                               dishprice: dishpricecontroller.text,
                               stock: dishstockcontroller.text,
                               serve: dishservecontroller.text,
-                              category: dishcategorycontroller.text
+                              category: []
                             );
 
                             BlocProvider.of<DishBloc>(context).add(DishUpdateEvent(updatedDish: dish));
@@ -230,14 +241,27 @@ class _DishEditWidgetState extends State<DishEditWidget> {
                       const SizedBox(
                         height: 20,
                       ),
-                      SizedBox(
-                        height: 37,
-                        width: 100,
-                        child: TextFormField(
-                          controller: dishcategorycontroller,
-                          decoration: const InputDecoration(
-                              border: OutlineInputBorder()),
-                        ),
+                       BlocBuilder<DishBloc, DishState>(
+                        builder: (context, state) {
+                          if(state is CategorySuccessEvent){
+                            categories = state.categories;
+
+                            return MultiSelectDropDown(
+                             
+                              options: categories.map((category)=> ValueItem(label: category.categoryname! , value: category.categoryid )).toList(),
+                              onOptionSelected: (selectedvalues){
+                                setState(() {
+                                  selectedcategories = selectedvalues;
+                                });
+                              }, 
+                              );
+                          }else{
+                            return Center(child: CircularProgressIndicator(),);
+                          }
+                          
+                          
+                        },
+                        
                       ),
                       const SizedBox(
                         height: 22,

@@ -20,4 +20,8 @@ final class DishSuccesEvent extends DishState{
   List<Object> get props => [dish];
 }
 
-final class DishErrorState extends DishState{}
+final class DishErrorState extends DishState{
+  final String? errormessage;
+
+  DishErrorState({this.errormessage});
+}

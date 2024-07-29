@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hungryfill_restaurant/features/restaurant/data/model/category/category_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/res_user/res_user_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/daily_order/daily_orders.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/dashboard/dashboard.dart';
@@ -25,6 +26,8 @@ class _MainScreenState extends State<MainScreen> {
      
   ];
 
+  
+
   int selectedindex = 0;
   RestaurantModel? currentrestaurantinfo;
 
@@ -34,7 +37,7 @@ class _MainScreenState extends State<MainScreen> {
         .add(GetRestaurantDetailEvent());
     BlocProvider.of<DishBloc>(context).add(GetDishesEvent());
 
-    BlocProvider.of<DishBloc>(context).add(CreateCategoryEvent());
+   
     super.initState();
   }
 
