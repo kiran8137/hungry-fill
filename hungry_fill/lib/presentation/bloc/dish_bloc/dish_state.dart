@@ -25,3 +25,13 @@ final class DishErrorState extends DishState{
 
   DishErrorState({this.errormessage});
 }
+
+final class SearchDishSuccessState extends DishState{
+  final List<DishModel> dishes;
+
+  const SearchDishSuccessState({required this.dishes});
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [dishes];
+}

@@ -23,4 +23,18 @@ class DishGetEvent extends DishEvent{
 }
 
 
+class SearchDishEvent extends DishEvent{
+  final String? dishname;
+  final String? userid;
+
+  const SearchDishEvent({required this.dishname , required this.userid});
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [dishname!];
+
+
+}
+
+
  

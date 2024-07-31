@@ -15,6 +15,7 @@ class DishBloc extends Bloc<DishEvent, DishState> {
   DishBloc({required this.dishrepository}) : super(DishInitial()) {
      
      on<DishGetEvent>(getDish);
+     on<SearchDishEvent>(searchDishes);
   }
 
   FutureOr<void> getDish(DishGetEvent event, Emitter<DishState> emit) async{
@@ -31,6 +32,18 @@ class DishBloc extends Bloc<DishEvent, DishState> {
     }catch(error){
       log(error.toString());
       
+    }
+  }
+
+  FutureOr<void> searchDishes(SearchDishEvent event, Emitter<DishState> emit) async {
+
+    try{
+
+      List<DishModel> dishes = await dishrepository.searchDishes(query: event.dishname, userid: event.userid);
+      emit(SearchDishSuccessState(dishes: dishes));
+
+    }catch(error){
+      log(error.toString());
     }
   }
 }
