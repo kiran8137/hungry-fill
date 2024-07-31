@@ -3,6 +3,7 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
@@ -40,49 +41,49 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCx8eyONUEdYplhhkWNzrtROKi25-5eDDo',
-    appId: '1:1043826955704:web:957d0bb9b53fd43f6c6b4d',
-    messagingSenderId: '1043826955704',
-    projectId: 'hungry-fill',
-    authDomain: 'hungry-fill.firebaseapp.com',
-    storageBucket: 'hungry-fill.appspot.com',
-    measurementId: 'G-1FV4Q5E43N',
+  static   FirebaseOptions web = FirebaseOptions(
+    apiKey: dotenv.env['webapiKey']!,
+    appId: dotenv.env['webappId']!,
+    messagingSenderId: dotenv.env['webmessagingSenderId']!,
+    projectId: dotenv.env['webprojectId']!,
+    authDomain: dotenv.env['webauthDomain']!,
+    storageBucket: dotenv.env['webstorageBucket']!,
+    measurementId: dotenv.env['webmeasurementId']!,
   );
  
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDkw6SrHz-CB059KeFP7ukROEy2LnMb874',
-    appId: '1:1043826955704:android:3f600614f28170c86c6b4d',
-    messagingSenderId: '1043826955704',
-    projectId: 'hungry-fill',
-    storageBucket: 'hungry-fill.appspot.com',
+  static   FirebaseOptions android = FirebaseOptions(
+    apiKey: dotenv.env['androidapiKey']!,
+    appId: dotenv.env['androidappId']!,
+    messagingSenderId: dotenv.env['androidmessagingSenderId']!,
+    projectId: dotenv.env['androidprojectId']!,
+    storageBucket: dotenv.env['androidstorageBucket']!,
   );
 
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDOFz2GJ6kdyUNdmRkjTubWEl8_RyBP8-Y',
-    appId: '1:1043826955704:ios:47fba01e3e9c23d26c6b4d',
-    messagingSenderId: '1043826955704',
-    projectId: 'hungry-fill',
-    storageBucket: 'hungry-fill.appspot.com',
-    iosBundleId: 'com.example.hungryFill',
+  static   FirebaseOptions ios = FirebaseOptions(
+    apiKey:dotenv.env['iosapiKey']!,
+    appId: dotenv.env['iosappId']!,
+    messagingSenderId: dotenv.env['iosmessagingSenderId']!,
+    projectId: dotenv.env['iosprojectId']!,
+    storageBucket: dotenv.env['iosstorageBucket']!,
+    iosBundleId: dotenv.env['iosiosBundleId']!,
   );
 
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDOFz2GJ6kdyUNdmRkjTubWEl8_RyBP8-Y',
-    appId: '1:1043826955704:ios:47fba01e3e9c23d26c6b4d',
-    messagingSenderId: '1043826955704',
-    projectId: 'hungry-fill',
-    storageBucket: 'hungry-fill.appspot.com',
-    iosBundleId: 'com.example.hungryFill',
+  static   FirebaseOptions macos = FirebaseOptions(
+    apiKey: dotenv.env['macosapiKey']!,
+    appId: dotenv.env['macosappId']!,
+    messagingSenderId: dotenv.env['macosmessagingSenderId']!,
+    projectId: dotenv.env['macosprojectId']!,
+    storageBucket: dotenv.env['macosstorageBucket']!,
+    iosBundleId: dotenv.env['macosiosBundleId']!,
   );
 
-  static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyCx8eyONUEdYplhhkWNzrtROKi25-5eDDo',
-    appId: '1:1043826955704:web:faa139f2adf5fac96c6b4d',
-    messagingSenderId: '1043826955704',
-    projectId: 'hungry-fill',
-    authDomain: 'hungry-fill.firebaseapp.com',
-    storageBucket: 'hungry-fill.appspot.com',
-    measurementId: 'G-XX1MTGY2WE',
+  static   FirebaseOptions windows = FirebaseOptions(
+    apiKey: dotenv.env['windowsapiKey']!,
+    appId: dotenv.env['windowsappId']!,
+    messagingSenderId: dotenv.env['windowsmessagingSenderId']!,
+    projectId: dotenv.env['windowsprojectId']!,
+    authDomain: dotenv.env['windowsauthDomain']!,
+    storageBucket: dotenv.env['windowsstorageBucket']!,
+    measurementId: dotenv.env['windowsmeasurementId']!,
   );
 }
