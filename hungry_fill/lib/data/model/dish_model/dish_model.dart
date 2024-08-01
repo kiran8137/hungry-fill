@@ -23,4 +23,15 @@ factory DishModel.fromJson({required Map<String , dynamic> json}){
   );
 }
 
+factory DishModel.fromSnapshot({required DocumentSnapshot snapshot}){
+  return DishModel(
+     dishid: snapshot["dishId"],
+    dishname: snapshot["dishName"],
+    dishprice: snapshot["dishPrice"],
+    dishserve: snapshot["serve"],
+    dishstock: snapshot["stock"],
+    dishimage: snapshot["imageUrl"],
+  );
+}
+
 }

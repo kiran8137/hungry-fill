@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hungry_fill/core/otp_model/otp_model.dart';
-import 'package:hungry_fill/data/user_model/user_model.dart';
+import 'package:hungry_fill/data/model/user_model/user_model.dart';
 
 abstract class AuthRepository{
 

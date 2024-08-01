@@ -6,7 +6,7 @@ import 'package:equatable/equatable.dart';
 
 import 'package:flutter/material.dart';
  
-import 'package:hungry_fill/data/user_model/user_model.dart';
+import 'package:hungry_fill/data/model/user_model/user_model.dart';
 import 'package:hungry_fill/domain/repositories/auth_repository/auth_repo.dart';
 import 'package:hungry_fill/presentation/bloc/auth_bloc/sign_in_bloc/sign_inauth_event.dart';
  

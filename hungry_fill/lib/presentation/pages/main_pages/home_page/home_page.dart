@@ -7,6 +7,7 @@ import 'package:hungry_fill/presentation/pages/main_pages/home_page/components_h
  
 
 import 'package:hungry_fill/presentation/pages/main_pages/widgets/search_widget.dart';
+import 'package:hungry_fill/presentation/pages/restaurant/restuarant_screen.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -17,6 +18,12 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton.extended(
+        label: Icon(Icons.shopping_cart,color: Colors.white,),
+        backgroundColor: primarycolor,
+        onPressed: (){
+
+        }),
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: SafeArea(
@@ -151,57 +158,67 @@ class HomeScreen extends StatelessWidget {
                           final restaurant = state.restaurants[index];
                           return 
                         
-                        Container(
-                          height: 135,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 245, 245, 245),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Row(
-                              children: [
-                                Container(
-                                  height: 135,
-                                  width: 165,
-                                  decoration: BoxDecoration(
-                                      color: Colors.red,
-                                      borderRadius: BorderRadius.circular(10),
-                                      image: const DecorationImage(
-                                        image:
-                                            AssetImage("assets/biriyani.jpg"),
-                                        fit: BoxFit.fill,
-                                      )),
-                                      
-                                ),
-                                const SizedBox(
-                                  width: 3,
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      width: 140,
-                                      child: Text(
-                                         overflow: TextOverflow.ellipsis,
-                                      softWrap: true,
-                                      restaurant.restaurantname!,
-                                        style: GoogleFonts.amaranth(
-                                            fontSize: 25,
-                                            fontWeight: FontWeight.bold),
+                        GestureDetector(
+                          onTap: (){
+                             Navigator.push(context, MaterialPageRoute(builder: (context)=>   RestuarantScreen(
+              resuerid: restaurant.userid,
+              restaurantname: restaurant.restaurantname,
+              restaurantdistrict: restaurant.restaurantdistrict,
+              restaurantplace: restaurant.restaurantplace,
+              )));
+                          },
+                          child: Container(
+                            height: 135,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 245, 245, 245),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    height: 135,
+                                    width: 165,
+                                    decoration: BoxDecoration(
+                                        color: Colors.red,
+                                        borderRadius: BorderRadius.circular(10),
+                                        image: const DecorationImage(
+                                          image:
+                                              AssetImage("assets/biriyani.jpg"),
+                                          fit: BoxFit.fill,
+                                        )),
+                                        
+                                  ),
+                                  const SizedBox(
+                                    width: 3,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        width: 140,
+                                        child: Text(
+                                           overflow: TextOverflow.ellipsis,
+                                        softWrap: true,
+                                        restaurant.restaurantname!,
+                                          style: GoogleFonts.amaranth(
+                                              fontSize: 25,
+                                              fontWeight: FontWeight.bold),
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      restaurant.restaurantplace!,
-                                      style:
-                                          GoogleFonts.abhayaLibre(fontSize: 15,
-                                           
-                                          ),
-                                    )
-                                  ],
-                                )
-                              ],
+                                      Text(
+                                        restaurant.restaurantplace!,
+                                        style:
+                                            GoogleFonts.abhayaLibre(fontSize: 15,
+                                             
+                                            ),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         );

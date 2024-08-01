@@ -4,7 +4,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:hungry_fill/data/user_model/user_model.dart';
+import 'package:hungry_fill/data/model/user_model/user_model.dart';
 import 'package:hungry_fill/domain/repositories/user_repository/user_repo.dart';
 
 part 'users_event.dart';

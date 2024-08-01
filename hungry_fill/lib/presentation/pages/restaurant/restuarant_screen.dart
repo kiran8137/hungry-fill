@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
-import 'package:hungry_fill/data/dish_model/dish_model.dart';
+import 'package:hungry_fill/data/model/dish_model/dish_model.dart';
 import 'package:hungry_fill/data/repository/dish_repo_imp/dish_repo_impl.dart';
 import 'package:hungry_fill/presentation/bloc/dish_bloc/dish_bloc.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/widgets/search_widget.dart';
@@ -33,6 +33,9 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
   void initState() {
     BlocProvider.of<DishBloc>(context)
         .add(DishGetEvent(resuserid: widget.resuerid));
+    BlocProvider.of<DishBloc>(context)
+        .add(GetCategories(resuerid: widget.resuerid));
+      
     super.initState();
   }
 
@@ -68,8 +71,9 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
               children: [
                 GestureDetector(
                   onTap: (){
-                    categoryhDishes();
+                   // categoryhDishes();
                     //searchDishes();
+                    //categorys();
                   },
                   child: Container(
                       height: 150,
@@ -122,7 +126,45 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                   height: 10,
                 ),
                 SearchWidget(searchcontroller: searchcontroller , resuserid: widget.resuerid,),
-                const SizedBox(height: 50),
+                 
+                 BlocBuilder<DishBloc , DishState>(
+                  builder:(context , state){
+
+                    if(state is GetCategoriesSuccessState){
+                      
+                      return SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: state.categories.map((category)=>
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: FilterChip(
+                               shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            
+                            ),
+                              backgroundColor: Colors.white,
+                              
+                              label: Text(category.categoryname!), 
+                              selectedColor: primarycolor,
+                              onSelected: (bool isseleced){
+
+                              }
+                              ),
+                          )
+                          ).toList(),
+                        
+                        ),
+                      );
+                    }else{
+                      return Text("somethign went wrong");
+                    }
+                  }
+                  ),
+
+
+                Text('category'),
+
                 Row(
                   children: [
                     const Expanded(
@@ -140,7 +182,7 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                       width: 8,
                     ),
                     const Expanded(
-                        child: const Divider(
+                        child:   Divider(
                       color: Colors.grey,
                     ))
                   ],
@@ -166,7 +208,7 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
 
                         
 
-                        if (state is DishSuccesEvent || state is SearchDishSuccessState) {
+                        if (state is DishSuccesEvent || state is SearchDishSuccessState ) {
                           final dishes = state is DishSuccesEvent ? state.dish : (state as SearchDishSuccessState).dishes ;
                           return ListView.separated(
                               shrinkWrap: true,
@@ -174,8 +216,9 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                               itemBuilder: (context, index) {
                                  
                                 return Dishwidget(
-                                  
-                                  dish: dishes[index]
+                                  restaurantid: widget.resuerid!,
+                                  dish: dishes[index],
+                                  restaurantname: widget.restaurantname!,
                                   );
                               },
                               separatorBuilder: (context, index) =>

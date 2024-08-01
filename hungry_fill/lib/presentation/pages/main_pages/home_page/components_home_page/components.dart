@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hungry_fill/presentation/bloc/dish_bloc/dish_bloc.dart';
  
 import 'package:hungry_fill/presentation/bloc/restaurant_bloc/restaurant_bloc.dart';
 import 'package:hungry_fill/presentation/pages/restaurant/restuarant_screen.dart';
@@ -47,7 +49,13 @@ ListView recommendedRestaurans(GetRestaurantSuccessState? state) {
               restaurantname: restaurant.restaurantname,
               restaurantdistrict: restaurant.restaurantdistrict,
               restaurantplace: restaurant.restaurantplace,
-              )));
+              ))).then((_)=>
+                BlocProvider.of<DishBloc>(context).add(DishGetEvent(resuserid: restaurant.userid))
+                
+
+              ).then((_)=>
+              BlocProvider.of<DishBloc>(context).add(GetCategories(resuerid: restaurant.userid))
+              );
           },
           child: Container(
             height: 315,
@@ -73,7 +81,7 @@ ListView recommendedRestaurans(GetRestaurantSuccessState? state) {
                   Text(
                     restaurant.restaurantname!,
                     style:
-                        GoogleFonts.amaranth(color: Colors.white, fontSize: 30),
+                        GoogleFonts.roboto(color: const Color.fromARGB(255, 255, 255, 255), fontSize: 30),
                   )
                 ],
               ),

@@ -1,4 +1,4 @@
-import 'package:hungry_fill/data/restaurant_model/restaurant_model.dart';
+import 'package:hungry_fill/data/model/restaurant_model/restaurant_model.dart';
 
 abstract class RestaurantRepository{
 

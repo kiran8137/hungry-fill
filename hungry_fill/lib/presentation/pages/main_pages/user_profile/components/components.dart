@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
-import 'package:hungry_fill/data/user_model/user_model.dart';
+import 'package:hungry_fill/data/model/user_model/user_model.dart';
 
 //Userprofilepage card profilepage
 Container userProfileCard({required UserModel? userinfo}) {

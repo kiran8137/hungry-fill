@@ -37,4 +37,52 @@ class SearchDishEvent extends DishEvent{
 }
 
 
+class GetCategories extends DishEvent{
+  final String? resuerid;
+
+  const GetCategories({required this.resuerid});
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [resuerid!];
+}
+
+class GetCategoryDish extends DishEvent{
+  final String? categoryid;
+  final String? resuerid;
+
+  const GetCategoryDish({required this.categoryid , required this.resuerid});
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [categoryid!];
+}
+
+
+class AddDishToCartEvent extends DishEvent{
+
+  final String? restaurantid;
+  final List<String>? items;
+
+  const AddDishToCartEvent({required this.restaurantid, required this.items});
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [restaurantid! , items! ];
+  
+   
+}
+
+
+class GetDishInCartEvent extends DishEvent{
+  final String? restaurantid;
+
+  const GetDishInCartEvent({required this.restaurantid});
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [restaurantid!];
+}
+
+
  

@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hungry_fill/core/otp_model/otp_model.dart';
-import 'package:hungry_fill/data/user_model/user_model.dart';
+import 'package:hungry_fill/data/model/user_model/user_model.dart';
 import 'package:hungry_fill/domain/repositories/auth_repository/auth_repo.dart';
 import 'package:hungry_fill/presentation/pages/user_auth/otp_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
