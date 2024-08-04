@@ -3,8 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/data/model/dish_model/dish_model.dart';
+import 'package:hungry_fill/data/repository/cart_repo_imp/cart_repo_impl.dart';
 import 'package:hungry_fill/data/repository/dish_repo_imp/dish_repo_impl.dart';
+import 'package:hungry_fill/data/repository/restaurant_repo_impl/restaurant_repo_imp.dart';
 import 'package:hungry_fill/presentation/bloc/dish_bloc/dish_bloc.dart';
+import 'package:hungry_fill/presentation/bloc/restaurant_bloc/restaurant_bloc.dart';
+import 'package:hungry_fill/presentation/pages/cart_page/cart_page.dart';
+ 
 import 'package:hungry_fill/presentation/pages/main_pages/widgets/search_widget.dart';
 import 'package:hungry_fill/presentation/pages/restaurant/widgets/dish_widget.dart';
 
@@ -29,6 +34,8 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
   final TextEditingController searchcontroller = TextEditingController();
  late DishModel dish;
 
+ 
+
   @override
   void initState() {
     BlocProvider.of<DishBloc>(context)
@@ -42,6 +49,12 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       floatingActionButton: FloatingActionButton.extended(
+        label: const Icon(Icons.shopping_cart,color: Colors.white,),
+        backgroundColor: primarycolor,
+        onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> const CartPage()));
+        }),
         backgroundColor: Colors.white,
         appBar: AppBar(
           leading: GestureDetector(
@@ -70,7 +83,9 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
             child: Column(
               children: [
                 GestureDetector(
-                  onTap: (){
+                  onTap: ()  {
+                   
+                   //addDish();
                    // categoryhDishes();
                     //searchDishes();
                     //categorys();
@@ -83,44 +98,69 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                           borderRadius: BorderRadius.circular(20)),
                       child: Padding(
                         padding: const EdgeInsets.all(20.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        child: Stack(
+                          
                           children: [
-                            Text(
-                              widget.restaurantname ?? '',
-                              style: GoogleFonts.montserrat(
-                                  color: Colors.white,
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            Row(
+                              Positioned(
+                              right: 0,
+                               
+                              child: 
+                             // Icon(Icons.favorite,color: Colors.white,)
+                              GestureDetector(
+                                onTap: (){
+                                   BlocProvider.of<RestaurantBloc>(context).add(AddRestaurantToWishList(restaurantid: widget.resuerid!));
+                                  //addToWishList(restaurantid: widget.resuerid!);
+                                },
+                                child: const Icon(Icons.favorite_border,color: Colors.white,))
+                              ),
+                        
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                            
+                                 
+                            
                                 Text(
-                                  widget.restaurantplace ?? '',
-                                  style: GoogleFonts.jost(
-                                    color: Colors.white,
-                                    fontSize: 15,
-                                  ),
+                                  widget.restaurantname ?? '',
+                                  style: GoogleFonts.montserrat(
+                                      color: Colors.white,
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w600),
                                 ),
-                  
-                                //Text(".",style: TextStyle(color: Colors.white , fontSize: 20),),
-                                const Icon(
-                                  Icons.fiber_manual_record,
-                                  size: 10,
-                                  color: Colors.white,
-                                ),
-                                Text(
-                                  widget.restaurantdistrict ?? '',
-                                  style: GoogleFonts.jost(
-                                    color: Colors.white,
-                                    fontSize: 15,
-                                  ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      widget.restaurantplace ?? '',
+                                      style: GoogleFonts.jost(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                              
+                                    //Text(".",style: TextStyle(color: Colors.white , fontSize: 20),),
+                                    const Icon(
+                                      Icons.fiber_manual_record,
+                                      size: 10,
+                                      color: Colors.white,
+                                    ),
+                                    Text(
+                                      widget.restaurantdistrict ?? '',
+                                      style: GoogleFonts.jost(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
                           ],
                         ),
-                      )),
+
+                        
+                      ),
+                      
+                      ),
                 ),
                 const SizedBox(
                   height: 10,
@@ -129,6 +169,8 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                  
                  BlocBuilder<DishBloc , DishState>(
                   builder:(context , state){
+
+                    
 
                     if(state is GetCategoriesSuccessState){
                       
@@ -157,13 +199,13 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                         ),
                       );
                     }else{
-                      return Text("somethign went wrong");
+                      return const Text("somethign went wrong");
                     }
                   }
                   ),
 
 
-                Text('category'),
+                const Text('category'),
 
                 Row(
                   children: [
@@ -206,6 +248,7 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                           );
                         }
 
+                       
                         
 
                         if (state is DishSuccesEvent || state is SearchDishSuccessState ) {

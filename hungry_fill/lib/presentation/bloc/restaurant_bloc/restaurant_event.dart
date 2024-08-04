@@ -9,3 +9,15 @@ sealed class RestaurantEvent extends Equatable {
 
 
 class GetRestaurantsEvent extends RestaurantEvent{}
+
+class AddRestaurantToWishList extends RestaurantEvent{
+  final String restaurantid;
+
+  const AddRestaurantToWishList({required this.restaurantid});
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [restaurantid];
+}
+
+class GetRestaurantsInWishList extends RestaurantEvent{}

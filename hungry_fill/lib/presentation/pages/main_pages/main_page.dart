@@ -47,7 +47,7 @@ UserModel? currentuserinfo;
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: appBarMain(),
+      appBar: appBarMain(context: context),
 
       
 

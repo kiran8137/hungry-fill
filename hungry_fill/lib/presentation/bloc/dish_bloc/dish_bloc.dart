@@ -3,11 +3,13 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:hungry_fill/data/model/category_model/category_model.dart';
 import 'package:hungry_fill/data/model/dish_model/dish_model.dart';
 import 'package:hungry_fill/domain/repositories/cart_repository/cart_repository.dart';
 import 'package:hungry_fill/domain/repositories/dish_repository/dish_repo.dart';
+import 'package:hungry_fill/presentation/pages/cart_page/cart_page.dart';
 
 part 'dish_event.dart';
 part 'dish_state.dart';
@@ -81,7 +83,8 @@ class DishBloc extends Bloc<DishEvent, DishState> {
 
   FutureOr<void> addDishToCart(AddDishToCartEvent event, Emitter<DishState> emit) async{
     try{
-      await cartrepositoy.addDishToCart(restaurantid: event.restaurantid, items: event.items);
+      await cartrepositoy.addDishToCart(cartrestaurantid: event.restaurantid, items: event.items);
+       //Navigator.push(event.context!, MaterialPageRoute(builder: (context)=> CartPage(restaurantid: event.restaurantid, restaurantname: event.restaurantname,)));
       emit(AddDishToCartSuccesState());
     }catch(error){
       
@@ -90,6 +93,8 @@ class DishBloc extends Bloc<DishEvent, DishState> {
   }
 
   FutureOr<void> getDishInCart(GetDishInCartEvent event, Emitter<DishState> emit) async{
+    print("getdishincart event trggerd");
+    print("${event.runtimeType}");
 
 
     emit(GetDishInCartInital());
@@ -102,6 +107,7 @@ class DishBloc extends Bloc<DishEvent, DishState> {
         emit(GetDishInCartSuccessState(cartdishes: cartdishes));
       }else{
         print('emitted GetDishInCartErrorState');
+        
         emit(GetDishInCartErrorState());
       }
 

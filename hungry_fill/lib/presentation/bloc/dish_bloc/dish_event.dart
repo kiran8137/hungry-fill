@@ -63,8 +63,10 @@ class AddDishToCartEvent extends DishEvent{
 
   final String? restaurantid;
   final List<String>? items;
+  final BuildContext? context;
+  final String? restaurantname;
 
-  const AddDishToCartEvent({required this.restaurantid, required this.items});
+  const AddDishToCartEvent({this.context, this.restaurantname, required this.restaurantid, required this.items});
 
   @override
   // TODO: implement props
@@ -76,11 +78,12 @@ class AddDishToCartEvent extends DishEvent{
 
 class GetDishInCartEvent extends DishEvent{
   final String? restaurantid;
+  
 
   const GetDishInCartEvent({required this.restaurantid});
 
   @override
-  // TODO: implement props
+   
   List<Object> get props => [restaurantid!];
 }
 

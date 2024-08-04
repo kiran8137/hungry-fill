@@ -14,3 +14,20 @@ final class GetRestaurantSuccessState extends RestaurantState{
 
  const GetRestaurantSuccessState({required this.restaurants});
 }
+
+final class GetRestaurantsInWishListInitial extends RestaurantState{}
+
+final class GetRestaurantsInWishListSucces extends RestaurantState{
+  final List<RestaurantModel> wishlistrestaurant;
+
+ const GetRestaurantsInWishListSucces({required this.wishlistrestaurant});
+
+ @override
+  
+  List<Object> get props => [wishlistrestaurant];
+
+  
+}
+
+final class GetRestaurantsInWishListErrorState extends RestaurantState{}
+

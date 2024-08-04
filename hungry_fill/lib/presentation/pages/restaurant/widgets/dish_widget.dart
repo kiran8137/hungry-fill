@@ -74,10 +74,19 @@ class Dishwidget extends StatelessWidget {
                   GestureDetector(
                     onTap: (){
                       //createcart();
-                      BlocProvider.of<DishBloc>(context).add(AddDishToCartEvent(restaurantid: restaurantid, items: [dish.dishid!]));
-                       Navigator.push(context, MaterialPageRoute(builder: (context)=> CartPage(restaurantid: restaurantid, restaurantname: restaurantname,)));
+                      BlocProvider.of<DishBloc>(context).add(AddDishToCartEvent(restaurantid: restaurantid, items: [dish.dishid!] , restaurantname: restaurantname));
+                      //BlocProvider.of<DishBloc>(context).add(GetDishInCartEvent(restaurantid: restaurantid));
+                    // addDish();
 
+                    context.read<DishBloc>().stream.listen((state){
+                      if(state is AddDishToCartSuccesState){
+                         Navigator.push(context, MaterialPageRoute(builder: (context)=> CartPage(restaurantid: restaurantid, restaurantname: restaurantname,)));
+                      }
+                    });
+                     
+                      
                     },
+                    
                     child: Container(
                       height: 45,
                       width: 155,

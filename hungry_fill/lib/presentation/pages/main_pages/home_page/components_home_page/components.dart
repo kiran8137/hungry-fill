@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hungry_fill/data/model/restaurant_model/restaurant_model.dart';
 import 'package:hungry_fill/presentation/bloc/dish_bloc/dish_bloc.dart';
  
 import 'package:hungry_fill/presentation/bloc/restaurant_bloc/restaurant_bloc.dart';
 import 'package:hungry_fill/presentation/pages/restaurant/restuarant_screen.dart';
+import 'package:hungry_fill/presentation/pages/widgets/recommended_res_widget.dart';
  
 
 //dishItems
@@ -57,36 +59,8 @@ ListView recommendedRestaurans(GetRestaurantSuccessState? state) {
               BlocProvider.of<DishBloc>(context).add(GetCategories(resuerid: restaurant.userid))
               );
           },
-          child: Container(
-            height: 315,
-            width: 250,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              image: const DecorationImage(
-                  image: AssetImage("assets/food-dosa.jpeg"), fit: BoxFit.fill),
-            ),
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              height: 68,
-              width: 250,
-              decoration: const BoxDecoration(
-                color: Color.fromARGB(86, 0, 0, 0),
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(16),
-                    bottomRight: Radius.circular(16)),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    restaurant.restaurantname!,
-                    style:
-                        GoogleFonts.roboto(color: const Color.fromARGB(255, 255, 255, 255), fontSize: 30),
-                  )
-                ],
-              ),
-            ),
-          ),
+          child: RecommendRestaurant(restaurant: restaurant),
         );
       });
 }
+

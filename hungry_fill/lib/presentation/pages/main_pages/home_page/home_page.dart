@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/presentation/bloc/restaurant_bloc/restaurant_bloc.dart';
+import 'package:hungry_fill/presentation/pages/cart_page/cart_page.dart';
+import 'package:hungry_fill/presentation/pages/cart_restaurants/cart_restauants.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/home_page/components_home_page/components.dart';
- 
 
 import 'package:hungry_fill/presentation/pages/main_pages/widgets/search_widget.dart';
 import 'package:hungry_fill/presentation/pages/restaurant/restuarant_screen.dart';
@@ -17,13 +18,18 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: FloatingActionButton.extended(
-        label: Icon(Icons.shopping_cart,color: Colors.white,),
-        backgroundColor: primarycolor,
-        onPressed: (){
+    BlocProvider.of<RestaurantBloc>(context).add(GetRestaurantsEvent());
 
-        }),
+    return Scaffold(
+        floatingActionButton: FloatingActionButton.extended(
+            label: Icon(
+              Icons.shopping_cart,
+              color: Colors.white,
+            ),
+            backgroundColor: primarycolor,
+            onPressed: () {
+              // Navigator.push(context, MaterialPageRoute(builder: (context)=> const CartRestaurants()));
+            }),
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: SafeArea(
@@ -32,17 +38,12 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
                   SearchWidget(searchcontroller: searchcontroller),
-
-                  
                   const SizedBox(height: 35),
                   SizedBox(
                     height: 70,
                     child: dishItems(),
                   ),
-
-
                   const SizedBox(height: 35),
                   Text(
                     "Recommended Restaurants",
@@ -52,38 +53,19 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(
                     height: 25,
                   ),
-
-
                   BlocBuilder<RestaurantBloc, RestaurantState>(
                     builder: (context, state) {
                       if (state is GetRestaurantSuccessState) {
                         return SizedBox(
-                          height: 160,
-                          child: BlocBuilder<RestaurantBloc, RestaurantState>(
-
-
-                            builder: (context, state) {
-
-                              
-                              if (state is GetRestaurantSuccessState) {
-                                return recommendedRestaurans(state);
-                              } else {
-                                return Center(
-                                  child: LoadingAnimationWidget.horizontalRotatingDots(color: primarycolor, size: 20),
-                                );
-                              }
-                            },
-                          ),
-                        );
+                            height: 160, child: recommendedRestaurans(state));
                       } else {
-                        return  Center(
-                                  child: LoadingAnimationWidget.horizontalRotatingDots(color: primarycolor, size: 20),
-                                );
+                        return Center(
+                          child: LoadingAnimationWidget.horizontalRotatingDots(
+                              color: primarycolor, size: 20),
+                        );
                       }
                     },
                   ),
-
-
                   const SizedBox(height: 10),
                   Text(
                     "Restaurants",
@@ -142,104 +124,100 @@ class HomeScreen extends StatelessWidget {
                   ),
                   BlocBuilder<RestaurantBloc, RestaurantState>(
                     builder: (context, state) {
-
-                      if(state is GetRestaurantSuccessState){
-
-
+                      if (state is GetRestaurantSuccessState) {
                         return ListView.separated(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: state.restaurants.length,
-                        separatorBuilder: (context, index) => const SizedBox(
-                          height: 10,
-                        ),
-                        itemBuilder: (context, index) {
-
-                          final restaurant = state.restaurants[index];
-                          return 
-                        
-                        GestureDetector(
-                          onTap: (){
-                             Navigator.push(context, MaterialPageRoute(builder: (context)=>   RestuarantScreen(
-              resuerid: restaurant.userid,
-              restaurantname: restaurant.restaurantname,
-              restaurantdistrict: restaurant.restaurantdistrict,
-              restaurantplace: restaurant.restaurantplace,
-              )));
-                          },
-                          child: Container(
-                            height: 135,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 245, 245, 245),
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    height: 135,
-                                    width: 165,
-                                    decoration: BoxDecoration(
-                                        color: Colors.red,
-                                        borderRadius: BorderRadius.circular(10),
-                                        image: const DecorationImage(
-                                          image:
-                                              AssetImage("assets/biriyani.jpg"),
-                                          fit: BoxFit.fill,
-                                        )),
-                                        
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: state.restaurants.length,
+                            separatorBuilder: (context, index) =>
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                            itemBuilder: (context, index) {
+                              final restaurant = state.restaurants[index];
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              RestuarantScreen(
+                                                resuerid: restaurant.userid,
+                                                restaurantname:
+                                                    restaurant.restaurantname,
+                                                restaurantdistrict: restaurant
+                                                    .restaurantdistrict,
+                                                restaurantplace:
+                                                    restaurant.restaurantplace,
+                                              )));
+                                },
+                                child: Container(
+                                  height: 135,
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: const Color.fromARGB(
+                                        255, 245, 245, 245),
+                                    borderRadius: BorderRadius.circular(15),
                                   ),
-                                  const SizedBox(
-                                    width: 3,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        width: 140,
-                                        child: Text(
-                                           overflow: TextOverflow.ellipsis,
-                                        softWrap: true,
-                                        restaurant.restaurantname!,
-                                          style: GoogleFonts.amaranth(
-                                              fontSize: 25,
-                                              fontWeight: FontWeight.bold),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          height: 135,
+                                          width: 165,
+                                          decoration: BoxDecoration(
+                                              color: Colors.red,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              image: const DecorationImage(
+                                                image: AssetImage(
+                                                    "assets/biriyani.jpg"),
+                                                fit: BoxFit.fill,
+                                              )),
                                         ),
-                                      ),
-                                      Text(
-                                        restaurant.restaurantplace!,
-                                        style:
-                                            GoogleFonts.abhayaLibre(fontSize: 15,
-                                             
+                                        const SizedBox(
+                                          width: 3,
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              width: 140,
+                                              child: Text(
+                                                overflow: TextOverflow.ellipsis,
+                                                softWrap: true,
+                                                restaurant.restaurantname!,
+                                                style: GoogleFonts.amaranth(
+                                                    fontSize: 25,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
                                             ),
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
-                        }
-                      );
-                      }else{
+                                            Text(
+                                              restaurant.restaurantplace!,
+                                              style: GoogleFonts.abhayaLibre(
+                                                fontSize: 15,
+                                              ),
+                                            )
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            });
+                      } else {
                         return Text("no restaurant");
                       }
-                      
                     },
                   ),
-
-                   
                 ],
               ),
             ),
           ),
         ));
   }
-
-  
-
-  
 }

@@ -11,7 +11,7 @@ final List<String>? items;
 
 
   @override
-  // TODO: implement props
+   
   List<Object?> get props => [restaurantid , items];
 
   
