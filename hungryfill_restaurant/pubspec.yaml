@@ -49,6 +49,7 @@ dependencies:
   timer_count_down: ^2.2.2
   multi_dropdown: ^2.1.4
   multi_select_flutter: ^4.1.3
+  image_picker_web: ^4.0.0
 
 dev_dependencies:
   flutter_test:

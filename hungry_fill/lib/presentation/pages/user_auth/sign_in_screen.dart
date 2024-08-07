@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
-import 'package:hungry_fill/presentation/bloc/auth_bloc/sign_in_bloc/sign_in_bloc.dart';
-import 'package:hungry_fill/presentation/bloc/auth_bloc/sign_in_bloc/sign_inauth_event.dart';
+import 'package:hungry_fill/presentation/bloc/auth_bloc/sign_in_bloc/auth_bloc.dart';
+import 'package:hungry_fill/presentation/bloc/auth_bloc/sign_in_bloc/auth_event.dart';
+import 'package:hungry_fill/presentation/pages/main_pages/main_page.dart';
 import 'package:hungry_fill/presentation/pages/user_auth/log_in_screen.dart';
 import 'package:hungry_fill/presentation/pages/user_auth/widgets/text_form.dart';
 
@@ -18,6 +19,7 @@ class _SignInScreenState extends State<SignInScreen> {
   TextEditingController usernamecontroller = TextEditingController();
   TextEditingController mobilenumbercontroller = TextEditingController();
   TextEditingController emailcontroller = TextEditingController();
+  TextEditingController passwordcontroller = TextEditingController();
 
   final formkey = GlobalKey<FormState>();
 
@@ -58,27 +60,8 @@ class _SignInScreenState extends State<SignInScreen> {
             }
 
 
-            if (state is AuthOtpSent) {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    height: 50,
-                    decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Center(
-                      child: Text(
-                          style: GoogleFonts.aBeeZee(fontSize: 15),
-                          "OTP Sent Successfully"),
-                    ),
-                  ),
-                ),
-                behavior: SnackBarBehavior.floating,
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-              ),
-              );
+            if (state is SigInSuccessState) {
+              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>const MainPage()), (Route<dynamic> predicate)=>false);
              // Navigator.push(context, MaterialPageRoute(builder: (context)=>OtpScreen(otpdata: OTPModel(verificationId: state.))))
             }
           },
@@ -157,6 +140,20 @@ class _SignInScreenState extends State<SignInScreen> {
                             const SizedBox(
                               height: 25,
                             ),
+                            TextFormWidget(
+                               controller: passwordcontroller,
+                              hinttext: "Password",
+                              validator: (value){
+                                 final regExp = RegExp(r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$');
+                                 if(!regExp.hasMatch(value!)){
+                                  return "Password must be at least 8 characters long, include "
+                                  "an uppercase letter, a lowercase letter, a number, and a special character";
+                                 }
+                              },
+                             ),
+                             const SizedBox(
+                              height: 25,
+                            ),
                             GestureDetector(
                               onTap: () {
                                 // if (usernamecontroller.text.isEmpty ||
@@ -166,12 +163,11 @@ class _SignInScreenState extends State<SignInScreen> {
                                 // } 
                                 if(formkey.currentState!.validate()){
                                    BlocProvider.of<AuthBloc>(context).add(
-                                      SendOtpEvent(
-                                        username: usernamecontroller.text,
-                                        useremail: emailcontroller.text,
-                                          phonenumber:
-                                              mobilenumbercontroller.text,
-                                          context: context
+                                      SignInEvent(
+                                         emailid: emailcontroller.text,
+                                         password: passwordcontroller.text,
+                                         username: usernamecontroller.text,
+                                         phonenumber: mobilenumbercontroller.text
                                               ),
                                               );
                                 }
@@ -210,27 +206,27 @@ class _SignInScreenState extends State<SignInScreen> {
                              ),
                         
                             const SizedBox(height: 10,),
-                             GestureDetector(
-                              onTap: (){},
-                               child: Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: Colors.white),
-                                  height: 45,
-                                  width: 381,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      const Text(
-                                        'Facebook',
-                                        style: TextStyle(color: Color.fromARGB(255, 118, 118, 118), fontSize: 17)
-                                      ),
-                                       const SizedBox(width: 5,),
-                                        Image.asset("assets/facebook.png" , height: 25,)
-                                    ],
-                                  ),
-                                ),
-                             ),
+                            //  GestureDetector(
+                            //   onTap: (){},
+                            //    child: Container(
+                            //       decoration: BoxDecoration(
+                            //           borderRadius: BorderRadius.circular(10),
+                            //           color: Colors.white),
+                            //       height: 45,
+                            //       width: 381,
+                            //       child: Row(
+                            //         mainAxisAlignment: MainAxisAlignment.center,
+                            //         children: [
+                            //           const Text(
+                            //             'Facebook',
+                            //             style: TextStyle(color: Color.fromARGB(255, 118, 118, 118), fontSize: 17)
+                            //           ),
+                            //            const SizedBox(width: 5,),
+                            //             Image.asset("assets/facebook.png" , height: 25,)
+                            //         ],
+                            //       ),
+                            //     ),
+                            //  ),
                         
                           ],
                         ),

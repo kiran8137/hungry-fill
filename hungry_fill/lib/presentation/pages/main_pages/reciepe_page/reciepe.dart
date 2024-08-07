@@ -14,7 +14,7 @@ class RecipeScreen extends StatelessWidget {
         child: SearchWidget(searchcontroller: controller),
       ),
       backgroundColor: Colors.white,
-      body: Center(child: Text("Recipe Screen",style: TextStyle(color: Colors.black),),),
+      body: const Center(child: Text("Recipe Screen",style:   TextStyle(color: Colors.black),),),
     );
   }
 }

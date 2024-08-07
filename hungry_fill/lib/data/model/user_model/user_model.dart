@@ -16,7 +16,7 @@ class UserModel extends UserEntity{
       userid: json["userId"],
       username: json["userName"],
       usermobilenumber: json["userMobileNumber"],
-      useremail: json["useEmail"]
+      useremail: json["userEmail"]
 
     );
      
@@ -28,7 +28,7 @@ class UserModel extends UserEntity{
       "userId" : userid,
       "userName" : username,
       "userMobileNumber" : usermobilenumber,
-      "useEmail" : useremail
+      "userEmail" : useremail
     };
      
    }

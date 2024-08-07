@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:hungry_fill/data/model/restaurant_model/restaurant_model.dart';
+import 'package:hungry_fill/presentation/bloc/category_bloc/category_bloc.dart';
+ 
 import 'package:hungry_fill/presentation/bloc/dish_bloc/dish_bloc.dart';
  
 import 'package:hungry_fill/presentation/bloc/restaurant_bloc/restaurant_bloc.dart';
@@ -46,7 +46,8 @@ ListView recommendedRestaurans(GetRestaurantSuccessState? state) {
         return GestureDetector(
           onTap: () {
           
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>   RestuarantScreen(
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> 
+              RestuarantScreen(
               resuerid: restaurant.userid,
               restaurantname: restaurant.restaurantname,
               restaurantdistrict: restaurant.restaurantdistrict,
@@ -56,7 +57,7 @@ ListView recommendedRestaurans(GetRestaurantSuccessState? state) {
                 
 
               ).then((_)=>
-              BlocProvider.of<DishBloc>(context).add(GetCategories(resuerid: restaurant.userid))
+              BlocProvider.of<CategoryBloc>(context).add(GetCategories(resuerid: restaurant.userid))
               );
           },
           child: RecommendRestaurant(restaurant: restaurant),

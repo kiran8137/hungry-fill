@@ -49,9 +49,10 @@ class DishRepoImplementation extends DishRepository {
       List<DishModel> dishes = dishessnapshot.docs
           .map((dish) => DishModel.fromJson(json: dish.data()))
           .toList();
+          print(dishes.first.category);
       return dishes;
     } catch (error) {
-      log(error.toString());
+      log(" error ${error.toString()}");
       throw Exception(error.toString());
     }
   }
@@ -91,7 +92,7 @@ class DishRepoImplementation extends DishRepository {
   Future<PlatformFile?> dishImagePicker() async {
     try {
       final result = await FilePicker.platform.pickFiles(
-          type: FileType.custom, allowedExtensions: ['jpg', 'jpeg', 'png']);
+          );
       if (result != null && result.files.isNotEmpty) {
         return result.files.first;
       }
@@ -180,16 +181,16 @@ class DishRepoImplementation extends DishRepository {
   
 }
 
-Future<void> getcat() async {
-  final result = await FirebaseFirestore.instance
-      .collection("Restaurants")
-      .doc("DrGiHa3uutdYSXUjl3TBUR1fwqG2")
-      .collection("categories")
-      .get();
+// Future<void> getcat() async {
+//   final result = await FirebaseFirestore.instance
+//       .collection("Restaurants")
+//       .doc("DrGiHa3uutdYSXUjl3TBUR1fwqG2")
+//       .collection("categories")
+//       .get();
 
-  List<CategoryModel> category = result.docs
-      .map((cat) => CategoryModel.fromJson(json: cat.data()))
-      .toList();
+//   List<CategoryModel> category = result.docs
+//       .map((cat) => CategoryModel.fromJson(json: cat.data()))
+//       .toList();
 
-  print("lunch ${category[1].categoryid}");
-}
+//   print("lunch ${category[1].categoryid}");
+// }

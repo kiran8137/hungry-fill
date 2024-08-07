@@ -37,6 +37,8 @@ class _DishAddDialogState extends State<DishAddDialog> {
 
   final List<bool> isSelected = [false, false];
 
+    String? selectedimage;
+
   // List<ValueItem> getCategoryValueItems() {
   @override
   Widget build(BuildContext context) {
@@ -78,6 +80,7 @@ class _DishAddDialogState extends State<DishAddDialog> {
                               stock: dishstockcontroller.text,
                               serve: dishservecontroller.text,
                               category: selectedcategoryids,
+                              imageurl: selectedimage
                               );
                           BlocProvider.of<DishBloc>(context)
                               .add(DishAddEvent(dishmodel: dish));
@@ -147,6 +150,7 @@ class _DishAddDialogState extends State<DishAddDialog> {
                     },
                     builder: (context, state) {
                       if (state is DishImagPickerLoaded) {
+                     // selectedimage = state.file.;
                         return Container(
                           height: 120,
                           width: 180,

@@ -6,6 +6,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/core/constants/constant.dart';
+import 'package:hungry_fill/data/model/cart_model/cart_model.dart';
+import 'package:hungry_fill/data/model/dish_model/dish_model.dart';
+import 'package:hungry_fill/data/repository/cart_repo_imp/cart_repo_impl.dart';
 import 'package:hungry_fill/presentation/bloc/dish_bloc/dish_bloc.dart';
 import 'package:hungry_fill/presentation/pages/cart_page/widgets/bill_details_widgets.dart';
 
@@ -22,6 +25,7 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
 
   late List<String> dishids = [];
+  late DishModel cartdish;
   @override
   void initState() {
     BlocProvider.of<DishBloc>(context)
@@ -48,7 +52,7 @@ class _CartPageState extends State<CartPage> {
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(4),
             child: Container(
-              color: Color.fromARGB(255, 188, 188, 188),
+              color: const Color.fromARGB(255, 188, 188, 188),
               height: 1,
             ),
           ),
@@ -70,7 +74,8 @@ class _CartPageState extends State<CartPage> {
         backgroundColor: Colors.white,
         floatingActionButton: GestureDetector(
           onTap: (){
-            CartTotals.carttotal(dishids: dishids);
+            //carttotal(dishids: dishids);
+            getcart();
           },
           child: Container(
               width: 250,
@@ -82,7 +87,8 @@ class _CartPageState extends State<CartPage> {
                   "Procced to Check out",
                   style: GoogleFonts.breeSerif(color: Colors.white, fontSize: 20),
                 ),
-              )),
+              ),
+              ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         body: SingleChildScrollView(
@@ -118,12 +124,12 @@ class _CartPageState extends State<CartPage> {
                             itemCount: state.cartdishes.length,
                             itemBuilder: (context, index) {
                             
-                            final cartdish = state.cartdishes[index];
+                              cartdish = state.cartdishes[index];
                               return Container(
                                 height: 100,
                                 width: double.infinity,
                                 decoration: BoxDecoration(
-                                    color: Color.fromARGB(155, 248, 248, 248),
+                                    color: const Color.fromARGB(155, 248, 248, 248),
                                     borderRadius: BorderRadius.circular(10)),
                                 child: Row(
                                   children: [
@@ -192,7 +198,7 @@ class _CartPageState extends State<CartPage> {
                         );
                       }
                       else{
-                        return Center(child: Text("cart is empty"));
+                        return const Center(child:   Text("cart is empty"));
                       }
                     },
                   ),

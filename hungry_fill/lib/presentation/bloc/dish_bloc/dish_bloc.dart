@@ -4,12 +4,12 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+ 
 import 'package:hungry_fill/data/model/category_model/category_model.dart';
 import 'package:hungry_fill/data/model/dish_model/dish_model.dart';
 import 'package:hungry_fill/domain/repositories/cart_repository/cart_repository.dart';
 import 'package:hungry_fill/domain/repositories/dish_repository/dish_repo.dart';
-import 'package:hungry_fill/presentation/pages/cart_page/cart_page.dart';
+ 
 
 part 'dish_event.dart';
 part 'dish_state.dart';
@@ -22,7 +22,7 @@ class DishBloc extends Bloc<DishEvent, DishState> {
      
      on<DishGetEvent>(getDish);
      on<SearchDishEvent>(searchDishes);
-     on<GetCategories>(getCategories);
+     //on<GetCategories>(getCategories);
      on<GetCategoryDish>(getCategoryDish);
      on<AddDishToCartEvent>(addDishToCart);
      on<GetDishInCartEvent>(getDishInCart);
@@ -38,7 +38,7 @@ class DishBloc extends Bloc<DishEvent, DishState> {
         emit(DishSuccesEvent(dish: dishes));
       }else{
         
-        emit(DishErrorState(errormessage: "no dishes available"));
+        emit(const DishErrorState(errormessage: "no dishes available"));
       }
 
     }catch(error){
@@ -59,16 +59,16 @@ class DishBloc extends Bloc<DishEvent, DishState> {
     }
   }
 
-  FutureOr<void> getCategories(GetCategories event, Emitter<DishState> emit) async{
-    try{
+  // FutureOr<void> getCategories(GetCategories event, Emitter<DishState> emit) async{
+  //   try{
 
-      List<CategoryModel> categories = await dishrepository.getCategories(resuerid: event.resuerid!);
-      //emit(GetCategoriesSuccessState(categories: categories));
+  //     List<CategoryModel> categories = await dishrepository.getCategories(resuerid: event.resuerid!);
+  //     emit(GetCategoriesSuccessState(categories: categories));
 
-    }catch(error){
-      log(error.toString());
-    }
-  }
+  //   }catch(error){
+  //     log(error.toString());
+  //   }
+  // }
 
   FutureOr<void> getCategoryDish(GetCategoryDish event, Emitter<DishState> emit) async{
 
@@ -83,7 +83,8 @@ class DishBloc extends Bloc<DishEvent, DishState> {
 
   FutureOr<void> addDishToCart(AddDishToCartEvent event, Emitter<DishState> emit) async{
     try{
-      await cartrepositoy.addDishToCart(cartrestaurantid: event.restaurantid, items: event.items);
+      
+      await cartrepositoy.addDishToCart(cartrestaurantid: event.restaurantid, items: event.items ,);
        //Navigator.push(event.context!, MaterialPageRoute(builder: (context)=> CartPage(restaurantid: event.restaurantid, restaurantname: event.restaurantname,)));
       emit(AddDishToCartSuccesState());
     }catch(error){

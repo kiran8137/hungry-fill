@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hungry_fill/core/color/colors.dart';
+ 
 import 'package:hungry_fill/data/repository/auth_repo_impl/authentication_repo.dart';
 import 'package:hungry_fill/data/model/user_model/user_model.dart';
 import 'package:hungry_fill/presentation/bloc/user_bloc/users_bloc.dart';

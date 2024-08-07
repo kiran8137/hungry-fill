@@ -10,7 +10,8 @@ import 'package:hungry_fill/data/repository/restaurant_repo_impl/restaurant_repo
 import 'package:hungry_fill/data/repository/user_repo_impl/user_repo.dart';
 import 'package:hungry_fill/firebase_options.dart';
 import 'package:hungry_fill/presentation/bloc/auth_bloc/login_bloc/log_in_bloc_bloc.dart';
-import 'package:hungry_fill/presentation/bloc/auth_bloc/sign_in_bloc/sign_in_bloc.dart';
+import 'package:hungry_fill/presentation/bloc/auth_bloc/sign_in_bloc/auth_bloc.dart';
+import 'package:hungry_fill/presentation/bloc/category_bloc/category_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/dish_bloc/dish_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/restaurant_bloc/restaurant_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/user_bloc/users_bloc.dart';
@@ -49,7 +50,12 @@ class MyApp extends StatelessWidget {
 
           BlocProvider(
             create: (context)=> DishBloc(dishrepository: DishRepoImpl() , cartrepositoy: CartRepoImpl())
-            )
+            ),
+           BlocProvider(
+            create: (context)=> CategoryBloc(dishrepository: DishRepoImpl())
+            ),
+          
+          
         
 
          

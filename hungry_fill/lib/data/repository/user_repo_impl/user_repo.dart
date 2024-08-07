@@ -37,7 +37,7 @@ UserRepoImplementation({required this.firestore , required this.firebaseauth});
   Future<User?> getUsersStatus() async{
     
     try{
-      User? user = await FirebaseAuth.instance.currentUser;
+      User? user =   FirebaseAuth.instance.currentUser;
       return user;
     }catch(error){
       throw Exception(error.toString());

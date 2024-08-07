@@ -3,8 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/presentation/bloc/restaurant_bloc/restaurant_bloc.dart';
-import 'package:hungry_fill/presentation/pages/cart_page/cart_page.dart';
-import 'package:hungry_fill/presentation/pages/cart_restaurants/cart_restauants.dart';
+ 
 import 'package:hungry_fill/presentation/pages/main_pages/home_page/components_home_page/components.dart';
 
 import 'package:hungry_fill/presentation/pages/main_pages/widgets/search_widget.dart';
@@ -22,7 +21,7 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
         floatingActionButton: FloatingActionButton.extended(
-            label: Icon(
+            label: const Icon(
               Icons.shopping_cart,
               color: Colors.white,
             ),
@@ -183,7 +182,7 @@ class HomeScreen extends StatelessWidget {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Container(
+                                            SizedBox(
                                               width: 140,
                                               child: Text(
                                                 overflow: TextOverflow.ellipsis,
@@ -210,7 +209,7 @@ class HomeScreen extends StatelessWidget {
                               );
                             });
                       } else {
-                        return Text("no restaurant");
+                        return const Text("no restaurant");
                       }
                     },
                   ),

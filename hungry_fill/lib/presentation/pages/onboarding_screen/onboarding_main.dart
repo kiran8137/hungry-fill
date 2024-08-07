@@ -15,7 +15,7 @@ class OnboardingMain extends StatefulWidget {
 }
 
 class _OnboardingMainState extends State<OnboardingMain> {
-  PageController _pagecontroller = PageController();
+  final PageController _pagecontroller = PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -43,33 +43,26 @@ class _OnboardingMainState extends State<OnboardingMain> {
                         onTap: (){
                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const SignInScreen()));
                         },
-                        child: Container(
-                          // alignment : Alignment(-0.9,0.925),
-                          child: Text(
-                            'SKIP',
-                            style: GoogleFonts.inter(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: primarycolor),
-                          ),
+                        child: Text(
+                          'SKIP',
+                          style: GoogleFonts.inter(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: primarycolor),
                         ),
                       ),
                       const SizedBox(
                         width: 2,
                       ),
-                      Container(
-                        //  color: Color.fromARGB(64, 14, 9, 45),
-                        // alignment: const Alignment(0, 0.90),
-                        child: SmoothPageIndicator(
-                          effect: const ExpandingDotsEffect(
-                            dotHeight: 6,
-                            dotWidth: 6,
-                            //dotColor: Color.fromARGB(64, 14, 9, 45),
-                            activeDotColor: primarycolor,
-                          ),
-                          controller: _pagecontroller,
-                          count: 3,
+                      SmoothPageIndicator(
+                        effect: const ExpandingDotsEffect(
+                          dotHeight: 6,
+                          dotWidth: 6,
+                          //dotColor: Color.fromARGB(64, 14, 9, 45),
+                          activeDotColor: primarycolor,
                         ),
+                        controller: _pagecontroller,
+                        count: 3,
                       ),
                       const SizedBox(
                         width: 2,

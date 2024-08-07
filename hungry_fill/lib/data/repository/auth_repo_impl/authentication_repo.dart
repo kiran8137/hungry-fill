@@ -20,56 +20,84 @@ class AuthenticationRepoImplement extends AuthRepository {
   AuthenticationRepoImplement(
       {required this.firestore, required this.firebaseauth});
 
-  @override
-  Future<void> sendOtp(
-      {required String phoneNumber,
-      required BuildContext context,
-      required String? username,
-      required String? useremail}) async {
-    try {
-      await firebaseauth.verifyPhoneNumber(
-          phoneNumber: phoneNumber,
-          verificationCompleted: (phoneAuthCredential) {},
-          verificationFailed: (error) {
-            print(error.toString());
-          },
-          codeSent: (verificationId, forceResendingToken) {
-            log(forceResendingToken.toString());
-            //navigate to the otp page
-            Navigator.push(
-                context,
-                (MaterialPageRoute(
-                    builder: (context) => (OtpScreen(
-                          username: username,
-                          useremail: useremail,
-                          otpdata: OTPModel(
-                            phonenumber: phoneNumber,
-                              verificationId: verificationId,
-                              forceResendingToken: forceResendingToken),
-                        )))));
-          },
-          codeAutoRetrievalTimeout: (verificationId) {});
-    } catch (e) {
-      log(e.toString());
-    }
-  }
+  // @override
+  // Future<void> sendOtp(
+  //     {required String phoneNumber,
+  //     required BuildContext context,
+  //     required String? username,
+  //     required String? useremail}) async {
+  //   try {
+  //     await firebaseauth.verifyPhoneNumber(
+  //         phoneNumber: phoneNumber,
+  //         verificationCompleted: (phoneAuthCredential) {},
+  //         verificationFailed: (error) {
+  //           print(error.toString());
+  //         },
+  //         codeSent: (verificationId, forceResendingToken) {
+  //           log(forceResendingToken.toString());
+  //           //navigate to the otp page
+  //           Navigator.push(
+  //               context,
+  //               (MaterialPageRoute(
+  //                   builder: (context) => (OtpScreen(
+  //                         username: username,
+  //                         useremail: useremail,
+  //                         otpdata: OTPModel(
+  //                           phonenumber: phoneNumber,
+  //                             verificationId: verificationId,
+  //                             forceResendingToken: forceResendingToken),
+  //                       )))));
+  //         },
+  //         codeAutoRetrievalTimeout: (verificationId) {});
+  //   } catch (e) {
+  //     log(e.toString());
+  //   }
+  // }
+
+  // @override
+  // Future<UserCredential> verifyOtp(
+  //     {required String verificationId, required String otpCode}) async {
+  //   try {
+  //     final credentials = PhoneAuthProvider.credential(
+  //         verificationId: verificationId, smsCode: otpCode);
+
+  //     Future<UserCredential> userdetail =
+  //         firebaseauth.signInWithCredential(credentials);
+
+  //     return userdetail;
+  //   } catch (e) {
+  //     log(e.toString());
+  //     throw Exception(e);
+  //   }
+  // }
+
 
   @override
-  Future<UserCredential> verifyOtp(
-      {required String verificationId, required String otpCode}) async {
-    try {
-      final credentials = PhoneAuthProvider.credential(
-          verificationId: verificationId, smsCode: otpCode);
+  Future<UserCredential> signIn({required String emailid, required String password})async{
+      try{
 
-      Future<UserCredential> userdetail =
-          firebaseauth.signInWithCredential(credentials);
+     UserCredential usercred =  await FirebaseAuth.instance.createUserWithEmailAndPassword(email: emailid, password: password);
+     return usercred;
+     }catch(error){
+      log(error.toString());
+      throw Exception(error.toString());
+     }
+  }
 
-      return userdetail;
-    } catch (e) {
-      log(e.toString());
-      throw Exception(e);
+  
+ @override
+  Future<UserCredential> logIn({required String emailid, required String password}) async{
+
+    try{
+       UserCredential usercred = await FirebaseAuth.instance.signInWithEmailAndPassword(email: emailid, password: password);
+      return usercred;
+
+    }catch(error){
+      log(error.toString());
+      throw Exception(error.toString());
     }
   }
+  
 
   @override
   Future<void> saveUserToDatabase({required UserModel usermodel}) async {
@@ -102,11 +130,11 @@ class AuthenticationRepoImplement extends AuthRepository {
 
   @override
   Future<bool> checkUserAlreadyRegistered(
-      {required String? phonenumber}) async {
+      {required String? emailid}) async {
     try {
       final result = await firestore
           .collection("Users")
-          .where("userMobileNumber", isEqualTo: phonenumber)
+          .where("useEmail", isEqualTo: emailid)
           .get();
 
       if (result.docs.isEmpty) {
@@ -171,4 +199,8 @@ class AuthenticationRepoImplement extends AuthRepository {
 
      }
   }
+  
+  
+  
+  
 }

@@ -3,15 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/data/model/dish_model/dish_model.dart';
-import 'package:hungry_fill/data/repository/cart_repo_imp/cart_repo_impl.dart';
-import 'package:hungry_fill/data/repository/dish_repo_imp/dish_repo_impl.dart';
-import 'package:hungry_fill/data/repository/restaurant_repo_impl/restaurant_repo_imp.dart';
 import 'package:hungry_fill/presentation/bloc/dish_bloc/dish_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/restaurant_bloc/restaurant_bloc.dart';
 import 'package:hungry_fill/presentation/pages/cart_page/cart_page.dart';
  
 import 'package:hungry_fill/presentation/pages/main_pages/widgets/search_widget.dart';
 import 'package:hungry_fill/presentation/pages/restaurant/widgets/dish_widget.dart';
+
+import '../../bloc/category_bloc/category_bloc.dart';
 
 class RestuarantScreen extends StatefulWidget {
   const RestuarantScreen(
@@ -40,7 +39,7 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
   void initState() {
     BlocProvider.of<DishBloc>(context)
         .add(DishGetEvent(resuserid: widget.resuerid));
-    BlocProvider.of<DishBloc>(context)
+    BlocProvider.of<CategoryBloc>(context)
         .add(GetCategories(resuerid: widget.resuerid));
       
     super.initState();
@@ -53,7 +52,7 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
         label: const Icon(Icons.shopping_cart,color: Colors.white,),
         backgroundColor: primarycolor,
         onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=> const CartPage()));
+          //Navigator.push(context, MaterialPageRoute(builder: (context)=> const CartPage()));
         }),
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -167,12 +166,12 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                 ),
                 SearchWidget(searchcontroller: searchcontroller , resuserid: widget.resuerid,),
                  
-                 BlocBuilder<DishBloc , DishState>(
+                 BlocConsumer<CategoryBloc , CategoryState>(
                   builder:(context , state){
-
+                    print(state.runtimeType.toString());
                     
 
-                    if(state is GetCategoriesSuccessState){
+                    if(state is GetCategoriesSuccesState){
                       
                       return SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
@@ -190,7 +189,7 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                               label: Text(category.categoryname!), 
                               selectedColor: primarycolor,
                               onSelected: (bool isseleced){
-
+                                
                               }
                               ),
                           )
@@ -201,7 +200,8 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                     }else{
                       return const Text("somethign went wrong");
                     }
-                  }
+                  }, listener: (BuildContext context, CategoryState state) {  }, 
+                 
                   ),
 
 
@@ -234,8 +234,14 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                 ),
                 
                         BlocConsumer<DishBloc, DishState>(
-                      listener: (context, state) {},
+                          
+                       listener: (BuildContext context, DishState state) { 
+                    if(state is AddDishToCartSuccesState){
+                       Navigator.push(context, MaterialPageRoute(builder: (context)=> CartPage(restaurantid: widget.resuerid, restaurantname: widget.restaurantname,)));
+                    }
+                   },
                       builder: (context, state) {
+                        print('in list dish ${state.runtimeType.toString()}');
                         if (state is DishInitial) {
                           return const Center(
                               child: CircularProgressIndicator());
@@ -251,8 +257,11 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                        
                         
 
-                        if (state is DishSuccesEvent || state is SearchDishSuccessState ) {
-                          final dishes = state is DishSuccesEvent ? state.dish : (state as SearchDishSuccessState).dishes ;
+                        if (state is DishSuccesEvent 
+                        || state is SearchDishSuccessState 
+                        ) {
+                          final dishes = state is DishSuccesEvent ? state.dish 
+                          : (state as SearchDishSuccessState).dishes ;
                           return ListView.separated(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
@@ -262,6 +271,7 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                                   restaurantid: widget.resuerid!,
                                   dish: dishes[index],
                                   restaurantname: widget.restaurantname!,
+                                  ctx: context,
                                   );
                               },
                               separatorBuilder: (context, index) =>

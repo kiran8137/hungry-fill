@@ -9,11 +9,22 @@ import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/scr
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/dishes/widgets/dish_header.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/dish/dish_bloc.dart';
 
-class DishScreen extends StatelessWidget {
+class DishScreen extends StatefulWidget {
   const DishScreen({super.key, this.index});
 
   final int? index;
 
+  @override
+  State<DishScreen> createState() => _DishScreenState();
+}
+
+class _DishScreenState extends State<DishScreen> {
+
+  @override
+  void initState() {
+    BlocProvider.of<DishBloc>(context).add(GetDishesEvent());
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -100,7 +111,7 @@ class DishScreen extends StatelessWidget {
                 child: Center(
                   child: GestureDetector(
                     onTap: (){
-                      getcat();
+                      // getcat();
                     },
                     child: Text(
                       "search",

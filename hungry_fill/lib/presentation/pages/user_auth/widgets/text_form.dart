@@ -1,7 +1,7 @@
 // import 'package:flutter/material.dart';
 
 import 'package:flutter/material.dart';
-import 'package:hungry_fill/presentation/bloc/auth_bloc/sign_in_bloc/sign_in_bloc.dart';
+import 'package:hungry_fill/presentation/bloc/auth_bloc/sign_in_bloc/auth_bloc.dart';
 
 class TextFormWidget extends StatelessWidget {
     const TextFormWidget({

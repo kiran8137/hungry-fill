@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+ 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -33,55 +33,53 @@ class WishlistWidget extends StatelessWidget {
               decoration: BoxDecoration(
                   color: Colors.green, borderRadius: BorderRadius.circular(10)),
             ),
-            SizedBox(
+            const SizedBox(
               width: 15,
             ),
-            Container(
-              child: Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    restaurantname!,
-                    style: GoogleFonts.mukta(
-                        fontSize: 23, fontWeight: FontWeight.w500),
-                  ),
-                  // Text(
-                  //   restaurantplace!,
-                  //   style: GoogleFonts.mukta(
-                  //     fontSize: 15,
-                  //     fontWeight: FontWeight.w400
-              
-                  //   ),
-                  //
-                  //),
-              
-                  Row(
-                    children: [
-                      Text(
-                        restaurantplace!,
-                        style: GoogleFonts.jost(
-                           color: const Color.fromARGB(255, 122, 121, 121),
-                          fontSize: 15,
-                        ),
+            Column(
+               crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  restaurantname!,
+                  style: GoogleFonts.mukta(
+                      fontSize: 23, fontWeight: FontWeight.w500),
+                ),
+                // Text(
+                //   restaurantplace!,
+                //   style: GoogleFonts.mukta(
+                //     fontSize: 15,
+                //     fontWeight: FontWeight.w400
+            
+                //   ),
+                //
+                //),
+            
+                Row(
+                  children: [
+                    Text(
+                      restaurantplace!,
+                      style: GoogleFonts.jost(
+                         color: const Color.fromARGB(255, 122, 121, 121),
+                        fontSize: 15,
                       ),
-              
-                      //Text(".",style: TextStyle(color: Colors.white , fontSize: 20),),
-                      const Icon(
-                        Icons.fiber_manual_record,
-                        size: 10,
-                        
+                    ),
+            
+                    //Text(".",style: TextStyle(color: Colors.white , fontSize: 20),),
+                    const Icon(
+                      Icons.fiber_manual_record,
+                      size: 10,
+                      
+                    ),
+                    Text(
+                      restaurantdistrict!,
+                      style: GoogleFonts.jost(
+                        color: const Color.fromARGB(255, 122, 121, 121),
+                        fontSize: 15,
                       ),
-                      Text(
-                        restaurantdistrict!,
-                        style: GoogleFonts.jost(
-                          color: const Color.fromARGB(255, 122, 121, 121),
-                          fontSize: 15,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             )
           ],
         ),

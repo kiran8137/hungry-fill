@@ -1,4 +1,4 @@
-part of 'sign_in_bloc.dart';
+part of 'auth_bloc.dart';
 
 @immutable
 sealed class AuthState extends Equatable{
@@ -23,14 +23,18 @@ sealed class AuthState extends Equatable{
   // List<Object?> get props => [user];
   //}
 
-  class OtpVerified extends AuthState{
-    final String? userid;
+  // class OtpVerified extends AuthState{
+  //   final String? userid;
 
-    const OtpVerified({required this.userid});
-    @override
+  //   const OtpVerified({required this.userid});
+  //   @override
    
-  List<Object?> get props => [userid];
-  }
+  // List<Object?> get props => [userid];
+  // }
+
+  final class SigInSuccessState extends AuthState{}
+
+  final class LogInSuccessState extends AuthState{}
 
   class AuthErrorState extends AuthState{
     final String? erromessage;

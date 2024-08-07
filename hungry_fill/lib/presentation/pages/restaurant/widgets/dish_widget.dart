@@ -3,22 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
+ 
 import 'package:hungry_fill/data/model/dish_model/dish_model.dart';
-import 'package:hungry_fill/data/repository/cart_repo_imp/cart_repo_impl.dart';
 import 'package:hungry_fill/presentation/bloc/dish_bloc/dish_bloc.dart';
-import 'package:hungry_fill/presentation/pages/cart_page/cart_page.dart';
+ 
 
 class Dishwidget extends StatelessWidget {
   const Dishwidget({
     super.key,
     required this.dish,
     required this.restaurantid,
-    required this.restaurantname
+    required this.restaurantname,
+    required this.ctx
   });
 
   final DishModel dish;
   final String restaurantid;
   final String restaurantname;
+  final BuildContext ctx;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -72,17 +74,18 @@ class Dishwidget extends StatelessWidget {
                     height: 4,
                   ),
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
+                       
                       //createcart();
                       BlocProvider.of<DishBloc>(context).add(AddDishToCartEvent(restaurantid: restaurantid, items: [dish.dishid!] , restaurantname: restaurantname));
                       //BlocProvider.of<DishBloc>(context).add(GetDishInCartEvent(restaurantid: restaurantid));
                     // addDish();
 
-                    context.read<DishBloc>().stream.listen((state){
-                      if(state is AddDishToCartSuccesState){
-                         Navigator.push(context, MaterialPageRoute(builder: (context)=> CartPage(restaurantid: restaurantid, restaurantname: restaurantname,)));
-                      }
-                    });
+                    // context.read<DishBloc>().stream.listen((state){
+                    //   if(state is AddDishToCartSuccesState){
+                    //      Navigator.push(ctx, MaterialPageRoute(builder: (context)=> CartPage(restaurantid: restaurantid, restaurantname: restaurantname,)));
+                    //   }
+                    // });
                      
                       
                     },

@@ -5,7 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/presentation/bloc/auth_bloc/login_bloc/log_in_bloc_bloc.dart';
-import 'package:hungry_fill/presentation/bloc/auth_bloc/sign_in_bloc/sign_in_bloc.dart';
+import 'package:hungry_fill/presentation/bloc/auth_bloc/sign_in_bloc/auth_bloc.dart';
+import 'package:hungry_fill/presentation/bloc/auth_bloc/sign_in_bloc/auth_event.dart';
+import 'package:hungry_fill/presentation/pages/main_pages/main_page.dart';
 import 'package:hungry_fill/presentation/pages/user_auth/sign_in_screen.dart';
 import 'package:hungry_fill/presentation/pages/user_auth/widgets/text_form.dart';
 
@@ -17,9 +19,9 @@ class LogInScreen extends StatefulWidget {
 }
 
 class _LogInScreenState extends State<LogInScreen> {
-  TextEditingController mobilecontrollerlogin = TextEditingController();
-  TextEditingController otpcontroller = TextEditingController();
-  bool isotpsend = false;
+  TextEditingController emailcontrollerlogin = TextEditingController();
+  TextEditingController passwordcontrollerlogin = TextEditingController();
+  
 
   final _formkey = GlobalKey<FormState>();
   @override
@@ -33,6 +35,10 @@ class _LogInScreenState extends State<LogInScreen> {
         child: BlocConsumer<AuthBloc, AuthState>(
 
           listener: (context, state) {
+
+            if(state is LogInSuccessState){
+              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>const MainPage()), (Route<dynamic> predicate)=>false);
+            }
 
             if(state is UserNotRegisteredStateLogin){
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -57,28 +63,7 @@ class _LogInScreenState extends State<LogInScreen> {
               );
             }
 
-             if(state is OtpSentStateLogin){
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    height: 50,
-                    decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Center(
-                      child: Text(
-                          style: GoogleFonts.aBeeZee(fontSize: 15),
-                          "OTP Sent Successfully"),
-                    ),
-                  ),
-                ),
-                behavior: SnackBarBehavior.floating,
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-              ),
-              );
-             }
+              
           },
           builder: (context, state) {
             return Column(
@@ -111,15 +96,15 @@ class _LogInScreenState extends State<LogInScreen> {
                             height: 40,
                           ),
                           TextFormWidget(
-                            controller: mobilecontrollerlogin,
-                            hinttext: "Mobile No",
+                            controller: emailcontrollerlogin,
+                            hinttext: "Email",
                           ),
                           const SizedBox(
                             height: 30,
                           ),
                           TextFormWidget(
-                            controller: otpcontroller,
-                            hinttext: 'OTP',
+                            controller: passwordcontrollerlogin,
+                            hinttext: 'password',
                           ),
                           const SizedBox(
                             height: 50,
@@ -127,10 +112,8 @@ class _LogInScreenState extends State<LogInScreen> {
                           GestureDetector(
                             onTap: () {
                               log("tapped log in");
-                              BlocProvider.of<LogInBloc>(context).add(SendOtpEventLogin(phonenumber: mobilecontrollerlogin.text, context: context));
-                              setState(() {
-                                isotpsend = true;
-                              });
+                              BlocProvider.of<AuthBloc>(context).add(LogInEvent(emailid: emailcontrollerlogin.text , password: passwordcontrollerlogin.text ));
+                              
                             },
                             child: Container(
                               decoration: BoxDecoration(
@@ -140,7 +123,7 @@ class _LogInScreenState extends State<LogInScreen> {
                               width: 381,
                               child: Center(
                                 child: Text(
-                                  isotpsend == true ? 'LOG IN' : 'Send OTP',
+                                  'Log In',
                                   style: GoogleFonts.breeSerif(
                                       color: Colors.white, fontSize: 30),
                                 ),
