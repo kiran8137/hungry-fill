@@ -3,17 +3,20 @@ import 'package:equatable/equatable.dart';
 
 class CartEntity extends Equatable{
 
+final String? cartid;
+final String? userid;
 final String? restaurantid;
-final List<String>? items;
-final int? totalprice;
+final String? dishid;
+final int? dishquantity;
+final int? priceperquantity;
 
- const CartEntity({this.totalprice, required this.restaurantid, required this.items});
+ const CartEntity({this.cartid, this.userid, this.restaurantid, this.dishid, this.dishquantity, this.priceperquantity});
 
 
 
   @override
    
-  List<Object?> get props => [restaurantid , items , totalprice];
+  List<Object?> get props => [];
 
   
 }

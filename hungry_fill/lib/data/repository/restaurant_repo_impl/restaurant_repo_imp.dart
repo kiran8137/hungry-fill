@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:hungry_fill/data/model/restaurant_model/restaurant_model.dart';
 import 'package:hungry_fill/domain/repositories/restaurant_repository/restaurant_respository.dart';
 
@@ -74,10 +75,22 @@ class RestaurantRepoImp extends RestaurantRepository {
 
      }
   }
+  
+  @override
+  Future<void> removeRestaurantFromWishist({required restaurantid}) async{
+    try{
+       final snapshot =   FirebaseFirestore.instance.collection("Users").doc(FirebaseAuth.instance.currentUser?.uid).collection('wishlist').doc(restaurantid);
+       await snapshot.delete();
+    }catch(error){
+     debugPrint(error.toString());
+     throw Exception(error.toString());
+    }
+    
+  }
 }
 
- Future<void> removeRestaurantWishList({required String restaurantid}) async{
+//  Future<void> removeRestaurantWishList({required String restaurantid}) async{
 
-  final snapshot =   FirebaseFirestore.instance.collection("Users").doc(FirebaseAuth.instance.currentUser?.uid).collection('wishlist').doc(restaurantid);
-   snapshot.delete();
- }
+//   final snapshot =   FirebaseFirestore.instance.collection("Users").doc(FirebaseAuth.instance.currentUser?.uid).collection('wishlist').doc(restaurantid);
+//    snapshot.delete();
+//  }

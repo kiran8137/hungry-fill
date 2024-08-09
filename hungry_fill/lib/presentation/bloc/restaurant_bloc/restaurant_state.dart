@@ -31,3 +31,6 @@ final class GetRestaurantsInWishListSucces extends RestaurantState{
 
 final class GetRestaurantsInWishListErrorState extends RestaurantState{}
 
+final class RemoveRestaurantsInWishListSucces extends RestaurantState{}
+
+

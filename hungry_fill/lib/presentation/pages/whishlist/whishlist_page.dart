@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -11,7 +12,9 @@ import 'package:hungry_fill/presentation/pages/restaurant/restuarant_screen.dart
 import 'package:hungry_fill/presentation/pages/whishlist/widgets/wishlist_widget.dart';
 
 class WishListPage extends StatelessWidget {
-  const WishListPage({super.key});
+   const WishListPage({super.key});
+
+  final bool isfav = false;
 
   @override
   Widget build(BuildContext context) {
@@ -30,14 +33,44 @@ class WishListPage extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: SafeArea(child: BlocBuilder<RestaurantBloc, RestaurantState>(
-        builder: (context, state) {
-          log(state.runtimeType.toString());
-          if (state is GetRestaurantsInWishListInitial) {
-            return const Center(
+      body: SafeArea(
+        child: BlocConsumer<RestaurantBloc, RestaurantState>(
+        listener:(context, state) {
+           if (state is GetRestaurantsInWishListInitial) {
+              const Center(
               child: CircularProgressIndicator(),
             );
+          }else{
+            if(state is RemoveRestaurantsInWishListSucces){
+              context.read<RestaurantBloc>().add(GetRestaurantsInWishList());
+             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 255, 38, 0),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Center(
+                      child: Text(
+                          style: GoogleFonts.aBeeZee(fontSize: 15),
+                          "Remove Successfully"),
+                    ),
+                  ),
+                ),
+                behavior: SnackBarBehavior.floating,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+              ));
           }
+          }
+          
+        },
+        builder: (context, state) {
+          log(state.runtimeType.toString());
+         
+
+         
           if (state is GetRestaurantsInWishListSucces) {
             return AnimationLimiter(
               child: ListView.separated(
@@ -70,35 +103,30 @@ class WishListPage extends StatelessWidget {
                               verticalOffset: 50.0,
                               child: FadeInAnimation(
                                 child:
-                                    // Dismissible(
-                                    //   key: Key(index.toString()),
-                                    //   onDismissed: (_){
-                                    //     removeRestaurantWishList(restaurantid: wishlistrestaurant.userid!);
-                                    //   },
-                                    Slidable(
-                                  endActionPane: ActionPane(
-                                      motion: const ScrollMotion(),
-                                      children: [
-                                        SlidableAction(onPressed: (contex) {
-                                          removeRestaurantWishList(
-                                              restaurantid:
-                                                  wishlistrestaurant.userid!);
-                                        })
-                                      ]),
-                                  child: WishlistWidget(
-                                    restaurantname:
-                                        wishlistrestaurant.restaurantname,
-                                    restaurantplace:
-                                        wishlistrestaurant.restaurantplace,
-                                    restaurantdistrict:
-                                        wishlistrestaurant.restaurantdistrict,
-                                  ),
+                                    
+                                   Dismissible(
+                                    direction: DismissDirection.endToStart,
+                                    background: const Icon(CupertinoIcons.delete),
+                                    onDismissed: (direction){
+                                      context.read<RestaurantBloc>().add(RemoveRestaurantInWishList(restaurantid: wishlistrestaurant.userid!));
+
+                                    },
+                                    key: Key(wishlistrestaurant.userid!),
+                                     child: WishlistWidget(
+                                      restaurantname:
+                                          wishlistrestaurant.restaurantname,
+                                      restaurantplace:
+                                          wishlistrestaurant.restaurantplace,
+                                      restaurantdistrict:
+                                          wishlistrestaurant.restaurantdistrict,
+                                       ),
+                                   ),
                                 ),
                               ),
                             ),
                           ),
                         ),
-                      ),
+                      
                     );
                   },
                   separatorBuilder: (context, index) =>
@@ -112,6 +140,7 @@ class WishListPage extends StatelessWidget {
               child: Text("No Restaurants in wishlist"),
             );
           } else {
+            log('else coming');
             return const Center(child: CircularProgressIndicator());
           }
         },

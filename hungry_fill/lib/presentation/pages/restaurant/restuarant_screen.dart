@@ -32,6 +32,8 @@ class RestuarantScreen extends StatefulWidget {
 class _RestuarantScreenState extends State<RestuarantScreen> {
   final TextEditingController searchcontroller = TextEditingController();
  late DishModel dish;
+ List<String> selectedcatories = [];
+ bool isfav = false;
 
  
 
@@ -47,6 +49,9 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+
+
     return Scaffold(
        floatingActionButton: FloatingActionButton.extended(
         label: const Icon(Icons.shopping_cart,color: Colors.white,),
@@ -108,9 +113,18 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                               GestureDetector(
                                 onTap: (){
                                    BlocProvider.of<RestaurantBloc>(context).add(AddRestaurantToWishList(restaurantid: widget.resuerid!));
+                                    setState(() {
+                                        isfav = true;
+                                      });
+                                   
                                   //addToWishList(restaurantid: widget.resuerid!);
                                 },
-                                child: const Icon(Icons.favorite_border,color: Colors.white,))
+                                child: isfav==false ? const Icon(Icons.favorite_border , color: Colors.white,):
+                                const Icon(Icons.favorite, color: Colors.white,)
+                                //   Icon(
+                                //  isfav ? Icons.favorite_border: Icons.favorite,
+                                // color: isfav? Colors.white :)
+                                )
                               ),
                         
                             Column(
@@ -180,16 +194,29 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                           Padding(
                             padding: const EdgeInsets.all(5.0),
                             child: FilterChip(
+                              selectedColor : Colors.white,
+                              
                                shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
+                            
                             
                             ),
                               backgroundColor: Colors.white,
                               
+                              
                               label: Text(category.categoryname!), 
-                              selectedColor: primarycolor,
+                               selected: selectedcatories.contains(category.categoryname),
                               onSelected: (bool isseleced){
-                                
+                                 debugPrint(isseleced.toString());
+                                 if(isseleced){
+                                  selectedcatories.add(category.categoryname!);
+                                  print(selectedcatories);
+                                 }else{
+                                  selectedcatories.remove(category.categoryname);
+                                  print(selectedcatories);
+                                 }
+                                  
+                                  
                               }
                               ),
                           )
@@ -236,9 +263,12 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                         BlocConsumer<DishBloc, DishState>(
                           
                        listener: (BuildContext context, DishState state) { 
-                    if(state is AddDishToCartSuccesState){
-                       Navigator.push(context, MaterialPageRoute(builder: (context)=> CartPage(restaurantid: widget.resuerid, restaurantname: widget.restaurantname,)));
-                    }
+                        if(state is AddDishToCartSuccesState){
+                          BlocProvider.of<DishBloc>(context).add(DishGetEvent(resuserid: widget.resuerid));
+                        }
+                    // if(state is AddDishToCartSuccesState){
+                    //    Navigator.push(context, MaterialPageRoute(builder: (context)=> CartPage(restaurantid: widget.resuerid, restaurantname: widget.restaurantname,)));
+                    // }
                    },
                       builder: (context, state) {
                         print('in list dish ${state.runtimeType.toString()}');
@@ -279,7 +309,7 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                               itemCount: dishes.length
                               );
                         } else {
-                          return const Center(child: Text("no dish available"));
+                          return const Center(child: CircularProgressIndicator());
                         }
                       },
                     )

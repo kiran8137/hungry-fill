@@ -19,7 +19,7 @@ class DishBloc extends Bloc<DishEvent, DishState> {
   DishBloc({required this.dishrepository}) : super(DishInitial()) {
     
     on<DishAddEvent>(addDish);
-    on<GetDishesEvent>(getDishes);
+   // on<GetDishesEvent>(getDishes);
     on<DeleteDishEvent>(deleteDish);
     on<DishUpdateEvent>(updateDish);
     on<DishImagePicker>(getDishImage);
@@ -40,25 +40,25 @@ class DishBloc extends Bloc<DishEvent, DishState> {
 
 
 
-  FutureOr<void> getDishes(GetDishesEvent event, Emitter<DishState> emit) async{
-    try{
+  // FutureOr<void> getDishes(GetDishesEvent event, Emitter<DishState> emit) async{
+  //   try{
 
-      List<DishModel> dishes = await dishrepository.getDishes(userid: FirebaseAuth.instance.currentUser?.uid);
-      if(dishes.isNotEmpty){
-        for(var i in dishes){
-          print(i);
-        }
-        emit(GetDishesSuccessState(dishes: dishes));
-      }else{
-        emit(const ErrorState(errormessage: "no food items found" ));
-        log("no food items found");
-      }
+  //     List<DishModel> dishes = await dishrepository.getDishes(userid: FirebaseAuth.instance.currentUser?.uid);
+  //     if(dishes.isNotEmpty){
+  //       for(var i in dishes){
+  //         print(i);
+  //       }
+  //       emit(GetDishesSuccessState(dishes: dishes));
+  //     }else{
+  //       emit(const ErrorState(errormessage: "no food items found" ));
+  //       log("no food items found");
+  //     }
       
 
-    }catch(error){
-      log(error.toString());
-    }
-  }
+  //   }catch(error){
+  //     log(error.toString());
+  //   }
+  // }
 
   FutureOr<void> deleteDish(DeleteDishEvent event, Emitter<DishState> emit) async{
     try{

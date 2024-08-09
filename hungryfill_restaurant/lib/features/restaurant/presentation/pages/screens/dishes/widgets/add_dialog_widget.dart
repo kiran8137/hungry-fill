@@ -84,8 +84,8 @@ class _DishAddDialogState extends State<DishAddDialog> {
                               );
                           BlocProvider.of<DishBloc>(context)
                               .add(DishAddEvent(dishmodel: dish));
-                          BlocProvider.of<DishBloc>(context)
-                              .add(GetDishesEvent());
+                          // BlocProvider.of<DishBloc>(context)
+                          //     .add(GetDishesEvent());
                           Navigator.pop(context);
                         },
                         child: Container(

@@ -10,6 +10,8 @@ import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/spl
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/authentication/auth_bloc_bloc.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/dish/dish_bloc.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/restaurant_user/restaurant_user_bloc.dart';
+import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/provider/dish_provider.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,18 +45,22 @@ class MyApp extends StatelessWidget {
 
       ],
        
-      child: MaterialApp(
-          debugShowCheckedModeBanner: false, 
-          home:
-          //ResetPasswordScreen()
-          SplashScreen()
-          //SignInScreen()
-           //LoginScreen()
-         // MainScreen()
-          //DishAddDialog()
-          //ResDetailAddScreen()
-          //ProfileScreen()
-          ),
+      child: ChangeNotifierProvider(
+        create: (context) => DishProvider(dishrepository: DishRepoImplementation()),
+
+        child: MaterialApp(
+            debugShowCheckedModeBanner: false, 
+            home:
+            //ResetPasswordScreen()
+            SplashScreen()
+            //SignInScreen()
+             //LoginScreen()
+           // MainScreen()
+            //DishAddDialog()
+            //ResDetailAddScreen()
+            //ProfileScreen()
+            ),
+      ),
     );
   }
 }

@@ -51,7 +51,7 @@ DishModel copywith({
   final String? dishprice,
   final String? stock,
   final String? serve,
-  required  List<String?> category,
+  required  List<dynamic> category,
   final String? imageurl,
 
   

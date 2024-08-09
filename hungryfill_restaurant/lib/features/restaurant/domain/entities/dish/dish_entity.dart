@@ -6,7 +6,7 @@ class DishEntity extends Equatable {
   final String? dishprice;
   final String? stock;
   final String? serve;
-  final List<String?> category;
+  final List<dynamic> category;
   final String? imageurl;
 
     DishEntity(

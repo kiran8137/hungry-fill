@@ -1,8 +1,10 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
+import 'package:hungry_fill/data/model/cart_model/cart_model.dart';
  
 import 'package:hungry_fill/data/model/dish_model/dish_model.dart';
 import 'package:hungry_fill/presentation/bloc/dish_bloc/dish_bloc.dart';
@@ -75,9 +77,19 @@ class Dishwidget extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                       
+                       CartModel cartmodel = CartModel(
+                         
+                          userid: FirebaseAuth.instance.currentUser?.uid,
+                         dishid: dish.dishid, 
+                         restaurantid: restaurantid, 
+                         dishquantity: 1, 
+                         priceperquantity: int.parse(dish.dishprice!)
+                         );
                       //createcart();
-                      BlocProvider.of<DishBloc>(context).add(AddDishToCartEvent(restaurantid: restaurantid, items: [dish.dishid!] , restaurantname: restaurantname));
+                      BlocProvider.of<DishBloc>(context).add(
+                        AddDishToCartEvent( 
+                          cart: cartmodel
+                        ));
                       //BlocProvider.of<DishBloc>(context).add(GetDishInCartEvent(restaurantid: restaurantid));
                     // addDish();
 

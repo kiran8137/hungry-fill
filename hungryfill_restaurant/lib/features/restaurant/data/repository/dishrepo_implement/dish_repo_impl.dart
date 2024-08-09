@@ -38,19 +38,26 @@ class DishRepoImplementation extends DishRepository {
   }
 
   @override
-  Future<List<DishModel>> getDishes({String? userid}) async {
+  Stream<List<DishModel>> getDishes({String? userid})   {
     try {
-      final dishessnapshot = await FirebaseFirestore.instance
-          .collection("Restaurants")
-          .doc(userid)
-          .collection("Dishes")
-          .get();
+      // final dishessnapshot =   FirebaseFirestore.instance
+      //     .collection("Restaurants")
+      //     .doc(userid)
+      //     .collection("Dishes")
+      //     .get();
 
-      List<DishModel> dishes = dishessnapshot.docs
-          .map((dish) => DishModel.fromJson(json: dish.data()))
-          .toList();
-          print(dishes.first.category);
-      return dishes;
+      // List<DishModel> dishes = dishessnapshot.docs
+      //     .map((dish) => DishModel.fromJson(json: dish.data()))
+      //     .toList();
+      //     print(dishes.first.category);
+      // return dishes;
+
+      return FirebaseFirestore.instance.
+      collection("Restaurants")
+      .doc(userid)
+      .collection("Dishes")
+      .snapshots()
+      .map((snapshot)=> snapshot.docs.map((dish)=> DishModel.fromJson(json: dish.data())).toList());
     } catch (error) {
       log(" error ${error.toString()}");
       throw Exception(error.toString());

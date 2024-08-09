@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:hungry_fill/data/model/cart_model/cart_model.dart';
  
 import 'package:hungry_fill/data/model/category_model/category_model.dart';
 import 'package:hungry_fill/data/model/dish_model/dish_model.dart';
@@ -20,15 +21,17 @@ class DishBloc extends Bloc<DishEvent, DishState> {
 
   DishBloc({required this.dishrepository , required this.cartrepositoy}) : super(DishInitial()) {
      
+     
      on<DishGetEvent>(getDish);
      on<SearchDishEvent>(searchDishes);
      //on<GetCategories>(getCategories);
      on<GetCategoryDish>(getCategoryDish);
-     on<AddDishToCartEvent>(addDishToCart);
-     on<GetDishInCartEvent>(getDishInCart);
+     //on<AddDishToCartEvent>(addDishToCart);
+     //on<GetDishInCartEvent>(getDishInCart);
+     on<GetRestaurantsInCart>(getRestaurantsInCart);
   }
 
-  FutureOr<void> getDish(DishGetEvent event, Emitter<DishState> emit) async{
+  FutureOr<void> getDish(DishGetEvent event, Emitter<DishState> emit) async {
 
     try{
 
@@ -40,6 +43,7 @@ class DishBloc extends Bloc<DishEvent, DishState> {
         
         emit(const DishErrorState(errormessage: "no dishes available"));
       }
+     emit(DishSuccesEvent(dish: dishes));
 
     }catch(error){
       log(error.toString());
@@ -81,38 +85,47 @@ class DishBloc extends Bloc<DishEvent, DishState> {
     }
   }
 
-  FutureOr<void> addDishToCart(AddDishToCartEvent event, Emitter<DishState> emit) async{
-    try{
+  // FutureOr<void> addDishToCart(AddDishToCartEvent event, Emitter<DishState> emit) async{
+  //   try{
       
-      await cartrepositoy.addDishToCart(cartrestaurantid: event.restaurantid, items: event.items ,);
-       //Navigator.push(event.context!, MaterialPageRoute(builder: (context)=> CartPage(restaurantid: event.restaurantid, restaurantname: event.restaurantname,)));
-      emit(AddDishToCartSuccesState());
-    }catch(error){
+  //     await cartrepositoy.addDishToCart(cartmodel: event.cart);
+  //      //Navigator.push(event.context!, MaterialPageRoute(builder: (context)=> CartPage(restaurantid: event.restaurantid, restaurantname: event.restaurantname,)));
+  //     emit(AddDishToCartSuccesState());
+  //   }catch(error){
       
-      log(error.toString());
-    }
-  }
+  //     log(error.toString());
+  //   }
+  // }
 
-  FutureOr<void> getDishInCart(GetDishInCartEvent event, Emitter<DishState> emit) async{
-    print("getdishincart event trggerd");
-    print("${event.runtimeType}");
+  // FutureOr<void> getDishInCart(GetDishInCartEvent event, Emitter<DishState> emit) async{
+  //   print("getdishincart event trggerd");
+  //   print("${event.runtimeType}");
 
 
-    emit(GetDishInCartInital());
-    try{
+  //   emit(GetDishInCartInital());
+  //   try{
 
-      List<DishModel> cartdishes = await cartrepositoy.getDishInCart(restaurantid: event.restaurantid!);
-      print(cartdishes);
-      if(cartdishes.isNotEmpty){
-        print('emitted GetDishInCartSuccessState');
-        emit(GetDishInCartSuccessState(cartdishes: cartdishes));
-      }else{
-        print('emitted GetDishInCartErrorState');
+  //     List<DishModel> cartdishes = await cartrepositoy.getDishInCart(restaurantid: event.restaurantid!);
+  //     print(cartdishes);
+  //     if(cartdishes.isNotEmpty){
+  //       print('emitted GetDishInCartSuccessState');
+  //       emit(GetDishInCartSuccessState(cartdishes: cartdishes));
+  //     }else{
+  //       print('emitted GetDishInCartErrorState');
         
-        emit(GetDishInCartErrorState());
-      }
+  //       emit(GetDishInCartErrorState());
+  //     }
 
 
+  //   }catch(error){
+  //     log(error.toString());
+  //   }
+  // }
+
+  FutureOr<void> getRestaurantsInCart(GetRestaurantsInCart event, Emitter<DishState> emit) async {
+     
+    try{
+      
     }catch(error){
       log(error.toString());
     }

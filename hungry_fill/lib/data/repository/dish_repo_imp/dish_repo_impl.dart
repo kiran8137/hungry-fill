@@ -16,9 +16,11 @@ class DishRepoImpl extends DishRepository{
 
 
   @override
-  Future<List<DishModel>> getDish({required String? resuerid}) async {
+  Future<List<DishModel>> getDish({required String? resuerid}) async  {
     
     try{
+       
+
       final snapshot =   await FirebaseFirestore.instance.collection("Restaurants").doc(resuerid).collection("Dishes").get();
       List<DishModel> dish = snapshot.docs.map((dish)=>DishModel.fromJson(json: dish.data())).toList();
       return dish;

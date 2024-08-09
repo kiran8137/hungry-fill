@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:hungry_fill/data/model/cart_model/cart_model.dart';
 import 'package:hungry_fill/data/model/restaurant_model/restaurant_model.dart';
 import 'package:hungry_fill/data/repository/restaurant_repo_impl/restaurant_repo_imp.dart';
 import 'package:hungry_fill/domain/repositories/restaurant_repository/restaurant_respository.dart';
@@ -17,6 +18,8 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
     on<RestaurantEvent>(getRestuarants);
     on<AddRestaurantToWishList>(addRestaurantToWishList);
     on<GetRestaurantsInWishList>(getRestaurantInWishList);
+    on<RemoveRestaurantInWishList>(removeRestaurantFromWishlist);
+    
   }
 
 
@@ -68,6 +71,16 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
         emit(GetRestaurantsInWishListErrorState());
       }
 
+    }catch(error){
+      log(error.toString());
+    }
+  }
+
+  FutureOr<void> removeRestaurantFromWishlist(RemoveRestaurantInWishList event, Emitter<RestaurantState> emit) async{
+
+    try{
+      await restaurantrepository.removeRestaurantFromWishist(restaurantid: event.restaurantid);
+      emit(RemoveRestaurantsInWishListSucces());
     }catch(error){
       log(error.toString());
     }

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
+import 'package:hungry_fill/data/repository/cart_repo_imp/cart_repo_impl.dart';
 import 'package:hungry_fill/presentation/bloc/restaurant_bloc/restaurant_bloc.dart';
+import 'package:hungry_fill/presentation/pages/cart_restaurants/cart_restauants.dart';
  
 import 'package:hungry_fill/presentation/pages/main_pages/home_page/components_home_page/components.dart';
 
@@ -27,7 +29,8 @@ class HomeScreen extends StatelessWidget {
             ),
             backgroundColor: primarycolor,
             onPressed: () {
-              // Navigator.push(context, MaterialPageRoute(builder: (context)=> const CartRestaurants()));
+             //  adddish();
+               Navigator.push(context, MaterialPageRoute(builder: (context)=> const Cart()));
             }),
         backgroundColor: Colors.white,
         body: SingleChildScrollView(

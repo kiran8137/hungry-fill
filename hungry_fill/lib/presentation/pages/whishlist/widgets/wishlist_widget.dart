@@ -22,7 +22,8 @@ class WishlistWidget extends StatelessWidget {
                 spreadRadius: 0,
                 blurRadius: 8,
                 offset: const Offset(0, 5))
-          ]),
+          ]
+          ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
