@@ -87,7 +87,7 @@ class WishListPage extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => RestuarantScreen(
-                                        resuerid: wishlistrestaurant.userid,
+                                        resuerid: wishlistrestaurant.restaurantuserid,
                                         restaurantname:
                                             wishlistrestaurant.restaurantname,
                                         restaurantdistrict: wishlistrestaurant
@@ -108,10 +108,10 @@ class WishListPage extends StatelessWidget {
                                     direction: DismissDirection.endToStart,
                                     background: const Icon(CupertinoIcons.delete),
                                     onDismissed: (direction){
-                                      context.read<RestaurantBloc>().add(RemoveRestaurantInWishList(restaurantid: wishlistrestaurant.userid!));
+                                      context.read<RestaurantBloc>().add(RemoveRestaurantInWishList(restaurantid: wishlistrestaurant.restaurantuserid!));
 
                                     },
-                                    key: Key(wishlistrestaurant.userid!),
+                                    key: Key(wishlistrestaurant.restaurantuserid!),
                                      child: WishlistWidget(
                                       restaurantname:
                                           wishlistrestaurant.restaurantname,

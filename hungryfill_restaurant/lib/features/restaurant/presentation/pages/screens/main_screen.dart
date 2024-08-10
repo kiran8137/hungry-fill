@@ -50,13 +50,15 @@ class _MainScreenState extends State<MainScreen> {
             Expanded(
               flex: 2,
               child: Container(
-                decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                decoration: BoxDecoration(color: Colors.white,
+                 boxShadow: [
                   BoxShadow(
                       color: Colors.black.withOpacity(0.20),
                       spreadRadius: -5,
                       blurRadius: 9,
                       offset: const Offset(10, 0))
-                ]),
+                ]
+                ),
                 child: SizedBox(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 70, horizontal: 20),

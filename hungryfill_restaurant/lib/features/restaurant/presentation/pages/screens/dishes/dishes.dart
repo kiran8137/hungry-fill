@@ -34,9 +34,9 @@ class _DishScreenState extends State<DishScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
           HeaderWidget(),
-    
+   const Divider(),
         const SizedBox(
-          height: 45,
+          height: 25,
         ),
     
         Row(
@@ -48,7 +48,7 @@ class _DishScreenState extends State<DishScreen> {
             Text(
               "DISHES",
               style: GoogleFonts.inriaSans(
-                  fontWeight: FontWeight.bold, fontSize: 38),
+                  fontWeight: FontWeight.bold, fontSize: 30),
             ),
     
             const SizedBox(width: 1050,),
@@ -65,8 +65,8 @@ class _DishScreenState extends State<DishScreen> {
                   );
               },
               child: Container(
-                  height: 45,
-                  width: 100,
+                  height: 40,
+                  width: 95,
                   decoration: BoxDecoration(
                     color: primarycolor,
                     borderRadius: BorderRadius.circular(12),
@@ -75,7 +75,7 @@ class _DishScreenState extends State<DishScreen> {
                     child: Text(
                       "ADD",
                       style: GoogleFonts.inriaSans(
-                          fontSize: 35, fontWeight: FontWeight.bold),
+                          fontSize: 30, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -89,24 +89,24 @@ class _DishScreenState extends State<DishScreen> {
           child: Row(
             children: [
               Container(
-                height: 50,
-                width: 600,
+                
+                height: 45,
+                width: 400,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12),
-                    boxShadow: const [
-                      BoxShadow(
-                          color: Colors.black,
-                          spreadRadius: -10,
-                          blurRadius: 9,
-                          offset: Offset(7, 10)
-                          )
-                    ]),
+                    border: Border.all()
+                    
+                    ),
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                        border: InputBorder.none
+                      ),                   ),
               ),
               const SizedBox(width: 15),
               Container(
                 height: 45,
-                width: 200,
+                width: 190,
                 decoration: BoxDecoration(
                   color: primarycolor,
                   borderRadius: BorderRadius.circular(12),
@@ -128,7 +128,12 @@ class _DishScreenState extends State<DishScreen> {
           ),
         ),
         // SizedBox(height: 45,),
-        const DishHeader(),
+        const Padding(
+          padding: EdgeInsets.all(10.0),
+          child: DishHeader(),
+        ),
+
+        const Divider(),
        // DishDetailWidget()
       //  Container(
       //   color: Colors.red,
@@ -237,7 +242,7 @@ class _DishScreenState extends State<DishScreen> {
           
             SizedBox(
                    width: 1280,
-                   height: 450,
+                   height: 435,
                   child: SingleChildScrollView(
                     child: Container(
                        width: 1280,
@@ -248,7 +253,10 @@ class _DishScreenState extends State<DishScreen> {
                         itemCount: value.dishes.length,
                         itemBuilder: (context , index){
                           final dish = value.dishes[index];
-                          return DishDetailWidget(dish: dish, index: index, );
+                          return Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: DishDetailWidget(dish: dish, index: index, ),
+                          );
                         }
                         ),
                     ),

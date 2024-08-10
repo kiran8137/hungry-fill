@@ -2,6 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hungryfill_restaurant/features/restaurant/data/model/category/category_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/dish/dish_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/repository/dishrepo_implement/dish_repo_impl.dart';
 
@@ -12,6 +13,8 @@ class DishProvider extends ChangeNotifier{
 
 
 List<DishModel> dishes = [];
+List<CategoryModel> categories = [];
+
 
 Future<void> getDishes() async{
 
@@ -26,8 +29,17 @@ Future<void> getDishes() async{
     }
   );
   //dishes.addAll(dish);
-  notifyListeners();
+  //notifyListeners();
 }
+
+// Future<void> getCategories()async{
+  
+//   final categoriesresult = await dishrepository.getCategories();
+//  categories.addAll(categoriesresult);
+//  notifyListeners();
+
+
+// }
 
 
 

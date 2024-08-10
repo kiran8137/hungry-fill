@@ -62,7 +62,7 @@ final class CategoryDishesSuccesState extends DishState {
   List<Object> get props => [categorydishes];
 }
 
-//Cart States
+//Cartpage States
 
 final class AddDishToCartInitial extends DishState {}
 
@@ -70,26 +70,48 @@ final class GetDishInCartInital extends DishState {}
 
 final class AddDishToCartSuccesState extends DishState {}
 
-final class GetDishInCartSuccessState extends DishState {
-  final List<DishModel> cartdishes;
+final class GetCartInitial extends DishState{}
 
-  const GetDishInCartSuccessState({required this.cartdishes});
+final class GetCartSuccessState extends DishState {
+  final List<CartModel> cart;
+  final int carttotal;
+
+  const GetCartSuccessState({required this.cart , required this.carttotal});
 
   @override
-  // TODO: implement props
-  List<Object> get props => [cartdishes];
+  
+  List<Object> get props => [cart ,carttotal];
 }
 
 final class AddDishToCartErrorState extends DishState {}
 
 final class GetDishInCartErrorState extends DishState {}
 
-//Cart States
+ 
 
 final class GetRestaurantsInCartInital extends DishState {}
 
 final class GetRestaurantsInCartSuccess extends DishState {
+  final List<RestaurantModel> restaurantsincart ;
+
+ const GetRestaurantsInCartSuccess({required this.restaurantsincart});
+
+  @override
   
+  List<Object> get props => [restaurantsincart];
 }
 
 final class GetRestaurantsInCartIsEmpty extends DishState {}
+
+
+
+// final class CartCalculationSuccesState extends DishState{
+//   final int carttotal;
+
+//  const CartCalculationSuccesState({required this.carttotal});
+
+// @override
+//   // TODO: implement props
+//   List<Object> get props => [carttotal];
+  
+// }

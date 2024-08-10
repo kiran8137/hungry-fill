@@ -8,6 +8,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/category/category_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/dish/dish_model.dart';
+import 'package:hungryfill_restaurant/features/restaurant/data/repository/dishrepo_implement/dish_repo_impl.dart';
 import 'package:hungryfill_restaurant/features/restaurant/domain/repositories/dish_repository.dart';
 
 part 'dish_event.dart';
@@ -22,7 +23,7 @@ class DishBloc extends Bloc<DishEvent, DishState> {
    // on<GetDishesEvent>(getDishes);
     on<DeleteDishEvent>(deleteDish);
     on<DishUpdateEvent>(updateDish);
-    on<DishImagePicker>(getDishImage);
+    //on<DishImagePicker>(getDishImage);
     on<CreateCategoryEvent>(createCategory);
     on<GetCategoriesEvent>(getCategories);
   }
@@ -94,23 +95,27 @@ class DishBloc extends Bloc<DishEvent, DishState> {
     }
   }
 
-  FutureOr<void> getDishImage(DishImagePicker event, Emitter<DishState> emit) async {
+  // FutureOr<void> getDishImage(DishImagePicker event, Emitter<DishState> emit) async {
 
-    try{
+  //   try{
 
-      final imagefile = await dishrepository.dishImagePicker();
+  //     final imagefile = await dishrepository.dishImagePicker();
+     
+  //    if(imagefile!=null){
+  //     //addImageToFirebase(imagefile.bytes);
+  //    }
 
-      if(imagefile!=null){
+  //     if(imagefile!=null){
         
-        emit(DishImagPickerLoaded(file: imagefile));
-      }else{
-        emit(ErrorState());
-      }
+  //       emit(DishImagPickerLoaded(file: imagefile));
+  //     }else{
+  //       emit(ErrorState());
+  //     }
 
-    }catch(error){
-      log(error.toString());
-    }
-  }
+  //   }catch(error){
+  //     log(error.toString());
+  //   }
+  // }
 
   FutureOr<void> createCategory(CreateCategoryEvent event, Emitter<DishState> emit) async{
 

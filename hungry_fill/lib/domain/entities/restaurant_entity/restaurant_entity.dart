@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 
 class RestaurantEntity extends Equatable {
    
-  final String? userid;
+  final String? restaurantuserid;
   final String? restaurantname; 
   final String? restaurantmobileNo;
   final String? restaurantstate;
@@ -13,7 +13,7 @@ class RestaurantEntity extends Equatable {
    RestaurantEntity(
       {
         
-        this.userid,
+        this.restaurantuserid,
         this.restaurantname,  
         this.restaurantmobileNo,
         this.restaurantstate,
@@ -26,5 +26,5 @@ class RestaurantEntity extends Equatable {
   @override
   
   List<Object?> get props =>
-      [userid,restaurantname,restaurantmobileNo,restaurantstate,restaurantdistrict,restaurantplace];
+      [restaurantuserid,restaurantname,restaurantmobileNo,restaurantstate,restaurantdistrict,restaurantplace];
 }

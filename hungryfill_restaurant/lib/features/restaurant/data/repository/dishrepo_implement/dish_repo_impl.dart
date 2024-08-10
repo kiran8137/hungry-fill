@@ -1,9 +1,12 @@
 import 'dart:developer';
+import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/category/category_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/dish/dish_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/domain/repositories/dish_repository.dart';
@@ -95,19 +98,19 @@ class DishRepoImplementation extends DishRepository {
     }
   }
 
-  @override
-  Future<PlatformFile?> dishImagePicker() async {
-    try {
-      final result = await FilePicker.platform.pickFiles(
-          );
-      if (result != null && result.files.isNotEmpty) {
-        return result.files.first;
-      }
-    } catch (error) {
-      log(error.toString());
-      throw Exception(error.toString());
-    }
-  }
+  // @override
+  // Future<PlatformFile?> dishImagePicker() async {
+  //   try {
+  //     final result = await FilePicker.platform.pickFiles(
+  //         );
+  //     if (result != null && result.files.isNotEmpty) {
+  //       return result.files.first;
+  //     }
+  //   } catch (error) {
+  //     log(error.toString());
+  //     throw Exception(error.toString());
+  //   }
+  // }
 
   @override
   Future<void> createCategory({required List<CategoryModel> categories}) async {
@@ -200,4 +203,14 @@ class DishRepoImplementation extends DishRepository {
 //       .toList();
 
 //   print("lunch ${category[1].categoryid}");
+// }
+
+// Future<void> addImageToFirebase(Uint8List? filname)async{
+  
+//    final storageref = FirebaseStorage.instance.ref().child('Dishesimages/$filname');
+//    final upload = storageref.putData(filname!);
+//    final snapshot = await upload;
+//    String downloadUrl = await snapshot.ref.getDownloadURL();
+//    debugPrint( "downloadurl$downloadUrl");
+
 // }

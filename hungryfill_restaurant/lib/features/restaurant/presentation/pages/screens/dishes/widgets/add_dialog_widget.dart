@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -37,7 +39,7 @@ class _DishAddDialogState extends State<DishAddDialog> {
 
   final List<bool> isSelected = [false, false];
 
-    String? selectedimage;
+  Uint8List? selectedimage;
 
   // List<ValueItem> getCategoryValueItems() {
   @override
@@ -80,7 +82,7 @@ class _DishAddDialogState extends State<DishAddDialog> {
                               stock: dishstockcontroller.text,
                               serve: dishservecontroller.text,
                               category: selectedcategoryids,
-                              imageurl: selectedimage
+                             // imageurl: selectedimage
                               );
                           BlocProvider.of<DishBloc>(context)
                               .add(DishAddEvent(dishmodel: dish));
@@ -142,7 +144,7 @@ class _DishAddDialogState extends State<DishAddDialog> {
                 left: 20,
                 child: GestureDetector(
                   onTap: () {
-                    BlocProvider.of<DishBloc>(context).add(DishImagePicker());
+                   // BlocProvider.of<DishBloc>(context).add(DishImagePicker());
                   },
                   child: BlocConsumer<DishBloc, DishState>(
                     listener: (context, state) {
@@ -150,6 +152,7 @@ class _DishAddDialogState extends State<DishAddDialog> {
                     },
                     builder: (context, state) {
                       if (state is DishImagPickerLoaded) {
+                        selectedimage = state.file!.bytes;
                      // selectedimage = state.file.;
                         return Container(
                           height: 120,
@@ -157,7 +160,7 @@ class _DishAddDialogState extends State<DishAddDialog> {
                           decoration: BoxDecoration(
                               // color: Colors.grey,
                               borderRadius: BorderRadius.circular(10)),
-                          child: Image.memory(state.file!.bytes!),
+                          child: Image.memory(selectedimage!),
                         );
                       } else {
                         return Container(
@@ -250,7 +253,9 @@ class _DishAddDialogState extends State<DishAddDialog> {
                         height: 20,
                       ),
                       BlocBuilder<DishBloc, DishState>(
+
                         builder: (context, state) {
+                          debugPrint(state.runtimeType.toString());
                           if(state is CategorySuccessEvent){
                             categories = state.categories;
 

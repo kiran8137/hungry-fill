@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/common_widgets/header_widget.dart';
+import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/daily_order/widgets/daily_orders_header.dart';
 
 class DailyOrders extends StatelessWidget {
   const DailyOrders({super.key,   this.index});
@@ -15,6 +16,8 @@ class DailyOrders extends StatelessWidget {
       children: [
           HeaderWidget(),
 
+           const Divider(),
+
         const SizedBox(height: 25,),
 
         Row(
@@ -24,10 +27,8 @@ class DailyOrders extends StatelessWidget {
             
              
             Text("DAILY ORDERS",
-              style: GoogleFonts.inriaSans(
-                fontWeight: FontWeight.bold,
-                fontSize: 38
-              ),
+             style: GoogleFonts.inriaSans(
+                  fontWeight: FontWeight.bold, fontSize: 30),
             ) 
 
 
@@ -36,65 +37,15 @@ class DailyOrders extends StatelessWidget {
 
         const SizedBox(height: 45,),
 
-        SizedBox(
+        const DailyOrderHeader(),
+
+        const Divider(),
+
+        Container(
           width: 1300,
-          height: 500,
+          height: 435,
          // color: Colors.green,
-          child: Column(
-            children: [
-
-              const SizedBox(height: 70,),
-              Container(
-                height: 50,
-                width: double.infinity,
-                
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                       color: Colors.black.withOpacity(0.50),
-              spreadRadius: -5,
-              blurRadius: 10,
-              offset: const Offset(1, 5)
-                    )
-                  ]),
-
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text("#",
-                      style: GoogleFonts.inter(
-                        fontSize: 28
-                      ),
-                      ),
-                      Text("Order",
-                      style: GoogleFonts.inter(
-                        fontSize: 28
-                      ),
-                      ),
-                      Text("Date",
-                      style: GoogleFonts.inter(
-                        fontSize: 28
-                      ),
-                      ),
-                      Text("Customer",
-                      style: GoogleFonts.inter(
-                        fontSize: 28
-                      ),
-                      ),
-                      Text("Total",
-                      style: GoogleFonts.inter(
-                        fontSize: 28
-                      ),),
-                      Text("Order Status",
-                      style: GoogleFonts.inter(
-                        fontSize: 28
-                      ),),
-                    ],
-                  ),
-              )
-            ],
-          ),
+          child: const SizedBox(height: 70,),
         ),
 
         const SizedBox(height: 5,),
@@ -105,3 +56,4 @@ class DailyOrders extends StatelessWidget {
     );
   }
 }
+

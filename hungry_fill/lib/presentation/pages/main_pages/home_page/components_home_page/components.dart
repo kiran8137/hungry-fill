@@ -48,16 +48,16 @@ ListView recommendedRestaurans(GetRestaurantSuccessState? state) {
           
             Navigator.push(context, MaterialPageRoute(builder: (context)=> 
               RestuarantScreen(
-              resuerid: restaurant.userid,
+              resuerid: restaurant.restaurantuserid,
               restaurantname: restaurant.restaurantname,
               restaurantdistrict: restaurant.restaurantdistrict,
               restaurantplace: restaurant.restaurantplace,
               ))).then((_)=>
-                BlocProvider.of<DishBloc>(context).add(DishGetEvent(resuserid: restaurant.userid))
+                BlocProvider.of<DishBloc>(context).add(DishGetEvent(resuserid: restaurant.restaurantuserid))
                 
 
               ).then((_)=>
-              BlocProvider.of<CategoryBloc>(context).add(GetCategories(resuerid: restaurant.userid))
+              BlocProvider.of<CategoryBloc>(context).add(GetCategories(resuerid: restaurant.restaurantuserid))
               );
           },
           child: RecommendRestaurant(restaurant: restaurant),

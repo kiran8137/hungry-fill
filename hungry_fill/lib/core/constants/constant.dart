@@ -3,6 +3,8 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:hungry_fill/data/model/cart_model/cart_model.dart';
  
 
 const String cartid = 'cartid1234';
@@ -70,5 +72,33 @@ Future<int?> carttotal({required List<String> dishids , required String? restaur
     throw Exception(error.toString());
   }
 
-  
+}
+
+
+// int cartCalculations({required int quantity , required int price }){
+//   var answer = price*quantity;
+//   debugPrint(answer.toString());
+//   return answer;
+//}
+
+
+Future<int> getcarttotal ({required String? userid , required String? restaurantid}) async{
+
+  int cartotal = 0;
+   final cartdoc = await FirebaseFirestore.instance
+ 
+      .collection('Cart')
+      .where('userId' , isEqualTo: userid )
+      .where('restaurantId' , isEqualTo: restaurantid)   
+      .get();
+
+      List<CartModel> cart = cartdoc.docs.map((cart)=> CartModel.fromJson(json: cart.data())).toList();
+      debugPrint(" items in cart${cart.toString()}");
+
+      for(var i in cart){
+         cartotal = cartotal+i.priceperquantity!;
+      }
+      debugPrint(cartotal.toString());
+      return cartotal;
+
 }

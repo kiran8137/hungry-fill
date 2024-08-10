@@ -17,101 +17,97 @@ class HeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
-      width: double.infinity,
-      height: 50,
-    
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: const BorderRadius.only(
-            bottomLeft: Radius.circular(10),
-            bottomRight:   Radius.circular(10)
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.50),
-              spreadRadius: -5,
-              blurRadius: 10,
-              offset: const Offset(10, 0)
-            )
-          ]
-
-      ),
-
-      child: Row(
-         
-        children: [
-
-          
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child:
+    return  Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        width: double.infinity,
+        height: 50,
+      
+        decoration: const BoxDecoration(
+            // color: Colors.white,
+            // borderRadius: BorderRadius.only(
+            //   bottomLeft: Radius.circular(10),
+            //   bottomRight:   Radius.circular(10)
+            // ),
+           
+      
+        ),
+      
+        child: Row(
+           
+          children: [
+      
             
-             Text("Hi,  Welcome.!",
-            style: GoogleFonts.barlow(
-              fontSize: 30,
-              fontWeight: FontWeight.w500,
-              color: primarycolor
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child:
+              
+               Text("Hi,  Welcome.!",
+              style: GoogleFonts.barlow(
+                fontSize: 30,
+                fontWeight: FontWeight.w500,
+                color: primarycolor
+              ),
+              ),
             ),
+      
+            const SizedBox(width: 950,),
+      
+            GestureDetector(
+              onTap: (){
+                  showDialog(
+                          context: context, 
+                          builder:(context){
+                          return  AlertDialog(
+                            title: const Text("Are you sure want to delete"),
+                              actions: [
+                                TextButton(
+                                  onPressed: (){
+                                     Navigator.pop(context);
+                                  }, 
+                                  child: const Text("cancel")
+                                  ),
+                                   TextButton(
+                                  onPressed: (){
+                                    BlocProvider.of<AuthBloc>(context).add(SignOutEvent());
+                                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> const LoginScreen()), (Route<dynamic> predicate)=>false);
+                                     
+                                  }, 
+                                  child: const Text("Ok")
+                                  )
+                              ],
+                            );
+                          }
+                          );
+                
+              },
+              child: Text("Log Out",
+              style: TextStyle(
+                color: Colors.red
+              ),
+              ),
             ),
-          ),
-
-          const SizedBox(width: 950,),
-
+      
+          SizedBox(width: 20,),
+      
           GestureDetector(
             onTap: (){
-                showDialog(
-                        context: context, 
-                        builder:(context){
-                        return  AlertDialog(
-                          title: const Text("Are you sure want to delete"),
-                            actions: [
-                              TextButton(
-                                onPressed: (){
-                                   Navigator.pop(context);
-                                }, 
-                                child: const Text("cancel")
-                                ),
-                                 TextButton(
-                                onPressed: (){
-                                  BlocProvider.of<AuthBloc>(context).add(SignOutEvent());
-                                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> const LoginScreen()), (Route<dynamic> predicate)=>false);
-                                   
-                                }, 
-                                child: const Text("Ok")
-                                )
-                            ],
-                          );
-                        }
-                        );
-              
+             
             },
-            child: Text("Log Out",
-            style: TextStyle(
-              color: Colors.red
-            ),
+            child: Container(
+              height: 45,
+              width: 45,
+              decoration: const BoxDecoration(
+                color: Colors.grey,
+                shape: BoxShape.circle,
+                image: DecorationImage(image: AssetImage("assets/person.png"))
+              ),
             ),
           ),
-
-        SizedBox(width: 20,),
-
-        GestureDetector(
-          onTap: (){
+      
            
-          },
-          child: Container(
-            height: 45,
-            width: 45,
-            decoration: const BoxDecoration(
-              color: Colors.grey,
-              shape: BoxShape.circle,
-              image: DecorationImage(image: AssetImage("assets/person.png"))
-            ),
-          ),
+          ],
         ),
-
-         
-        ],
       ),
     );
   }

@@ -83,7 +83,8 @@ class Dishwidget extends StatelessWidget {
                          dishid: dish.dishid, 
                          restaurantid: restaurantid, 
                          dishquantity: 1, 
-                         priceperquantity: int.parse(dish.dishprice!)
+                         priceperquantity: int.parse(dish.dishprice!),
+                         dishname: dish.dishname
                          );
                       //createcart();
                       BlocProvider.of<DishBloc>(context).add(

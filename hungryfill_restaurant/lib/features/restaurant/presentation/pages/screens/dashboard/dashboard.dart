@@ -16,6 +16,10 @@ class Dashboard extends StatelessWidget {
       children: [
         
         HeaderWidget(index: index,),
+        const Divider(),
+        const SizedBox(
+          height: 25,
+        ),
 
         const SizedBox(height: 10,),
 
@@ -25,8 +29,7 @@ class Dashboard extends StatelessWidget {
             const SizedBox(width: 20,),
             Text("DASHBOARD",
               style: GoogleFonts.inriaSans(
-                fontWeight: FontWeight.bold,
-                fontSize: 38
+                fontWeight: FontWeight.bold, fontSize: 30
               ),
             ),
 

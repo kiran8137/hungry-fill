@@ -76,8 +76,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
           HeaderWidget(),
+         const Divider(),
         const SizedBox(
-          height: 45,
+          height: 25,
         ),
         Row(
           children: [
@@ -87,7 +88,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Text(
               "Profile",
               style: GoogleFonts.inriaSans(
-                  fontWeight: FontWeight.bold, fontSize: 38),
+                   fontWeight: FontWeight.bold, fontSize: 30),
             ),
     
             const SizedBox(

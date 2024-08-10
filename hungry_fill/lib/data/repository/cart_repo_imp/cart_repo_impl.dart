@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
  
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hungry_fill/core/constants/constant.dart';
  
 import 'package:hungry_fill/data/model/cart_model/cart_model.dart';
 import 'package:hungry_fill/data/model/dish_model/dish_model.dart';
@@ -31,13 +32,17 @@ class CartRepoImpl extends CartRepository{
 
   debugPrint(docref.id); 
 
+ //final carttotal =  cartCalculations(quantity: 2, price: cartmodel.priceperquantity!);
+
+
   CartModel cart = CartModel(
     cartid: docref.id,
     userid: cartmodel.userid, 
     dishid: cartmodel.dishid, 
     restaurantid: cartmodel.restaurantid, 
     dishquantity: cartmodel.dishquantity, 
-    priceperquantity: cartmodel.priceperquantity
+    priceperquantity: cartmodel.priceperquantity,
+    dishname:cartmodel.dishname 
     );
   docref.set(cart.toJson());
       
@@ -54,38 +59,45 @@ class CartRepoImpl extends CartRepository{
 
 
   @override
-  Future<List<DishModel>> getDishInCart ({required String restaurantid}) async{
+  Future<List<CartModel>> getCart ({required String restaurantid}) async{
+    String? userid = FirebaseAuth.instance.currentUser?.uid;
     List<String> dishids = [];
     List<DishModel> cartdishes = [];
      
      try{
-      
+      final carttotal = await getcarttotal(userid: userid!, restaurantid: restaurantid);
+      debugPrint(carttotal.toString());
       final cartdoc = await FirebaseFirestore.instance
-      .collection('Users')
-      .doc(FirebaseAuth.instance.currentUser?.uid)
+ 
       .collection('Cart')
-       
+      .where('userId' , isEqualTo: userid )
+      .where('restaurantId' , isEqualTo: restaurantid)   
       .get();
 
-      for(var doc in cartdoc.docs){
-        dishids = List<String>.from(doc['items']);
-      }
+      List<CartModel> cart = cartdoc.docs.map((cart)=> CartModel.fromJson(json: cart.data())).toList();
+      debugPrint(cart.toString());
 
-      for(var id in dishids){
-            final dishdoc = await FirebaseFirestore.instance
-          .collection("Restaurants")
-          .doc(restaurantid)
-          .collection('Dishes')
-          .doc(id)
-          .get();
+      return cart;
+
+      // for(var doc in cartdoc.docs){
+      //   dishids = List<String>.from(doc['items']);
+      // }
+
+      // for(var id in dishids){
+      //       final dishdoc = await FirebaseFirestore.instance
+      //     .collection("Restaurants")
+      //     .doc(restaurantid)
+      //     .collection('Dishes')
+      //     .doc(id)
+      //     .get();
 
 
-          cartdishes.add(DishModel.fromSnapshot(snapshot: dishdoc));
-      }
+      //     cartdishes.add(DishModel.fromSnapshot(snapshot: dishdoc));
+      // }
 
       
 
-      return cartdishes;
+      // return cartdishes;
 
      }catch(error){
       debugPrint(error.toString());
@@ -94,16 +106,15 @@ class CartRepoImpl extends CartRepository{
   }
   
   @override
-  Future<List<CartModel>> getRestaurantsInCart() async {
+  Future<List<dynamic>> getRestaurantsInCart() async {
     String? userid = FirebaseAuth.instance.currentUser?.uid;
-     Set<String> restaurants = {};
+     
     try{
      
  final result =   await FirebaseFirestore.instance.collection('Cart').where('userId', isEqualTo: userid ).get();
-     List<CartModel> cartmodel =  result.docs.map((res)=> CartModel.fromJson(json: res.data())).toList();
-
+   final Set<dynamic> restaurant = result.docs.map((doc)=> doc["restaurantId"]).toSet();
       
-      return cartmodel;
+      return restaurant.toList();
     }catch(error){
       log(error.toString());
       throw Exception(error.toString());
@@ -115,13 +126,24 @@ class CartRepoImpl extends CartRepository{
   
 }
 
-// Future<void> adddish() async{
+//  Future<void> adddish() async{
+// final docref = FirebaseFirestore.instance.collection('Cart').doc();
 
-//   final docref =  await  FirebaseFirestore.instance.collection('Cart').doc();
+//   debugPrint(docref.id); 
 
-//   debugPrint(docref.id);
-//   docref.set({});
+//   CartModel cart = CartModel(
+//     cartid: docref.id,
+//     userid: cartmodel.userid, 
+//     dishid: cartmodel.dishid, 
+//     restaurantid: cartmodel.restaurantid, 
+//     dishquantity: cartmodel.dishquantity, 
+//     priceperquantity: cartmodel.priceperquantity
+//     );
+//   docref.set(cart.toJson());
+ 
       
-// }
+//  }
+
+
 
  

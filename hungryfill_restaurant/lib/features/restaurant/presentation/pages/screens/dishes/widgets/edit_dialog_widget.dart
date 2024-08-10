@@ -83,7 +83,7 @@ class _DishEditWidgetState extends State<DishEditWidget> {
                             );
 
                             BlocProvider.of<DishBloc>(context).add(DishUpdateEvent(updatedDish: dish));
-                            BlocProvider.of<DishBloc>(context).add(GetDishesEvent());
+                         //   BlocProvider.of<DishBloc>(context).add(GetDishesEvent());
                             Navigator.pop(context);
 
                           // if (dishnamecontroller.text.isEmpty ||

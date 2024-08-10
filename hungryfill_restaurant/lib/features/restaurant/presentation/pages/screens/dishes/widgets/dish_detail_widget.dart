@@ -37,7 +37,7 @@ class DishDetailWidget extends StatelessWidget {
               //   height: 10,
               // ),
               SizedBox(
-                height: 150,
+                height: 140,
                 width: double.infinity,
                 //  color: Colors.green,
                 child: Column(
@@ -58,8 +58,8 @@ class DishDetailWidget extends StatelessWidget {
                         Column(
                           children: [
                             Container(
-                              height: 100,
-                              width: 160,
+                              height: 90,
+                              width: 150,
                               decoration: BoxDecoration(
                                   color: Colors.grey,
                                   borderRadius: BorderRadius.circular(10)),
@@ -69,36 +69,36 @@ class DishDetailWidget extends StatelessWidget {
                             ),
                             Text(dish.dishname!,
                                 style: GoogleFonts.inter(
-                                    fontSize: 18, fontWeight: FontWeight.w500))
+                                    fontSize: 15, fontWeight: FontWeight.w500))
                           ],
                         ),
-                        const SizedBox(width: 130),
+                        const SizedBox(width: 115),
                         Container(
                           width: 60,
                           child: Center(
                             child: Text(
                               dish.dishprice!,
-                              style: GoogleFonts.inter(fontSize: 18),
+                              style: GoogleFonts.inter(fontSize: 15),
                             ),
                           ),
                         ),
-                        const SizedBox(width: 145),
+                        const SizedBox(width: 135),
                         Container(
                           width: 60,
                           child: Center(
                             child: Text(
                               dish.serve!,
-                              style: GoogleFonts.inter(fontSize: 18),
+                              style: GoogleFonts.inter(fontSize: 15),
                             ),
                           ),
                         ),
-                        const SizedBox(width: 170),
+                        const SizedBox(width: 160),
                         Container(
                           width: 60,
                           child: Center(
                             child: Text(
                               dish.stock!,
-                              style: GoogleFonts.inter(fontSize: 18),
+                              style: GoogleFonts.inter(fontSize: 15),
                             ),
                           ),
                         ),

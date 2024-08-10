@@ -56,11 +56,26 @@ class AddDishToCartEvent extends DishEvent {
   List<Object> get props => [cart];
 }
 
-class GetDishInCartEvent extends DishEvent {
+class GetCartEvent extends DishEvent {
   final String? restaurantid;
 
-  const GetDishInCartEvent({required this.restaurantid});
+  const GetCartEvent({required this.restaurantid});
 
   @override
   List<Object> get props => [restaurantid!];
 }
+
+
+class CartCalculationEvent extends DishEvent{
+  final String? userid;
+  final String? restuarantid;
+
+  const CartCalculationEvent({required this.userid, required this.restuarantid,});
+
+ @override
+  // TODO: implement props
+  List<Object> get props => [userid! , restuarantid!];
+  
+}
+
+ 

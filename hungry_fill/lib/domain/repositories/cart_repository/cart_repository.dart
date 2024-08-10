@@ -7,9 +7,9 @@ import 'package:hungry_fill/data/model/dish_model/dish_model.dart';
 
 abstract class CartRepository{
 
-  //Future<void> addDishToCart({required CartModel cartmodel});
+  Future<void> addDishToCart({required CartModel cartmodel});
 
-  //Future<List<DishModel>> getDishInCart({required String restaurantid});
+  Future<List<CartModel>> getCart({required String restaurantid});
 
-  Future<List<CartModel>>  getRestaurantsInCart();
+  Future<List<dynamic>>  getRestaurantsInCart();
 }
