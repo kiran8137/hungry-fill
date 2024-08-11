@@ -16,6 +16,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   CategoryBloc({required this.dishrepository}) : super(CategoryInitial()) {
      
      on<GetCategories>(getCategories);
+     on<CategorySelect>(categorySelect);
 
 
 
@@ -25,10 +26,24 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
        try{
 
       List<CategoryModel> categories = await dishrepository.getCategories(resuerid: event.resuerid!);
-      emit(GetCategoriesSuccesState(categories: categories));
+      emit(GetCategoriesSuccesState(categories: categories , selectedcategories: []));
 
     }catch(error){
       log(error.toString());
     }
+  }
+
+  FutureOr<void> categorySelect(CategorySelect event, Emitter<CategoryState> emit) async{
+
+      if(state is GetCategoriesSuccesState){
+        final currentstate = state as GetCategoriesSuccesState;
+        List<String> selectedcategories = List.from(currentstate.selectedcategories);
+        if(selectedcategories.contains(event.category)){
+          selectedcategories.remove(event.category);
+        }else{
+          selectedcategories.add(event.category!);
+        }
+        emit(GetCategoriesSuccesState(categories: currentstate.categories, selectedcategories: selectedcategories));
+      }
   }
 }

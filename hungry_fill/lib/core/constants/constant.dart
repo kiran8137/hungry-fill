@@ -82,23 +82,23 @@ Future<int?> carttotal({required List<String> dishids , required String? restaur
 //}
 
 
-Future<int> getcarttotal ({required String? userid , required String? restaurantid}) async{
+// Future<int> getcarttotal ({required String? userid , required String? restaurantid}) async{
 
-  int cartotal = 0;
-   final cartdoc = await FirebaseFirestore.instance
+//   int cartotal = 0;
+//    final cartdoc = await FirebaseFirestore.instance
  
-      .collection('Cart')
-      .where('userId' , isEqualTo: userid )
-      .where('restaurantId' , isEqualTo: restaurantid)   
-      .get();
+//       .collection('Cart')
+//       .where('userId' , isEqualTo: userid )
+//       .where('restaurantId' , isEqualTo: restaurantid)   
+//       .get();
 
-      List<CartModel> cart = cartdoc.docs.map((cart)=> CartModel.fromJson(json: cart.data())).toList();
-      debugPrint(" items in cart${cart.toString()}");
+//       List<CartModel> cart = cartdoc.docs.map((cart)=> CartModel.fromJson(json: cart.data())).toList();
+//       debugPrint(" items in cart${cart.toString()}");
 
-      for(var i in cart){
-         cartotal = cartotal+i.priceperquantity!;
-      }
-      debugPrint(cartotal.toString());
-      return cartotal;
+//       for(var i in cart){
+//          cartotal = cartotal+i.priceperquantity!;
+//       }
+//       debugPrint(cartotal.toString());
+//       return cartotal;
 
-}
+// }

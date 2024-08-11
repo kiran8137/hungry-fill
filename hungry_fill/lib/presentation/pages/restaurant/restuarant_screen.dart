@@ -190,8 +190,9 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                       return SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(
-                          children: state.categories.map((category)=>
-                          Padding(
+                          children: state.categories.map((category){
+                            bool isselected = state.selectedcategories.contains(category.categoryname);
+                            return Padding(
                             padding: const EdgeInsets.all(5.0),
                             child: FilterChip(
                               selectedColor : Colors.white,
@@ -205,21 +206,23 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                               
                               
                               label: Text(category.categoryname!), 
-                               selected: selectedcatories.contains(category.categoryname),
+                               selected: isselected,
                               onSelected: (bool isseleced){
                                  debugPrint(isseleced.toString());
-                                 if(isseleced){
-                                  selectedcatories.add(category.categoryname!);
-                                  print(selectedcatories);
+                                 BlocProvider.of<CategoryBloc>(context).add(CategorySelect(category: category.categoryname));
+                                 if(isseleced == true){
+                                   BlocProvider.of<DishBloc>(context).add((GetCategoryDish(categoryid: category.categoryid , resuerid: widget.resuerid)));
                                  }else{
-                                  selectedcatories.remove(category.categoryname);
-                                  print(selectedcatories);
+                                   BlocProvider.of<DishBloc>(context).add((DishGetEvent(resuserid: widget.resuerid)));
                                  }
+                                
                                   
                                   
                               }
                               ),
-                          )
+                          );
+                          }
+                          
                           ).toList(),
                         
                         ),
@@ -287,11 +290,10 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                        
                         
 
-                        if (state is DishSuccesEvent 
-                        || state is SearchDishSuccessState 
-                        ) {
+                        if (state is DishSuccesEvent || state is SearchDishSuccessState || state is CategoryDishesSuccesState) {
+                        debugPrint(state.runtimeType.toString());
                           final dishes = state is DishSuccesEvent ? state.dish 
-                          : (state as SearchDishSuccessState).dishes ;
+                          : state is CategoryDishesSuccesState ? state.categorydishes :(state as SearchDishSuccessState).dishes ;
                           return ListView.separated(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),

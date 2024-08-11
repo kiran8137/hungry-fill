@@ -34,7 +34,7 @@ class DishBloc extends Bloc<DishEvent, DishState> {
      //on<GetCategories>(getCategories);
      on<GetCategoryDish>(getCategoryDish);
      on<AddDishToCartEvent>(addDishToCart);
-     on<GetCartEvent>(getCart);
+    // on<GetCartEvent>(getCart);
      on<GetRestaurantsInCart>(getRestaurantsInCart);
      //on<CartCalculationEvent>(getCartCalculation);
   }
@@ -105,18 +105,18 @@ class DishBloc extends Bloc<DishEvent, DishState> {
     }
   }
 
-   FutureOr<void> getCart(GetCartEvent event, Emitter<DishState> emit) async {
-    try{
+  //  FutureOr<void> getCart(GetCartEvent event, Emitter<DishState> emit) async {
+  //   try{
     
-   final cart =  await cartrepositoy.getCart(restaurantid: event.restaurantid!);
-   final total = await getcarttotal(userid: FirebaseAuth.instance.currentUser?.uid, restaurantid: event.restaurantid);
-  print(cart);
-  emit(GetCartSuccessState(cart: cart , carttotal: total));
+  //  final cart =  await cartrepositoy.getCart(restaurantid: event.restaurantid!);
+  //  final total = await getcarttotal(userid: FirebaseAuth.instance.currentUser?.uid, restaurantid: event.restaurantid);
+  // print(cart);
+  // emit(GetCartSuccessState(cart: cart , carttotal: total));
 
-    }catch(error){
-      log(error.toString());
-    }
-  }
+  //   }catch(error){
+  //     log(error.toString());
+  //   }
+  // }
 
   
 

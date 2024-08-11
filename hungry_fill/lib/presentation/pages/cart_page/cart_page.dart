@@ -1,11 +1,13 @@
  
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/core/constants/constant.dart';
+import 'package:hungry_fill/core/functions/cart_functions.dart';
 import 'package:hungry_fill/data/model/cart_model/cart_model.dart';
 import 'package:hungry_fill/data/model/dish_model/dish_model.dart';
 import 'package:hungry_fill/data/repository/cart_repo_imp/cart_repo_impl.dart';
@@ -25,11 +27,12 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
 
   late List<String> dishids = [];
+  int? carttotal = 0;
   
   @override
   void initState() {
     
-     BlocProvider.of<DishBloc>(context).add(GetCartEvent(restaurantid: widget.restaurantid));
+    // BlocProvider.of<DishBloc>(context).add(GetCartEvent(restaurantid: widget.restaurantid));
         
         
     super.initState();
@@ -94,10 +97,10 @@ class _CartPageState extends State<CartPage> {
         body: BlocBuilder<DishBloc, DishState>(
           builder: (context, state) {
             if(state is GetCartInitial){
-              return Center(child: CircularProgressIndicator(),
+              return const Center(child: CircularProgressIndicator(),
               );
             }
-            if(state is GetCartSuccessState){
+             
                return SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),
@@ -112,99 +115,125 @@ class _CartPageState extends State<CartPage> {
                           
                               
                                 
-                                  SingleChildScrollView(
-                                  child: ListView.separated(
-                                     
-                                    separatorBuilder: (context, index) => const Divider(),
-                                    physics: const NeverScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    itemCount: state.cart.length,
-                                    itemBuilder: (context, index) {
-                                    
-                                     final cartdish = state.cart[index];
-                                      return Container(
-                                        height: 100,
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(
-                                            color: const Color.fromARGB(155, 248, 248, 248),
-                                            borderRadius: BorderRadius.circular(10)),
-                                        child: Row(
-                                          children: [
-                                            Container(
-                                              width: 70,
-                                              height: 70,
+                                  StreamBuilder<List<CartModel>>(
+                                    stream: getCart(restaurantid: widget.restaurantid!),
+                                    builder: (context, snapshot) {
+                                      if(snapshot.connectionState == ConnectionState.waiting){
+                                        return const Center(child: CircularProgressIndicator(),);
+                                      }
+                                      return SingleChildScrollView(
+                                      child: ListView.separated(
+                                         
+                                        separatorBuilder: (context, index) => const Divider(),
+                                        physics: const NeverScrollableScrollPhysics(),
+                                        shrinkWrap: true,
+                                        itemCount: snapshot.data!.length,
+                                        itemBuilder: (context, index) {
+                                        
+                                         final cartdish = snapshot.data![index];
+                                          return Dismissible(
+                                            direction: DismissDirection.horizontal,
+                                            
+                                            key: Key(cartdish.cartid!),
+                                            onDismissed: (direction){
+                                              deleteDishInCart(cartid: cartdish.cartid!);
+                                            },
+                                            child: Container(
+                                              height: 100,
+                                              width: double.infinity,
                                               decoration: BoxDecoration(
-                                                  color: Colors.green,
+                                                  color: const Color.fromARGB(155, 248, 248, 248),
                                                   borderRadius: BorderRadius.circular(10)),
-                                            ),
-                                            const SizedBox(
-                                              width: 5,
-                                            ),
-                                            Column(
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Container(
-                                                  width: 90,
-                                                  child: Text(
-                                                     cartdish.dishname!,
-                                                    maxLines: 2,
-                                                    style: GoogleFonts.roboto(
-                                                        fontSize: 18,
-                                                        fontWeight: FontWeight.w500),
-                                                  ),
-                                                ),
-
-                                                Text("₹ ${cartdish.priceperquantity.toString()}",
-                                                style: TextStyle(fontSize: 15,color: Colors.grey),
-                                                )
-                                              ],
-                                            ),
-                                            SizedBox(width: 50,),
-                                            Container(
-                                              height: 40,
-                                              width: 100,
-                                              decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  border: Border.all(color: primarycolor),
-                                                  borderRadius: BorderRadius.circular(8)),
                                               child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.spaceAround,
                                                 children: [
-                                                  const Icon(
-                                                    Icons.remove,
-                                                    size: 20,
-                                                    color: primarycolor,
+                                                  Container(
+                                                    width: 70,
+                                                    height: 70,
+                                                    decoration: BoxDecoration(
+                                                        color: Colors.green,
+                                                        borderRadius: BorderRadius.circular(10)),
                                                   ),
-                                                  Text(
-                                                    cartdish.dishquantity.toString(),
-                                                    style: GoogleFonts.abhayaLibre(
-                                                        fontSize: 20,
-                                                        fontWeight: FontWeight.bold),
+                                                  const SizedBox(
+                                                    width: 5,
                                                   ),
-                                                  const Icon(
-                                                    Icons.add,
-                                                    size: 20,
-                                                    color: primarycolor,
+                                                  Column(
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      Container(
+                                                        width: 90,
+                                                        child: Text(
+                                                           cartdish.dishname!,
+                                                          maxLines: 2,
+                                                          style: GoogleFonts.roboto(
+                                                              fontSize: 18,
+                                                              fontWeight: FontWeight.w500),
+                                                        ),
+                                                      ),
+                                                                                  
+                                                      Text("₹ ${cartdish.priceperquantity.toString()}",
+                                                      style: const TextStyle(fontSize: 15,color: Colors.grey),
+                                                      )
+                                                    ],
                                                   ),
+                                                  const SizedBox(width: 40,),
+                                                  Container(
+                                                    height: 40,
+                                                    width: 100,
+                                                    decoration: BoxDecoration(
+                                                        color: Colors.white,
+                                                        border: Border.all(color: primarycolor),
+                                                        borderRadius: BorderRadius.circular(8)),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment.spaceAround,
+                                                      children: [
+                                                        GestureDetector(
+                                                          onTap: ()async{
+                                                            if(cartdish.dishquantity! > 1 ){
+                                                                await decrease(dishquantity: cartdish.dishquantity!, cartid: cartdish.cartid!);
+                                                            }
+                                                          
+                                                          },
+                                                          child: const Icon(
+                                                            Icons.remove,
+                                                            size: 20,
+                                                            color: primarycolor,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          cartdish.dishquantity.toString(),
+                                                          style: GoogleFonts.abhayaLibre(
+                                                              fontSize: 20,
+                                                              fontWeight: FontWeight.bold),
+                                                        ),
+                                                        GestureDetector(
+                                                          onTap: () async {
+                                                          debugPrint('clicked on ${cartdish.dishname}');
+                                                           await increase(dishquantity: cartdish.dishquantity! , cartid: cartdish.cartid!);
+                                                          },
+                                                          child: const Icon(
+                                                            Icons.add,
+                                                            size: 20,
+                                                            color: primarycolor,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                   
+ 
+                                                  
+                                                   
                                                 ],
                                               ),
+                                              
                                             ),
-                                            const SizedBox(
-                                              width: 15,
-                                            ),
-                                            // Expanded(
-                                            //     child: Text(
-                                            //   cartdish.priceperquantity.toString(),
-                                            //   style: GoogleFonts.aBeeZee(fontSize: 15),
-                                            // )
-                                            // )
-                                          ],
-                                        ),
-                                      );
-                                    }),
-                                )
+                                          );
+                                        }),
+                                                                      );
+                                    }
+                                  )
                             
                         ),
                         const SizedBox(
@@ -216,35 +245,42 @@ class _CartPageState extends State<CartPage> {
                         const SizedBox(
                           height: 50,
                         ),
-                          Column(
-                          children: [
-                              BillDetailswidget(
-                          detail: "Item total",
-                          amount: state.carttotal.toString()
-                        ),
-                        SizedBox(height: 15),
-                        BillDetailswidget(
-                            detail: "packaging charges", amount: "10"),
-                        SizedBox(height: 15),
-                        BillDetailswidget(
-                          detail: "delivery charges",
-                          amount: "30",
-                        ),
-                        SizedBox(height: 50),
-                        BillDetailswidget(
-                          detail: "Total Amount",
-                          amount: "${state.carttotal+packagingcharge+deliveycharge}",
-                        ),
-                          ],
-                        )
+                          StreamBuilder<int>(
+                            stream: getcarttotal(userid: FirebaseAuth.instance.currentUser?.uid, restaurantid: widget.restaurantid ,),
+                            builder: (context, snapshot) {
+                               
+                              if(snapshot.connectionState == ConnectionState.waiting){
+                                return const Center(child: CircularProgressIndicator(),);
+                              }
+                              return   Column(
+                              children: [
+                                    BillDetailswidget(
+                              detail: "Item total",
+                              amount: "${snapshot.data}"
+                                                      ),
+                                                        const SizedBox(height: 15),
+                                                        const BillDetailswidget(
+                                detail: "packaging charges", amount: "10"),
+                                                        const SizedBox(height: 15),
+                                                        const BillDetailswidget(
+                              detail: "delivery charges",
+                              amount: "30",
+                                                      ),
+                                                        const SizedBox(height: 50),
+                                                      BillDetailswidget(
+                              detail: "Total Amount",
+                              amount: "${snapshot.data! + packagingcharge+deliveycharge}",
+                                                      ),
+                              ],
+                                                      );
+                            }
+                          )
                       
                       ],
                     ),
                   ),
                 );
-            }else{
-              return const Center(child: CircularProgressIndicator());
-            }
+            
            
           }
         ));

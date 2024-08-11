@@ -18,3 +18,14 @@ class GetCategories extends CategoryEvent{
 }
 
 
+class CategorySelect extends CategoryEvent{
+  final String? category;
+
+const  CategorySelect({required this.category});
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [category!];
+}
+
+

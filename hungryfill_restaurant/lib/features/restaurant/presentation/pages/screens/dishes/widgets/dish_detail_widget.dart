@@ -97,7 +97,7 @@ class DishDetailWidget extends StatelessWidget {
                           width: 60,
                           child: Center(
                             child: Text(
-                              dish.stock!,
+                               dish.stock!,
                               style: GoogleFonts.inter(fontSize: 15),
                             ),
                           ),

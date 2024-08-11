@@ -41,6 +41,13 @@ class _DishAddDialogState extends State<DishAddDialog> {
 
   Uint8List? selectedimage;
 
+  var stockitems = [     
+     'IN',
+     'OUT'
+  ]; 
+
+  var dropdownvalue = 'IN';
+
   // List<ValueItem> getCategoryValueItems() {
   @override
   Widget build(BuildContext context) {
@@ -68,7 +75,7 @@ class _DishAddDialogState extends State<DishAddDialog> {
                         onTap: () {
                           if (dishnamecontroller.text.isEmpty ||
                               dishpricecontroller.text.isEmpty ||
-                              dishstockcontroller.text.isEmpty ||
+                              dropdownvalue.isEmpty ||
                               dishservecontroller.text.isEmpty ||
                               selectedcategories.isEmpty) {
                             return;
@@ -79,7 +86,7 @@ class _DishAddDialogState extends State<DishAddDialog> {
                           DishModel dish = DishModel(
                               dishname: dishnamecontroller.text,
                               dishprice: dishpricecontroller.text,
-                              stock: dishstockcontroller.text,
+                              stock: dropdownvalue,
                               serve: dishservecontroller.text,
                               category: selectedcategoryids,
                              // imageurl: selectedimage
@@ -282,11 +289,25 @@ class _DishAddDialogState extends State<DishAddDialog> {
                       SizedBox(
                         height: 37,
                         width: 100,
-                        child: TextFormField(
-                          controller: dishstockcontroller,
-                          decoration: const InputDecoration(
-                              border: OutlineInputBorder()),
-                        ),
+                        child: DropdownButton(
+                          value: dropdownvalue,
+                          items: stockitems.map((item){
+                            return DropdownMenuItem(
+                              value: item,
+                              child: Text(item),
+                              );
+                          }).toList(),
+                          onChanged: ( newvalue){
+                            setState(() {
+                              dropdownvalue = newvalue!;
+                            });
+                          }
+                          )
+                        // TextFormField(
+                        //   controller: dishstockcontroller,
+                        //   decoration: const InputDecoration(
+                        //       border: OutlineInputBorder()),
+                        // ),
                       ),
                       const SizedBox(
                         height: 25,
