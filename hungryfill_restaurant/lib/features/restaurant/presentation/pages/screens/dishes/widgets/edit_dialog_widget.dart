@@ -5,6 +5,7 @@ import 'package:hungryfill_restaurant/core/categories.dart';
 import 'package:hungryfill_restaurant/core/theme/color.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/category/category_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/dish/dish_model.dart';
+import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/category/category_bloc.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/dish/dish_bloc.dart';
 import 'package:multi_dropdown/multiselect_dropdown.dart';
 
@@ -241,7 +242,7 @@ class _DishEditWidgetState extends State<DishEditWidget> {
                       const SizedBox(
                         height: 20,
                       ),
-                       BlocBuilder<DishBloc, DishState>(
+                       BlocBuilder<CategoryBloc, CategoryState>(
                         builder: (context, state) {
                           if(state is CategorySuccessEvent){
                             categories = state.categories;

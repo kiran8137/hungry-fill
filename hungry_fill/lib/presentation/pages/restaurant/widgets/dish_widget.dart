@@ -30,7 +30,8 @@ class Dishwidget extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
           color:
-              const Color.fromARGB(255, 246, 245, 245),
+
+            dish.dishstock == 'IN' ? const Color.fromARGB(255, 246, 245, 245): Color.fromARGB(255, 165, 164, 164),
           borderRadius: BorderRadius.circular(20)),
       child: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -56,12 +57,14 @@ class Dishwidget extends StatelessWidget {
                   Text(
                     dish.dishname!,
                     style: GoogleFonts.abhayaLibre(
+                      color: dish.dishstock == 'IN'? Colors.black: const Color.fromARGB(255, 93, 92, 92),
                         fontSize: 23,
                         fontWeight: FontWeight.w600),
                   ),
                   Text(
                     "₹${dish.dishprice!}",
                     style: GoogleFonts.aBeeZee(
+                      color: dish.dishstock == 'IN'? Colors.black: const Color.fromARGB(255, 93, 92, 92),
                         fontSize: 15,
                         fontWeight: FontWeight.bold),
                   ),
@@ -91,14 +94,7 @@ class Dishwidget extends StatelessWidget {
                         AddDishToCartEvent( 
                           cart: cartmodel
                         ));
-                      //BlocProvider.of<DishBloc>(context).add(GetDishInCartEvent(restaurantid: restaurantid));
-                    // addDish();
-
-                    // context.read<DishBloc>().stream.listen((state){
-                    //   if(state is AddDishToCartSuccesState){
-                    //      Navigator.push(ctx, MaterialPageRoute(builder: (context)=> CartPage(restaurantid: restaurantid, restaurantname: restaurantname,)));
-                    //   }
-                    // });
+                       
                      
                       
                     },
@@ -113,12 +109,13 @@ class Dishwidget extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          "ADD",
+                         dish.dishstock == 'IN'? "ADD": 'Out of stock',
                           style: GoogleFonts.abrilFatface(
-                              color: Colors.white,
+                              color:  dish.dishstock == 'IN'?Colors.white:const Color.fromARGB(255, 204, 203, 203),
                               fontSize: 20,
                               fontWeight:
-                                  FontWeight.w400),
+                                  FontWeight.w400,
+                                  ),
                         ),
                       ),
                     ),

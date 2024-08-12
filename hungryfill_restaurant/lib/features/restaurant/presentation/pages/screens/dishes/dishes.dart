@@ -7,6 +7,7 @@ import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/com
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/dishes/widgets/add_dialog_widget.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/dishes/widgets/dish_detail_widget.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/dishes/widgets/dish_header.dart';
+import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/category/category_bloc.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/dish/dish_bloc.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/provider/dish_provider.dart';
 import 'package:provider/provider.dart';
@@ -54,7 +55,7 @@ class _DishScreenState extends State<DishScreen> {
             const SizedBox(width: 1050,),
             GestureDetector(
               onTap: (){
-                  BlocProvider.of<DishBloc>(context)
+                  BlocProvider.of<CategoryBloc>(context)
                               .add(GetCategoriesEvent());
                 showDialog(
                   barrierDismissible: false,

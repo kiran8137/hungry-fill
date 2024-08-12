@@ -27,8 +27,30 @@ class CartRepoImpl extends CartRepository{
 
     try{
        
-    
-    final docref = FirebaseFirestore.instance.collection('Cart').doc();
+       int flag = 0;
+       String _cartId = '';
+       int _dishquantity = 0;
+       final collectionref = FirebaseFirestore.instance.collection('Cart');
+
+       final cartquerysnap =  await collectionref.
+       where('restaurantId', isEqualTo: cartmodel.restaurantid).
+       where('userId',isEqualTo: cartmodel.userid).get();
+
+      final result = cartquerysnap.docs.map((doc)=>doc.data()).toList();
+
+      for(var i in result){
+        if(i.containsValue(cartmodel.dishid)){
+          flag = 0;
+          _cartId = i['cartId'];
+          _dishquantity = i['dishQuantity'];
+          break;
+        }
+      }
+
+      if(flag == 0){
+        await increase(dishquantity: _dishquantity, cartid: _cartId);
+      }else{
+          final docref = FirebaseFirestore.instance.collection('Cart').doc();
 
   debugPrint(docref.id); 
 
@@ -45,6 +67,9 @@ class CartRepoImpl extends CartRepository{
     dishname:cartmodel.dishname 
     );
   docref.set(cart.toJson());
+      }
+    
+  
       
     
      

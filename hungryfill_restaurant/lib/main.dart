@@ -8,6 +8,7 @@ import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/aut
  
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/splash_screen/splash_screen.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/authentication/auth_bloc_bloc.dart';
+import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/category/category_bloc.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/dish/dish_bloc.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/restaurant_user/restaurant_user_bloc.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/provider/dish_provider.dart';
@@ -40,7 +41,11 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
           create:(context)=> DishBloc(dishrepository: DishRepoImplementation())
-          )
+          ),
+
+          BlocProvider(
+            create: (context) => CategoryBloc(dishrepository: DishRepoImplementation())
+            )
 
 
       ],

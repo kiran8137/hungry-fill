@@ -15,7 +15,7 @@ abstract class DishRepository {
   Future<void> updateDish({required DishModel dish});
 
 
-  //Future<PlatformFile?> dishImagePicker();
+  Future<PlatformFile?> dishImagePicker();
 
 
   Future<void> createCategory({required List<CategoryModel> categories});

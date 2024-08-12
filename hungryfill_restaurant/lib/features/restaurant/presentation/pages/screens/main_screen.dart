@@ -158,7 +158,7 @@ Widget getSelectedpage(
     {required int index, RestaurantModel? currentrestaurantinfo}) {
   switch (index) {
     case 0:
-      return const Dashboard();
+      return   Dashboard();
     case 1:
       return const DailyOrders();
     case 2:

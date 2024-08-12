@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/presentation/bloc/dish_bloc/dish_bloc.dart';
-import 'package:hungry_fill/presentation/bloc/restaurant_bloc/restaurant_bloc.dart';
+ 
 import 'package:hungry_fill/presentation/pages/cart_page/cart_page.dart';
 
 class Cart extends StatefulWidget {
@@ -30,7 +30,7 @@ class _CartState extends State<Cart> {
             },
             child: const Icon(Icons.arrow_back_ios)),
           backgroundColor: Colors.white,
-          title: Text("Cart"),
+          title: const Text("Cart"),
           centerTitle: true,
         ),
         backgroundColor: Colors.white,
@@ -41,13 +41,13 @@ class _CartState extends State<Cart> {
               builder: (context, state) {
 
             if(state is GetRestaurantsInCartIsEmpty){
-              return Center(child: Text("No cart Added ", style: TextStyle(color: Colors.black),));
+              return const Center(child: Text("No cart Added ", style: TextStyle(color: Colors.black),));
             }
             if (state is GetRestaurantsInCartSuccess) {
               debugPrint('${state.runtimeType}');
               return  
               ListView.separated(
-                  separatorBuilder: (context, index) => SizedBox(height: 10),
+                  separatorBuilder: (context, index) => const SizedBox(height: 10),
                   itemCount: state.restaurantsincart.length,
                   itemBuilder: (context, index) {
                     final restaurants = state.restaurantsincart[index];
@@ -80,7 +80,7 @@ class _CartState extends State<Cart> {
                                     fontWeight: FontWeight.w700
                                   ),
                                   ),
-                                  Icon(Icons.arrow_forward_ios,
+                                  const Icon(Icons.arrow_forward_ios,
                                   size: 15,
                                   
                               
@@ -98,7 +98,7 @@ class _CartState extends State<Cart> {
                     // );
                   });
             } else {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }

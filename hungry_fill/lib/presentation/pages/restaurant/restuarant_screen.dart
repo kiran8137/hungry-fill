@@ -5,9 +5,10 @@ import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/data/model/dish_model/dish_model.dart';
 import 'package:hungry_fill/presentation/bloc/dish_bloc/dish_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/restaurant_bloc/restaurant_bloc.dart';
-import 'package:hungry_fill/presentation/pages/cart_page/cart_page.dart';
+ 
  
 import 'package:hungry_fill/presentation/pages/main_pages/widgets/search_widget.dart';
+import 'package:hungry_fill/presentation/pages/restaurant/components/res_components.dart';
 import 'package:hungry_fill/presentation/pages/restaurant/widgets/dish_widget.dart';
 
 import '../../bloc/category_bloc/category_bloc.dart';
@@ -187,46 +188,7 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
 
                     if(state is GetCategoriesSuccesState){
                       
-                      return SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: state.categories.map((category){
-                            bool isselected = state.selectedcategories.contains(category.categoryname);
-                            return Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: FilterChip(
-                              selectedColor : Colors.white,
-                              
-                               shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            
-                            
-                            ),
-                              backgroundColor: Colors.white,
-                              
-                              
-                              label: Text(category.categoryname!), 
-                               selected: isselected,
-                              onSelected: (bool isseleced){
-                                 debugPrint(isseleced.toString());
-                                 BlocProvider.of<CategoryBloc>(context).add(CategorySelect(category: category.categoryname));
-                                 if(isseleced == true){
-                                   BlocProvider.of<DishBloc>(context).add((GetCategoryDish(categoryid: category.categoryid , resuerid: widget.resuerid)));
-                                 }else{
-                                   BlocProvider.of<DishBloc>(context).add((DishGetEvent(resuserid: widget.resuerid)));
-                                 }
-                                
-                                  
-                                  
-                              }
-                              ),
-                          );
-                          }
-                          
-                          ).toList(),
-                        
-                        ),
-                      );
+                      return filterChip(state, context , widget.resuerid!);
                     }else{
                       return const Text("somethign went wrong");
                     }
@@ -235,7 +197,7 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                   ),
 
 
-                const Text('category'),
+                
 
                 Row(
                   children: [
@@ -324,4 +286,5 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
           ),
         )));
   }
+
 }

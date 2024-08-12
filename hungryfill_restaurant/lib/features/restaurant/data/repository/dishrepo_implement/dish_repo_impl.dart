@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+ 
 import 'package:file_picker/file_picker.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/category/category_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/dish/dish_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/domain/repositories/dish_repository.dart';
+ import 'dart:html' as html;
 
 String dishid = "";
 
@@ -98,19 +100,19 @@ class DishRepoImplementation extends DishRepository {
     }
   }
 
-  // @override
-  // Future<PlatformFile?> dishImagePicker() async {
-  //   try {
-  //     final result = await FilePicker.platform.pickFiles(
-  //         );
-  //     if (result != null && result.files.isNotEmpty) {
-  //       return result.files.first;
-  //     }
-  //   } catch (error) {
-  //     log(error.toString());
-  //     throw Exception(error.toString());
-  //   }
-  // }
+  @override
+  Future<PlatformFile?> dishImagePicker() async {
+    try {
+      final result = await FilePicker.platform.pickFiles(
+          );
+      if (result != null && result.files.isNotEmpty) {
+        return result.files.first;
+      }
+    } catch (error) {
+      log(error.toString());
+      throw Exception(error.toString());
+    }
+  }
 
   @override
   Future<void> createCategory({required List<CategoryModel> categories}) async {
@@ -191,26 +193,32 @@ class DishRepoImplementation extends DishRepository {
   
 }
 
-// Future<void> getcat() async {
-//   final result = await FirebaseFirestore.instance
-//       .collection("Restaurants")
-//       .doc("DrGiHa3uutdYSXUjl3TBUR1fwqG2")
-//       .collection("categories")
-//       .get();
+ 
 
-//   List<CategoryModel> category = result.docs
-//       .map((cat) => CategoryModel.fromJson(json: cat.data()))
-//       .toList();
+Future<void> addImageToFirebase(Uint8List? fileinbytes , String filename)async{
+ 
+   
+    final uploadTask = FirebaseStorage.instance.ref().child('/ $filename').putData(fileinbytes!);
+  //  final uploadtask = storageref.putData(fileinbytes!);
+  final tasksnapshot = await uploadTask;
+  final imagurl = await tasksnapshot.ref.getDownloadURL();
+  // await uploadtask.whenComplete(()=> null);
 
-//   print("lunch ${category[1].categoryid}");
-// }
+  //  String imageurl = await storageref.getDownloadURL();
+   debugPrint(imagurl);
+   
+  //  final snapshot = await upload;
+   //String downloadUrl = await snapshot.ref.getDownloadURL();
+  // debugPrint( "downloadurl$downloadUrl");
 
-// Future<void> addImageToFirebase(Uint8List? filname)async{
-  
-//    final storageref = FirebaseStorage.instance.ref().child('Dishesimages/$filname');
-//    final upload = storageref.putData(filname!);
-//    final snapshot = await upload;
-//    String downloadUrl = await snapshot.ref.getDownloadURL();
-//    debugPrint( "downloadurl$downloadUrl");
+}
 
-// }
+  // UploadTask uploadTask = firebaseStorage.ref().child(ref).putFile(file);
+  //     TaskSnapshot taskSnapshot = await uploadTask;
+  //     return await taskSnapshot.ref.getDownloadURL();
+
+  Future<String> getImage() async{
+
+    String url = await FirebaseStorage.instance.ref().child('1.jpg').getDownloadURL();
+    return url;
+  }

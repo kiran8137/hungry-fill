@@ -44,14 +44,14 @@ final class DishImagPickerLoaded extends DishState{
  
 }
 
-final class CategorySuccessEvent extends DishState{
-  final List<CategoryModel> categories;
+// final class CategorySuccessEvent extends DishState{
+//   final List<CategoryModel> categories;
 
- const CategorySuccessEvent({required this.categories});
+//  const CategorySuccessEvent({required this.categories});
 
- @override
-  // TODO: implement props
-  List<Object> get props => [categories];
+//  @override
+//   // TODO: implement props
+//   List<Object> get props => [categories];
 
   
-}
+// }

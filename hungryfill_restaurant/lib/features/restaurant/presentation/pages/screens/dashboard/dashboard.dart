@@ -2,13 +2,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungryfill_restaurant/core/theme/color.dart';
+import 'package:hungryfill_restaurant/features/restaurant/data/repository/dishrepo_implement/dish_repo_impl.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/common_widgets/header_widget.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/dashboard/widgets/revenue_card_widget.dart';
 
 class Dashboard extends StatelessWidget {
-  const Dashboard({super.key, this.index});
+    Dashboard({super.key, this.index});
   
   final int? index;
+
+
+  String? url;
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +31,14 @@ class Dashboard extends StatelessWidget {
           children: [
 
             const SizedBox(width: 20,),
-            Text("DASHBOARD",
-              style: GoogleFonts.inriaSans(
-                fontWeight: FontWeight.bold, fontSize: 30
+            GestureDetector(
+              onTap: () async{
+                url = await getImage();
+              },
+              child: Text("DASHBOARD",
+                style: GoogleFonts.inriaSans(
+                  fontWeight: FontWeight.bold, fontSize: 30
+                ),
               ),
             ),
 
@@ -71,6 +80,13 @@ class Dashboard extends StatelessWidget {
              ),
            ),
 
+        ),
+
+        Container(
+          height: 100,
+          width: 100,
+        color: Colors.green,
+        child: Image.network(url.toString()),
         )
       ],
 

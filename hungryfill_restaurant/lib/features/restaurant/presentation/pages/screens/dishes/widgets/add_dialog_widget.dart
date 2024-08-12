@@ -3,15 +3,15 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hungryfill_restaurant/core/categories.dart';
+ 
 import 'package:hungryfill_restaurant/core/theme/color.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/category/category_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/dish/dish_model.dart';
+import 'package:hungryfill_restaurant/features/restaurant/data/repository/dishrepo_implement/dish_repo_impl.dart';
+import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/category/category_bloc.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/dish/dish_bloc.dart';
 import 'package:multi_dropdown/multiselect_dropdown.dart';
-import 'package:multi_select_flutter/dialog/mult_select_dialog.dart';
-import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
-import 'package:multi_select_flutter/util/multi_select_item.dart';
+ 
 
 class DishAddDialog extends StatefulWidget {
   DishAddDialog({super.key});
@@ -39,7 +39,10 @@ class _DishAddDialogState extends State<DishAddDialog> {
 
   final List<bool> isSelected = [false, false];
 
-  Uint8List? selectedimage;
+    Uint8List? selectedimage;
+    String? filename;
+
+
 
   var stockitems = [     
      'IN',
@@ -51,7 +54,8 @@ class _DishAddDialogState extends State<DishAddDialog> {
   // List<ValueItem> getCategoryValueItems() {
   @override
   Widget build(BuildContext context) {
-    List<ValueItem<dynamic>> selecteditems = [];
+  //  List<ValueItem<dynamic>> selecteditems = [];
+    
     return Dialog(
       child: Container(
         height: 550,
@@ -72,7 +76,7 @@ class _DishAddDialogState extends State<DishAddDialog> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       GestureDetector(
-                        onTap: () {
+                        onTap: () async{
                           if (dishnamecontroller.text.isEmpty ||
                               dishpricecontroller.text.isEmpty ||
                               dropdownvalue.isEmpty ||
@@ -95,6 +99,8 @@ class _DishAddDialogState extends State<DishAddDialog> {
                               .add(DishAddEvent(dishmodel: dish));
                           // BlocProvider.of<DishBloc>(context)
                           //     .add(GetDishesEvent());
+
+                         await addImageToFirebase(selectedimage, filename!);
                           Navigator.pop(context);
                         },
                         child: Container(
@@ -150,18 +156,25 @@ class _DishAddDialogState extends State<DishAddDialog> {
                 top: 40,
                 left: 20,
                 child: GestureDetector(
-                  onTap: () {
-                   // BlocProvider.of<DishBloc>(context).add(DishImagePicker());
+                  onTap: () async{
+                    BlocProvider.of<DishBloc>(context).add(DishImagePicker());
+                   
+                  
                   },
-                  child: BlocConsumer<DishBloc, DishState>(
+                  child:
+                   
+                     
+                   BlocConsumer<DishBloc, DishState>(
                     listener: (context, state) {
                       // TODO: implement listener
                     },
                     builder: (context, state) {
                       if (state is DishImagPickerLoaded) {
+                        filename = state.file!.name;
                         selectedimage = state.file!.bytes;
                      // selectedimage = state.file.;
-                        return Container(
+                        return 
+                  Container(
                           height: 120,
                           width: 180,
                           decoration: BoxDecoration(
@@ -180,7 +193,8 @@ class _DishAddDialogState extends State<DishAddDialog> {
                       }
                     },
                   ),
-                )),
+                )
+                ),
             Positioned(
                 left: 230,
                 top: 90,
@@ -259,7 +273,7 @@ class _DishAddDialogState extends State<DishAddDialog> {
                       const SizedBox(
                         height: 20,
                       ),
-                      BlocBuilder<DishBloc, DishState>(
+                      BlocBuilder<CategoryBloc, CategoryState>(
 
                         builder: (context, state) {
                           debugPrint(state.runtimeType.toString());

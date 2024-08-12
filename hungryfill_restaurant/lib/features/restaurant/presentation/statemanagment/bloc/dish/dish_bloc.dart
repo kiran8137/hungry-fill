@@ -23,9 +23,9 @@ class DishBloc extends Bloc<DishEvent, DishState> {
    // on<GetDishesEvent>(getDishes);
     on<DeleteDishEvent>(deleteDish);
     on<DishUpdateEvent>(updateDish);
-    //on<DishImagePicker>(getDishImage);
-    on<CreateCategoryEvent>(createCategory);
-    on<GetCategoriesEvent>(getCategories);
+    on<DishImagePicker>(getDishImage);
+    // on<CreateCategoryEvent>(createCategory);
+    // on<GetCategoriesEvent>(getCategories);
   }
 
   FutureOr<void> addDish(DishAddEvent event, Emitter<DishState> emit) async {
@@ -95,49 +95,49 @@ class DishBloc extends Bloc<DishEvent, DishState> {
     }
   }
 
-  // FutureOr<void> getDishImage(DishImagePicker event, Emitter<DishState> emit) async {
-
-  //   try{
-
-  //     final imagefile = await dishrepository.dishImagePicker();
-     
-  //    if(imagefile!=null){
-  //     //addImageToFirebase(imagefile.bytes);
-  //    }
-
-  //     if(imagefile!=null){
-        
-  //       emit(DishImagPickerLoaded(file: imagefile));
-  //     }else{
-  //       emit(ErrorState());
-  //     }
-
-  //   }catch(error){
-  //     log(error.toString());
-  //   }
-  // }
-
-  FutureOr<void> createCategory(CreateCategoryEvent event, Emitter<DishState> emit) async{
+  FutureOr<void> getDishImage(DishImagePicker event, Emitter<DishState> emit) async {
 
     try{
 
-      dishrepository.createCategory(categories: event.categorymodel);
+      final imagefile = await dishrepository.dishImagePicker();
+     
+     if(imagefile!=null){
+      //addImageToFirebase(imagefile.bytes);
+     }
+
+      if(imagefile!=null){
+        
+        emit(DishImagPickerLoaded(file: imagefile));
+      }else{
+        emit(ErrorState());
+      }
+
     }catch(error){
       log(error.toString());
     }
   }
 
-  FutureOr<void> getCategories(GetCategoriesEvent event, Emitter<DishState> emit) async{
+  // FutureOr<void> createCategory(CreateCategoryEvent event, Emitter<DishState> emit) async{
 
-    try{
-     final categories = await dishrepository.getCategories();
-     if(categories.isNotEmpty){
-      emit(CategorySuccessEvent(categories: categories));
-     }else{
-      emit(ErrorState(errormessage: 'categories are empty'));
-     }
-    }catch(error){
-      log(" getcatbloc error ${error.toString()}");
-    }
-  }
+  //   try{
+
+  //     dishrepository.createCategory(categories: event.categorymodel);
+  //   }catch(error){
+  //     log(error.toString());
+  //   }
+  // }
+
+  // FutureOr<void> getCategories(GetCategoriesEvent event, Emitter<DishState> emit) async{
+
+  //   try{
+  //    final categories = await dishrepository.getCategories();
+  //    if(categories.isNotEmpty){
+  //     emit(CategorySuccessEvent(categories: categories));
+  //    }else{
+  //     emit(ErrorState(errormessage: 'categories are empty'));
+  //    }
+  //   }catch(error){
+  //     log(" getcatbloc error ${error.toString()}");
+  //   }
+  // }
 }
