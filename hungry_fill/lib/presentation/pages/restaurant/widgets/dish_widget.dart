@@ -31,7 +31,7 @@ class Dishwidget extends StatelessWidget {
       decoration: BoxDecoration(
           color:
 
-            dish.dishstock == 'IN' ? const Color.fromARGB(255, 246, 245, 245): Color.fromARGB(255, 165, 164, 164),
+            dish.dishstock == 'IN' ? const Color.fromARGB(255, 246, 245, 245): const Color.fromARGB(255, 165, 164, 164),
           borderRadius: BorderRadius.circular(20)),
       child: Padding(
         padding: const EdgeInsets.all(10.0),

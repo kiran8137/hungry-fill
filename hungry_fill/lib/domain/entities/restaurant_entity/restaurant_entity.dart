@@ -18,10 +18,7 @@ class RestaurantEntity extends Equatable {
         this.restaurantmobileNo,
         this.restaurantstate,
         this.restaurantdistrict,
-        this.restaurantplace}){
-
-          
-        }
+        this.restaurantplace});
 
   @override
   

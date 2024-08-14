@@ -32,8 +32,8 @@ class Dashboard extends StatelessWidget {
 
             const SizedBox(width: 20,),
             GestureDetector(
-              onTap: () async{
-                url = await getImage();
+              onTap: ()  {
+                 
               },
               child: Text("DASHBOARD",
                 style: GoogleFonts.inriaSans(
@@ -82,12 +82,12 @@ class Dashboard extends StatelessWidget {
 
         ),
 
-        Container(
-          height: 100,
-          width: 100,
-        color: Colors.green,
-        child: Image.network(url.toString()),
-        )
+        // Container(
+        //   height: 100,
+        //   width: 100,
+        // color: Colors.green,
+        //  child: Image.memory(),
+        //  )
       ],
 
     );

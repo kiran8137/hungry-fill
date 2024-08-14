@@ -1,10 +1,8 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/dish/dish_model.dart';
-import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/dishes/widgets/dish_header.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/dishes/widgets/edit_dialog_widget.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/dish/dish_bloc.dart';
 
@@ -19,7 +17,7 @@ class DishDetailWidget extends StatelessWidget {
     return BlocConsumer<DishBloc, DishState>(
       listener: (context, state) {
         if(state is DishImagPickerLoaded){
-          print(state.file?.path);
+          debugPrint(state.file?.path);
         }
       },
       builder: (context, state) {
@@ -73,7 +71,7 @@ class DishDetailWidget extends StatelessWidget {
                           ],
                         ),
                         const SizedBox(width: 115),
-                        Container(
+                        SizedBox(
                           width: 60,
                           child: Center(
                             child: Text(
@@ -83,7 +81,7 @@ class DishDetailWidget extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 135),
-                        Container(
+                        SizedBox(
                           width: 60,
                           child: Center(
                             child: Text(
@@ -93,7 +91,7 @@ class DishDetailWidget extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 160),
-                        Container(
+                        SizedBox(
                           width: 60,
                           child: Center(
                             child: Text(
@@ -102,7 +100,7 @@ class DishDetailWidget extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 60,
                         ),
                         GestureDetector(

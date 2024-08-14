@@ -4,9 +4,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hungry_fill/data/model/category_model/category_model.dart';
-import 'package:hungry_fill/data/model/dish_model/dish_model.dart';
 import 'package:hungry_fill/domain/repositories/dish_repository/dish_repo.dart';
-import 'package:hungry_fill/presentation/bloc/dish_bloc/dish_bloc.dart';
 
 part 'category_event.dart';
 part 'category_state.dart';

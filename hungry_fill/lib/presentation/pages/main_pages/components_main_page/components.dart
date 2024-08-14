@@ -31,7 +31,7 @@ AppBar appBarMain({required BuildContext context}) {
           children: [
             GestureDetector(
               onTap: (){
-                 print("tapped location");
+                 debugPrint("tapped location");
               },
               child: Text('Location',
               style: GoogleFonts.abhayaLibre(),

@@ -4,14 +4,12 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:hungry_fill/core/constants/constant.dart';
 import 'package:hungry_fill/data/model/cart_model/cart_model.dart';
-import 'package:hungry_fill/data/model/dish_model/dish_model.dart';
 
 Stream<List<CartModel>> getCart ({required String restaurantid}) async*{
     String? userid = FirebaseAuth.instance.currentUser?.uid;
-    List<String> dishids = [];
-    List<DishModel> cartdishes = [];
+    // List<String> dishids = [];
+    // List<DishModel> cartdishes = [];
      
      try{
       //final carttotal = await getcarttotal(userid: userid!, restaurantid: restaurantid);
@@ -42,7 +40,7 @@ Stream<List<CartModel>> getCart ({required String restaurantid}) async*{
 
   Stream<int> getcarttotal ({required String? userid , required String? restaurantid ,  }) async*{
 
-  ;
+  
   //int currentcartotal = 0;
    final cartdoc =   FirebaseFirestore.instance
  

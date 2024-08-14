@@ -3,7 +3,6 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/res_user/res_user_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/domain/repositories/res_user_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';

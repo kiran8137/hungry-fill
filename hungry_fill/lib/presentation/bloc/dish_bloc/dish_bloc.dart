@@ -3,9 +3,7 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:hungry_fill/core/constants/constant.dart';
  
 import 'package:hungry_fill/data/model/cart_model/cart_model.dart';
  
@@ -15,7 +13,6 @@ import 'package:hungry_fill/data/model/restaurant_model/restaurant_model.dart';
 import 'package:hungry_fill/domain/repositories/cart_repository/cart_repository.dart';
 import 'package:hungry_fill/domain/repositories/dish_repository/dish_repo.dart';
 import 'package:hungry_fill/domain/repositories/restaurant_repository/restaurant_respository.dart';
-import 'package:hungry_fill/presentation/pages/cart_page/cart_restauants.dart';
  
 
 part 'dish_event.dart';
@@ -130,7 +127,7 @@ class DishBloc extends Bloc<DishEvent, DishState> {
        for(var resid in restaurantsidcart){
         restaurantsincart.add(await restaurantepository.getRestaurantUsingId(restaurantid: resid)) ;
        }
-       print(restaurantsincart);
+       debugPrint(restaurantsincart.toString());
        if(restaurantsincart.isNotEmpty){
         emit(GetRestaurantsInCartSuccess(restaurantsincart: restaurantsincart));
        }else{

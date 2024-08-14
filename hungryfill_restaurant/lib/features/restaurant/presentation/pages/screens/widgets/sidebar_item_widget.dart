@@ -16,6 +16,7 @@ class SideBarItem extends StatefulWidget {
 }
 
 class _SideBarItemState extends State<SideBarItem> {
+  int? selectedindex;
   @override
   Widget build(BuildContext context) {
     final isselected = widget.selectedindex == widget.index;

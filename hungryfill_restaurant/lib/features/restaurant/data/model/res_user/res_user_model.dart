@@ -1,4 +1,5 @@
 
+import 'package:flutter/material.dart';
 import 'package:hungryfill_restaurant/features/restaurant/domain/entities/res_user/res_user_enitity.dart';
 
 class RestaurantModel extends RestaurantEntity {
@@ -13,7 +14,7 @@ class RestaurantModel extends RestaurantEntity {
         super.restaurantplace
         
         }){
-          print("res model : $username");
+          debugPrint("res model : $username");
         }
 
 

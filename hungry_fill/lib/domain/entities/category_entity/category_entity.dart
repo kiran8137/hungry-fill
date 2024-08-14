@@ -8,6 +8,6 @@ class CategoryEntity extends Equatable {
   const CategoryEntity({required this.categoryname, required this.categoryid});
 
   @override
-  // TODO: implement props
+   
   List<Object?> get props => [categoryname , categoryid];
 }

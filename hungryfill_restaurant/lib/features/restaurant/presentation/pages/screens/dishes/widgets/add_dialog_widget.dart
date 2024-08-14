@@ -100,7 +100,8 @@ class _DishAddDialogState extends State<DishAddDialog> {
                           // BlocProvider.of<DishBloc>(context)
                           //     .add(GetDishesEvent());
 
-                         await addImageToFirebase(selectedimage, filename!);
+                         //await addImageToFirebase(selectedimage, filename!);
+                        // selectedimage = await pickimage();
                           Navigator.pop(context);
                         },
                         child: Container(
@@ -166,7 +167,7 @@ class _DishAddDialogState extends State<DishAddDialog> {
                      
                    BlocConsumer<DishBloc, DishState>(
                     listener: (context, state) {
-                      // TODO: implement listener
+                       
                     },
                     builder: (context, state) {
                       if (state is DishImagPickerLoaded) {
@@ -174,14 +175,19 @@ class _DishAddDialogState extends State<DishAddDialog> {
                         selectedimage = state.file!.bytes;
                      // selectedimage = state.file.;
                         return 
-                  Container(
-                          height: 120,
-                          width: 180,
-                          decoration: BoxDecoration(
-                              // color: Colors.grey,
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Image.memory(selectedimage!),
-                        );
+                  GestureDetector(
+                    onTap: () async{
+                      selectedimage = await pickimage();
+                    },
+                    child: Container(
+                            height: 120,
+                            width: 180,
+                            decoration: BoxDecoration(
+                                // color: Colors.grey,
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Image.memory(selectedimage!),
+                          ),
+                  );
                       } else {
                         return Container(
                           height: 120,
@@ -290,7 +296,7 @@ class _DishAddDialogState extends State<DishAddDialog> {
                               }, 
                               );
                           }else{
-                            return Center(child: CircularProgressIndicator(),);
+                            return const Center(child: CircularProgressIndicator(),);
                           }
                           
                           
@@ -317,11 +323,7 @@ class _DishAddDialogState extends State<DishAddDialog> {
                             });
                           }
                           )
-                        // TextFormField(
-                        //   controller: dishstockcontroller,
-                        //   decoration: const InputDecoration(
-                        //       border: OutlineInputBorder()),
-                        // ),
+                        
                       ),
                       const SizedBox(
                         height: 25,

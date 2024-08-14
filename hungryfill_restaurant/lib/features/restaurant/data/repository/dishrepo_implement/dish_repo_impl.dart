@@ -7,11 +7,13 @@ import 'package:file_picker/file_picker.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/category/category_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/dish/dish_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/domain/repositories/dish_repository.dart';
- import 'dart:html' as html;
+import 'package:image_picker/image_picker.dart';
+ 
 
 String dishid = "";
 
@@ -178,7 +180,7 @@ class DishRepoImplementation extends DishRepository {
   List<CategoryModel> category = result.docs
       .map((cat) =>  CategoryModel(categoryid: cat.id , categoryname: cat['name']))
       .toList();
-      print(category);
+      debugPrint(category.toString());
 
     return category;
 
@@ -195,30 +197,33 @@ class DishRepoImplementation extends DishRepository {
 
  
 
-Future<void> addImageToFirebase(Uint8List? fileinbytes , String filename)async{
+Future<Uint8List> pickimage() async {
+
+  String? url;
+  Uint8List? image;
+  XFile? pickedfile = await ImagePicker().pickImage(source: ImageSource.gallery);
+  image = await pickedfile!.readAsBytes();
+  if(kIsWeb){
+    Reference ref = FirebaseStorage.instance.ref().child('image/${pickedfile.name}');
+    await ref.putData(
+      await pickedfile.readAsBytes(),
+      SettableMetadata(contentType: 'image/jpeg')
+    ).whenComplete(() async{
+      await ref.getDownloadURL().then((value) {
+          url = value;
+      
+      });
+    }
+      
+    );
+     
+
+  }
+ debugPrint(url);
+  return image;
+
  
-   
-    final uploadTask = FirebaseStorage.instance.ref().child('/ $filename').putData(fileinbytes!);
-  //  final uploadtask = storageref.putData(fileinbytes!);
-  final tasksnapshot = await uploadTask;
-  final imagurl = await tasksnapshot.ref.getDownloadURL();
-  // await uploadtask.whenComplete(()=> null);
-
-  //  String imageurl = await storageref.getDownloadURL();
-   debugPrint(imagurl);
-   
-  //  final snapshot = await upload;
-   //String downloadUrl = await snapshot.ref.getDownloadURL();
-  // debugPrint( "downloadurl$downloadUrl");
-
 }
 
-  // UploadTask uploadTask = firebaseStorage.ref().child(ref).putFile(file);
-  //     TaskSnapshot taskSnapshot = await uploadTask;
-  //     return await taskSnapshot.ref.getDownloadURL();
 
-  Future<String> getImage() async{
-
-    String url = await FirebaseStorage.instance.ref().child('1.jpg').getDownloadURL();
-    return url;
-  }
+  

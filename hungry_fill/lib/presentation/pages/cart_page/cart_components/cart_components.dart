@@ -49,7 +49,7 @@ SingleChildScrollView cartDishDetail(AsyncSnapshot<List<CartModel>> snapshot) {
                                                   mainAxisAlignment: MainAxisAlignment.center,
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
-                                                    Container(
+                                                    SizedBox(
                                                       width: 90,
                                                       child: Text(
                                                          cartdish.dishname!,

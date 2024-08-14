@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
 class DishEntity extends Equatable {
   final String? dishid;
@@ -19,7 +20,7 @@ class DishEntity extends Equatable {
         required this.category,
         this.imageurl
       }) {
-        print(" dish enitiy : $dishname");
+        debugPrint(" dish enitiy : $dishname");
       }
 
   @override

@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungryfill_restaurant/core/theme/color.dart';
-import 'package:hungryfill_restaurant/features/restaurant/data/model/category/category_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/auth_screens/login.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/authentication/auth_bloc_bloc.dart';
-import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/dish/dish_bloc.dart';
 
 class HeaderWidget extends StatelessWidget {
     HeaderWidget({super.key, this.index});
@@ -81,14 +79,14 @@ class HeaderWidget extends StatelessWidget {
                           );
                 
               },
-              child: Text("Log Out",
+              child: const Text("Log Out",
               style: TextStyle(
                 color: Colors.red
               ),
               ),
             ),
       
-          SizedBox(width: 20,),
+          const SizedBox(width: 20,),
       
           GestureDetector(
             onTap: (){

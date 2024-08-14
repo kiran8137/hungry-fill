@@ -27,7 +27,7 @@ class CartRepoImpl extends CartRepository{
 
     try{
        
-       int flag = 0;
+       int flag = 1;
        String _cartId = '';
        int _dishquantity = 0;
        final collectionref = FirebaseFirestore.instance.collection('Cart');
@@ -49,7 +49,7 @@ class CartRepoImpl extends CartRepository{
 
       if(flag == 0){
         await increase(dishquantity: _dishquantity, cartid: _cartId);
-      }else{
+      }else if(flag == 1){
           final docref = FirebaseFirestore.instance.collection('Cart').doc();
 
   debugPrint(docref.id); 

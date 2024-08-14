@@ -3,9 +3,8 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:hungry_fill/data/model/cart_model/cart_model.dart';
+import 'package:flutter/material.dart';
 import 'package:hungry_fill/data/model/restaurant_model/restaurant_model.dart';
-import 'package:hungry_fill/data/repository/restaurant_repo_impl/restaurant_repo_imp.dart';
 import 'package:hungry_fill/domain/repositories/restaurant_repository/restaurant_respository.dart';
 
 part 'restaurant_event.dart';
@@ -63,7 +62,7 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
        restaurants.add(restaurantwishlist);
       }
 
-      print(restaurants);
+      debugPrint(restaurants.toString());
 
       if(restaurants.isNotEmpty){
         emit(GetRestaurantsInWishListSucces(wishlistrestaurant: restaurants));

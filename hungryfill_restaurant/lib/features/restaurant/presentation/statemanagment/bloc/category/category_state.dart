@@ -15,7 +15,7 @@ final class CategorySuccessEvent extends CategoryState{
  const CategorySuccessEvent({required this.categories});
 
  @override
-  // TODO: implement props
+   
   List<Object> get props => [categories];
 
   

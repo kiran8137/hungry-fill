@@ -73,7 +73,7 @@ class UserRegisteredEvent extends AuthEvent{
 //   ResentOtpEvent({this.username, this.useremail, this.forceresendingtoken , this.phonenumber});
 
 //   @override
-//   // TODO: implement props
+ 
 //   List<Object?> get props => [forceresendingtoken];
 // }
 

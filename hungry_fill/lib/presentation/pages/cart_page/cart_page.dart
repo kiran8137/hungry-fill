@@ -2,16 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:google_fonts/google_fonts.dart';
-import 'package:hungry_fill/core/color/colors.dart';
-import 'package:hungry_fill/core/constants/constant.dart';
 import 'package:hungry_fill/core/functions/cart_functions.dart';
 import 'package:hungry_fill/data/model/cart_model/cart_model.dart';
-import 'package:hungry_fill/data/model/dish_model/dish_model.dart';
-import 'package:hungry_fill/data/repository/cart_repo_imp/cart_repo_impl.dart';
 import 'package:hungry_fill/presentation/bloc/dish_bloc/dish_bloc.dart';
 import 'package:hungry_fill/presentation/pages/cart_page/cart_components/cart_components.dart';
-import 'package:hungry_fill/presentation/pages/cart_page/widgets/bill_details_widgets.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key, this.restaurantid, this.restaurantname});

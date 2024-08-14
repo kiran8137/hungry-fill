@@ -41,11 +41,11 @@ class DailyOrders extends StatelessWidget {
 
         const Divider(),
 
-        Container(
+        const SizedBox(
           width: 1300,
           height: 435,
          // color: Colors.green,
-          child: const SizedBox(height: 70,),
+          child: SizedBox(height: 70,),
         ),
 
         const SizedBox(height: 5,),

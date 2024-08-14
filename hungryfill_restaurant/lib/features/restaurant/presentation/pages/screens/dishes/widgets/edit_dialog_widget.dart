@@ -36,6 +36,12 @@ class _DishEditWidgetState extends State<DishEditWidget> {
 
   List<CategoryModel> categories = [];
 
+var stockitems = [     
+     'IN',
+     'OUT'
+  ]; 
+
+  String? dropdownvalue ;
     @override
   void initState() {
   dishnamecontroller = TextEditingController(text: widget.dish.dishname);
@@ -47,6 +53,8 @@ class _DishEditWidgetState extends State<DishEditWidget> {
   dishservecontroller = TextEditingController(text: widget.dish.serve);
 
   categorycontroller =  MultiSelectController();
+
+  dropdownvalue = widget.dish.stock;
  // dishcategorycontroller = TextEditingController(text: widget.dish.category);
     super.initState();
   }
@@ -78,7 +86,7 @@ class _DishEditWidgetState extends State<DishEditWidget> {
                               dishid: widget.dish.dishid,
                               dishname: dishnamecontroller.text,
                               dishprice: dishpricecontroller.text,
-                              stock: dishstockcontroller.text,
+                              stock:  dropdownvalue ,
                               serve: dishservecontroller.text,
                               category: []
                             );
@@ -245,6 +253,8 @@ class _DishEditWidgetState extends State<DishEditWidget> {
                        BlocBuilder<CategoryBloc, CategoryState>(
                         builder: (context, state) {
                           if(state is CategorySuccessEvent){
+                          debugPrint(state.runtimeType.toString());
+                          debugPrint('if worked');
                             categories = state.categories;
 
                             return MultiSelectDropDown(
@@ -257,7 +267,8 @@ class _DishEditWidgetState extends State<DishEditWidget> {
                               }, 
                               );
                           }else{
-                            return Center(child: CircularProgressIndicator(),);
+                            debugPrint('else worked');
+                            return const Center(child: CircularProgressIndicator(),);
                           }
                           
                           
@@ -267,14 +278,24 @@ class _DishEditWidgetState extends State<DishEditWidget> {
                       const SizedBox(
                         height: 22,
                       ),
-                      SizedBox(
+                        SizedBox(
                         height: 37,
                         width: 100,
-                        child: TextFormField(
-                          controller: dishstockcontroller,
-                          decoration: const InputDecoration(
-                              border: OutlineInputBorder()),
-                        ),
+                        child: DropdownButton(
+                          value: dropdownvalue,
+                          items: stockitems.map((item){
+                            return DropdownMenuItem(
+                              value: item,
+                              child: Text(item),
+                              );
+                          }).toList(),
+                          onChanged: ( newvalue){
+                            setState(() {
+                              dropdownvalue = newvalue!;
+                            });
+                          }
+                          )
+                        
                       ),
                       const SizedBox(
                         height: 25,

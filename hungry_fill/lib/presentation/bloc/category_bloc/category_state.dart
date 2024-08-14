@@ -17,7 +17,7 @@ final class GetCategoriesSuccesState extends CategoryState{
   const GetCategoriesSuccesState({required this.categories , required this.selectedcategories});
 
   @override
-  // TODO: implement props
+ 
   List<Object> get props => [categories , selectedcategories];
 }
 
@@ -27,6 +27,6 @@ final class CategorySelectSuccess extends CategoryState{
  const CategorySelectSuccess({required this.selectedcategory});
 
  @override
-  // TODO: implement props
+ 
   List<Object> get props => [selectedcategory];
 }

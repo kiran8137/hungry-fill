@@ -14,7 +14,7 @@ class DishAddEvent extends DishEvent {
  const DishAddEvent({required this.dishmodel});
 
   @override
-  // TODO: implement props
+  
   List<Object> get props => [dishmodel];
 }
 
@@ -26,7 +26,7 @@ class DishUpdateEvent extends DishEvent{
  const DishUpdateEvent({required this.updatedDish});
 
  @override
-  // TODO: implement props
+   
   List<Object> get props => [updatedDish];
   
 }

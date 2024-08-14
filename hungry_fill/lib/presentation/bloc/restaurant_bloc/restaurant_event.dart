@@ -16,7 +16,7 @@ class AddRestaurantToWishList extends RestaurantEvent{
   const AddRestaurantToWishList({required this.restaurantid});
 
   @override
-  // TODO: implement props
+ 
   List<Object> get props => [restaurantid];
 }
 
@@ -28,7 +28,7 @@ class RemoveRestaurantInWishList extends RestaurantEvent{
  const RemoveRestaurantInWishList({required this.restaurantid});
 
  @override
-  // TODO: implement props
+  
   List<Object> get props => [restaurantid];
 
   

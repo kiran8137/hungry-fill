@@ -155,7 +155,7 @@ class AuthenticationRepoImplement extends AuthRepository {
           phoneNumber: phonenumber,
           verificationCompleted: (phoneAuthCredential) {},
           verificationFailed: (error) {
-            print(error.toString());
+            debugPrint(error.toString());
           },
           codeSent: (verificationId, forceResendingToken) {
               Navigator.push(
@@ -183,7 +183,7 @@ class AuthenticationRepoImplement extends AuthRepository {
         phoneNumber: phoneNumber,
           verificationCompleted: (phoneAuthCredential) {},
           verificationFailed: (error) {
-            print(error.toString());
+            debugPrint(error.toString());
           },
           codeSent: (verificationId, forceResendingtoken) {
              log(forceResendingtoken.toString());

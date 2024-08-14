@@ -268,7 +268,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 )
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             !isedit
@@ -297,7 +297,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               elevation: 0,
             ),
            );
-           Center(
+           const Center(
             child: CircularProgressIndicator(),
            );
                       }
@@ -323,17 +323,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           decoration: BoxDecoration(
                               color: primarycolor,
                               borderRadius: BorderRadius.circular(50)),
-                          child: Center(
+                          child: const Center(
                               child: Text(
                             "Save",
                             style:
                                 TextStyle(color: Colors.white, fontSize: 17),
                           )),
-                        ).animate(effects: [SlideEffect(), FadeEffect()]),
+                        ).animate(effects: [const SlideEffect(), const FadeEffect()]),
                       );
                     },
                   )
-                : SizedBox()
+                : const SizedBox()
           ]),
         )
       ],

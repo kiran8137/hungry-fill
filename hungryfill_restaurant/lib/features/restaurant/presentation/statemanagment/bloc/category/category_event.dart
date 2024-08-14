@@ -15,7 +15,7 @@ class CreateCategoryEvent extends CategoryEvent{
  const  CreateCategoryEvent({required this.categorymodel});
 
  @override
-  // TODO: implement props
+   
   List<Object> get props => [categorymodel];
 }
 

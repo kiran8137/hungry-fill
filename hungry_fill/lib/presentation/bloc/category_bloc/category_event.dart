@@ -11,9 +11,10 @@ sealed class CategoryEvent extends Equatable {
 class GetCategories extends CategoryEvent{
   final String? resuerid;
 
-    GetCategories({required this.resuerid});
+    const GetCategories({required this.resuerid});
 
-  // TODO: implement props
+  
+  @override
   List<Object> get props => [resuerid!];
 }
 
@@ -24,7 +25,7 @@ class CategorySelect extends CategoryEvent{
 const  CategorySelect({required this.category});
 
   @override
-  // TODO: implement props
+   
   List<Object> get props => [category!];
 }
 

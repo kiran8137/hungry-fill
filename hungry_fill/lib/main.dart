@@ -15,7 +15,6 @@ import 'package:hungry_fill/presentation/bloc/category_bloc/category_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/dish_bloc/dish_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/restaurant_bloc/restaurant_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/user_bloc/users_bloc.dart';
-import 'package:hungry_fill/presentation/pages/cart_page/cart_restauants.dart';
 import 'package:hungry_fill/presentation/pages/splashscreen/splash_screen.dart';
 
 void main() async {

@@ -32,7 +32,7 @@ class ResetPasswordScreen extends StatelessWidget {
                      Row(
                        crossAxisAlignment: CrossAxisAlignment.center,
                        children: [
-                        SizedBox(width: 80,),
+                        const SizedBox(width: 80,),
                          Text(
                           "Enter your email",
                           style: GoogleFonts.copse(fontSize: 30),

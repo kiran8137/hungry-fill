@@ -5,8 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/core/otp_model/otp_model.dart';
 import 'package:hungry_fill/presentation/bloc/auth_bloc/sign_in_bloc/auth_bloc.dart';
-import 'package:hungry_fill/presentation/bloc/auth_bloc/sign_in_bloc/auth_event.dart';
-import 'package:hungry_fill/presentation/pages/main_pages/main_page.dart';
  
  
 

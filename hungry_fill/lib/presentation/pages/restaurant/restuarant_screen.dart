@@ -183,7 +183,7 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                  
                  BlocConsumer<CategoryBloc , CategoryState>(
                   builder:(context , state){
-                    print(state.runtimeType.toString());
+                    debugPrint(state.runtimeType.toString());
                     
 
                     if(state is GetCategoriesSuccesState){

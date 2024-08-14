@@ -42,7 +42,7 @@ ListView recommendedRestaurans(GetRestaurantSuccessState? state) {
       itemCount: state!.restaurants.length,
       itemBuilder: (context, index) {
         final restaurant = state.restaurants[index];
-        print(restaurant);
+        debugPrint(restaurant.toString());
 
         return GestureDetector(
           onTap: () {

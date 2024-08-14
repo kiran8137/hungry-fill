@@ -69,7 +69,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
 
            if(state is AuthInitial){
-            Center(
+            const Center(
               child: CircularProgressIndicator(color: Colors.black,),
             );
            }

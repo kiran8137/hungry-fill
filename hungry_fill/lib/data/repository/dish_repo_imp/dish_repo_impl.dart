@@ -5,6 +5,7 @@ import 'dart:developer';
  
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:hungry_fill/data/model/category_model/category_model.dart';
 import 'package:hungry_fill/data/model/dish_model/dish_model.dart';
 import 'package:hungry_fill/domain/repositories/dish_repository/dish_repo.dart';
@@ -45,7 +46,7 @@ class DishRepoImpl extends DishRepository{
      //final snapshot =   await FirebaseFirestore.instance.collection("Restaurants").doc(userid).collection("Dishes").get();
 
      List<DishModel> dishes = snapshot.docs.map((dish)=> DishModel.fromJson(json: dish.data())).toList();
-     print(dishes);
+     debugPrint(dishes.toString());
      return dishes;
 
     }catch(error){
@@ -96,7 +97,7 @@ class DishRepoImpl extends DishRepository{
 
      List<DishModel> dishes = snapshot.docs.map((dish)=> DishModel.fromJson(json: dish.data())).toList();
      
-     print("category: $dishes");
+     debugPrint("category: $dishes");
 
      return dishes;
 

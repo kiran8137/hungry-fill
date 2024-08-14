@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,7 +17,7 @@ class RestaurantRepoImp extends RestaurantRepository {
           .toList();
       return restaurants;
     } catch (error) {
-      print(error.toString());
+      debugPrint(error.toString());
       throw Exception(error.toString());
     }
   }
@@ -50,7 +49,7 @@ class RestaurantRepoImp extends RestaurantRepository {
   final wishlistdoc = await wishlistref.get();
   List<String> wishlist = wishlistdoc.docs.map((doc) => doc.id).toList();
 
-  print(wishlist);
+  debugPrint(wishlist.toString());
 
   return wishlist;
 
