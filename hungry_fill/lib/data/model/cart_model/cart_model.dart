@@ -9,7 +9,10 @@ class CartModel extends CartEntity{
   required super.restaurantid,
   required super.dishquantity,
   required super.priceperquantity,
-  required super.dishname
+  required super.dishname,
+  required super.dishimage,
+  
+  
  });
 
   factory CartModel.fromJson({required Map<String , dynamic> json}){
@@ -20,7 +23,8 @@ class CartModel extends CartEntity{
       restaurantid: json['restaurantId'], 
       dishquantity: json['dishQuantity'],
       priceperquantity: json['priceperQuantity'],
-      dishname: json['dishName']
+      dishname: json['dishName'],
+      dishimage: json['dishImage']
       );
   }
 
@@ -33,7 +37,8 @@ class CartModel extends CartEntity{
       'restaurantId' : restaurantid,
       'dishQuantity' : dishquantity,
       'priceperQuantity' : priceperquantity,
-      'dishName' : dishname
+      'dishName' : dishname,
+      'dishImage' : dishimage
 
     };
   }

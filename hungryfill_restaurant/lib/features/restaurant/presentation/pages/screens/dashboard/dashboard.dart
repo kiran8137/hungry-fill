@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungryfill_restaurant/core/theme/color.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/repository/dishrepo_implement/dish_repo_impl.dart';
-import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/common_widgets/header_widget.dart';
+import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/widgets/header_widget.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/dashboard/widgets/revenue_card_widget.dart';
 
 class Dashboard extends StatelessWidget {

@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hungryfill_restaurant/core/funcitons/dish_funcitons.dart';
  
 import 'package:hungryfill_restaurant/core/theme/color.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/category/category_model.dart';
@@ -86,6 +87,8 @@ class _DishAddDialogState extends State<DishAddDialog> {
                           }
 
                           final selectedcategoryids = selectedcategories.map((category)=> category.value).toList();
+
+                          String imageurl = await  saveImageToStorage(filename: filename!, selectedImageInBytes: selectedimage!);
                          
                           DishModel dish = DishModel(
                               dishname: dishnamecontroller.text,
@@ -93,15 +96,13 @@ class _DishAddDialogState extends State<DishAddDialog> {
                               stock: dropdownvalue,
                               serve: dishservecontroller.text,
                               category: selectedcategoryids,
+                              imageurl: imageurl
                              // imageurl: selectedimage
                               );
                           BlocProvider.of<DishBloc>(context)
                               .add(DishAddEvent(dishmodel: dish));
-                          // BlocProvider.of<DishBloc>(context)
-                          //     .add(GetDishesEvent());
-
-                         //await addImageToFirebase(selectedimage, filename!);
-                        // selectedimage = await pickimage();
+                         
+                       
                           Navigator.pop(context);
                         },
                         child: Container(
@@ -158,8 +159,8 @@ class _DishAddDialogState extends State<DishAddDialog> {
                 left: 20,
                 child: GestureDetector(
                   onTap: () async{
-                    BlocProvider.of<DishBloc>(context).add(DishImagePicker());
-                   
+                   BlocProvider.of<DishBloc>(context).add(DishImagePicker());
+                    // selectedimage = await pickImag();
                   
                   },
                   child:
@@ -171,33 +172,36 @@ class _DishAddDialogState extends State<DishAddDialog> {
                     },
                     builder: (context, state) {
                       if (state is DishImagPickerLoaded) {
-                        filename = state.file!.name;
-                        selectedimage = state.file!.bytes;
+ 
+                        selectedimage = state.file!.files.first.bytes;
+                        filename = state.file!.files.first.name;
                      // selectedimage = state.file.;
-                        return 
-                  GestureDetector(
-                    onTap: () async{
-                      selectedimage = await pickimage();
-                    },
-                    child: Container(
-                            height: 120,
-                            width: 180,
-                            decoration: BoxDecoration(
-                                // color: Colors.grey,
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Image.memory(selectedimage!),
-                          ),
-                  );
-                      } else {
-                        return Container(
+                        return    Container(
                           height: 120,
                           width: 180,
                           decoration: BoxDecoration(
                               color: Colors.grey,
-                              borderRadius: BorderRadius.circular(10)),
+                              borderRadius: BorderRadius.circular(10),
+                              ),
+                              child:  Image.memory(selectedimage!,
+                              fit: BoxFit.fill,
+                              ),
                         );
-                      }
-                    },
+                 
+                      } else{
+                      return Container(
+                          height: 120,
+                          width: 180,
+                          decoration: BoxDecoration(
+                              color: Colors.grey,
+                              borderRadius: BorderRadius.circular(10),
+                              ),
+                               
+                        );
+                    }
+                       
+                       
+                    }
                   ),
                 )
                 ),

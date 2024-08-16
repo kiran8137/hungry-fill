@@ -41,9 +41,16 @@ class Dishwidget extends StatelessWidget {
               height: 120,
               width: 130,
               decoration: BoxDecoration(
-                  color: Colors.red,
+                 
                   borderRadius:
-                      BorderRadius.circular(20)),
+                      BorderRadius.circular(20),
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                      image: NetworkImage(
+                        dish.dishimage!)
+                        )
+                      ),
+                     // child: Image.network(dish.dishimage!,fit: BoxFit.cover),
             ),
             const SizedBox(
               width: 10,
@@ -56,7 +63,7 @@ class Dishwidget extends StatelessWidget {
                 children: [
                   Text(
                     dish.dishname!,
-                    style: GoogleFonts.abhayaLibre(
+                    style: GoogleFonts.rubik(
                       color: dish.dishstock == 'IN'? Colors.black: const Color.fromARGB(255, 93, 92, 92),
                         fontSize: 23,
                         fontWeight: FontWeight.w600),
@@ -87,7 +94,8 @@ class Dishwidget extends StatelessWidget {
                          restaurantid: restaurantid, 
                          dishquantity: 1, 
                          priceperquantity: int.parse(dish.dishprice!),
-                         dishname: dish.dishname
+                         dishname: dish.dishname,
+                         dishimage: dish.dishimage
                          );
                       //createcart();
                       BlocProvider.of<DishBloc>(context).add(

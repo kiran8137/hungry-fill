@@ -17,7 +17,7 @@ class DishDetailWidget extends StatelessWidget {
     return BlocConsumer<DishBloc, DishState>(
       listener: (context, state) {
         if(state is DishImagPickerLoaded){
-          debugPrint(state.file?.path);
+        //  debugPrint(state.file?.path);
         }
       },
       builder: (context, state) {
@@ -60,7 +60,9 @@ class DishDetailWidget extends StatelessWidget {
                               width: 150,
                               decoration: BoxDecoration(
                                   color: Colors.grey,
-                                  borderRadius: BorderRadius.circular(10)),
+                                  borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Image.network(dish.imageurl!),
                             ),
                             const SizedBox(
                               height: 5,

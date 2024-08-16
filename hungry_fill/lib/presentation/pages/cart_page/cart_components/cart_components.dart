@@ -39,8 +39,12 @@ SingleChildScrollView cartDishDetail(AsyncSnapshot<List<CartModel>> snapshot) {
                                                   width: 70,
                                                   height: 70,
                                                   decoration: BoxDecoration(
-                                                      color: Colors.green,
-                                                      borderRadius: BorderRadius.circular(10)),
+                                                     // color: Colors.green,
+                                                      borderRadius: BorderRadius.circular(10),
+                                                      image: DecorationImage(
+                                                        image: NetworkImage(cartdish.dishimage!)
+                                                        )
+                                                      ),
                                                 ),
                                                 const SizedBox(
                                                   width: 5,

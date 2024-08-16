@@ -64,7 +64,8 @@ class CartRepoImpl extends CartRepository{
     restaurantid: cartmodel.restaurantid, 
     dishquantity: cartmodel.dishquantity, 
     priceperquantity: cartmodel.priceperquantity,
-    dishname:cartmodel.dishname 
+    dishname:cartmodel.dishname ,
+    dishimage: cartmodel.dishimage
     );
   docref.set(cart.toJson());
       }

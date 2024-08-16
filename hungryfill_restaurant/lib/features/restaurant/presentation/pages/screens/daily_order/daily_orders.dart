@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/common_widgets/header_widget.dart';
+import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/widgets/header_widget.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/daily_order/widgets/daily_orders_header.dart';
 
 class DailyOrders extends StatelessWidget {

@@ -78,24 +78,7 @@ class _MainScreenState extends State<MainScreen> {
                 ),
               ),
             ),
-            // NavigationRail(
-            //   backgroundColor: Colors.white,
-            //   elevation: 8,
-            //   minWidth: 180,
-            //   indicatorColor: primarycolor,
-
-            //   onDestinationSelected: (index){
-            //     setState(() {
-            //       selectedindex = index;
-            //     });
-            //   },
-            //   destinations:[
-            //     NavigationRailDestination(icon: Icon(Icons.home), label: Text("Dashboard",style: TextStyle(color: Colors.black),)),
-            //      NavigationRailDestination(icon: Icon(Icons.home), label: Text("Daily Order")),
-            //       NavigationRailDestination(icon: Icon(Icons.home), label: Text("Dishes"))
-            //   ],
-            //   selectedIndex: selectedindex,
-            //   ),
+            
 
             Expanded(
                 flex: 12,
@@ -115,39 +98,7 @@ class _MainScreenState extends State<MainScreen> {
           ],
         )
 
-        // SafeArea(
-        //   child: Row(
-        //     children: [
-        //         Expanded(
-        //         flex: 2,
-        //         child: Container(
-
-        //           decoration: BoxDecoration(
-        //             color: Colors.white,
-
-        //            boxShadow: [
-        //       BoxShadow(
-        //         color: Colors.black.withOpacity(0.20),
-        //         spreadRadius: -9,
-        //         //blurRadius: 10,
-        //         offset: const Offset(10, 0)
-        //       )
-        //    ]
-        //           ) ,
-        //           child:   SidebarWidget(),
-
-        //         )
-        //         ),
-
-        //         Expanded(
-        //           flex: 12,
-        //           child: Container(
-        //             child: Dashboard(),
-        //           )
-        //           )
-        //     ],
-        //   )
-        //   ),
+        
         );
   }
 }

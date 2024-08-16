@@ -48,6 +48,16 @@ class DeleteDishEvent extends DishEvent{
 
 class DishImagePicker extends DishEvent{}
 
+// class SaveImageToStorage extends DishEvent{
+//   final Uint8List? imagefile;
+
+//   const SaveImageToStorage({required this.imagefile});
+
+//   @override
+//   // TODO: implement props
+//   List<Object> get props => [imagefile!];
+// }
+
 // class CreateCategoryEvent extends DishEvent{
 
 //  final List<CategoryModel> categorymodel;

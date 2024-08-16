@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:typed_data';
  
 
 import 'package:bloc/bloc.dart';
@@ -96,17 +97,15 @@ class DishBloc extends Bloc<DishEvent, DishState> {
 
     try{
 
-      final imagefile = await dishrepository.dishImagePicker();
+      final pickedimage = await dishrepository.dishImagePicker();
      
-     if(imagefile!=null){
-      //addImageToFirebase(imagefile.bytes);
-     }
+      
 
-      if(imagefile!=null){
+      if(pickedimage!=null){
         
-        emit(DishImagPickerLoaded(file: imagefile));
+        emit(DishImagPickerLoaded(file: pickedimage));
       }else{
-        emit(ErrorState());
+        emit(const ErrorState());
       }
 
     }catch(error){

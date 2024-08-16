@@ -20,7 +20,9 @@ void main() async {
           apiKey: "AIzaSyCx8eyONUEdYplhhkWNzrtROKi25-5eDDo",
           appId: "1:1043826955704:web:f79b48aec9358c4b6c6b4d",
           messagingSenderId: "1043826955704",
-          projectId: "hungry-fill"));
+          projectId: "hungry-fill",
+          storageBucket: "hungry-fill.appspot.com"
+          ));
   runApp(const MyApp());
 }
 

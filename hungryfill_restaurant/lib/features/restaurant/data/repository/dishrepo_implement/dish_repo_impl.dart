@@ -2,17 +2,16 @@ import 'dart:developer';
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
- 
+
 import 'package:file_picker/file_picker.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/category/category_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/dish/dish_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/domain/repositories/dish_repository.dart';
-import 'package:image_picker/image_picker.dart';
  
 
 String dishid = "";
@@ -21,19 +20,21 @@ class DishRepoImplementation extends DishRepository {
   @override
   Future<void> addDish({required DishModel dishmodel}) async {
     try {
-      final resref =  FirebaseFirestore.instance
+      final resref = FirebaseFirestore.instance
           .collection("Restaurants")
           .doc(FirebaseAuth.instance.currentUser?.uid)
           .collection("Dishes")
           .doc();
 
       DishModel dish = DishModel(
-          dishid: resref.id, 
+          dishid: resref.id,
           dishname: dishmodel.dishname,
           dishprice: dishmodel.dishprice,
           stock: dishmodel.stock,
           serve: dishmodel.serve,
-          category: dishmodel.category);
+          category: dishmodel.category,
+          imageurl: dishmodel.imageurl
+          );
 
       await resref.set(dish.toJson());
       // set(dishmodel.toJson());
@@ -45,7 +46,7 @@ class DishRepoImplementation extends DishRepository {
   }
 
   @override
-  Stream<List<DishModel>> getDishes({String? userid})   {
+  Stream<List<DishModel>> getDishes({String? userid}) {
     try {
       // final dishessnapshot =   FirebaseFirestore.instance
       //     .collection("Restaurants")
@@ -59,12 +60,14 @@ class DishRepoImplementation extends DishRepository {
       //     print(dishes.first.category);
       // return dishes;
 
-      return FirebaseFirestore.instance.
-      collection("Restaurants")
-      .doc(userid)
-      .collection("Dishes")
-      .snapshots()
-      .map((snapshot)=> snapshot.docs.map((dish)=> DishModel.fromJson(json: dish.data())).toList());
+      return FirebaseFirestore.instance
+          .collection("Restaurants")
+          .doc(userid)
+          .collection("Dishes")
+          .snapshots()
+          .map((snapshot) => snapshot.docs
+              .map((dish) => DishModel.fromJson(json: dish.data()))
+              .toList());
     } catch (error) {
       log(" error ${error.toString()}");
       throw Exception(error.toString());
@@ -103,39 +106,46 @@ class DishRepoImplementation extends DishRepository {
   }
 
   @override
-  Future<PlatformFile?> dishImagePicker() async {
+  Future<FilePickerResult?> dishImagePicker() async {
+    //Uint8List? selectedimagefile;
+    String? filename;
     try {
-      final result = await FilePicker.platform.pickFiles(
-          );
-      if (result != null && result.files.isNotEmpty) {
-        return result.files.first;
-      }
+     
+        final pickedimage = await FilePicker.platform.pickFiles();
+
+        if (pickedimage != null) {
+          filename = pickedimage.files.first.name;
+         // selectedImageInBytes = pickedimage.files.first.bytes;
+         // debugPrint('pickimage $selectedImageInBytes');
+        }
+
+        return pickedimage;
+      
     } catch (error) {
       log(error.toString());
       throw Exception(error.toString());
     }
   }
 
+
+
+
   @override
   Future<void> createCategory({required List<CategoryModel> categories}) async {
     try {
       final firestore = FirebaseFirestore.instance;
 
-      for(var i=0;i<categories.length;i++){
-       final categoryref =   await firestore
-      .collection("Restaurants")
-      .doc(FirebaseAuth.instance.currentUser?.uid)
-      .collection("categories").add({'name':'veg'});
-            CategoryModel category = CategoryModel(
-              categoryid: categoryref.id,
-              categoryname: categories[i].categoryname
-            );
-           await categoryref.set(category.toJson());
+      for (var i = 0; i < categories.length; i++) {
+        final categoryref = await firestore
+            .collection("Restaurants")
+            .doc(FirebaseAuth.instance.currentUser?.uid)
+            .collection("categories")
+            .add({'name': 'veg'});
+        CategoryModel category = CategoryModel(
+            categoryid: categoryref.id,
+            categoryname: categories[i].categoryname);
+        await categoryref.set(category.toJson());
       }
-     
-
-
-
 
       // final categoryref = FirebaseFirestore.instance
       //     .collection("Restaurants")
@@ -144,86 +154,82 @@ class DishRepoImplementation extends DishRepository {
       //     .doc();
       //      log(categoryref.id);
 
-          // CategoryModel category = CategoryModel(
-          //   categoryid: categoryref.id,
-          //   categoryname: categorymodel.categoryname
-          // );
+      // CategoryModel category = CategoryModel(
+      //   categoryid: categoryref.id,
+      //   categoryname: categorymodel.categoryname
+      // );
 
-          // categoryref.set(category.toJson());
+      // categoryref.set(category.toJson());
 
-          // for(var cat in categories){
-          //   CategoryModel category = CategoryModel(
-          //     categoryid: categoryref.id,
-          //     categoryname: cat.categoryname
-          //   );
-          //  await categoryref.set(category.toJson());
-          // }
-          
-
+      // for(var cat in categories){
+      //   CategoryModel category = CategoryModel(
+      //     categoryid: categoryref.id,
+      //     categoryname: cat.categoryname
+      //   );
+      //  await categoryref.set(category.toJson());
+      // }
     } catch (error) {
       log("create category error ${error.toString()}");
       throw Exception(error.toString());
     }
   }
-  
+
   @override
-  Future<List<CategoryModel>> getCategories() async{
+  Future<List<CategoryModel>> getCategories() async {
+    try {
+      final result = await FirebaseFirestore.instance
+          .collection("Restaurants")
+          .doc(FirebaseAuth.instance.currentUser?.uid)
+          .collection("categories")
+          .get();
 
-    try{
-
-       final result = await FirebaseFirestore.instance
-      .collection("Restaurants")
-      .doc(FirebaseAuth.instance.currentUser?.uid)
-      .collection("categories")
-      .get();
-
-  List<CategoryModel> category = result.docs
-      .map((cat) =>  CategoryModel(categoryid: cat.id , categoryname: cat['name']))
-      .toList();
+      List<CategoryModel> category = result.docs
+          .map((cat) =>
+              CategoryModel(categoryid: cat.id, categoryname: cat['name']))
+          .toList();
       debugPrint(category.toString());
 
-    return category;
-
-    }catch(error){
+      return category;
+    } catch (error) {
       log(" getcategory error ${error.toString()}");
       throw Exception(error.toString());
     }
-    
   }
-
-
-  
 }
 
- 
+//  Uint8List? selectedImageInBytes;
+//  String? filename;
 
-Future<Uint8List> pickimage() async {
+//  Future<Uint8List?> pickImag() async{
+//   final pickedimage = await FilePicker.platform.pickFiles();
 
-  String? url;
-  Uint8List? image;
-  XFile? pickedfile = await ImagePicker().pickImage(source: ImageSource.gallery);
-  image = await pickedfile!.readAsBytes();
-  if(kIsWeb){
-    Reference ref = FirebaseStorage.instance.ref().child('image/${pickedfile.name}');
-    await ref.putData(
-      await pickedfile.readAsBytes(),
-      SettableMetadata(contentType: 'image/jpeg')
-    ).whenComplete(() async{
-      await ref.getDownloadURL().then((value) {
-          url = value;
-      
-      });
-    }
-      
-    );
-     
+// if(pickedimage!=null){
+//   filename = pickedimage.files.first.name;
+//   selectedImageInBytes = pickedimage.files.first.bytes;
+//   debugPrint('pickimage $selectedImageInBytes');
+// }
 
-  }
- debugPrint(url);
-  return image;
+// return selectedImageInBytes;
 
- 
-}
+// }
 
+// Future<void> saveimage() async {
+//   try {
+//     debugPrint("save imag");
+//     firebase_storage.UploadTask uploadtask;
 
-  
+//     firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
+//         .ref()
+//         .child('dishes')
+//         .child('/+ ${filename}');
+//     final metadata =
+//         firebase_storage.SettableMetadata(contentType: 'image/jpeg');
+
+//     uploadtask = ref.putData(selectedImageInBytes!, metadata);
+//     await uploadtask.whenComplete(() => null);
+//     final imageUrl = await ref.getDownloadURL();
+//     debugPrint(imageUrl);
+//   } catch (error) {
+//     log(error.toString());
+//   }
+// }
