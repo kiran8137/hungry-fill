@@ -197,7 +197,8 @@ class RestaurantsScreen extends StatelessWidget {
                                   );
                                 });
                           },
-                          child: Container(
+                          child: 
+                          Container(
                             height: 34,
                             width: 120,
                             decoration: BoxDecoration(

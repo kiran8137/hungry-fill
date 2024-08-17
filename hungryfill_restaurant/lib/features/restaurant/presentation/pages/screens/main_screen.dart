@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_admin_scaffold/admin_scaffold.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:hungryfill_restaurant/core/theme/color.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/res_user/res_user_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/daily_order/daily_orders.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/dashboard/dashboard.dart';
@@ -39,50 +42,64 @@ class _MainScreenState extends State<MainScreen> {
     super.initState();
   }
 
+   String selectedRoute = '/Dashboard';
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.white,
-        body: Row(
-          children: [
-            Expanded(
-              flex: 2,
-              child: Container(
-                decoration: BoxDecoration(color: Colors.white,
-                 boxShadow: [
-                  BoxShadow(
-                      color: Colors.black.withOpacity(0.20),
-                      spreadRadius: -5,
-                      blurRadius: 9,
-                      offset: const Offset(10, 0))
-                ]
-                ),
-                child: SizedBox(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 70, horizontal: 20),
-                    child: ListView.builder(
-                        itemCount: sidebaritems.length,
-                        itemBuilder: (context, index) => Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: SideBarItem(
-                                  sidebaritem: sidebaritems,
-                                  index: index,
-                                  selectedindex: selectedindex,
-                                  itemselected: (int index) {
-                                    setState(() {
-                                      selectedindex = index;
-                                    });
-                                  }),
-                            )),
-                  ),
-                ),
-              ),
+    return AdminScaffold(
+        appBar: AppBar(
+          title: 
+          Text(
+            "Hungry Fill",
+            style: GoogleFonts.radioCanada(
+              fontSize: 25,
+              fontWeight: FontWeight.w600,
             ),
-            
-
-            Expanded(
-                flex: 12,
-                child: BlocConsumer<RestaurantUserBloc, RestaurantUserState>(
+          ),
+          actions: [
+            Icon(Icons.logout),
+            SizedBox(width: 20,)
+          ],
+          backgroundColor: Colors.white,
+        ),
+        backgroundColor: Colors.white,
+        sideBar: SideBar(
+          activeBackgroundColor: primarycolor,
+          backgroundColor: Colors.white,
+          borderColor: Colors.grey,
+          iconColor: Colors.black,
+          textStyle: const TextStyle(color: Colors.black),
+          activeTextStyle: const TextStyle(color: Colors.white),
+          items: const [
+            AdminMenuItem(
+              title: 'Dashboard',
+              //icon: Icons.dashboard,
+              route: '/dashboard',
+            ),
+            AdminMenuItem(
+              title: 'Daily Orders',
+              // icon: Icons.shopping_cart,
+              route: '/Daily Orders',
+            ),
+            AdminMenuItem(
+              title: 'Dishes',
+              // icon: Icons.restaurant,
+              route: '/Dishes',
+            ),
+            AdminMenuItem(
+              title: 'Profile',
+              // icon: Icons.people,
+              route: '/Profile',
+            ),
+          ],
+          selectedRoute: selectedRoute,
+          onSelected: (item) {
+            setState(() {
+              selectedRoute = item.route!;
+            });
+          },
+        ),
+        body:  BlocConsumer<RestaurantUserBloc, RestaurantUserState>(
                   listener: (context, state) {
                     
                   },
@@ -91,36 +108,101 @@ class _MainScreenState extends State<MainScreen> {
                       currentrestaurantinfo = state.restaurantmodel;
                     }
                     return getSelectedpage(
-                        index: selectedindex,
+                         selectedroute: selectedRoute,
                         currentrestaurantinfo: currentrestaurantinfo);
                   },
-                ))
-          ],
-        )
+                )
+                );
+      //     ],
+      //   )
 
         
-        );
+      //  );
+      //   //getSelectedpage(selectedroute: selectedRoute)
+         
+      //   );
+    // Scaffold(
+    //     backgroundColor: Colors.white,
+    //     body: Row(
+    //       children: [
+    //         Expanded(
+    //           flex: 2,
+    //           child: Container(
+    //             decoration: BoxDecoration(color: Colors.white,
+    //              boxShadow: [
+    //               BoxShadow(
+    //                   color: Colors.black.withOpacity(0.20),
+    //                   spreadRadius: -5,
+    //                   blurRadius: 9,
+    //                   offset: const Offset(10, 0))
+    //             ]
+    //             ),
+    //             child: SizedBox(
+    //               child: Padding(
+    //                 padding: const EdgeInsets.symmetric(vertical: 70, horizontal: 20),
+    //                 child: ListView.builder(
+    //                     itemCount: sidebaritems.length,
+    //                     itemBuilder: (context, index) => Padding(
+    //                           padding: const EdgeInsets.all(5.0),
+    //                           child: SideBarItem(
+    //                               sidebaritem: sidebaritems,
+    //                               index: index,
+    //                               selectedindex: selectedindex,
+    //                               itemselected: (int index) {
+    //                                 setState(() {
+    //                                   selectedindex = index;
+    //                                 });
+    //                               }),
+    //                         )),
+    //               ),
+    //             ),
+    //           ),
+    //         ),
+            
+
+    //         Expanded(
+    //             flex: 12,
+    //             child: 
+    // BlocConsumer<RestaurantUserBloc, RestaurantUserState>(
+    //               listener: (context, state) {
+                    
+    //               },
+    //               builder: (context, state) {
+    //                 if (state is RestaurantDetailLoaded) {
+    //                   currentrestaurantinfo = state.restaurantmodel;
+    //                 }
+    //                 return getSelectedpage(
+    //                     index: selectedindex,
+    //                     currentrestaurantinfo: currentrestaurantinfo);
+    //               },
+    //             ))
+    //       ],
+    //     )
+
+        
+    //    );
   }
 }
 
 Widget getSelectedpage(
-    {required int index, RestaurantModel? currentrestaurantinfo}) {
-  switch (index) {
-    case 0:
-      return   Dashboard();
-    case 1:
-      return const DailyOrders();
-    case 2:
-      return const DishScreen();
-    case 3:
-      return ProfileScreen(
-        restaurantname: currentrestaurantinfo?.restaurantname,
-        restaurantmobileNo: currentrestaurantinfo?.restaurantmobileNo,
-        restaurantstate: currentrestaurantinfo?.restaurantstate,
-        restaurantdistrict: currentrestaurantinfo?.restaurantdistrict,
-        restaurantplace: currentrestaurantinfo?.restaurantplace,
-      );
+    {required String selectedroute ,  RestaurantModel? currentrestaurantinfo}) {
+  switch (selectedroute) {
+    case '/dashboard':
+     // return   Dashboard();
+    case '/Daily Orders':
+      //return const DailyOrders();
+    case '/Dishes':
+     // return const DishScreen();
+    case '/Profile':
+      // return ProfileScreen(
+      //   restaurantname: currentrestaurantinfo?.restaurantname,
+      //   restaurantmobileNo: currentrestaurantinfo?.restaurantmobileNo,
+      //   restaurantstate: currentrestaurantinfo?.restaurantstate,
+      //   restaurantdistrict: currentrestaurantinfo?.restaurantdistrict,
+      //   restaurantplace: currentrestaurantinfo?.restaurantplace,
+      // );
     default:
-      return const Text("no page found");
+      //return Dashboard();
+      return DishScreen();
   }
 }

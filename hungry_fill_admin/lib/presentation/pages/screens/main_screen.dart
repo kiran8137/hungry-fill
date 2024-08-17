@@ -94,55 +94,7 @@ class _MainScreenState extends State<MainScreen> {
           },
         ),
         body: getSelectedpage(selectedroute: selectedRoute)
-        // Row(
-        //   children: [
-        //     Expanded(
-        //       flex: 2,
-        //       child: Container(
-        //         decoration: BoxDecoration(color: Colors.white,
-        //          boxShadow: [
-        //           BoxShadow(
-        //               color: Colors.black.withOpacity(0.20),
-        //               spreadRadius: -5,
-        //               blurRadius: 9,
-        //               offset: const Offset(10, 0))
-        //         ]
-        //         ),
-        //         child: SizedBox(
-        //           child: Padding(
-        //             padding: const EdgeInsets.symmetric(vertical: 70, horizontal: 20),
-        //             child: ListView.builder(
-        //                 itemCount: sidebaritems.length,
-        //                 itemBuilder: (context, index) => Padding(
-        //                       padding: const EdgeInsets.all(5.0),
-        //                       child: SideBarItem(
-        //                           sidebaritem: sidebaritems,
-        //                           index: index,
-        //                           selectedindex: selectedindex,
-        //                           itemselected: (int index) {
-        //                             setState(() {
-        //                               selectedindex = index;
-        //                             });
-        //                           }),
-        //                     )),
-        //           ),
-        //         ),
-        //       ),
-        //     ),
-
-        //     Expanded(
-        //         flex: 12,
-        //         child:
-
-        //           getSelectedpage(
-        //                 index: selectedindex,
-
-        //                 )
-
-        //         )
-        //   ],
-        // )
-
+         
         );
   }
 }

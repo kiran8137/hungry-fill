@@ -19,8 +19,8 @@ class Dashboard extends StatelessWidget {
     return Column(
       children: [
         
-        HeaderWidget(index: index,),
-        const Divider(),
+        //HeaderWidget(index: index,),
+       // const Divider(),
         const SizedBox(
           height: 25,
         ),

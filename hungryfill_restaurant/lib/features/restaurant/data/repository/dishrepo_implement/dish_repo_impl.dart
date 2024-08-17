@@ -178,9 +178,8 @@ class DishRepoImplementation extends DishRepository {
   Future<List<CategoryModel>> getCategories() async {
     try {
       final result = await FirebaseFirestore.instance
-          .collection("Restaurants")
-          .doc(FirebaseAuth.instance.currentUser?.uid)
-          .collection("categories")
+          .collection("Categories")
+         
           .get();
 
       List<CategoryModel> category = result.docs

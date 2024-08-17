@@ -14,9 +14,9 @@ class DailyOrders extends StatelessWidget {
     return Column(
        crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-          HeaderWidget(),
+          //HeaderWidget(),
 
-           const Divider(),
+          // const Divider(),
 
         const SizedBox(height: 25,),
 
