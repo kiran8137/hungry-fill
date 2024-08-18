@@ -83,7 +83,10 @@ class DishBloc extends Bloc<DishEvent, DishState> {
         dishprice: event.updatedDish.dishprice,
         stock: event.updatedDish.stock,
         serve: event.updatedDish.serve,
-        category: event.updatedDish.category
+        category: event.updatedDish.category,
+        
+        
+        
       );
 
       await dishrepository.updateDish(dish: dish);

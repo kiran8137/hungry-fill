@@ -6,7 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
  
 import 'package:flutter/material.dart';
 
-Future<String> saveImageToStorage({required String filename , required Uint8List selectedImageInBytes}) async {
+Future<String> saveImageToStorage({required String filename , required Uint8List selectedImageInBytes ,}) async {
   try {
     debugPrint("save imag");
     firebase_storage.UploadTask uploadtask;
@@ -19,6 +19,7 @@ Future<String> saveImageToStorage({required String filename , required Uint8List
         firebase_storage.SettableMetadata(contentType: 'image/jpeg');
 
     uploadtask = ref.putData(selectedImageInBytes, metadata);
+    
     await uploadtask.whenComplete(() => null);
     final imageUrl = await ref.getDownloadURL();
     debugPrint(imageUrl);

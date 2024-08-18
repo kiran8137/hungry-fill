@@ -61,7 +61,12 @@ class DishBloc extends Bloc<DishEvent, DishState> {
     try{
 
       List<DishModel> dishes = await dishrepository.searchDishes(query: event.dishname, userid: event.userid);
-      emit(SearchDishSuccessState(dishes: dishes));
+      if(dishes.isNotEmpty){
+         emit(SearchDishSuccessState(dishes: dishes));
+      }else{
+        emit(SearchDishEmptyState());
+      }
+     
 
     }catch(error){
       log(error.toString());
@@ -84,7 +89,12 @@ class DishBloc extends Bloc<DishEvent, DishState> {
     try{
 
       List<DishModel> categorydishes = await dishrepository.getCategoryDishes(categoryid: event.categoryid!, resuerid: event.resuerid!);
-      emit(CategoryDishesSuccesState(categorydishes: categorydishes));
+      if(categorydishes.isNotEmpty){
+        emit(CategoryDishesSuccesState(categorydishes: categorydishes));
+      }else{
+        emit(CategoryDisheseEmptyState());
+      }
+      
     }catch(error){
       log(error.toString());
     }

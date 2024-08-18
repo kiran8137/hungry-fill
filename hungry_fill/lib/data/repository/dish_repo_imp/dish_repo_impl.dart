@@ -65,9 +65,7 @@ class DishRepoImpl extends DishRepository{
 
 
       final snapshot = await FirebaseFirestore.instance
-     .collection("Restaurants")
-     .doc(resuerid)
-     .collection("categories")
+     .collection("Categories")
      .get();
      //final snapshot =   await FirebaseFirestore.instance.collection("Restaurants").doc(userid).collection("Dishes").get();
 

@@ -29,11 +29,16 @@ class DishRepoImplementation extends DishRepository {
       DishModel dish = DishModel(
           dishid: resref.id,
           dishname: dishmodel.dishname,
+          dishdescription: dishmodel.dishdescription,
           dishprice: dishmodel.dishprice,
           stock: dishmodel.stock,
           serve: dishmodel.serve,
           category: dishmodel.category,
-          imageurl: dishmodel.imageurl
+          image1: dishmodel.image1,
+          image2: dishmodel.image2,
+          image3: dishmodel.image3,
+          image4: dishmodel.image4
+          
           );
 
       await resref.set(dish.toJson());

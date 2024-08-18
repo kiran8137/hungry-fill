@@ -1,13 +1,21 @@
+import 'dart:ffi';
+
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:hungry_fill/core/color/colors.dart';
+import 'package:hungry_fill/data/model/dish_model/dish_model.dart';
 
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class DishDetail extends StatelessWidget {
-  DishDetail({super.key});
-  final PageController _pagecontroller = PageController();
+  const DishDetail({super.key, required this.images, required this.dish});
+  //final PageController _pagecontroller = PageController();
+  final List<String> images;
+  final DishModel dish;
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +28,11 @@ class DishDetail extends StatelessWidget {
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.white,
-          leading: const Icon(Icons.arrow_back_ios_new),
+          leading: GestureDetector(
+            onTap: (){
+              Navigator.pop(context);
+            },
+            child: const Icon(Icons.arrow_back_ios_new)),
         ),
         body: SafeArea(
             child: Padding(
@@ -28,70 +40,54 @@ class DishDetail extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                height: 210,
-                width: double.infinity,
-                color: Colors.grey,
-                child: Stack(
-                  children: [
-                    PageView(
-                      controller: _pagecontroller,
-                      children: [
-                        Container(
-                          height: 210,
-                          width: double.infinity,
-                          color: Colors.green,
-                        ),
-                        Container(
-                          height: 210,
-                          width: double.infinity,
-                          color: Colors.blue,
-                        ),
-                        Container(
-                          height: 210,
-                          width: double.infinity,
-                          color: Colors.red,
-                        )
-                      ],
-                    ),
-                    Positioned(
-                      bottom: 10,
-                      left: 150,
-                      child: SmoothPageIndicator(
-                        effect: const ExpandingDotsEffect(
-                          dotHeight: 6,
-                          dotWidth: 6,
-                          //dotColor: Color.fromARGB(64, 14, 9, 45),
-                          activeDotColor: primarycolor,
-                        ),
-                        controller: _pagecontroller,
-                        count: 3,
+              CarouselSlider.builder(
+                itemCount: images.length, 
+                itemBuilder:(context, index, realIndex) {
+                  final image = images[index];
+                  return Padding(
+                    padding: const EdgeInsets.all(1.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      // width: 350,
+                      // margin: const EdgeInsets.symmetric(horizontal: 5),
+                      // decoration: BoxDecoration(
+                      //   color: Colors.green,
+                      //   borderRadius: BorderRadius.circular(10)
+                      // ),
+                    
+                      child: Image.network(image,
+                      fit: BoxFit.cover,
                       ),
                     ),
-                  ],
+                  );
+                }, 
+                options: CarouselOptions(
+                  height: 210,
+                  enlargeCenterPage: true
+                  )
                 ),
-              ),
+             
               const SizedBox(height: 30),
               Text(
-                'Dishname',
+                dish.dishname!,
                 style: GoogleFonts.rubik(
-                    fontSize: 25,
+                    fontSize: 30,
                     color: Colors.black,
                     fontWeight: FontWeight.w500),
               ),
-              const SizedBox(height: 5),
+              
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'non-veg',
+                   "${ dish.dishserve!} serve",
                     style: GoogleFonts.rubik(
                       fontSize: 15,
                       color: const Color.fromARGB(255, 128, 128, 128),
                     ),
                   ),
                    Text(
-                    '1 serve',
+                    ' ',//serve
                     style: GoogleFonts.rubik(
                       fontSize: 15,
                       color: const Color.fromARGB(255, 128, 128, 128),
@@ -99,7 +95,37 @@ class DishDetail extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 285),
+             const SizedBox(height: 30),
+
+             Text("About Dish",
+              style: GoogleFonts.rubik(
+                fontSize: 18,
+               // fontWeight: FontWeight.w500,
+                color: Color.fromARGB(255, 44, 44, 44)
+
+              ),
+             ),
+             Container(
+              height: 200,
+              width: double.infinity,
+              //color: Colors.grey,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: ListView(
+                  children: [
+                    Text(dish.dishdescription!,
+                    style: GoogleFonts.roboto(
+                      fontSize: 16,
+                      color: const Color.fromARGB(255, 84, 84, 84)
+                         
+                    )
+                    )
+                  ],
+                ),
+              ),
+             ),
+
+             SizedBox(height: 25),
               Row(
                  
                 children: [
@@ -110,7 +136,7 @@ class DishDetail extends StatelessWidget {
                   ),
                   ),
 
-                 // SizedBox(width: 10,),
+                  SizedBox(width: 6,),
                    Container(
                     margin: EdgeInsets.only(),
                       height: 40,

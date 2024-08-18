@@ -68,9 +68,9 @@ class MyApp extends StatelessWidget {
            
         ),
         home: 
-          DishDetail()
+      //  DishDetail()
         //CartPage()
-        //const SplashScreen()
+        const SplashScreen()
         //MainPage()
         // LogInScreen(),
         //OtpScreen()

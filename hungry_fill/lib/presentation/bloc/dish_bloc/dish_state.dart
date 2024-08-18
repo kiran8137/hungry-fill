@@ -40,6 +40,8 @@ final class SearchDishSuccessState extends DishState {
   List<Object> get props => [dishes];
 }
 
+final class SearchDishEmptyState extends DishState{}
+
 // Category filter States
 
 final class GetCategoriesSuccessState extends DishState {
@@ -51,6 +53,8 @@ final class GetCategoriesSuccessState extends DishState {
   List<Object> get props => [categories];
 }
 
+
+
 final class GetCategoriesErrorState extends DishState {}
 
 final class CategoryDishesSuccesState extends DishState {
@@ -61,6 +65,8 @@ final class CategoryDishesSuccesState extends DishState {
   @override
   List<Object> get props => [categorydishes];
 }
+
+final class CategoryDisheseEmptyState extends DishState{}
 
 //Cartpage States
 

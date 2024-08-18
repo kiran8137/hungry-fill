@@ -1,5 +1,7 @@
 
 
+import 'dart:typed_data';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/category/category_model.dart';
@@ -14,6 +16,10 @@ class DishProvider extends ChangeNotifier{
 
 List<DishModel> dishes = [];
 List<CategoryModel> categories = [];
+
+//Uint8List? selectedimage;
+ 
+
 
 
 Future<void> getDishes() async{
@@ -40,6 +46,16 @@ Future<void> getDishes() async{
 
 
 // }
+
+Future<Uint8List?> dishImagePicker() async{
+
+  final imageresult = await dishrepository.dishImagePicker();
+  final selectedimage = imageresult!.files.first.bytes;
+  notifyListeners();
+  return selectedimage;
+
+
+}
 
 
 

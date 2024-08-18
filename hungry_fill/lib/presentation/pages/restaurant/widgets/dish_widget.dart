@@ -47,7 +47,7 @@ class Dishwidget extends StatelessWidget {
                       image: DecorationImage(
                         fit: BoxFit.cover,
                       image: NetworkImage(
-                        dish.dishimage!)
+                        dish.image1!)
                         )
                       ),
                      // child: Image.network(dish.dishimage!,fit: BoxFit.cover),
@@ -95,7 +95,7 @@ class Dishwidget extends StatelessWidget {
                          dishquantity: 1, 
                          priceperquantity: int.parse(dish.dishprice!),
                          dishname: dish.dishname,
-                         dishimage: dish.dishimage
+                         dishimage: dish.image1
                          );
                       //createcart();
                       BlocProvider.of<DishBloc>(context).add(

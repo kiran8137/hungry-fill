@@ -6,31 +6,43 @@ class DishModel extends DishEntity {
       {
         super.dishid,
         super.dishname,
+        super.dishdescription,
         super.dishprice,
         super.dishserve,
         super.dishstock,
-        super.dishimage
+        super.image1,
+        super.image2,
+        super.image3,
+        super.image4
       });
 
 factory DishModel.fromJson({required Map<String , dynamic> json}){
   return DishModel(
     dishid: json["dishId"],
     dishname: json["dishName"],
+    dishdescription: json["dishDescription"],
     dishprice: json["dishPrice"],
     dishserve: json["serve"],
     dishstock: json["stock"],
-    dishimage: json["imageUrl"],
+    image1: json['image1'],
+    image2: json['image2'],
+    image3: json['image3'],
+    image4: json['image4']
   );
 }
 
 factory DishModel.fromSnapshot({required DocumentSnapshot snapshot}){
   return DishModel(
-     dishid: snapshot["dishId"],
+    dishid: snapshot["dishId"],
     dishname: snapshot["dishName"],
+    dishdescription: snapshot["dishDescription"],
     dishprice: snapshot["dishPrice"],
     dishserve: snapshot["serve"],
     dishstock: snapshot["stock"],
-    dishimage: snapshot["imageUrl"],
+    image1: snapshot['image1'],
+    image2: snapshot['image2'],
+    image3: snapshot['image3'],
+    image4: snapshot['image4']
   );
 }
 

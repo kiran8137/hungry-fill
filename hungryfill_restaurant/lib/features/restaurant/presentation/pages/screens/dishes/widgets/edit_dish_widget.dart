@@ -1,29 +1,29 @@
- 
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hungryfill_restaurant/core/categories.dart';
 import 'package:hungryfill_restaurant/core/funcitons/dish_funcitons.dart';
 import 'package:hungryfill_restaurant/core/theme/color.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/category/category_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/dish/dish_model.dart';
-import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/dishes/widgets/widgets_dish_image/add_dish_image.dart';
+import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/dishes/widgets/widgets_dish_image/edit_dish_image.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/category/category_bloc.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/dish/dish_bloc.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/provider/dish_provider.dart';
 import 'package:multi_dropdown/multiselect_dropdown.dart';
 import 'package:provider/provider.dart';
 
-class AddDish extends StatefulWidget {
-  const AddDish({super.key});
+class EditDish extends StatefulWidget {
+  const EditDish({super.key, required this.currentdish});
+
+  final DishModel currentdish;
 
   @override
-  State<AddDish> createState() => _AddDishState();
+  State<EditDish> createState() => _EditDishState();
 }
 
-class _AddDishState extends State<AddDish> {
+class _EditDishState extends State<EditDish> {
   var stockitems = ['IN', 'OUT'];
 
   var dropdownvalue = 'IN';
@@ -32,7 +32,7 @@ class _AddDishState extends State<AddDish> {
 
     
      
- 
+//List<Uint8List?> selectedimages = [];
 List<String>? selectedimagesurl = [];
   //selected images
   Uint8List? selectedimag1;
@@ -47,19 +47,41 @@ List<String>? selectedimagesurl = [];
 
 
 
-  final TextEditingController dishnamecontroller = TextEditingController();
-   
-  final TextEditingController discriptioncontroller = TextEditingController(); 
+  late TextEditingController dishnamecontroller;
 
-  final TextEditingController dishpricecontroller = TextEditingController();
+  late TextEditingController dishdescriptioncontroller;
 
-  final TextEditingController dishstockcontroller = TextEditingController();
+  late  TextEditingController dishpricecontroller;
 
-  final TextEditingController dishservecontroller = TextEditingController();
+  late  TextEditingController dishstockcontroller;
 
-  final TextEditingController dishcategorycontroller = TextEditingController();
+  late   TextEditingController dishservecontroller;
 
-  final MultiSelectController mulitselectorcontoller = MultiSelectController();
+  late TextEditingController dishcategorycontroller;
+
+  late MultiSelectController categorycontroller;
+
+
+
+     @override
+  void initState() {
+  dishnamecontroller = TextEditingController(text: widget.currentdish.dishname);
+
+  dishdescriptioncontroller = TextEditingController(text: widget.currentdish.dishdescription);
+
+  dishpricecontroller =  TextEditingController(text: widget.currentdish.dishprice);
+
+  dishstockcontroller =  TextEditingController(text: widget.currentdish.stock);
+
+  dishservecontroller = TextEditingController(text: widget.currentdish.serve);
+
+  categorycontroller =  MultiSelectController();
+
+  dropdownvalue = widget.currentdish.stock!;
+ // dishcategorycontroller = TextEditingController(text: widget.dish.category);
+    super.initState();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -152,7 +174,7 @@ List<String>? selectedimagesurl = [];
                                  // selectedimages.add(selectedimag1);
                                   
                                   },
-                                  child: DishImageWidget(selectedimage: selectedimag1) 
+                                  child: EditDishImageWidget(selectedimage: selectedimag1 , imageurl: widget.currentdish.image1,) 
                                 ),
                                 const SizedBox(
                                   width: 5,
@@ -162,7 +184,7 @@ List<String>? selectedimagesurl = [];
                                    selectedimag2 = await value.dishImagePicker();
                                   // selectedimages.add(selectedimag2);
                                   },
-                                  child: DishImageWidget(selectedimage: selectedimag2)
+                                  child: EditDishImageWidget(selectedimage: selectedimag2 ,  imageurl: widget.currentdish.image2)
                                    
                                 ),
                                 const SizedBox(
@@ -173,7 +195,7 @@ List<String>? selectedimagesurl = [];
                                     selectedimag3 = await value.dishImagePicker();
                                    // selectedimages.add(selectedimag3);
                                   },
-                                  child: DishImageWidget(selectedimage: selectedimag3)
+                                  child: EditDishImageWidget(selectedimage: selectedimag3, imageurl: widget.currentdish.image3)
                                   
                                 ),
                                 const SizedBox(
@@ -184,7 +206,7 @@ List<String>? selectedimagesurl = [];
                                     selectedimag4 = await value.dishImagePicker();
                                     //selectedimages.add(selectedimag4);
                                   },
-                                  child: DishImageWidget(selectedimage: selectedimag4)
+                                  child: EditDishImageWidget(selectedimage: selectedimag4 ,  imageurl: widget.currentdish.image4)
                                   
                                 ),
                                 const SizedBox(
@@ -252,7 +274,7 @@ List<String>? selectedimagesurl = [];
                           maxLines: 2,
                           decoration:
                               const InputDecoration(border: InputBorder.none),
-                          controller: discriptioncontroller,
+                          controller: dishdescriptioncontroller,
                         ),
                       ),
 
@@ -445,44 +467,57 @@ List<String>? selectedimagesurl = [];
                          GestureDetector(
                           onTap: () async{
                             debugPrint('add dish tapped');
-                              if (dishnamecontroller.text.isEmpty ||
-                              dishpricecontroller.text.isEmpty ||
-                              dropdownvalue.isEmpty ||
-                              dishservecontroller.text.isEmpty ||
-                              selectedcategories.isEmpty 
-                            //  selectedimages.isEmpty || selectedimages.length<4
-                              ) {
-                            return;
-                          }
+                          //     if (dishnamecontroller.text.isEmpty ||
+                          //     dishpricecontroller.text.isEmpty ||
+                          //     dropdownvalue.isEmpty ||
+                          //     dishservecontroller.text.isEmpty ||
+                          //     selectedcategories.isEmpty 
+                          //   //  selectedimages.isEmpty || selectedimages.length<4
+                          //     ) {
+                          //   return;
+                          // }
 
                           final selectedcategoryids = selectedcategories.map((category)=> category.value).toList();
 
+                          // for(var image in selectedimages){
+                          //   selectedimagesurl!.add(await saveImageToStorage(filename: 'dishimage', selectedImageInBytes: image!));
+                          // }
+                          if(selectedimag1!=null){
+                              selectedimag1url = await  saveImageToStorage(filename: 'dishimage1', selectedImageInBytes: selectedimag1!);
+                          }
+                          if(selectedimag2!=null){
+                             selectedimag2url = await  saveImageToStorage(filename: 'dishimage2', selectedImageInBytes: selectedimag2!);
+                          }
+                          if(selectedimag3!=null){
+                            selectedimag3url = await  saveImageToStorage(filename: 'dishimage3', selectedImageInBytes: selectedimag3!);
+                          }
+                          if(selectedimag4!=null){
+                             selectedimag4url = await  saveImageToStorage(filename: 'dishimage4', selectedImageInBytes: selectedimag4!);
+                          }
+                        
+                         
                           
-
-                          selectedimag1url = await  saveImageToStorage(filename: 'dishimage1', selectedImageInBytes: selectedimag1! , );
-                          selectedimag2url = await  saveImageToStorage(filename: 'dishimage2', selectedImageInBytes: selectedimag2!);
-                          selectedimag3url = await  saveImageToStorage(filename: 'dishimage3', selectedImageInBytes: selectedimag3!);
-                          selectedimag4url = await  saveImageToStorage(filename: 'dishimage4', selectedImageInBytes: selectedimag4!);
+                         
 
                          
                           DishModel dish = DishModel(
                               dishname: dishnamecontroller.text,
-                              dishdescription: discriptioncontroller.text,
+                              dishdescription: dishdescriptioncontroller.text,
                               dishprice: dishpricecontroller.text,
                               stock: dropdownvalue,
                               serve: dishservecontroller.text,
                               category: selectedcategoryids,
-                              image1: selectedimag1url,
-                              image2 :selectedimag2url,
-                              image3: selectedimag3url,
-                              image4: selectedimag4url
+                              image1: selectedimag1url ?? widget.currentdish.image1,
+                              image2 :selectedimag2url ?? widget.currentdish.image2,
+                              image3: selectedimag3url ?? widget.currentdish.image3,
+                              image4: selectedimag4url ?? widget.currentdish.image4
                               
                               );
 
                               debugPrint(dish.toString());
 
                           BlocProvider.of<DishBloc>(context)
-                              .add(DishAddEvent(dishmodel: dish));
+                              .add(DishUpdateEvent(updatedDish: dish));
                               
                               Navigator.pop(context);
                           },
