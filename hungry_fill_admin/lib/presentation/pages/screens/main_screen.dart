@@ -104,15 +104,15 @@ Widget getSelectedpage({
 }) {
   switch (selectedroute) {
     case '/dashboard':
-    // return   Dashboard();
-    // return  RestaurantsScreen();
+     return   Dashboard();
+     
 
-    // case '/orders':
-    //return   DailyOrders();
+     case '/orders':
+     //return   DailyOrders();
     case '/restaurants':
-    // return   RestaurantsScreen();
+     return   RestaurantsScreen();
     case '/customers':
-    //return ProfileScreen();
+     
     default:
       return RestaurantsScreen();
   }

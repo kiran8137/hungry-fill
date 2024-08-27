@@ -29,6 +29,8 @@ final class DishErrorState extends DishState {
   List<Object> get props => [errormessage!];
 }
 
+final class DishEmpty extends DishState{}
+
 //Search States
 
 final class SearchDishSuccessState extends DishState {

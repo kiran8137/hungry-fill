@@ -1,30 +1,31 @@
-import 'dart:ffi';
+ 
 
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:hungry_fill/core/color/colors.dart';
+import 'package:hungry_fill/data/model/cart_model/cart_model.dart';
 import 'package:hungry_fill/data/model/dish_model/dish_model.dart';
+import 'package:hungry_fill/presentation/bloc/dish_bloc/dish_bloc.dart';
+import 'package:hungry_fill/presentation/pages/dish_detail/components/dish_detail_components.dart';
+import 'package:hungry_fill/presentation/pages/widgets/common_components.dart';
 
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+ 
 
 class DishDetail extends StatelessWidget {
-  const DishDetail({super.key, required this.images, required this.dish});
+  const DishDetail({super.key, required this.images, required this.dish, required this.restuaurantid});
   //final PageController _pagecontroller = PageController();
   final List<String> images;
   final DishModel dish;
+  final String restuaurantid;
 
   
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       floatingActionButton: FloatingActionButton.extended(
-        label: const Icon(Icons.shopping_cart,color: Colors.white,),
-        backgroundColor: primarycolor,
-        onPressed: (){
-          //Navigator.push(context, MaterialPageRoute(builder: (context)=> const CartPage()));
-        }),
+       floatingActionButton: floatingActionButton(context),
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -40,32 +41,7 @@ class DishDetail extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CarouselSlider.builder(
-                itemCount: images.length, 
-                itemBuilder:(context, index, realIndex) {
-                  final image = images[index];
-                  return Padding(
-                    padding: const EdgeInsets.all(1.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      // width: 350,
-                      // margin: const EdgeInsets.symmetric(horizontal: 5),
-                      // decoration: BoxDecoration(
-                      //   color: Colors.green,
-                      //   borderRadius: BorderRadius.circular(10)
-                      // ),
-                    
-                      child: Image.network(image,
-                      fit: BoxFit.cover,
-                      ),
-                    ),
-                  );
-                }, 
-                options: CarouselOptions(
-                  height: 210,
-                  enlargeCenterPage: true
-                  )
-                ),
+              dishImagesSlider(images),
              
               const SizedBox(height: 30),
               Text(
@@ -101,31 +77,21 @@ class DishDetail extends StatelessWidget {
               style: GoogleFonts.rubik(
                 fontSize: 18,
                // fontWeight: FontWeight.w500,
-                color: Color.fromARGB(255, 44, 44, 44)
+                color: const Color.fromARGB(255, 44, 44, 44)
 
               ),
              ),
-             Container(
+             SizedBox(
               height: 200,
               width: double.infinity,
               //color: Colors.grey,
               child: Padding(
                 padding: const EdgeInsets.only(top: 10),
-                child: ListView(
-                  children: [
-                    Text(dish.dishdescription!,
-                    style: GoogleFonts.roboto(
-                      fontSize: 16,
-                      color: const Color.fromARGB(255, 84, 84, 84)
-                         
-                    )
-                    )
-                  ],
-                ),
+                child: dishDescription(dish),
               ),
              ),
 
-             SizedBox(height: 25),
+             const SizedBox(height: 25),
               Row(
                  
                 children: [
@@ -136,28 +102,47 @@ class DishDetail extends StatelessWidget {
                   ),
                   ),
 
-                  SizedBox(width: 6,),
-                   Container(
-                    margin: EdgeInsets.only(),
-                      height: 40,
-                      width: 140,
-                      decoration: BoxDecoration(
-                        color: primarycolor,
-                        borderRadius:
-                            BorderRadius.circular(10),
-                      ),
-                      child: Center(
-                        child: Text(
-                           "ADD" ,
-                          style: GoogleFonts.abrilFatface(
-                              color:  Colors.white ,
-                              fontSize: 20,
-                              fontWeight:
-                                  FontWeight.w400,
-                                  ),
+                  const SizedBox(width: 6,),
+                   GestureDetector(
+                    onTap: (){
+                       CartModel cartmodel = CartModel(
+                         
+                          userid: FirebaseAuth.instance.currentUser?.uid,
+                         dishid: dish.dishid, 
+                         restaurantid: restuaurantid, 
+                         dishquantity: 1, 
+                         priceperquantity: int.parse(dish.dishprice!),
+                         dishname: dish.dishname,
+                         dishimage: dish.image1
+                         );
+                      //createcart();
+                      BlocProvider.of<DishBloc>(context).add(
+                        AddDishToCartEvent( 
+                          cart: cartmodel
+                        ));
+                    },
+                     child: Container(
+                      margin: const EdgeInsets.only(),
+                        height: 40,
+                        width: 140,
+                        decoration: BoxDecoration(
+                          color: primarycolor,
+                          borderRadius:
+                              BorderRadius.circular(10),
+                        ),
+                        child: Center(
+                          child: Text(
+                             "ADD" ,
+                            style: GoogleFonts.abrilFatface(
+                                color:  Colors.white ,
+                                fontSize: 20,
+                                fontWeight:
+                                    FontWeight.w400,
+                                    ),
+                          ),
                         ),
                       ),
-                    ),
+                   ),
                 ],
               )
             ],
@@ -166,4 +151,10 @@ class DishDetail extends StatelessWidget {
         ),
         );
   }
+
+ 
+
+
+
+  
 }

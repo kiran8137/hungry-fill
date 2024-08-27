@@ -53,6 +53,10 @@ dependencies:
   flutter_staggered_animations: ^1.1.1
   flutter_slidable: ^3.0.1
   carousel_slider: ^5.0.0
+  google_maps_flutter: ^2.9.0
+  geolocator: ^12.0.0
+  geocoding: ^3.0.0
+  
    
 
 dev_dependencies:
@@ -99,6 +103,7 @@ flutter:
     - assets/power-off.png
     - assets/facebook.png
     - .env
+    - assets/gps.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

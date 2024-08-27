@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:hungry_fill/core/functions/cart_functions.dart';
+import 'package:hungry_fill/core/functions/functions.dart';
 import 'package:hungry_fill/data/model/cart_model/cart_model.dart';
 import 'package:hungry_fill/presentation/bloc/dish_bloc/dish_bloc.dart';
 import 'package:hungry_fill/presentation/pages/cart_page/cart_components/cart_components.dart';

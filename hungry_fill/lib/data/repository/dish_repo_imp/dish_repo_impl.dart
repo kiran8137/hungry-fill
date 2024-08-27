@@ -27,7 +27,7 @@ class DishRepoImpl extends DishRepository{
       return dish;
     }
     catch(error){
-      log(error.toString());
+      log(".......${error.toString()}");
       throw Exception(error.toString());
     }
   }
@@ -76,7 +76,7 @@ class DishRepoImpl extends DishRepository{
       
 
      }catch(error){
-      log(error.toString());
+      log("cat error ${error.toString()}");
       throw Exception(error.toString());
      }
   }

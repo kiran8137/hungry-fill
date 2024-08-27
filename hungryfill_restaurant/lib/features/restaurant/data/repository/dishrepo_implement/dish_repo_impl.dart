@@ -111,7 +111,7 @@ class DishRepoImplementation extends DishRepository {
   }
 
   @override
-  Future<FilePickerResult?> dishImagePicker() async {
+  Future<FilePickerResult?> ImagePicker() async {
     //Uint8List? selectedimagefile;
     String? filename;
     try {
@@ -120,8 +120,7 @@ class DishRepoImplementation extends DishRepository {
 
         if (pickedimage != null) {
           filename = pickedimage.files.first.name;
-         // selectedImageInBytes = pickedimage.files.first.bytes;
-         // debugPrint('pickimage $selectedImageInBytes');
+          
         }
 
         return pickedimage;

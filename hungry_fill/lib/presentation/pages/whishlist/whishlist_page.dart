@@ -113,6 +113,7 @@ class WishListPage extends StatelessWidget {
                                      child: WishlistWidget(
                                       restaurantname:
                                           wishlistrestaurant.restaurantname,
+                                          
                                       restaurantplace:
                                           wishlistrestaurant.restaurantplace,
                                       restaurantdistrict:

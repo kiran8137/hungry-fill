@@ -233,12 +233,16 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                       return const Center(child: CircularProgressIndicator());
                     }
 
-                    if (state is DishErrorState) {
-                      return Center(
+                    if (state is DishEmpty) {
+                      return const Center(
                         child:
-                            Text(state.errormessage ?? "something went wrong"),
+                            Text("😞Oops, no dish available"
+                            ,style: TextStyle(color: Colors.black),
+                            ),
                       );
                     }
+
+                    
 
                     if (state is SearchDishEmptyState) {
                       return Center(
@@ -288,6 +292,7 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                                     MaterialPageRoute(
                                         builder: (context) =>
                                             DishDetail(
+                                              restuaurantid : widget.resuerid!,
                                               images: imagesurl,
                                               dish: dishes[index],
                                             )

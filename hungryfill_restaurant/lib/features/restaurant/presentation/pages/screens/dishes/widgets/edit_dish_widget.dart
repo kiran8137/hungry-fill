@@ -111,7 +111,7 @@ List<String>? selectedimagesurl = [];
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Text(
-                  'Add Dish',
+                  'update Dish',
                   style: GoogleFonts.roboto(
                       fontSize: 25, fontWeight: FontWeight.w600),
                 ),
@@ -170,7 +170,7 @@ List<String>? selectedimagesurl = [];
                                 GestureDetector(
                                   onTap: ()async{
                                   
-                                  selectedimag1 = await value.dishImagePicker();
+                                  selectedimag1 = await value.ImagePicker();
                                  // selectedimages.add(selectedimag1);
                                   
                                   },
@@ -181,7 +181,7 @@ List<String>? selectedimagesurl = [];
                                 ),
                                 GestureDetector(
                                   onTap: () async{
-                                   selectedimag2 = await value.dishImagePicker();
+                                   selectedimag2 = await value.ImagePicker();
                                   // selectedimages.add(selectedimag2);
                                   },
                                   child: EditDishImageWidget(selectedimage: selectedimag2 ,  imageurl: widget.currentdish.image2)
@@ -192,7 +192,7 @@ List<String>? selectedimagesurl = [];
                                 ),
                                 GestureDetector(
                                   onTap: ()async{
-                                    selectedimag3 = await value.dishImagePicker();
+                                    selectedimag3 = await value.ImagePicker();
                                    // selectedimages.add(selectedimag3);
                                   },
                                   child: EditDishImageWidget(selectedimage: selectedimag3, imageurl: widget.currentdish.image3)
@@ -203,7 +203,7 @@ List<String>? selectedimagesurl = [];
                                 ),
                                 GestureDetector(
                                   onTap: () async{
-                                    selectedimag4 = await value.dishImagePicker();
+                                    selectedimag4 = await value.ImagePicker();
                                     //selectedimages.add(selectedimag4);
                                   },
                                   child: EditDishImageWidget(selectedimage: selectedimag4 ,  imageurl: widget.currentdish.image4)

@@ -9,6 +9,7 @@ class RestaurantEntity extends Equatable {
   final String? restaurantstate;
   final String? restaurantdistrict;
   final String? restaurantplace;
+   
 
    RestaurantEntity(
       {
@@ -19,7 +20,9 @@ class RestaurantEntity extends Equatable {
         this.restaurantmobileNo,
         this.restaurantstate,
         this.restaurantdistrict,
-        this.restaurantplace}){
+        this.restaurantplace,
+        //this.restaurantimageurl
+        }){
 
           print("res enitiy : $username");
         }
@@ -27,5 +30,5 @@ class RestaurantEntity extends Equatable {
   @override
   
   List<Object?> get props =>
-      [restaurantname, restaurantemail,restaurantmobileNo,restaurantstate,restaurantdistrict,restaurantplace];
+      [restaurantname, restaurantemail,restaurantmobileNo,restaurantstate,restaurantdistrict,restaurantplace, ];
 }

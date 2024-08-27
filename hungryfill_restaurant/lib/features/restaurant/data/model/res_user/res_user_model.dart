@@ -11,7 +11,8 @@ class RestaurantModel extends RestaurantEntity {
         super.restaurantmobileNo,
         super.restaurantstate,
         super.restaurantdistrict,
-        super.restaurantplace
+        super.restaurantplace,
+      //  super.restaurantimageurl
         
         }){
           debugPrint("res model : $username");
@@ -28,7 +29,8 @@ class RestaurantModel extends RestaurantEntity {
       restaurantmobileNo: json["restaurantMobileNo"],
       restaurantstate: json["restaurantState"],
       restaurantdistrict:json["restaurantDistrict"],
-      restaurantplace: json["restaurantPlace"]
+      restaurantplace: json["restaurantPlace"],
+    //  restaurantimageurl: json["restaurantImageUrl"]
 
       
       
@@ -47,7 +49,8 @@ class RestaurantModel extends RestaurantEntity {
       "restaurantMobileNo" : restaurantmobileNo,
       "restaurantState": restaurantstate,
       "restaurantDistrict" : restaurantdistrict,
-      "restaurantPlace" : restaurantplace
+      "restaurantPlace" : restaurantplace,
+      //"restaurantImageUrl" : restaurantimageurl
 
     };
      
@@ -62,6 +65,7 @@ class RestaurantModel extends RestaurantEntity {
     String? restaurantstate,
     String? restaurantdistrict,
     String? restaurantplace,
+    String? restaurantimageurl
 
    
  
@@ -75,7 +79,8 @@ class RestaurantModel extends RestaurantEntity {
       restaurantmobileNo: restaurantmobileNo ?? this.restaurantmobileNo,
       restaurantstate: restaurantstate ?? this.restaurantstate,
       restaurantdistrict: restaurantdistrict ?? this.restaurantdistrict,
-      restaurantplace: restaurantplace ?? this.restaurantplace
+      restaurantplace: restaurantplace ?? this.restaurantplace,
+      //restaurantimageurl: restaurantimageurl ?? this.restaurantimageurl
       
     );
    }

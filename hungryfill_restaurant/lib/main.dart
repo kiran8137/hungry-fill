@@ -5,6 +5,7 @@ import 'package:hungryfill_restaurant/features/restaurant/data/repository/authre
 import 'package:hungryfill_restaurant/features/restaurant/data/repository/dishrepo_implement/dish_repo_impl.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/repository/resUser_implement/res_user_impl.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/dishes/widgets/add_dish_widget.dart';
+import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/res_detail_add_screen/res_detail_add.dart';
  
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/splash_screen/splash_screen.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/authentication/auth_bloc_bloc.dart';
@@ -55,9 +56,10 @@ class MyApp extends StatelessWidget {
       child: ChangeNotifierProvider(
         create: (context) => DishProvider(dishrepository: DishRepoImplementation()),
 
-        child:   MaterialApp(
+        child:     MaterialApp(
             debugShowCheckedModeBanner: false, 
             home:
+            //ResDetailAddScreen()
             SplashScreen()
             //AddDish()
            // DishScreen()

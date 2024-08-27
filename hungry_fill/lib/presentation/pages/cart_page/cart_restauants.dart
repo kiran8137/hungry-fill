@@ -90,12 +90,7 @@ class _CartState extends State<Cart> {
                             ),
                       ),
                     );
-                    // ListTile(
-                    //   onTap: (){
-                    //     Navigator.push(context, (MaterialPageRoute(builder: (context)=> CartPage(restaurantid: restaurants.userid, restaurantname: restaurants.restaurantname,))));
-                    //   },
-                    //   title: Text(restaurants.restaurantname!),
-                    // );
+                    
                   });
             } else {
               return const Center(

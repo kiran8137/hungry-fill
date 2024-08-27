@@ -5,7 +5,9 @@ import 'package:google_fonts/google_fonts.dart';
  
 import 'package:hungry_fill/data/repository/auth_repo_impl/authentication_repo.dart';
 import 'package:hungry_fill/data/model/user_model/user_model.dart';
+import 'package:hungry_fill/presentation/bloc/address_bloc/address_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/user_bloc/users_bloc.dart';
+import 'package:hungry_fill/presentation/pages/address/addresses_page.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/user_profile/components/components.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/user_profile/user_detail_page.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/widgets/profile_menu_widget.dart';
@@ -99,11 +101,19 @@ class UserProfileScreen extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            ProfileMenuWidget(
-              leadingicon: 'assets/locationIcon.png',
-              title: 'Address',
-              trailing: "assets/next.png",
-              ontap: () {},
+            GestureDetector(
+              onTap: (){
+                
+              },
+              child: ProfileMenuWidget(
+                leadingicon: 'assets/locationIcon.png',
+                title: 'Address',
+                trailing: "assets/next.png",
+                ontap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> const AddressPage()));
+                  
+                },
+              ),
             ),
             ProfileMenuWidget(
               leadingicon: 'assets/information-button.png',

@@ -8,7 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
  
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:hungry_fill/core/functions/cart_functions.dart';
+import 'package:hungry_fill/core/functions/functions.dart';
  
  
 import 'package:hungry_fill/data/model/cart_model/cart_model.dart';

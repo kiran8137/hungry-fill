@@ -47,9 +47,9 @@ Future<void> getDishes() async{
 
 // }
 
-Future<Uint8List?> dishImagePicker() async{
+Future<Uint8List?> ImagePicker() async{
 
-  final imageresult = await dishrepository.dishImagePicker();
+  final imageresult = await dishrepository.ImagePicker();
   final selectedimage = imageresult!.files.first.bytes;
   notifyListeners();
   return selectedimage;

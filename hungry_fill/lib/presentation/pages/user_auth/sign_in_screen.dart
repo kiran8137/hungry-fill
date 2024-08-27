@@ -6,7 +6,7 @@ import 'package:hungry_fill/presentation/bloc/auth_bloc/sign_in_bloc/auth_bloc.d
 import 'package:hungry_fill/presentation/bloc/auth_bloc/sign_in_bloc/auth_event.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/main_page.dart';
 import 'package:hungry_fill/presentation/pages/user_auth/log_in_screen.dart';
-import 'package:hungry_fill/presentation/pages/user_auth/widgets/text_form.dart';
+import 'package:hungry_fill/presentation/pages/widgets/text_form_field.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});

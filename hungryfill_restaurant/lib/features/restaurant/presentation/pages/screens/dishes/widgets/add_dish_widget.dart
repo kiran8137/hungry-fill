@@ -4,7 +4,6 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hungryfill_restaurant/core/categories.dart';
 import 'package:hungryfill_restaurant/core/funcitons/dish_funcitons.dart';
 import 'package:hungryfill_restaurant/core/theme/color.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/category/category_model.dart';
@@ -148,7 +147,7 @@ List<String>? selectedimagesurl = [];
                                 GestureDetector(
                                   onTap: ()async{
                                   
-                                  selectedimag1 = await value.dishImagePicker();
+                                  selectedimag1 = await value.ImagePicker();
                                  // selectedimages.add(selectedimag1);
                                   
                                   },
@@ -159,7 +158,7 @@ List<String>? selectedimagesurl = [];
                                 ),
                                 GestureDetector(
                                   onTap: () async{
-                                   selectedimag2 = await value.dishImagePicker();
+                                   selectedimag2 = await value.ImagePicker();
                                   // selectedimages.add(selectedimag2);
                                   },
                                   child: DishImageWidget(selectedimage: selectedimag2)
@@ -170,7 +169,7 @@ List<String>? selectedimagesurl = [];
                                 ),
                                 GestureDetector(
                                   onTap: ()async{
-                                    selectedimag3 = await value.dishImagePicker();
+                                    selectedimag3 = await value.ImagePicker();
                                    // selectedimages.add(selectedimag3);
                                   },
                                   child: DishImageWidget(selectedimage: selectedimag3)
@@ -181,7 +180,7 @@ List<String>? selectedimagesurl = [];
                                 ),
                                 GestureDetector(
                                   onTap: () async{
-                                    selectedimag4 = await value.dishImagePicker();
+                                    selectedimag4 = await value.ImagePicker();
                                     //selectedimages.add(selectedimag4);
                                   },
                                   child: DishImageWidget(selectedimage: selectedimag4)

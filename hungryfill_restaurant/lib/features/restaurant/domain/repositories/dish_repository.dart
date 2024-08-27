@@ -17,7 +17,7 @@ abstract class DishRepository {
   Future<void> updateDish({required DishModel dish});
 
 
-  Future<FilePickerResult?> dishImagePicker();
+  Future<FilePickerResult?> ImagePicker();
 
   
 

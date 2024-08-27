@@ -6,17 +6,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hungry_fill/data/repository/auth_repo_impl/authentication_repo.dart';
 import 'package:hungry_fill/data/repository/cart_repo_imp/cart_repo_impl.dart';
 import 'package:hungry_fill/data/repository/dish_repo_imp/dish_repo_impl.dart';
+import 'package:hungry_fill/data/repository/order_repo_impl/order_repo_imp.dart';
 import 'package:hungry_fill/data/repository/restaurant_repo_impl/restaurant_repo_imp.dart';
 import 'package:hungry_fill/data/repository/user_repo_impl/user_repo.dart';
 import 'package:hungry_fill/firebase_options.dart';
+import 'package:hungry_fill/presentation/bloc/address_bloc/address_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/auth_bloc/login_bloc/log_in_bloc_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/auth_bloc/sign_in_bloc/auth_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/category_bloc/category_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/dish_bloc/dish_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/restaurant_bloc/restaurant_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/user_bloc/users_bloc.dart';
+import 'package:hungry_fill/presentation/pages/address/add_address_page.dart';
+import 'package:hungry_fill/presentation/pages/address/addresses_page.dart';
 import 'package:hungry_fill/presentation/pages/dish_detail/dish_detail.dart';
+import 'package:hungry_fill/presentation/pages/map/map_screen.dart';
 import 'package:hungry_fill/presentation/pages/splashscreen/splash_screen.dart';
+import 'package:hungry_fill/presentation/pages/user_auth/sign_in_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -56,7 +62,9 @@ class MyApp extends StatelessWidget {
             create: (context)=> CategoryBloc(dishrepository: DishRepoImpl())
             ),
           
-          
+          BlocProvider(
+            create: (context)=>AddressBloc(orderrepository: OrderRepoImp())
+            )
         
 
          
@@ -68,8 +76,9 @@ class MyApp extends StatelessWidget {
            
         ),
         home: 
-      //  DishDetail()
-        //CartPage()
+       // MapScreen()
+        //AddAddressPage()
+        // AddressPage()
         const SplashScreen()
         //MainPage()
         // LogInScreen(),

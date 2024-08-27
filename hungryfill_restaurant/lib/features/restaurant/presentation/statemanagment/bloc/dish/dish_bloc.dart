@@ -21,7 +21,7 @@ class DishBloc extends Bloc<DishEvent, DishState> {
    // on<GetDishesEvent>(getDishes);
     on<DeleteDishEvent>(deleteDish);
     on<DishUpdateEvent>(updateDish);
-    on<DishImagePicker>(getDishImage);
+   // on<DishImagePicker>(getDishImage);
     // on<CreateCategoryEvent>(createCategory);
     // on<GetCategoriesEvent>(getCategories);
   }
@@ -96,25 +96,25 @@ class DishBloc extends Bloc<DishEvent, DishState> {
     }
   }
 
-  FutureOr<void> getDishImage(DishImagePicker event, Emitter<DishState> emit) async {
+  // FutureOr<void> getDishImage(DishImagePicker event, Emitter<DishState> emit) async {
 
-    try{
+  //   try{
 
-      final pickedimage = await dishrepository.dishImagePicker();
+  //     final pickedimage = await dishrepository.dishImagePicker();
      
       
 
-      if(pickedimage!=null){
+  //     if(pickedimage!=null){
         
-        emit(DishImagPickerLoaded(file: pickedimage));
-      }else{
-        emit(const ErrorState());
-      }
+  //       emit(DishImagPickerLoaded(file: pickedimage));
+  //     }else{
+  //       emit(const ErrorState());
+  //     }
 
-    }catch(error){
-      log(error.toString());
-    }
-  }
+  //   }catch(error){
+  //     log(error.toString());
+  //   }
+  // }
 
   // FutureOr<void> createCategory(CreateCategoryEvent event, Emitter<DishState> emit) async{
 

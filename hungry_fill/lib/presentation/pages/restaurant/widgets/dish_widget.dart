@@ -61,12 +61,16 @@ class Dishwidget extends StatelessWidget {
                 crossAxisAlignment:
                     CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    dish.dishname!,
-                    style: GoogleFonts.rubik(
-                      color: dish.dishstock == 'IN'? Colors.black: const Color.fromARGB(255, 93, 92, 92),
-                        fontSize: 23,
-                        fontWeight: FontWeight.w600),
+                  SizedBox(
+                    width: 165,
+                    child: Text(
+                      overflow: TextOverflow.ellipsis,
+                      dish.dishname!,
+                      style: GoogleFonts.rubik(
+                        color: dish.dishstock == 'IN'? Colors.black: const Color.fromARGB(255, 93, 92, 92),
+                          fontSize: 23,
+                          fontWeight: FontWeight.w600),
+                    ),
                   ),
                   Text(
                     "₹${dish.dishprice!}",
