@@ -33,7 +33,7 @@ final class GetAddressFromDbSuccessState extends AddressState{
   const GetAddressFromDbSuccessState({required this.addresses});
 
   @override
-  // TODO: implement props
+  
   List<Object> get props => [addresses];
 }
 
@@ -41,4 +41,18 @@ final class GetAddressFromDbSuccessState extends AddressState{
 final class GetAddressFromDbEmptyState extends AddressState{}
 
 final class GetAddressFromDbErrorState extends AddressState{}
+
+final class RemoveAddressSuccessState extends AddressState{}
+
+final class RemoveAddressErrorState extends AddressState{}
+
+final class GetAddressUsingIdEvent extends AddressState{}
+final class GetAddressUsingIdSuccess extends AddressState{
+ final AddressModel address;
+ const GetAddressUsingIdSuccess({required this.address});
+
+ @override
+  // TODO: implement props
+  List<Object> get props => [address];
+}
 

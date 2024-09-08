@@ -1,3 +1,5 @@
+ 
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -63,6 +65,7 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
           leading: GestureDetector(
               onTap: () {
                 Navigator.pop(context);
+                  
               },
               child: const Icon(Icons.arrow_back_ios_new)),
           backgroundColor: Colors.white,
@@ -228,7 +231,7 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                     // }
                   },
                   builder: (context, state) {
-                    print('in list dish ${state.runtimeType.toString()}');
+                    debugPrint('in list dish ${state.runtimeType.toString()}');
                     if (state is DishInitial) {
                       return const Center(child: CircularProgressIndicator());
                     }

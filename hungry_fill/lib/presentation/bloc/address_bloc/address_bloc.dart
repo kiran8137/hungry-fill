@@ -3,7 +3,6 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/physics.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:hungry_fill/data/model/address_model/address_model.dart';
@@ -19,6 +18,8 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
     on<GetAddressEvent>(getAddress);
     on<SaveAddressToDb>(saveAddressToDb);
     on<GetAddressFromDb>(getAddressFromDb);
+    on<RemoveAddress>(removeAddress);
+    on<GetAddressUsingId>(getAddressUsingId);
   }
 
   FutureOr<void> getAddress(GetAddressEvent event, Emitter<AddressState> emit) async{
@@ -53,6 +54,28 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
       }
     }catch(error){
       log(error.toString());
+    }
+  }
+
+  FutureOr<void> removeAddress(RemoveAddress event, Emitter<AddressState> emit) async {
+
+    try{
+
+      await orderrepository.removeAddress(addressid: event.addressid);
+      emit(RemoveAddressSuccessState());
+
+    }catch(error){
+      emit(RemoveAddressErrorState());
+      log(error.toString());
+    }
+  }
+
+  FutureOr<void> getAddressUsingId(GetAddressUsingId event, Emitter<AddressState> emit) async{
+    try{
+      final address =await orderrepository.getAddressUsingId(addressid: event.addressid);
+      emit(GetAddressUsingIdSuccess(address: address));
+    }catch(error){
+      log((error.toString()));
     }
   }
 }

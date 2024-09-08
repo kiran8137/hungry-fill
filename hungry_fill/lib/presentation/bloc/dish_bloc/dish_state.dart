@@ -113,13 +113,5 @@ final class GetRestaurantsInCartIsEmpty extends DishState {}
 
 
 
-// final class CartCalculationSuccesState extends DishState{
-//   final int carttotal;
 
-//  const CartCalculationSuccesState({required this.carttotal});
 
-// @override
-//   // TODO: implement props
-//   List<Object> get props => [carttotal];
-  
-// }

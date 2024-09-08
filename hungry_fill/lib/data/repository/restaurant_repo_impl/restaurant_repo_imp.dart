@@ -78,8 +78,8 @@ class RestaurantRepoImp extends RestaurantRepository {
   @override
   Future<void> removeRestaurantFromWishist({required restaurantid}) async{
     try{
-       final snapshot =   FirebaseFirestore.instance.collection("Users").doc(FirebaseAuth.instance.currentUser?.uid).collection('wishlist').doc(restaurantid);
-       await snapshot.delete();
+       final docref =   FirebaseFirestore.instance.collection("Users").doc(FirebaseAuth.instance.currentUser?.uid).collection('wishlist').doc(restaurantid);
+       await docref.delete();
     }catch(error){
      debugPrint(error.toString());
      throw Exception(error.toString());

@@ -17,6 +17,7 @@ class DishModel extends DishEntity{
   super.stock,
   super.serve,
  required super.category,
+ required super.dishcategory,
    super.image1,
    super.image2,
    super.image3,
@@ -35,6 +36,7 @@ factory DishModel.fromJson({ required Map<String , dynamic> json}){
     stock: json["stock"],
     serve: json["serve"],
     category: json["category"],
+    dishcategory: json['dishCategory'],
     image1: json["image1"],
     image2: json["image2"],
     image3: json["image3"],
@@ -52,6 +54,7 @@ Map<String , dynamic> toJson(){
     "stock" : stock,
     "serve" : serve,
     "category" : category,
+    'dishCategory' : dishcategory,
     "image1" : image1,
     "image2" : image2,
     "image3" : image2,
@@ -70,6 +73,7 @@ DishModel copywith({
   final String? stock,
   final String? serve,
   required  List<dynamic> category,
+  required String? dishCategory,
   final String? image1,
   final String? image2,
   final String? image3,
@@ -86,10 +90,11 @@ DishModel copywith({
       stock: stock ?? stock,
       serve: serve ?? serve,
       category: category,
+      dishcategory: dishCategory,
       image1: image1 ?? this.image1,
       image2: image2?? this.image2,
       image3: image3 ?? this.image3,
-      image4: image4 ?? this.image4
+      image4: image4 ?? this.image4, 
       
 
        

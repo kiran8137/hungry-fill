@@ -118,7 +118,7 @@ List<String>? selectedimagesurl = [];
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.only(left: 15,bottom: 10),
               child: Container(
                 margin: const EdgeInsets.only(
                   left: 0.9,
@@ -220,7 +220,7 @@ List<String>? selectedimagesurl = [];
                         ),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                       const Text(
                         'Dish Name',
@@ -249,7 +249,7 @@ List<String>? selectedimagesurl = [];
                       ),
 
                       const SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                       const Text(
                         'Dish Description',
@@ -279,7 +279,7 @@ List<String>? selectedimagesurl = [];
                       ),
 
                       const SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
 
                       Row(
@@ -404,11 +404,11 @@ List<String>? selectedimagesurl = [];
                         ],
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
 
                       const Text(
-                        'Dish Category',
+                        'Category',
                         style: TextStyle(
                             fontSize: 15,
                             color: primarycolor,
@@ -447,7 +447,32 @@ List<String>? selectedimagesurl = [];
                         },
                       ),
 
-                      SizedBox(height: 35),
+                      const Text(
+                        'Dish Category',
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: primarycolor,
+                            fontWeight: FontWeight.w700
+                            ),
+                      ),
+                      Container(
+                              width: double.infinity,
+                              height: 35,
+                              child: MultiSelectDropDown(
+                                options: categories
+                                    .map((category) => ValueItem(
+                                        label: category.categoryname!,
+                                        value: category.categoryid))
+                                    .toList(),
+                                onOptionSelected: (selectedvalues) {
+                                  setState(() {
+                                    selectedcategories = selectedvalues;
+                                  });
+                                },
+                              ),
+                            ),
+
+                          SizedBox(height: 10,),
 
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -507,6 +532,7 @@ List<String>? selectedimagesurl = [];
                               stock: dropdownvalue,
                               serve: dishservecontroller.text,
                               category: selectedcategoryids,
+                              dishcategory: '',
                               image1: selectedimag1url ?? widget.currentdish.image1,
                               image2 :selectedimag2url ?? widget.currentdish.image2,
                               image3: selectedimag3url ?? widget.currentdish.image3,

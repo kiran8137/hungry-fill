@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hungry_fill_admin/data/models/category_model.dart';
+import 'package:hungry_fill_admin/data/models/dish_category_model.dart';
 import 'package:hungry_fill_admin/data/models/restaurant_model.dart';
 import 'package:hungry_fill_admin/data/repository/restaurant_repo/restaurant_repo_impl.dart';
 
@@ -13,8 +14,12 @@ class RestaurantProvider extends ChangeNotifier{
 
   RestaurantProvider({required this.restaurantrepository});
 
+  
+
   List<RestaurantModel> restaurants = [];
   List<CategoryModel> categories = [];
+  List<DishCategoryModel> dishcategories = [];
+
 
 Future<void> getRestaurants() async {
 
@@ -67,4 +72,46 @@ await restaurantrepository.createCategory(category: category);
   await restaurantrepository.updateCategory(category: category);
   notifyListeners();
  }
+
+
+
+ //dish wise category
+
+
+ Future<void> createDishCategory({required String dishcategory , required String dishcategoryimgeurl}) async{
+ 
+ try{
+await restaurantrepository.createDishCategory(dishcategory: dishcategory , dishcategoryimgeurl: dishcategoryimgeurl);
+ notifyListeners();
+ }catch(error){
+  log(error.toString());
+ }
+ 
+  
+}
+
+
+ Future<void> getDishCategories() async{
+
+  // final result = await restaurantrepository.getCategories();
+  // categories.addAll(result);
+  // notifyListeners();
+  restaurantrepository.getDishCategories().listen(
+    (dishcategorystream){
+      dishcategories = dishcategorystream;
+      notifyListeners();
+    }
+    );
+ }
+
+
+ Future<Uint8List?> ImagePicker() async{
+
+  final imageresult = await restaurantrepository.ImagePicker();
+  final selectedimage = imageresult!.files.first.bytes;
+  notifyListeners();
+  return selectedimage;
+  
+
+}
 }

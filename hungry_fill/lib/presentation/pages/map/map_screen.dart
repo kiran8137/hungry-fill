@@ -1,3 +1,5 @@
+ 
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geocoding/geocoding.dart';
@@ -28,25 +30,7 @@ class _MapScreenState extends State<MapScreen> {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-            // showModalBottomSheet(
-            //     isDismissible: false,
-            //     context: context,
-            //     builder: (ctx) => const AddAddressPage());
-            // addAddressDetail(context, context);
-            //     position = await getCurrentLocation();
-            //  address = await getAddress(position!);
-            //   googlemapcontroller.animateCamera(CameraUpdate.newCameraPosition(
-            //       CameraPosition(
-            //           target: LatLng(position!.latitude, position!.longitude),
-            //           zoom: 12)));
-
-            //   markers.clear();
-
-            //   markers.add(Marker(
-            //       markerId: const MarkerId('current location'),
-            //       position: LatLng(position!.latitude, position!.longitude)));
-
-            //   setState(() {});
+           
           },
           backgroundColor: primarycolor,
           child: const Icon(
@@ -61,7 +45,7 @@ class _MapScreenState extends State<MapScreen> {
           child: Stack(
             children: [
               Positioned(
-                child: Container(
+                child: SizedBox(
                     height: MediaQuery.of(context).size.height * 0.7,
                     width: double.infinity,
                     // color: Colors.red,
@@ -101,7 +85,7 @@ class _MapScreenState extends State<MapScreen> {
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Container(
+                                SizedBox(
                                     height: 35,
                                     width: 35,
                                     child: Image.asset("assets/gps.png")),
@@ -139,27 +123,14 @@ class _MapScreenState extends State<MapScreen> {
                                   context: context,
                                   builder: (ctx) =>   AddAddressPage(address: state.address!, positon: position!,));
                             },
-                            child: Container(
-                                margin: const EdgeInsets.only(top: 70),
-                                width: 250,
-                                height: 55,
-                                decoration: BoxDecoration(
-                                    color: primarycolor,
-                                    borderRadius: BorderRadius.circular(25)),
-                                child: Center(
-                                  child: Text(
-                                    "Add Address Details",
-                                    style: GoogleFonts.breeSerif(
-                                        color: Colors.white, fontSize: 20),
-                                  ),
-                                )),
+                            child: addAddressDetailsButton(text: 'Add Address Details'),
                           )
                         ],
                       );
                     } else {
-                      return const CircularProgressIndicator();
+                      return const Center(child: CircularProgressIndicator());
                     }
-                    ;
+                    
                   },
                 ),
               ),
@@ -191,31 +162,7 @@ class _MapScreenState extends State<MapScreen> {
 
                       setState(() {});
                     },
-                    child: Container(
-                      height: 35,
-                      width: 160,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(color: primarycolor),
-                          borderRadius: BorderRadius.circular(5)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          const Icon(
-                            Icons.my_location,
-                            color: primarycolor,
-                            size: 20,
-                          ),
-                          Text(
-                            'Current Location',
-                            style: GoogleFonts.roboto(
-                                fontWeight: FontWeight.w400,
-                                color: primarycolor,
-                                fontSize: 15),
-                          )
-                        ],
-                      ),
-                    ),
+                    child: getCurrentLocationButton(text: 'Current Location'),
                   ),
                 ),
               )
@@ -223,4 +170,8 @@ class _MapScreenState extends State<MapScreen> {
           ),
         )));
   }
+
+  
+
+  
 }

@@ -21,3 +21,6 @@ class CreateCategoryEvent extends CategoryEvent{
 
 
 class GetCategoriesEvent extends CategoryEvent{}
+
+
+//class GetDishCategoriesEvent extends CategoryEvent{}

@@ -14,7 +14,7 @@ class Categories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 450,
+        height: 250,
         width: 250,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),

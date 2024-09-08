@@ -30,3 +30,4 @@ final class CategorySelectSuccess extends CategoryState{
  
   List<Object> get props => [selectedcategory];
 }
+

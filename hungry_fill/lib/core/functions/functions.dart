@@ -1,16 +1,16 @@
 
 import 'dart:async';
-import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:hungry_fill/data/model/address_model/address_model.dart';
 import 'package:hungry_fill/data/model/cart_model/cart_model.dart';
 import 'package:hungry_fill/data/model/user_model/user_model.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 
-Stream<List<CartModel>> getCart ({required String restaurantid}) async*{
+Stream<List<CartModel>> getCartInStream ({required String restaurantid}) async*{
     String? userid = FirebaseAuth.instance.currentUser?.uid;
     // List<String> dishids = [];
     // List<DishModel> cartdishes = [];
@@ -28,6 +28,7 @@ Stream<List<CartModel>> getCart ({required String restaurantid}) async*{
      await for(var snashot in cartdoc){
        List<CartModel> cart = snashot.docs.map((cart)=> CartModel.fromJson(json: cart.data())).toList();
       debugPrint(cart.toString());
+      
 
       yield cart;
 
@@ -172,4 +173,79 @@ Future<UserModel?> getUserDetailForAddress() async{
        debugPrint(error.toString());
       throw Exception("error while getting user info $error");
     }
+}
+
+
+Future<List<CartModel>> getCartDetail({required restaurantid}) async{
+  String? userid = FirebaseAuth.instance.currentUser?.uid;
+  try{
+    final result = await FirebaseFirestore.instance.collection('Cart') .where('userId' , isEqualTo: userid )
+      .where('restaurantId' , isEqualTo: restaurantid).get();
+    final cartdetails = result.docs.map((cart)=> CartModel.fromJson(json: cart.data())).toList();
+    return cartdetails;
+  }catch(error){
+    throw Exception(error.toString());
+  }
+}
+
+Future<AddressModel> getAddressOrderDetail ({required String addressId}) async{
+   
+   try{
+  
+    final result = await FirebaseFirestore.instance.collection('Addresses').doc(addressId).get();
+    AddressModel address = AddressModel.fromJson(json: result.data()!);
+    return address;
+   }catch(error){
+    throw Exception(error.toString());
+   }
+}
+
+
+Future<void> deleteCart ({required String cartId}) async{
+
+  try{
+    await FirebaseFirestore.instance.collection('Cart').doc(cartId).delete();
+  }catch(error){
+    throw Exception(error.toString());
+  }
+}
+
+
+ void openCheckOutPayments({
+  required int amount,
+  required String username,
+  required String usermobilenumber,
+  required Razorpay razorPay
+ }){
+
+  var options ={
+    'key' : 'rzp_test_b0Ft6owMsckUhT',
+    'amount' : amount*100,
+    'name' : username,
+    'prefill': {
+      'contact': usermobilenumber,
+      'email': 'test@razorpay.com',
+    },
+  };
+
+
+  try{
+  razorPay.open(options);
+  }catch(error){
+    throw Exception(error.toString());
+  }
+ }
+
+
+
+Future<String> getUserMobileNumber({required String userId}) async{
+ 
+  try{
+    String userNumber;
+    final result = await FirebaseFirestore.instance.collection('Users').doc(userId).get();
+     userNumber = result.get('userMobileNumber');
+     return userNumber;
+  }catch(error){
+    throw Exception(error.toString());
+  }
 }

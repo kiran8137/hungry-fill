@@ -1,33 +1,54 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hungry_fill/data/model/dish_category_model/dish_category_model.dart';
+import 'package:hungry_fill/data/repository/dish_repo_imp/dish_repo_impl.dart';
 import 'package:hungry_fill/presentation/bloc/category_bloc/category_bloc.dart';
  
 import 'package:hungry_fill/presentation/bloc/dish_bloc/dish_bloc.dart';
  
 import 'package:hungry_fill/presentation/bloc/restaurant_bloc/restaurant_bloc.dart';
+import 'package:hungry_fill/presentation/pages/filtered_dishes/filtered_dishes_page.dart';
 import 'package:hungry_fill/presentation/pages/restaurant/restuarant_screen.dart';
 import 'package:hungry_fill/presentation/pages/widgets/recommended_res_widget.dart';
  
 
 //dishItems
 
-ListView dishItems() {
+ListView dishItems({required List<DishCategoryModel> filteroptions}) {
   return ListView.separated(
       separatorBuilder: (context, index) => const SizedBox(
-            width: 10,
+            width: 15,
           ),
       scrollDirection: Axis.horizontal,
-      itemCount: 5,
-      itemBuilder: (context, index) => Container(
-            height: 100,
-            width: 100,
-            decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                //color: Colors.green,
-                image: DecorationImage(
-                    image: AssetImage("assets/food.jpg"), fit: BoxFit.fill)),
-          ));
+      itemCount: filteroptions.length,
+      itemBuilder: (context, index) {
+        final filteroption = filteroptions[index];
+        return Column(
+        children: [
+          GestureDetector(
+            onTap: () async{
+              Navigator.push(context, CupertinoPageRoute(builder: (context)=>   FilteredDishesPage(dishCategoryId: filteroption.dishcategoryid! , dishCategoryName: filteroption.dishcategoryname!,)));
+               
+            },
+            child: Container(
+                  height: 65,
+                  width: 65,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                       
+                      image: DecorationImage(
+                          image: NetworkImage(filteroption.dishcategoryimgeurl!), fit: BoxFit.fill)),
+                ),
+          ),
+                Text(filteroption.dishcategoryname!,
+                style: TextStyle(fontWeight: FontWeight.bold),
+                )
+        ],
+      );
+      } 
+      );
 }
 
 
@@ -53,13 +74,14 @@ ListView recommendedRestaurans(GetRestaurantSuccessState? state) {
               restaurantname: restaurant.restaurantname,
               restaurantdistrict: restaurant.restaurantdistrict,
               restaurantplace: restaurant.restaurantplace,
-              ))).then((_)=>
-                BlocProvider.of<DishBloc>(context).add(DishGetEvent(resuserid: restaurant.restaurantuserid))
+              )));
+              // .then((_)=>
+              //   BlocProvider.of<DishBloc>(context).add(DishGetEvent(resuserid: restaurant.restaurantuserid))
                 
 
-              ).then((_)=>
-              BlocProvider.of<CategoryBloc>(context).add(GetCategories(resuerid: restaurant.restaurantuserid))
-              );
+              // ).then((_)=>
+              // BlocProvider.of<CategoryBloc>(context).add(GetCategories(resuerid: restaurant.restaurantuserid))
+              // );
           },
           child: RecommendRestaurant(restaurant: restaurant),
         );

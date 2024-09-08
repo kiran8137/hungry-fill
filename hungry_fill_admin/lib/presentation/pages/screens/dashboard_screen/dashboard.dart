@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill_admin/core/theme/color.dart';
 import 'package:hungry_fill_admin/presentation/pages/screens/dashboard_screen/widgets/revenue_cart_widget.dart';
-import 'package:hungry_fill_admin/presentation/pages/screens/widgets/header_widget.dart';
+import 'package:hungry_fill_admin/presentation/pages/common_widget_component/widgets/header_widget.dart';
  
 
 class Dashboard extends StatelessWidget {

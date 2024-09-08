@@ -15,14 +15,12 @@ import 'package:hungry_fill/presentation/bloc/auth_bloc/login_bloc/log_in_bloc_b
 import 'package:hungry_fill/presentation/bloc/auth_bloc/sign_in_bloc/auth_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/category_bloc/category_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/dish_bloc/dish_bloc.dart';
+import 'package:hungry_fill/presentation/bloc/filter_homepage/filter_bloc.dart';
+import 'package:hungry_fill/presentation/bloc/order_bloc/order_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/restaurant_bloc/restaurant_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/user_bloc/users_bloc.dart';
-import 'package:hungry_fill/presentation/pages/address/add_address_page.dart';
-import 'package:hungry_fill/presentation/pages/address/addresses_page.dart';
-import 'package:hungry_fill/presentation/pages/dish_detail/dish_detail.dart';
-import 'package:hungry_fill/presentation/pages/map/map_screen.dart';
 import 'package:hungry_fill/presentation/pages/splashscreen/splash_screen.dart';
-import 'package:hungry_fill/presentation/pages/user_auth/sign_in_screen.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -64,12 +62,22 @@ class MyApp extends StatelessWidget {
           
           BlocProvider(
             create: (context)=>AddressBloc(orderrepository: OrderRepoImp())
+            ),
+
+            BlocProvider(
+            create: (context)=>OrderBloc( orderrepositoy: OrderRepoImp())
+            ),
+
+            
+            BlocProvider(
+            create: (context)=>FilterBloc(dishrepository: DishRepoImpl())
             )
         
 
          
       ],
       child: MaterialApp(
+        
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
@@ -79,7 +87,11 @@ class MyApp extends StatelessWidget {
        // MapScreen()
         //AddAddressPage()
         // AddressPage()
+        //AboutPage()
         const SplashScreen()
+        //RecentOrdersDetailScreen()
+        //const OrderSuccessPage()
+         // CheckoutPage()
         //MainPage()
         // LogInScreen(),
         //OtpScreen()

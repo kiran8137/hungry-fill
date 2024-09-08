@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_admin_scaffold/admin_scaffold.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill_admin/core/theme/color.dart';
+ 
 import 'package:hungry_fill_admin/presentation/pages/screens/dashboard_screen/dashboard.dart';
+import 'package:hungry_fill_admin/presentation/pages/screens/orders_screen/orders_screen.dart';
 
 import 'package:hungry_fill_admin/presentation/pages/screens/restaurants_screen/restaurants.dart';
-import 'package:hungry_fill_admin/presentation/pages/screens/widgets/sidebar_items_widget.dart';
+import 'package:hungry_fill_admin/presentation/pages/common_widget_component/widgets/sidebar_items_widget.dart';
+import 'package:hungry_fill_admin/presentation/pages/screens/users_screen/users_screen.dart';
+import 'package:hungry_fill_admin/presentation/statemanagment/provider/order_provider.dart';
 import 'package:hungry_fill_admin/presentation/statemanagment/provider/restaurant_provider.dart';
+import 'package:hungry_fill_admin/presentation/statemanagment/provider/user_provider.dart';
 import 'package:provider/provider.dart';
 
 class MainScreen extends StatefulWidget {
@@ -32,7 +37,10 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     Provider.of<RestaurantProvider>(context, listen: false).getRestaurants();
-     Provider.of<RestaurantProvider>(context,listen: false).getCategories();
+    Provider.of<RestaurantProvider>(context,listen: false).getCategories();
+    Provider.of<RestaurantProvider>(context,listen: false).getDishCategories();
+    Provider.of<OrderProvider>(context,listen: false).getOrdersList();
+     Provider.of<UserProvider>(context,listen: false).getUsersDetail();
     super.initState();
   }
 
@@ -81,9 +89,9 @@ class _MainScreenState extends State<MainScreen> {
               route: '/restaurants',
             ),
             AdminMenuItem(
-              title: 'Customers',
+              title: 'Users',
               // icon: Icons.people,
-              route: '/customers',
+              route: '/users',
             ),
           ],
           selectedRoute: selectedRoute,
@@ -104,17 +112,17 @@ Widget getSelectedpage({
 }) {
   switch (selectedroute) {
     case '/dashboard':
-     return   Dashboard();
+    // return   Dashboard();
      
 
      case '/orders':
-     //return   DailyOrders();
+    return  OrdersScreen();
     case '/restaurants':
      return   RestaurantsScreen();
-    case '/customers':
-     
+    case '/users':
+     return UsersScreen();
     default:
-      return RestaurantsScreen();
+      return UsersScreen();
   }
 }
 

@@ -6,8 +6,11 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:hungry_fill/core/restaurant_and_dish/restaurant_and_dish.dart';
 import 'package:hungry_fill/data/model/category_model/category_model.dart';
+import 'package:hungry_fill/data/model/dish_category_model/dish_category_model.dart';
 import 'package:hungry_fill/data/model/dish_model/dish_model.dart';
+import 'package:hungry_fill/data/model/restaurant_model/restaurant_model.dart';
 import 'package:hungry_fill/domain/repositories/dish_repository/dish_repo.dart';
 
 class DishRepoImpl extends DishRepository{
@@ -48,6 +51,7 @@ class DishRepoImpl extends DishRepository{
      List<DishModel> dishes = snapshot.docs.map((dish)=> DishModel.fromJson(json: dish.data())).toList();
      debugPrint(dishes.toString());
      return dishes;
+      
 
     }catch(error){
       log(error.toString());
@@ -104,89 +108,69 @@ class DishRepoImpl extends DishRepository{
       throw Exception(error.toString());
      }
   }
+
+  @override
+  Future<List<RestaurantAndDish>> getFilterDish({required String dishcategoryid}) async{
+    List<RestaurantAndDish> filteredDishandRestaurants = [];
+    try{
+      final restaurantSnapshot = await FirebaseFirestore.instance.collection('Restaurants').get();
+
+      for(var restaurantdoc in restaurantSnapshot.docs){
+        var restaurantdata = restaurantdoc.data();
+        var restaurantid = restaurantdoc.id;
+
+        final dishessnapshot = await FirebaseFirestore.instance
+        .collection('Restaurants')
+        .doc(restaurantid)
+        .collection("Dishes")
+        .where('dishCategory' , isEqualTo: dishcategoryid)
+        .get();
+
+        if(dishessnapshot.docs.isNotEmpty){
+          List<DishModel> dishes = dishessnapshot.docs.map((dish)=> DishModel.fromJson(json: dish.data())).toList();
+        
+
+        filteredDishandRestaurants.add(RestaurantAndDish(
+          restaurant: RestaurantModel.fromJson(doc: restaurantdoc), 
+          dishes: dishes
+          )
+          );
+        }
+      }
+
+      return filteredDishandRestaurants;
+    }catch(error){
+      log(error.toString());
+      throw Exception(error.toString());
+    }
+  }
+  
+  @override
+  Future<List<DishCategoryModel>> getDishesCategoryFilterOptionFromDb() async {
+    try{
+    final snapshot = await FirebaseFirestore.instance.collection('DishCategories').get();
+    final result = snapshot.docs.map((doc)=> DishCategoryModel.fromJson(json: doc.data())).toList();
+    debugPrint(result.toString());
+return result;
+  }catch(error){
+    log(error.toString());
+    throw Exception(error.toString());
+  }
+  }
   
 }
 
-// Future<void> categorys() async{
-//    try{
+// Future<List<DishCategoryModel>> getDishesCategoryFilterOptionFromDb() async{
 
-//       final snapshot = await FirebaseFirestore.instance
-//      .collection("Restaurants")
-//      .doc("EVNCBQtwSBMoCI7EsKFvDwrX7vE3")
-//      .collection("categories")
-//      .get();
-//      //final snapshot =   await FirebaseFirestore.instance.collection("Restaurants").doc(userid).collection("Dishes").get();
-
-//       final result = snapshot.docs.map((cat)=> CategoryModel.fromJson(json: cat.data())).toList();
-//      print("category: $result");
-
-//     }catch(error){
-//       log(error.toString());
-//       throw Exception(error.toString());
-//     }
-// }
-
-
-
-// Future<void> categoryhDishes() async{
-
-//     try{
-
-//       final snapshot = await FirebaseFirestore.instance
-//      .collection("Restaurants")
-//      .doc("EVNCBQtwSBMoCI7EsKFvDwrX7vE3")
-//      .collection("Dishes")
-//      .where("category" , arrayContains: "1DtFhrpljNQ2DHzuG8oe")
-//      .get();
-//      //final snapshot =   await FirebaseFirestore.instance.collection("Restaurants").doc(userid).collection("Dishes").get();
-
-//      List<DishModel> dishes = snapshot.docs.map((dish)=> DishModel.fromJson(json: dish.data())).toList();
-     
-//      print("category: $dishes");
-
-//     }catch(error){
-//       log(error.toString());
-//       throw Exception(error.toString());
-//     }
-     
-
-     
+//   try{
+//     final snapshot = await FirebaseFirestore.instance.collection('DishCategories').get();
+//     final result = snapshot.docs.map((doc)=> DishCategoryModel.fromJson(json: doc.data())).toList();
+//     debugPrint(result.toString());
+// return result;
+//   }catch(error){
+//     log(error.toString());
+//     throw Exception(error.toString());
 //   }
-
-
-  // Future<void> searchDishes() async{
-
-  //   try{
-
-  //     final snapshot = await FirebaseFirestore.instance
-  //    .collection("Restaurants")
-  //    .doc("EVNCBQtwSBMoCI7EsKFvDwrX7vE3")
-  //    .collection("Dishes")
-  //    .where("dishName" , isEqualTo: "chicken biriyani")
-  //    .get();
-  //    //final snapshot =   await FirebaseFirestore.instance.collection("Restaurants").doc(userid).collection("Dishes").get();
-
-  //    List<DishModel> dishes = snapshot.docs.map((dish)=> DishModel.fromJson(json: dish.data())).toList();
-  //    print("search : $dishes");
-
-  //   }catch(error){
-  //     log(error.toString());
-  //     throw Exception(error.toString());
-  //   }
-     
-
-     
-  // }
-  
-
-
-
- 
- 
-
-
-
-
-
+// }
 
  

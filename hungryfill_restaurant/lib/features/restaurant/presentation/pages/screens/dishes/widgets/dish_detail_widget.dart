@@ -99,6 +99,7 @@ class DishDetailWidget extends StatelessWidget {
                       stock: dishes.stock,
                       category:
                           dishes.category,
+                      dishcategory: dishes.dishcategory,
                       image1: dishes.image1,
                       image2: dishes.image2,
                       image3: dishes.image3,

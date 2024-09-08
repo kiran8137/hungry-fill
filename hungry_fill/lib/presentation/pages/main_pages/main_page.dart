@@ -5,11 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/data/model/user_model/user_model.dart';
+import 'package:hungry_fill/presentation/bloc/category_bloc/category_bloc.dart';
+import 'package:hungry_fill/presentation/bloc/filter_homepage/filter_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/restaurant_bloc/restaurant_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/user_bloc/users_bloc.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/components_main_page/components.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/home_page/home_page.dart';
-import 'package:hungry_fill/presentation/pages/main_pages/recent_orders_page/recent_order.dart';
+import 'package:hungry_fill/presentation/pages/main_pages/recent_orders_page/recent_orders.dart';
+ 
 import 'package:hungry_fill/presentation/pages/main_pages/reciepe_page/reciepe.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/user_profile/user_profile.dart';
 
@@ -41,6 +44,7 @@ UserModel? currentuserinfo;
     
     BlocProvider.of<UsersBloc>(context).add(UserGetEvent());
     BlocProvider.of<RestaurantBloc>(context).add(GetRestaurantsEvent());
+    BlocProvider.of<FilterBloc>(context).add(GetDishesCategoryFilterOptions());
     super.initState();
   }
   @override

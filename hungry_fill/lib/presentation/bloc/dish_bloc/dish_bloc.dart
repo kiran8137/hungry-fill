@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:hungry_fill/core/restaurant_and_dish/restaurant_and_dish.dart';
 
 import 'package:hungry_fill/data/model/cart_model/cart_model.dart';
 
@@ -35,6 +36,8 @@ class DishBloc extends Bloc<DishEvent, DishState> {
     // on<GetCartEvent>(getCart);
     on<GetRestaurantsInCart>(getRestaurantsInCart);
     //on<CartCalculationEvent>(getCartCalculation);
+   
+
   }
 
   FutureOr<void> getDish(DishGetEvent event, Emitter<DishState> emit) async {
@@ -55,11 +58,15 @@ class DishBloc extends Bloc<DishEvent, DishState> {
 
   FutureOr<void> searchDishes(
       SearchDishEvent event, Emitter<DishState> emit) async {
+
+        List<DishModel> searchesDishes = [];
     try {
       List<DishModel> dishes = await dishrepository.searchDishes(
           query: event.dishname, userid: event.userid);
+      
       if (dishes.isNotEmpty) {
-        emit(SearchDishSuccessState(dishes: dishes));
+        //searchesDishes = dishes.where((dish)=> dish.dishname!.toLowerCase().contains(event.dishname!.toLowerCase())).toList();
+         emit(SearchDishSuccessState(dishes: dishes));
       } else {
         emit(SearchDishEmptyState());
       }
@@ -105,18 +112,7 @@ class DishBloc extends Bloc<DishEvent, DishState> {
     }
   }
 
-  //  FutureOr<void> getCart(GetCartEvent event, Emitter<DishState> emit) async {
-  //   try{
-
-  //  final cart =  await cartrepositoy.getCart(restaurantid: event.restaurantid!);
-  //  final total = await getcarttotal(userid: FirebaseAuth.instance.currentUser?.uid, restaurantid: event.restaurantid);
-  // print(cart);
-  // emit(GetCartSuccessState(cart: cart , carttotal: total));
-
-  //   }catch(error){
-  //     log(error.toString());
-  //   }
-  // }
+   
 
   FutureOr<void> getRestaurantsInCart(
       GetRestaurantsInCart event, Emitter<DishState> emit) async {
@@ -146,6 +142,23 @@ class DishBloc extends Bloc<DishEvent, DishState> {
   //     final cartcarttotal = await getcarttotal(userid: event.userid!, restaurantid: event.restuarantid);
 
   //     emit(CartCalculationSuccesState(carttotal: cartcarttotal));
+  //   }catch(error){
+  //     log(error.toString());
+  //   }
+  // }
+
+  // FutureOr<void> getFilteredDishes(GetFilteredDishes event, Emitter<DishState> emit) async{
+    
+
+  //   try{
+  //     emit(FilterDishesInitial());
+  //     final result = await dishrepository.getFilterDish(dishcategoryid: event.dishCategoryId);
+  //     if(result.isEmpty){
+  //       emit(FilterDishesEmpty());
+  //     }else{
+  //       emit(FilteredDishesSuccess(filtereddish: result));
+  //     }
+  //   debugPrint(result.toString());
   //   }catch(error){
   //     log(error.toString());
   //   }

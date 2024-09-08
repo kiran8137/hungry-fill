@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/category/category_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/dish/dish_model.dart';
+import 'package:hungryfill_restaurant/features/restaurant/data/model/dish_category/dish_category_model.dart';
 
 abstract class DishRepository {
   
@@ -25,4 +26,6 @@ abstract class DishRepository {
   Future<void> createCategory({required List<CategoryModel> categories});
 
   Future<List<CategoryModel>> getCategories();
+
+  Future<List<DishCategoryModel>> getDishCategories();
 }

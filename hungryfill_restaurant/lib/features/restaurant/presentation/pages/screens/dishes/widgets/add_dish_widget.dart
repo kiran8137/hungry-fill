@@ -1,4 +1,3 @@
- 
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -11,6 +10,7 @@ import 'package:hungryfill_restaurant/features/restaurant/data/model/dish/dish_m
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/dishes/widgets/widgets_dish_image/add_dish_image.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/category/category_bloc.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/dish/dish_bloc.dart';
+import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/dish_category/dish_category_bloc.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/provider/dish_provider.dart';
 import 'package:multi_dropdown/multiselect_dropdown.dart';
 import 'package:provider/provider.dart';
@@ -28,11 +28,9 @@ class _AddDishState extends State<AddDish> {
   var dropdownvalue = 'IN';
   List<CategoryModel> categories = [];
   List<ValueItem<String>> selectedcategories = [];
+   List<ValueItem<String>> selecteddishcategories = [];
 
-    
-     
- 
-List<String>? selectedimagesurl = [];
+  List<String>? selectedimagesurl = [];
   //selected images
   Uint8List? selectedimag1;
   Uint8List? selectedimag2;
@@ -44,11 +42,9 @@ List<String>? selectedimagesurl = [];
   String? selectedimag3url;
   String? selectedimag4url;
 
-
-
   final TextEditingController dishnamecontroller = TextEditingController();
-   
-  final TextEditingController discriptioncontroller = TextEditingController(); 
+
+  final TextEditingController discriptioncontroller = TextEditingController();
 
   final TextEditingController dishpricecontroller = TextEditingController();
 
@@ -59,6 +55,16 @@ List<String>? selectedimagesurl = [];
   final TextEditingController dishcategorycontroller = TextEditingController();
 
   final MultiSelectController mulitselectorcontoller = MultiSelectController();
+  @override
+  void initState() {
+    // TODO: implement initState
+    // BlocProvider.of<CategoryBloc>(context).add(GetCategoriesEvent());
+    // BlocProvider.of<CategoryBloc>(context).add(GetDishCategoriesEvent());
+     Provider.of<DishProvider>(context, listen: false).getDishCategory();
+     Provider.of<DishProvider>(context, listen: false).getCategory();
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +101,10 @@ List<String>? selectedimagesurl = [];
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.only(
+                left: 15,
+                bottom: 10,
+              ),
               child: Container(
                 margin: const EdgeInsets.only(
                   left: 0.9,
@@ -103,7 +112,7 @@ List<String>? selectedimagesurl = [];
                 ),
                 height: 590,
                 width: 450,
-                 //color: Colors.grey,
+                //color: Colors.grey,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
@@ -121,9 +130,8 @@ List<String>? selectedimagesurl = [];
                         'Images',
                         style: TextStyle(
                             fontSize: 15,
-                             color: primarycolor,
-                            fontWeight: FontWeight.w700
-                            ),
+                            color: primarycolor,
+                            fontWeight: FontWeight.w700),
                       ),
                       const SizedBox(height: 8),
                       Container(
@@ -140,72 +148,64 @@ List<String>? selectedimagesurl = [];
                           padding:
                               const EdgeInsets.only(top: 8, bottom: 8, left: 8),
                           child: Consumer<DishProvider>(
-                            builder: (context, value, child) {
-                             // selectedimag1 = value.selectedimage;
-                              return  Row(
+                              builder: (context, value, child) {
+                            // selectedimag1 = value.selectedimage;
+                            return Row(
                               children: [
                                 GestureDetector(
-                                  onTap: ()async{
-                                  
-                                  selectedimag1 = await value.ImagePicker();
-                                 // selectedimages.add(selectedimag1);
-                                  
-                                  },
-                                  child: DishImageWidget(selectedimage: selectedimag1) 
-                                ),
+                                    onTap: () async {
+                                      selectedimag1 = await value.ImagePicker();
+                                      // selectedimages.add(selectedimag1);
+                                    },
+                                    child: DishImageWidget(
+                                        selectedimage: selectedimag1)),
                                 const SizedBox(
                                   width: 5,
                                 ),
                                 GestureDetector(
-                                  onTap: () async{
-                                   selectedimag2 = await value.ImagePicker();
-                                  // selectedimages.add(selectedimag2);
-                                  },
-                                  child: DishImageWidget(selectedimage: selectedimag2)
-                                   
-                                ),
+                                    onTap: () async {
+                                      selectedimag2 = await value.ImagePicker();
+                                      // selectedimages.add(selectedimag2);
+                                    },
+                                    child: DishImageWidget(
+                                        selectedimage: selectedimag2)),
                                 const SizedBox(
                                   width: 5,
                                 ),
                                 GestureDetector(
-                                  onTap: ()async{
-                                    selectedimag3 = await value.ImagePicker();
-                                   // selectedimages.add(selectedimag3);
-                                  },
-                                  child: DishImageWidget(selectedimage: selectedimag3)
-                                  
-                                ),
+                                    onTap: () async {
+                                      selectedimag3 = await value.ImagePicker();
+                                      // selectedimages.add(selectedimag3);
+                                    },
+                                    child: DishImageWidget(
+                                        selectedimage: selectedimag3)),
                                 const SizedBox(
                                   width: 5,
                                 ),
                                 GestureDetector(
-                                  onTap: () async{
-                                    selectedimag4 = await value.ImagePicker();
-                                    //selectedimages.add(selectedimag4);
-                                  },
-                                  child: DishImageWidget(selectedimage: selectedimag4)
-                                  
-                                ),
+                                    onTap: () async {
+                                      selectedimag4 = await value.ImagePicker();
+                                      //selectedimages.add(selectedimag4);
+                                    },
+                                    child: DishImageWidget(
+                                        selectedimage: selectedimag4)),
                                 const SizedBox(
                                   width: 5,
                                 )
                               ],
                             );
-                            }
-                            
-                          ),
+                          }),
                         ),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                       const Text(
                         'Dish Name',
                         style: TextStyle(
                             fontSize: 15,
                             color: primarycolor,
-                            fontWeight: FontWeight.w700
-                            ),
+                            fontWeight: FontWeight.w700),
                       ),
                       const SizedBox(height: 5),
                       Container(
@@ -221,20 +221,19 @@ List<String>? selectedimagesurl = [];
                         child: TextFormField(
                           decoration:
                               const InputDecoration(border: InputBorder.none),
-                              controller: dishnamecontroller,
+                          controller: dishnamecontroller,
                         ),
                       ),
 
                       const SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                       const Text(
                         'Dish Description',
                         style: TextStyle(
                             fontSize: 15,
-                             color: primarycolor,
-                            fontWeight: FontWeight.w700
-                            ),
+                            color: primarycolor,
+                            fontWeight: FontWeight.w700),
                       ),
                       const SizedBox(height: 5),
                       Container(
@@ -256,11 +255,10 @@ List<String>? selectedimagesurl = [];
                       ),
 
                       const SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
 
                       Row(
-                        
                         children: [
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -269,9 +267,8 @@ List<String>? selectedimagesurl = [];
                                 'Dish price',
                                 style: TextStyle(
                                     fontSize: 15,
-                                     color: primarycolor,
-                            fontWeight: FontWeight.w700
-                                    ),
+                                    color: primarycolor,
+                                    fontWeight: FontWeight.w700),
                               ),
                               const SizedBox(height: 5),
                               Container(
@@ -297,7 +294,6 @@ List<String>? selectedimagesurl = [];
                           const SizedBox(
                             width: 30,
                           ),
-
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -305,9 +301,8 @@ List<String>? selectedimagesurl = [];
                                 'Dish Serve',
                                 style: TextStyle(
                                     fontSize: 15,
-                                     color: primarycolor,
-                            fontWeight: FontWeight.w700
-                                    ),
+                                    color: primarycolor,
+                                    fontWeight: FontWeight.w700),
                               ),
                               const SizedBox(height: 5),
                               Container(
@@ -330,11 +325,9 @@ List<String>? selectedimagesurl = [];
                               )
                             ],
                           ),
-
-                           const SizedBox(
+                          const SizedBox(
                             width: 30,
                           ),
-
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -342,9 +335,8 @@ List<String>? selectedimagesurl = [];
                                 'Dish Stock',
                                 style: TextStyle(
                                     fontSize: 15,
-                                     color: primarycolor,
-                            fontWeight: FontWeight.w700
-                                    ),
+                                    color: primarycolor,
+                                    fontWeight: FontWeight.w700),
                               ),
                               const SizedBox(height: 5),
                               Container(
@@ -371,28 +363,22 @@ List<String>? selectedimagesurl = [];
                                         setState(() {
                                           dropdownvalue = newvalue!;
                                         });
-                                      }))
+                                      })),
                             ],
                           ),
-
-                          
-
-                          
                         ],
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
 
                       const Text(
-                        'Dish Category',
+                        'Category',
                         style: TextStyle(
                             fontSize: 15,
                             color: primarycolor,
-                            fontWeight: FontWeight.w700
-                            ),
+                            fontWeight: FontWeight.w700),
                       ),
-
 
                       BlocBuilder<CategoryBloc, CategoryState>(
                         builder: (context, state) {
@@ -400,7 +386,8 @@ List<String>? selectedimagesurl = [];
                           if (state is CategorySuccessEvent) {
                             categories = state.categories;
 
-                            return Container(
+                            return 
+                      Container(
                               width: double.infinity,
                               height: 35,
                               child: MultiSelectDropDown(
@@ -424,97 +411,190 @@ List<String>? selectedimagesurl = [];
                         },
                       ),
 
-                      SizedBox(height: 35),
+                      //   Consumer<DishProvider>(
+                      // builder: (BuildContext context, DishProvider value,
+                      //         Widget? child){
+                      //            return  
+                      //           Container(
+                      //         width: double.infinity,
+                      //         height: 35,
+                      //         child: MultiSelectDropDown(
+                      //           hintColor: Colors.black,
+                      //           options: value.categories
+                      //               .map((category) => ValueItem(
+                      //                   label: category.categoryname!,
+                      //                   value: category.categoryid))
+                      //               .toList(),
+                      //           onOptionSelected: (selectedvalues) {
+                      //             setState(() {
+                      //               selectedcategories = selectedvalues;
+                      //             });
+                      //           },
+                      //         ),
+                      //       );
+                      //         }
+                      //   ),
+                      //SizedBox(height: 30),
 
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      const Text(
+                        'Dish Category',
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: primarycolor,
+                            fontWeight: FontWeight.w700),
+                      ),
+                      BlocBuilder<DishCategoryBloc, DishCategoryState>(
+                        builder: (context, state) {
+                          if (state is GetDishCategoriesSuccess) {
+                            final dishcategories = state.dishcategories;
+                            return
+                             Container(
+                              width: double.infinity,
+                              height: 35,
+                              child: MultiSelectDropDown(
+                                options: dishcategories
+                                    .map((dishcategory) => ValueItem(
+                                        label: dishcategory.dishcategoryname!,
+                                        value: dishcategory.dishcategoryid))
+                                    .toList(),
+                                onOptionSelected: (selectedvalues) {
+                                  setState(() {
+                                    selecteddishcategories = selectedvalues;
+                                  });
+                                },
+                              ),
+                            );
+                          } else {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                        },
+                      ),
+
+                      //  Consumer<DishProvider>(
+                      // builder: (BuildContext context, DishProvider value,
+                      //         Widget? child){
+                      //           return
+                      //                    Container(
+                      //         width: double.infinity,
+                      //         height: 35,
+                      //         child: MultiSelectDropDown(
+                      //           options: value.dishcategries
+                      //               .map((dishcategory) => ValueItem(
+                      //                   label: dishcategory.dishcategoryname!,
+                      //                   value: dishcategory.dishcategoryid))
+                      //               .toList(),
+                      //           onOptionSelected: (selectedvalues) {
+                      //             setState(() {
+                      //               selectedcategories = selectedvalues;
+                      //             });
+                      //           },
+                      //         ),
+                      //       );
+                      //         }
+                      //  ),
+
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               Navigator.pop(context);
                             },
-                            child: const Text('Cancel',
-                            style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              fontWeight: FontWeight.w600
-                            ),
+                            child: const Text(
+                              'Cancel',
+                              style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  fontWeight: FontWeight.w600),
                             ),
                           ),
-
-                         GestureDetector(
-                          onTap: () async{
-                            debugPrint('add dish tapped');
+                          GestureDetector(
+                            onTap: () async {
+                              debugPrint('add dish tapped');
                               if (dishnamecontroller.text.isEmpty ||
-                              dishpricecontroller.text.isEmpty ||
-                              dropdownvalue.isEmpty ||
-                              dishservecontroller.text.isEmpty ||
-                              selectedcategories.isEmpty 
-                            //  selectedimages.isEmpty || selectedimages.length<4
-                              ) {
-                            return;
-                          }
+                                      dishpricecontroller.text.isEmpty ||
+                                      dropdownvalue.isEmpty ||
+                                      dishservecontroller.text.isEmpty ||
+                                      selectedcategories.isEmpty ||
+                                      selecteddishcategories.isEmpty
+                                  //  selectedimages.isEmpty || selectedimages.length<4
+                                  ) {
+                                return;
+                              }
 
-                          final selectedcategoryids = selectedcategories.map((category)=> category.value).toList();
+                              final selectedcategoryids = selectedcategories
+                                  .map((category) => category.value)
+                                  .toList();
+                              final selecteddishcategoryids = selecteddishcategories.
+                              map((category)=> category.value).toList();
 
-                          
-
-                          selectedimag1url = await  saveImageToStorage(filename: 'dishimage1', selectedImageInBytes: selectedimag1! , );
-                          selectedimag2url = await  saveImageToStorage(filename: 'dishimage2', selectedImageInBytes: selectedimag2!);
-                          selectedimag3url = await  saveImageToStorage(filename: 'dishimage3', selectedImageInBytes: selectedimag3!);
-                          selectedimag4url = await  saveImageToStorage(filename: 'dishimage4', selectedImageInBytes: selectedimag4!);
-
-                         
-                          DishModel dish = DishModel(
-                              dishname: dishnamecontroller.text,
-                              dishdescription: discriptioncontroller.text,
-                              dishprice: dishpricecontroller.text,
-                              stock: dropdownvalue,
-                              serve: dishservecontroller.text,
-                              category: selectedcategoryids,
-                              image1: selectedimag1url,
-                              image2 :selectedimag2url,
-                              image3: selectedimag3url,
-                              image4: selectedimag4url
-                              
+                              selectedimag1url = await saveImageToStorage(
+                                filename: 'dishimage1',
+                                selectedImageInBytes: selectedimag1!,
                               );
+                              selectedimag2url = await saveImageToStorage(
+                                  filename: 'dishimage2',
+                                  selectedImageInBytes: selectedimag2!);
+                              selectedimag3url = await saveImageToStorage(
+                                  filename: 'dishimage3',
+                                  selectedImageInBytes: selectedimag3!);
+                              selectedimag4url = await saveImageToStorage(
+                                  filename: 'dishimage4',
+                                  selectedImageInBytes: selectedimag4!);
 
-                              debugPrint(dish.toString());
+                              DishModel dish = DishModel(
+                                  dishname: dishnamecontroller.text,
+                                  dishdescription: discriptioncontroller.text,
+                                  dishprice: dishpricecontroller.text,
+                                  stock: dropdownvalue,
+                                  serve: dishservecontroller.text,
+                                  category: selectedcategoryids,
+                                  dishcategory: selecteddishcategoryids[0],
+                                  image1: selectedimag1url,
+                                  image2: selectedimag2url,
+                                  image3: selectedimag3url,
+                                  image4: selectedimag4url);
 
-                          BlocProvider.of<DishBloc>(context)
-                              .add(DishAddEvent(dishmodel: dish));
-                              
+                              debugPrint('selected dish $dish');
+
+                              BlocProvider.of<DishBloc>(context)
+                                  .add(DishAddEvent(dishmodel: dish));
+
                               Navigator.pop(context);
-                          },
-                           child: Container(
-                                height: 34,
-                                width: 100,
-                                decoration: BoxDecoration(
-                                    color: primarycolor,
-                                    borderRadius: BorderRadius.circular(5)),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                   
-                                    Text(
-                                      'Add Dish',
-                                      style: GoogleFonts.roboto(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 15
-                                          ),
-                                    ),
-                           
-                                     const Icon(
-                                      Icons.arrow_forward,
-                                      color: Colors.white,
-                                      size: 20,
-                                    ),
-                                    
-                                  ],
-                                ),
+                              selecteddishcategoryids.clear();
+
+                            },
+                            child: Container(
+                              height: 34,
+                              width: 100,
+                              decoration: BoxDecoration(
+                                  color: primarycolor,
+                                  borderRadius: BorderRadius.circular(5)),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Add Dish',
+                                    style: GoogleFonts.roboto(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 15),
+                                  ),
+                                  const Icon(
+                                    Icons.arrow_forward,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
+                                ],
                               ),
-                         ),
+                            ),
+                          ),
                         ],
                       )
                     ],
@@ -528,4 +608,3 @@ List<String>? selectedimagesurl = [];
     );
   }
 }
-

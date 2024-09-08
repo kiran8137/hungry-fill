@@ -59,7 +59,8 @@ class WishListPage extends StatelessWidget {
                 behavior: SnackBarBehavior.floating,
                 backgroundColor: Colors.transparent,
                 elevation: 0,
-              ));
+              )
+              );
           }
           }
           

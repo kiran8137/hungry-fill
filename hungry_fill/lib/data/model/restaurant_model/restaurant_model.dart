@@ -5,7 +5,7 @@ import 'package:hungry_fill/domain/entities/restaurant_entity/restaurant_entity.
  
 
 class RestaurantModel extends RestaurantEntity {
-    RestaurantModel({
+    const RestaurantModel({
         
         super.restaurantuserid,
         super.restaurantname,

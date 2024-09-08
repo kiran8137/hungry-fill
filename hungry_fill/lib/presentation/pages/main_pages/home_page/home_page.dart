@@ -2,24 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
+import 'package:hungry_fill/presentation/bloc/category_bloc/category_bloc.dart';
+import 'package:hungry_fill/presentation/bloc/filter_homepage/filter_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/restaurant_bloc/restaurant_bloc.dart';
 import 'package:hungry_fill/presentation/pages/cart_page/cart_restauants.dart';
- 
+
 import 'package:hungry_fill/presentation/pages/main_pages/home_page/components_home_page/components.dart';
 
 import 'package:hungry_fill/presentation/pages/main_pages/widgets/search_widget.dart';
- 
+
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
 
-  final TextEditingController searchcontroller = TextEditingController();
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
 
+class _HomeScreenState extends State<HomeScreen> {
+  final TextEditingController searchcontroller = TextEditingController();
+ @override
+  void initState() {
+    BlocProvider.of<FilterBloc>(context).add(GetDishesCategoryFilterOptions());
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<RestaurantBloc>(context).add(GetRestaurantsEvent());
-
     return Scaffold(
         floatingActionButton: FloatingActionButton.extended(
             label: const Icon(
@@ -28,8 +38,9 @@ class HomeScreen extends StatelessWidget {
             ),
             backgroundColor: primarycolor,
             onPressed: () {
-             //  adddish();
-               Navigator.push(context, MaterialPageRoute(builder: (context)=> const Cart()));
+              //  adddish();
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const Cart()));
             }),
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
@@ -41,9 +52,18 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   SearchWidget(searchcontroller: searchcontroller),
                   const SizedBox(height: 35),
-                  SizedBox(
-                    height: 70,
-                    child: dishItems(),
+                  BlocBuilder<FilterBloc , FilterState>(
+                    builder: (context, state) {
+                      if(state is DishesCategoryFilterOptionSuccess){
+                        return  SizedBox(
+                        height: 100,
+                        child: dishItems(filteroptions: state.filteroptions),
+                      );
+                      }else{
+                        return SizedBox(height: 100);
+                      }
+                      
+                    },
                   ),
                   const SizedBox(height: 35),
                   Text(
@@ -138,6 +158,4 @@ class HomeScreen extends StatelessWidget {
           ),
         ));
   }
-
- 
 }

@@ -3,7 +3,9 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/category/category_model.dart';
+import 'package:hungryfill_restaurant/features/restaurant/data/model/dish_category/dish_category_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/domain/repositories/dish_repository.dart';
 
 part 'category_event.dart';
@@ -16,6 +18,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     
      on<CreateCategoryEvent>(createCategory);
     on<GetCategoriesEvent>(getCategories);
+    //on<GetDishCategoriesEvent>(getDishCategoriesEvent);
   }
 
   FutureOr<void> createCategory(CreateCategoryEvent event, Emitter<CategoryState> emit) async {
@@ -40,4 +43,15 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       log(" getcatbloc error ${error.toString()}");
     }
   }
+
+//   FutureOr<void> getDishCategoriesEvent(GetDishCategoriesEvent event, Emitter<CategoryState> emit) async {
+// //  emit(GetDishCategoriesIntial());
+// //     try{
+// //       final dishcategories = await dishrepository.getDishCategories();
+// //       emit(GetDishCategoriesSuccess(dishcategories: dishcategories));
+// //       debugPrint('emitting GetDishCategoriesSuccesss');
+// //     }catch(error){
+// //       log(error.toString());
+// //     }
+//   }
 }

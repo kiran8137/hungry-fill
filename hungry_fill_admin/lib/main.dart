@@ -1,12 +1,16 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hungry_fill_admin/data/repository/auth_repo/auth_repo_impl.dart';
+import 'package:hungry_fill_admin/data/repository/order_repo/order_repo_impl.dart';
 import 'package:hungry_fill_admin/data/repository/restaurant_repo/restaurant_repo_impl.dart';
+import 'package:hungry_fill_admin/data/repository/users_repo/users_repo_impl.dart';
 import 'package:hungry_fill_admin/presentation/pages/auth_screens/sign_in.dart';
 import 'package:hungry_fill_admin/presentation/pages/screens/main_screen.dart';
 import 'package:hungry_fill_admin/presentation/pages/splash_screen/splash_screen.dart';
 import 'package:hungry_fill_admin/presentation/statemanagment/provider/auth_provider.dart';
+import 'package:hungry_fill_admin/presentation/statemanagment/provider/order_provider.dart';
 import 'package:hungry_fill_admin/presentation/statemanagment/provider/restaurant_provider.dart';
+import 'package:hungry_fill_admin/presentation/statemanagment/provider/user_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() async{
@@ -35,7 +39,13 @@ class MyApp extends StatelessWidget {
           ),
         ChangeNotifierProvider(
           create: (context)=> AuthProvider(authrepository: AuthRepoImpl())
-          )
+          ),
+           ChangeNotifierProvider(
+          create: (context)=> OrderProvider(orderRepository: OrderRepoImpl())
+          ),
+                     ChangeNotifierProvider(
+          create: (context)=> UserProvider(userRepository: UsersRepoImpl())
+          ),
       ],
       
       child: MaterialApp(

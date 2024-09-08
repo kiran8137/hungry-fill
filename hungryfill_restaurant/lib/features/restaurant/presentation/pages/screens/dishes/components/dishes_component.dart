@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hungryfill_restaurant/core/theme/color.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/dishes/widgets/add_dish_widget.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/category/category_bloc.dart';
+import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/dish_category/dish_category_bloc.dart';
 
 Container dishListBar(BuildContext context) {
     return Container(
@@ -54,8 +55,11 @@ Container dishListBar(BuildContext context) {
                       ),
                       GestureDetector(
                         onTap: () {
-                          BlocProvider.of<CategoryBloc>(context)
+                           BlocProvider.of<CategoryBloc>(context)
                               .add(GetCategoriesEvent());
+                         
+                           BlocProvider.of<DishCategoryBloc>(context)
+                              .add(GetDishCategoriesEvent());
                           showDialog(
                               barrierDismissible: false,
                               context: context,

@@ -10,7 +10,7 @@ class RestaurantEntity extends Equatable {
   final String? restaurantdistrict;
   final String? restaurantplace;
 
-   RestaurantEntity(
+   const RestaurantEntity(
       {
         
         this.restaurantuserid,

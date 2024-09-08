@@ -4,7 +4,6 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:hungry_fill/data/model/cart_model/cart_model.dart';
  
 
 const String cartid = 'cartid1234';
@@ -34,7 +33,7 @@ Future<int?> carttotal({required List<String> dishids , required String? restaur
   if (cartsnapshot.exists) {
     List<dynamic> dishids = cartsnapshot.get('items');
 
-    print('dishids $dishids');
+    debugPrint('dishids $dishids');
 
     final dishdocref = FirebaseFirestore.instance
         .collection("Restaurants")
@@ -49,14 +48,14 @@ Future<int?> carttotal({required List<String> dishids , required String? restaur
     for (var i in result) {
       dishprices.add(int.parse(i['dishPrice']));
     }
-    print(dishprices);
+    debugPrint(dishprices.toString());
 
     var totalsum = 0;
     if(dishprices.length == 1){
       return dishprices.first;
     }else{
       totalsum = dishprices.reduce((value, element) => value += element);
-       print(totalsum);
+       debugPrint(totalsum.toString());
     return totalsum;
     }
 
@@ -65,7 +64,7 @@ Future<int?> carttotal({required List<String> dishids , required String? restaur
    
     
   } else {
-    print('doc not exists');
+    debugPrint('doc not exists');
   }
   }catch(error){
     log(error.toString());
@@ -102,3 +101,11 @@ Future<int?> carttotal({required List<String> dishids , required String? restaur
 //       return cartotal;
 
 // }
+
+
+
+const aboutus = "At Hungry Fill, we believe food should be accessible, convenient, and delicious" 
+"Whether you're craving a hearty meal or a light snack,"
+ "our app connects you with the best restaurants and dishes in your area."
+ "With a user-friendly interface and real-time updates, we make it easy to browse menus,"
+  "place orders, and track your food from the kitchen to your doorstepOur mission is simple: to satisfy your hunger with speed and quality. We work closely with local restaurants to ensure every meal delivered is fresh, tasty, and prepared with care.";

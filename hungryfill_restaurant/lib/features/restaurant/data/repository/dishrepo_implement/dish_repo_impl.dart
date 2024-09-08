@@ -11,6 +11,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/category/category_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/dish/dish_model.dart';
+import 'package:hungryfill_restaurant/features/restaurant/data/model/dish_category/dish_category_model.dart';
 import 'package:hungryfill_restaurant/features/restaurant/domain/repositories/dish_repository.dart';
  
 
@@ -34,6 +35,7 @@ class DishRepoImplementation extends DishRepository {
           stock: dishmodel.stock,
           serve: dishmodel.serve,
           category: dishmodel.category,
+          dishcategory: dishmodel.dishcategory,
           image1: dishmodel.image1,
           image2: dishmodel.image2,
           image3: dishmodel.image3,
@@ -195,6 +197,19 @@ class DishRepoImplementation extends DishRepository {
       return category;
     } catch (error) {
       log(" getcategory error ${error.toString()}");
+      throw Exception(error.toString());
+    }
+  }
+
+  @override
+  Future<List<DishCategoryModel>> getDishCategories() async {
+    try{
+      final result = await FirebaseFirestore.instance.collection('DishCategories').get();
+      final dishcategories = result.docs.map((dishcat)=> DishCategoryModel.fromJson(json: dishcat.data())).toList();
+      debugPrint(dishcategories.toString());
+      return dishcategories;
+    }catch(error){
+      log(error.toString());
       throw Exception(error.toString());
     }
   }

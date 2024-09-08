@@ -20,3 +20,16 @@ final class CategorySuccessEvent extends CategoryState{
 
   
 }
+
+// final class GetDishCategoriesIntial extends CategoryState{}
+
+// final class GetDishCategoriesSuccess extends CategoryState{
+//   final List<DishCategoryModel> dishcategories;
+
+//   const GetDishCategoriesSuccess({required this.dishcategories});
+
+//   @override
+//   // TODO: implement props
+//   List<Object> get props => [dishcategories];
+
+// }

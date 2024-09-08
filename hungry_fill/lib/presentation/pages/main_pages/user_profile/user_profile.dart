@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
  
 import 'package:hungry_fill/data/repository/auth_repo_impl/authentication_repo.dart';
 import 'package:hungry_fill/data/model/user_model/user_model.dart';
-import 'package:hungry_fill/presentation/bloc/address_bloc/address_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/user_bloc/users_bloc.dart';
 import 'package:hungry_fill/presentation/pages/address/addresses_page.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/user_profile/components/components.dart';
@@ -121,23 +120,19 @@ class UserProfileScreen extends StatelessWidget {
               trailing: "assets/next.png",
               ontap: () {},
             ),
-            ProfileMenuWidget(
-              leadingicon: 'assets/review.png',
-              title: 'Send Feedback',
-              trailing: "assets/next.png",
-              ontap: () {},
-            ),
+            // ProfileMenuWidget(
+            //   leadingicon: 'assets/review.png',
+            //   title: 'Send Feedback',
+            //   trailing: "assets/next.png",
+            //   ontap: () {},
+            // ),
             ProfileMenuWidget(
               leadingicon: 'assets/privacy.png',
               title: 'Privacy and Policy',
               trailing: "assets/next.png",
               ontap: () {},
             ),
-            // ProfileMenuWidget(
-            //   leadingicon: 'assets/power-off.png',
-            //   title: 'Logout',
-            //   ontap: onLogOut(context)
-            // )
+            
 
             ListTile(
       onTap:  (){

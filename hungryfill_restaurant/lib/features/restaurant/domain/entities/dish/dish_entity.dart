@@ -11,6 +11,7 @@ class DishEntity extends Equatable {
   final String? stock;
   final String? serve;
   final List<dynamic> category;
+  final String? dishcategory;
   final String? image1;
   final String? image2;
   final String? image3;
@@ -27,6 +28,7 @@ class DishEntity extends Equatable {
         this.stock,
         this.serve,
         required this.category,
+        required this.dishcategory,
         this.image1,
         this.image2,
         this.image3,
@@ -38,5 +40,5 @@ class DishEntity extends Equatable {
 
   @override
    
-  List<Object?> get props => [dishid , dishname , dishdescription, dishprice , stock , serve , category , image1,image2,image3,image4];
+  List<Object?> get props => [dishid , dishname , dishdescription, dishprice , stock , serve , category , dishcategory, image1,image2,image3,image4];
 }

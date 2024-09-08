@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
  
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hungry_fill/presentation/bloc/address_bloc/address_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/restaurant_bloc/restaurant_bloc.dart';
 import 'package:hungry_fill/presentation/pages/map/map_screen.dart';
 import 'package:hungry_fill/presentation/pages/whishlist/whishlist_page.dart';
@@ -36,7 +35,7 @@ AppBar appBarMain({required BuildContext context}) {
                  debugPrint("tapped location");
                   //  BlocProvider.of<AddressBloc>(context)
                   //         .add(GetAddressEvent(position: position!));
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> MapScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> const MapScreen()));
               },
               child: Text('Location',
               style: GoogleFonts.abhayaLibre(),

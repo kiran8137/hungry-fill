@@ -4,6 +4,8 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hungry_fill/data/model/category_model/category_model.dart';
+import 'package:hungry_fill/data/model/dish_category_model/dish_category_model.dart';
+import 'package:hungry_fill/data/repository/dish_repo_imp/dish_repo_impl.dart';
 import 'package:hungry_fill/domain/repositories/dish_repository/dish_repo.dart';
 
 part 'category_event.dart';
@@ -15,6 +17,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
      
      on<GetCategories>(getCategories);
      on<CategorySelect>(categorySelect);
+     //on<GetDishesCategoryFilterOptions>(getDishCategoryFilterOptions);
 
 
 
@@ -44,4 +47,16 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
         emit(GetCategoriesSuccesState(categories: currentstate.categories, selectedcategories: selectedcategories));
       }
   }
+
+
+  
+
+  // FutureOr<void> getDishCategoryFilterOptions(GetDishesCategoryFilterOptions event, Emitter<CategoryState> emit) async{
+  //   try{
+  //     final result = await dishrepository.getDishesCategoryFilterOptionFromDb();
+  //     emit(DishesCategoryFilterOptionSuccess(filteroptions: result));
+  //   }catch(error){
+  //     log(error.toString());
+  //   }
+  // }
 }

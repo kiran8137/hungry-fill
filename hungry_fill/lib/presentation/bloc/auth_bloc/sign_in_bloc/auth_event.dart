@@ -60,7 +60,7 @@ class UserRegisteredEvent extends AuthEvent{
 
 
    @override
-  // TODO: implement props
+  
   List<Object?> get props => [phonenumber];
 }
 

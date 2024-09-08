@@ -147,40 +147,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
                             }
                           },
                         ),
-                        // GestureDetector(
-                        //   onTap: () {
-                        //     // AddressModel useraddress = AddressModel(
-                        //     //     latitude: widget.positon.latitude.toString(),
-                        //     //     longitude: widget.positon.longitude.toString(),
-                        //     //     userid: FirebaseAuth.instance.currentUser?.uid,
-                        //     //     username: recipientnamecontroller.text,
-                        //     //     userMobileNumber: recipientnumbercontroller.text,
-                        //     //     houseNo: flatnumbercontroller.text,
-                        //     //     street: widget.address.subLocality,
-                        //     //     district: widget.address.locality,
-                        //     //     state: widget.address.administrativeArea);
-                    
-                        //     // if (formkey.currentState!.validate()) {
-                        //     //   BlocProvider.of<AddressBloc>(context)
-                        //     //       .add(SaveAddressToDb(useraddress: useraddress));
-                        //     //       Navigator.pop(context);
-                        //     // }
-                        //   },
-                        //   child: Container(
-                        //       margin: EdgeInsets.only(top: 30),
-                        //       width: 250,
-                        //       height: 55,
-                        //       decoration: BoxDecoration(
-                        //           color: primarycolor,
-                        //           borderRadius: BorderRadius.circular(25)),
-                        //       child: Center(
-                        //         child: Text(
-                        //           "Save Address",
-                        //           style: GoogleFonts.breeSerif(
-                        //               color: Colors.white, fontSize: 20),
-                        //         ),
-                        //       )),
-                        // ),
+                        
                       ],
                     ),
                   ),

@@ -115,7 +115,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               controller: mobilenumbercontroller,
                               hinttext: 'Mobile N0',
                               validator: (value){
-                                 final regex = RegExp(r'^\+91[6-9]\d{9}$');
+                                 final regex = RegExp(r'^[6-9]\d{9}$');
                                  if(!regex.hasMatch(value!)){
                                   return "Enter a valid phone number";
                                  }
