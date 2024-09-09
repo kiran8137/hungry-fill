@@ -1,86 +1,104 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill_admin/core/theme/color.dart';
 import 'package:hungry_fill_admin/presentation/pages/screens/dashboard_screen/widgets/revenue_cart_widget.dart';
 import 'package:hungry_fill_admin/presentation/pages/common_widget_component/widgets/header_widget.dart';
- 
+import 'package:hungry_fill_admin/presentation/statemanagment/provider/dashboard_provider.dart';
+import 'package:provider/provider.dart';
 
-class Dashboard extends StatelessWidget {
-    Dashboard({super.key, this.index});
-  
+class Dashboard extends StatefulWidget {
+  Dashboard({super.key, this.index});
+
   final int? index;
 
+  @override
+  State<Dashboard> createState() => _DashboardState();
+}
 
+class _DashboardState extends State<Dashboard> {
   String? url;
+
+  // @override
+  // void initState() {
+  //   Provider.of<DashboardProvider>(context).getUsersCount();
+  //   super.initState();
+  // }
+  @override
+  void didChangeDependencies() {
+    Provider.of<DashboardProvider>(context).getUsersCount();
+    Provider.of<DashboardProvider>(context).getOrdersCount();
+     Provider.of<DashboardProvider>(context).getRestaurantCount();
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        
-        HeaderWidget(index: index,),
-        const Divider(),
+        // HeaderWidget(index: index,),
+
         const SizedBox(
           height: 25,
         ),
 
-        const SizedBox(height: 10,),
+        const SizedBox(
+          height: 10,
+        ),
 
         Row(
           children: [
-
-            const SizedBox(width: 20,),
+            const SizedBox(
+              width: 20,
+            ),
             GestureDetector(
-              onTap: ()  {
-                 
-              },
-              child: Text("DASHBOARD",
+              onTap: () {},
+              child: Text(
+                "DASHBOARD",
                 style: GoogleFonts.inriaSans(
-                  fontWeight: FontWeight.bold, fontSize: 30
-                ),
+                    fontWeight: FontWeight.bold, fontSize: 30),
               ),
             ),
-
-
           ],
         ),
 
-        const SizedBox(height: 45,),
-
-        Row(
-          children: [
-
-            const SizedBox(width: 15,),
-            Text("Here’s Your Revenue",
-              style: GoogleFonts.barlow(
-                fontWeight: FontWeight.w500,
-                fontSize: 28,
-                color: primarycolor
-              ),
-            ),
-
-            
-          ],
+        const SizedBox(
+          height: 45,
         ),
 
-        const SizedBox(height: 5,),
+        const SizedBox(
+          height: 5,
+        ),
 
-        SizedBox(
-          height: 150,
          
-            
-           child: Padding(
-             padding: const EdgeInsets.all(5.0),
-             child: ListView.separated(
-              separatorBuilder: (context, index) => const SizedBox(width: 50,),
-              scrollDirection: Axis.horizontal,
-              itemCount: 4,
-              itemBuilder:(context , index)=>  const RevenueCardWidget()
-             ),
-           ),
 
+        Consumer<DashboardProvider>(
+          builder: (context, value, child) => 
+              Row(
+            children: [
+              RevenueCardWidget(title: 'Todays Revenue', amount: '10',image: 'assets/salary.png',),
+              SizedBox(width: 20),
+              RevenueCardWidget(title: 'Users', amount: '${value.totalUsers}',image: 'assets/user.png',),
+              SizedBox(
+                width: 20,
+              ),
+              RevenueCardWidget(title: 'Orders', amount: '${value.totalOrders}',image: 'assets/delivery.png',),
+              SizedBox(
+                width: 20,
+              ),
+              RevenueCardWidget(title: 'Restaurants', amount: '${value.totalRestaurant}',image: 'assets/restaurant.png',),
+              SizedBox(
+                width: 20,
+              ),
+             
+              
+            ],
+          ),
         ),
+        const SizedBox(height: 10),
+         const RevenueCardWidget(title: 'One Month Earning', amount: '10',image: 'assets/wallet.png',),
 
         // Container(
         //   height: 100,
@@ -89,7 +107,6 @@ class Dashboard extends StatelessWidget {
         //  child: Image.memory(),
         //  )
       ],
-
     );
   }
 }

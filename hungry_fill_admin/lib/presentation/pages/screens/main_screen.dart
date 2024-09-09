@@ -48,21 +48,23 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return AdminScaffold(
         appBar: AppBar(
+          
           title: Text(
             "Admin Panel",
             style: GoogleFonts.radioCanada(
               fontSize: 25,
               fontWeight: FontWeight.w600,
+              color: Colors.white
             ),
           ),
-          leading: Text(
-            "Admin Panel",
-            style: GoogleFonts.radioCanada(
-              fontSize: 25,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          backgroundColor: Colors.white,
+          // leading: Text(
+          //   "Admin Panel",
+          //   style: GoogleFonts.radioCanada(
+          //     fontSize: 25,
+          //     fontWeight: FontWeight.w600,
+          //   ),
+          // ),
+          backgroundColor: primarycolor
         ),
         backgroundColor: Colors.white,
         sideBar: SideBar(
@@ -112,7 +114,7 @@ Widget getSelectedpage({
 }) {
   switch (selectedroute) {
     case '/dashboard':
-    // return   Dashboard();
+     return   Dashboard();
      
 
      case '/orders':
@@ -122,7 +124,7 @@ Widget getSelectedpage({
     case '/users':
      return UsersScreen();
     default:
-      return UsersScreen();
+      return Dashboard();
   }
 }
 

@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hungry_fill_admin/data/models/orders_model.dart';
 import 'package:hungry_fill_admin/data/models/restaurant_model.dart';
+import 'package:hungry_fill_admin/presentation/statemanagment/provider/order_provider.dart';
+import 'package:provider/provider.dart';
 
 class OrderDetailWidget extends StatelessWidget {
     OrderDetailWidget({
@@ -41,6 +43,25 @@ final OrderModel orderDetail;
               width: 150,
               child: Text("${orderDetail.orderstatus}"),
             ),
+
+            // Consumer<OrderProvider>(
+            //   builder: (context, value, child) => 
+            //     Container(
+            //     width: 100,
+            //     height: 50,
+            //     child: DropdownButton<String>(
+            //       value: value.selectStatus,
+            //       items: value.orderStatusList.map((item){
+            //         return DropdownMenuItem<String>(
+            //           value: item,
+            //           child: Text(item)
+            //           );
+            //       }).toList(), 
+            //       onChanged: (String? val){
+            //         value.changeOrderStatus(val!);
+            //       }),
+            //   ),
+            // )
           ],
         ));
   }
