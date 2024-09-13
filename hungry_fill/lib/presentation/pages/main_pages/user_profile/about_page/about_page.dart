@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:hungry_fill/core/constants/constant.dart';
+import 'package:hungry_fill/presentation/pages/main_pages/user_profile/components/components.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
@@ -9,37 +8,22 @@ class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: AppBar(
-        leading: GestureDetector(
-          onTap: (){
-            Navigator.pop(context);
-          },
-          child: const Icon(Icons.arrow_back_ios_new)),
-        title: Text('About',
-        style: GoogleFonts.abhayaLibre()
-        ),
-        centerTitle: true,
-      ),
+      backgroundColor: Colors.white,
+      appBar: appBarAboutPage(context),
 
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(25.0),
-                child: Text(
-                  aboutus,
-                  style: GoogleFonts.roboto(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500
-                  ),
-                ),
-              )
+              child: aboutPageContent()
               ),
           ],
         )
         ),
     );
   }
+
+  
+ 
 }

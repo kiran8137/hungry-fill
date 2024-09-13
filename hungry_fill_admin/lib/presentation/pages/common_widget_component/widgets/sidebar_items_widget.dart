@@ -34,7 +34,7 @@ class _SideBarItemState extends State<SideBarItem> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
             color: isselected ? 
-            Color.fromARGB(188, 8, 5, 26).withOpacity(0.15): Colors.white
+            const Color.fromARGB(188, 8, 5, 26).withOpacity(0.15): Colors.white
         
           ),
           child: Center(child: Text(widget.sidebaritem[widget.index],

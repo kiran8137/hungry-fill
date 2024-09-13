@@ -21,136 +21,99 @@ class DishDetailWidget extends StatelessWidget {
         child: Row(
           children: [
             const SizedBox(width: 10),
-            Container(
+            FadeInImage(
+              fadeInDuration: const Duration(milliseconds: 200),
+              fit: BoxFit.cover,
+              placeholderFit: BoxFit.cover,
+              placeholder: const AssetImage("assets/placeholders2.jpg"),
+              image: NetworkImage(dishes.image1!),
               height: 50,
               width: 50,
-              decoration: BoxDecoration(
-                  color:
-                      const Color.fromARGB(
-                          255,
-                          239,
-                          239,
-                          239),
-                  borderRadius:
-                      BorderRadius.circular(
-                          5),
-                  image: DecorationImage(
-                      image: NetworkImage(
-                          dishes.image1!),
-                      fit: BoxFit.cover)),
             ),
             const SizedBox(width: 10),
             SizedBox(
               width: 80,
               child: Text(
                 "${dishes.dishname}",
-                style: const TextStyle(
-                    fontWeight:
-                        FontWeight.w700),
+                style: const TextStyle(fontWeight: FontWeight.w700),
               ),
             ),
-            const SizedBox(width: 165),
+            const SizedBox(width: 175),
             SizedBox(
               width: 150,
               child: Text(
                 "₹${dishes.dishprice}",
                 style: const TextStyle(
-                    fontWeight:
-                        FontWeight.w500,
-                    color: Color.fromARGB(
-                        255,
-                        102,
-                        102,
-                        102)),
+                    fontWeight: FontWeight.w500,
+                    color: Color.fromARGB(255, 102, 102, 102)),
               ),
             ),
             const SizedBox(width: 80),
             Text(
               dishes.serve!,
               style: const TextStyle(
-                  fontWeight:
-                      FontWeight.w500,
-                  color: Color.fromARGB(
-                      255, 102, 102, 102)),
+                  fontWeight: FontWeight.w500,
+                  color: Color.fromARGB(255, 102, 102, 102)),
             ),
             const SizedBox(width: 215),
             Text(
               dishes.stock!,
               style: const TextStyle(
-                  fontWeight:
-                      FontWeight.w500,
-                  color: Color.fromARGB(
-                      255, 102, 102, 102)),
+                  fontWeight: FontWeight.w500,
+                  color: Color.fromARGB(255, 102, 102, 102)),
             ),
-    
-            SizedBox(width: 300),
-    
+
+            const SizedBox(width: 300),
+
             GestureDetector(
                 onTap: () {
                   DishModel dish = DishModel(
                       dishid: dishes.dishid,
-                      dishname:
-                          dishes.dishname,
-                      dishdescription: dishes
-                          .dishdescription,
-                      dishprice:
-                          dishes.dishprice,
+                      dishname: dishes.dishname,
+                      dishdescription: dishes.dishdescription,
+                      dishprice: dishes.dishprice,
                       serve: dishes.serve,
                       stock: dishes.stock,
-                      category:
-                          dishes.category,
+                      category: dishes.category,
                       dishcategory: dishes.dishcategory,
                       image1: dishes.image1,
                       image2: dishes.image2,
                       image3: dishes.image3,
-                      image4: dishes.image4
-                          );
-    
+                      image4: dishes.image4);
+
                   showDialog(
-                      barrierDismissible:
-                          false,
+                      barrierDismissible: false,
                       context: context,
                       builder: (context) {
-                        return   EditDish(currentdish: dish);
+                        return EditDish(currentdish: dish);
                       });
                 },
-                child:
-                    const Icon(Icons.edit)),
-    
-            SizedBox(width: 50),
-    
+                child: const Icon(Icons.edit)),
+
+            const SizedBox(width: 50),
+
             GestureDetector(
                 onTap: () {
                   showDialog(
                       context: context,
                       builder: (context) {
                         return AlertDialog(
-                          title: const Text(
-                              "Are you sure want to delete"),
+                          title: const Text("Are you sure want to delete"),
                           actions: [
                             TextButton(
-                                onPressed:
-                                    () {
-                                  Navigator.pop(
-                                      context);
+                                onPressed: () {
+                                  Navigator.pop(context);
                                 },
-                                child: const Text(
-                                    "cancel")),
+                                child: const Text("cancel")),
                             TextButton(
-                                onPressed:
-                                    () {
-                                  BlocProvider.of<DishBloc>(
-                                          context)
-                                      .add(DeleteDishEvent(
-                                          dishid: dishes.dishid));
-                                  Navigator.pop(
-                                      context);
+                                onPressed: () {
+                                  BlocProvider.of<DishBloc>(context).add(
+                                      DeleteDishEvent(dishid: dishes.dishid));
+                                  Navigator.pop(context);
                                   // BlocProvider.of<DishBloc>(context)
                                   //     .add(GetDishesEvent());
                                 },
-                                child:
-                                    const Text(
-                                        "Ok"))
+                                child: const Text("Ok"))
                           ],
                         );
                       });

@@ -154,7 +154,7 @@ class _AddDishState extends State<AddDish> {
                               children: [
                                 GestureDetector(
                                     onTap: () async {
-                                      selectedimag1 = await value.ImagePicker();
+                                      selectedimag1 = await value.imagePicker();
                                       // selectedimages.add(selectedimag1);
                                     },
                                     child: DishImageWidget(
@@ -164,7 +164,7 @@ class _AddDishState extends State<AddDish> {
                                 ),
                                 GestureDetector(
                                     onTap: () async {
-                                      selectedimag2 = await value.ImagePicker();
+                                      selectedimag2 = await value.imagePicker();
                                       // selectedimages.add(selectedimag2);
                                     },
                                     child: DishImageWidget(
@@ -174,7 +174,7 @@ class _AddDishState extends State<AddDish> {
                                 ),
                                 GestureDetector(
                                     onTap: () async {
-                                      selectedimag3 = await value.ImagePicker();
+                                      selectedimag3 = await value.imagePicker();
                                       // selectedimages.add(selectedimag3);
                                     },
                                     child: DishImageWidget(
@@ -184,7 +184,7 @@ class _AddDishState extends State<AddDish> {
                                 ),
                                 GestureDetector(
                                     onTap: () async {
-                                      selectedimag4 = await value.ImagePicker();
+                                      selectedimag4 = await value.imagePicker();
                                       //selectedimages.add(selectedimag4);
                                     },
                                     child: DishImageWidget(
@@ -387,7 +387,7 @@ class _AddDishState extends State<AddDish> {
                             categories = state.categories;
 
                             return 
-                      Container(
+                      SizedBox(
                               width: double.infinity,
                               height: 35,
                               child: MultiSelectDropDown(
@@ -448,7 +448,7 @@ class _AddDishState extends State<AddDish> {
                           if (state is GetDishCategoriesSuccess) {
                             final dishcategories = state.dishcategories;
                             return
-                             Container(
+                             SizedBox(
                               width: double.infinity,
                               height: 35,
                               child: MultiSelectDropDown(
@@ -472,30 +472,9 @@ class _AddDishState extends State<AddDish> {
                         },
                       ),
 
-                      //  Consumer<DishProvider>(
-                      // builder: (BuildContext context, DishProvider value,
-                      //         Widget? child){
-                      //           return
-                      //                    Container(
-                      //         width: double.infinity,
-                      //         height: 35,
-                      //         child: MultiSelectDropDown(
-                      //           options: value.dishcategries
-                      //               .map((dishcategory) => ValueItem(
-                      //                   label: dishcategory.dishcategoryname!,
-                      //                   value: dishcategory.dishcategoryid))
-                      //               .toList(),
-                      //           onOptionSelected: (selectedvalues) {
-                      //             setState(() {
-                      //               selectedcategories = selectedvalues;
-                      //             });
-                      //           },
-                      //         ),
-                      //       );
-                      //         }
-                      //  ),
+                    
 
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Row(
@@ -563,7 +542,7 @@ class _AddDishState extends State<AddDish> {
 
                               BlocProvider.of<DishBloc>(context)
                                   .add(DishAddEvent(dishmodel: dish));
-
+                           
                               Navigator.pop(context);
                               selecteddishcategoryids.clear();
 

@@ -2,6 +2,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
  
 import 'package:flutter/material.dart';
  
@@ -13,7 +14,7 @@ class OrderRepoImpl extends OrderRepository{
   Future<List<OrderModel>> getOrdersListFromDb() async{
     List<OrderModel> ordersList = [];
      try{
-    final result = await FirebaseFirestore.instance.collection('OrderCollection').get();
+    final result =  await FirebaseFirestore.instance.collection('OrderCollection').where('restaurantId' ,isEqualTo: FirebaseAuth.instance.currentUser?.uid).get();;
 
     final orderResult = result.docs.map((order)=> OrderModel.fromJson(json: order.data())).toList();
     debugPrint(ordersList.toString());
@@ -51,4 +52,19 @@ class OrderRepoImpl extends OrderRepository{
   }
 }
 
- 
+ Future<List<OrderModel>> getFilterOrdersFromDb({required String filteroption}) async{
+     try{
+    final result = await FirebaseFirestore.instance.collection('OrderCollection').where('orderStatus', isEqualTo: filteroption).get();
+
+    final filterordersList = result.docs.map((order)=> OrderModel.fromJson(json: order.data())).toList();
+    debugPrint(filterordersList.toString());
+    
+    return filterordersList;
+    
+  }catch(error){
+    log(error.toString());
+    throw Exception(error);
+
+  }
+
+  }

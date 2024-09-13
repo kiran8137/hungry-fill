@@ -9,10 +9,11 @@ import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/scr
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/dashboard/dashboard.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/dishes/dishes.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/profile/profile_screen.dart';
-import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/widgets/sidebar_item_widget.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/authentication/auth_bloc_bloc.dart';
-import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/orders_bloc/orders_bloc.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/restaurant_user/restaurant_user_bloc.dart';
+import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/provider/dashboard_provider.dart';
+import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/provider/order_provider.dart';
+import 'package:provider/provider.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -40,9 +41,15 @@ class _MainScreenState extends State<MainScreen> {
     BlocProvider.of<RestaurantUserBloc>(context)
         .add(GetRestaurantDetailEvent());
     //BlocProvider.of<DishBloc>(context).add(GetDishesEvent());
-     BlocProvider.of<OrdersBloc>(context)
-        .add(GetOrdersList());
-
+    //  BlocProvider.of<OrdersBloc>(context)
+    //     .add(GetOrdersList());
+    //  Provider.of<DashboardProvider>(context,listen: false).getOrdersCount();
+    context.read<DashboardProvider>().getDishesCount();
+    context.read<DashboardProvider>().getOrdersCount();
+    Provider.of<OrderProvider>(context,listen: false).getOrdersList();
+    Provider.of<DashboardProvider>(context,listen: false).calculateTodaysRevenue();
+    Provider.of<DashboardProvider>(context,listen: false).calculateTotalEarnings();
+    
    
     super.initState();
   }

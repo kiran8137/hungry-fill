@@ -9,7 +9,7 @@ sealed class DishState extends Equatable {
 
 final class DishInitial extends DishState {}
 
-
+final class DishAddIntial extends DishState{}
 final class DishAddSuccuessState extends DishState{}
 
 final class ErrorState extends DishState{
@@ -18,7 +18,7 @@ final class ErrorState extends DishState{
   const ErrorState({this.errormessage});
 
   @override
-  // TODO: implement props
+  
   List<Object> get props => [errormessage!];
 }
 
@@ -29,7 +29,7 @@ final class GetDishesSuccessState extends DishState{
 const  GetDishesSuccessState({required this.dishes});
 
 @override
-  // TODO: implement props
+   
   List<Object> get props => [dishes];
 
 

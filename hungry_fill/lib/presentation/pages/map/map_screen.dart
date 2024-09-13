@@ -1,5 +1,3 @@
- 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geocoding/geocoding.dart';
@@ -29,9 +27,7 @@ class _MapScreenState extends State<MapScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-           
-          },
+          onPressed: () async {},
           backgroundColor: primarycolor,
           child: const Icon(
             Icons.my_location,
@@ -46,20 +42,20 @@ class _MapScreenState extends State<MapScreen> {
             children: [
               Positioned(
                 child: SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.7,
-                    width: double.infinity,
-                    // color: Colors.red,
-                    child: 
-                    //const Text("map")
-                        GoogleMap(
-                      initialCameraPosition: const CameraPosition(
-                          target: LatLng(11.006340, 76.962170), zoom: 12),
-                      markers: markers,
-                      onMapCreated: (controller) {
-                        googlemapcontroller = controller;
-                      },
-                    ),
-                    ),
+                  height: MediaQuery.of(context).size.height * 0.7,
+                  width: double.infinity,
+                  // color: Colors.red,
+                  child:
+                      //const Text("map")
+                      GoogleMap(
+                    initialCameraPosition: const CameraPosition(
+                        target: LatLng(11.006340, 76.962170), zoom: 12),
+                    markers: markers,
+                    onMapCreated: (controller) {
+                      googlemapcontroller = controller;
+                    },
+                  ),
+                ),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 500),
@@ -121,16 +117,19 @@ class _MapScreenState extends State<MapScreen> {
                               showModalBottomSheet(
                                   isDismissible: false,
                                   context: context,
-                                  builder: (ctx) =>   AddAddressPage(address: state.address!, positon: position!,));
+                                  builder: (ctx) => AddAddressPage(
+                                        address: state.address!,
+                                        positon: position!,
+                                      ));
                             },
-                            child: addAddressDetailsButton(text: 'Add Address Details'),
+                            child: addAddressDetailsButton(
+                                text: 'Add Address Details'),
                           )
                         ],
                       );
                     } else {
                       return const Center(child: CircularProgressIndicator());
                     }
-                    
                   },
                 ),
               ),
@@ -170,8 +169,4 @@ class _MapScreenState extends State<MapScreen> {
           ),
         )));
   }
-
-  
-
-  
 }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/data/model/order_model/order_model.dart';
 import 'package:hungry_fill/presentation/bloc/order_bloc/order_bloc.dart';
 import 'package:hungry_fill/presentation/pages/cart_page/widgets/bill_details_widgets.dart';
+import 'package:hungry_fill/presentation/pages/main_pages/recent_orders_page/widgets/cancel_button.dart';
 
 //appbar
 PreferredSize preferredSizedAppBar(BuildContext context,
@@ -119,7 +121,7 @@ Container dishDetailRecentOrder(
           width: 60,
           height: 60,
           decoration: BoxDecoration(
-              color: Colors.green,
+             // color: Colors.green,
               borderRadius: BorderRadius.circular(10),
               image: DecorationImage(
                   image: NetworkImage(
@@ -171,3 +173,71 @@ Container dishDetailRecentOrder(
     ),
   );
 }
+
+
+  Padding orderStatus({required OrderModel orderdetail}) {
+    return Padding(
+                padding: const EdgeInsets.only(left: 8),
+                child: Text(
+                  "Order Status : Order ${orderdetail.orderstatus}",
+                  style: GoogleFonts.nunitoSans(
+                      color: orderdetail.orderstatus == 'placed'
+                          ? const Color.fromARGB(255, 120, 120, 120)
+                          : orderdetail.orderstatus == 'canceled'
+                              ? Colors.red
+                              : orderdetail.orderstatus == 'picked'
+                                  ? Colors.black
+                                  : orderdetail.orderstatus == 'delivered'
+                                      ? Colors.green
+                                      : Colors.black,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600),
+                ),
+              );
+  }
+
+   Container restaurantName() {
+    return Container(
+              height: 25,
+              width: double.infinity,
+              color: const Color.fromARGB(255, 250, 250, 250),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8),
+                child: Text(
+                  "Restaurant : 12333",
+                  style: GoogleFonts.nunitoSans(
+                      color: const Color.fromARGB(255, 120, 120, 120),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
+                ),
+              ),
+            );
+  }
+
+
+   Padding orderCancelButton(BuildContext context , OrderModel orderdetail) {
+    return Padding(
+                  padding:
+                      const EdgeInsets.only(left: 8, right: 8, bottom: 5),
+                  child: orderdetail.orderstatus == 'Placed'
+                      ? GestureDetector(
+                          onTap: () {
+                            cancelDialog(context , orderdetail);
+                          },
+                          child: const CancelButton(buttontext: 'Cancel Order', buttoncolor: primarycolor, buttontextcolor: Colors.white ,),
+                        )
+                      : orderdetail.orderstatus == 'cancelled'
+                          ? const CancelButton(buttontext: 'Order cancelled', buttoncolor: Colors.grey, buttontextcolor:  Colors.black )
+                        
+                           
+                          : const SizedBox());
+  }
+
+
+  Text text(String text) {
+    return   Text(text,
+          style: const TextStyle(fontSize: 23,
+          fontWeight: FontWeight.w500
+          ),
+          );
+  }

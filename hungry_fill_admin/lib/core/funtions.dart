@@ -13,7 +13,7 @@ Future<String> saveImageToStorage({required String filename , required Uint8List
     firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
         .ref()
         .child('dishCategoryImages')
-        .child('/+ ${filename}');
+        .child('/+ $filename');
     final metadata =
         firebase_storage.SettableMetadata(contentType: 'image/jpeg');
 

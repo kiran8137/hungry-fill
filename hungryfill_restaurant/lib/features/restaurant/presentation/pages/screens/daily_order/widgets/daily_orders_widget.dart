@@ -18,41 +18,41 @@ class DailyOrdersWidget extends StatelessWidget {
         color: Colors.white,
         child:     Row(
           children: [
-            SizedBox(width: 10),
-            SizedBox(
+            const SizedBox(width: 10),
+            const SizedBox(
               width: 80,
               child: Text(
                 "-",
                 style: TextStyle(fontWeight: FontWeight.w700),
               ),
             ),
-            SizedBox(width: 95),
-            SizedBox(
+            const SizedBox(width: 95),
+              SizedBox(
               width: 150,
-              child: Text("${order.orderdate}",
-              style: TextStyle(fontWeight: FontWeight.w600),
+              child: Text('${order.orderdate}',
+              style: const TextStyle(fontWeight: FontWeight.w600),
               ),
             ),
-            SizedBox(width: 100),
+            const SizedBox(width: 100),
             SizedBox(
            
               width: 150,
-              child: Text('${order.username}', style: TextStyle(fontWeight: FontWeight.w600))),
-            SizedBox(width: 135),
+              child: Text('${order.username}', style: const TextStyle(fontWeight: FontWeight.w600))),
+            const SizedBox(width: 135),
             SizedBox(
             
               width: 85,
-              child: Text('${order.grandtotal}', style: TextStyle(fontWeight: FontWeight.w600))),
-            SizedBox(width: 140),
+              child: Text('${order.grandtotal}', style: const TextStyle(fontWeight: FontWeight.w600))),
+            const SizedBox(width: 140),
             SizedBox(
               width: 150,
               child: Text("${order.orderstatus}"),
             ),
 
-            SizedBox(
+            const SizedBox(
               width: 100,
             ),
-            Icon(Icons.arrow_forward_ios , size: 15)
+            const Icon(Icons.arrow_forward_ios , size: 15)
           ],
         ));
   }

@@ -1,8 +1,8 @@
 
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:hungry_fill_admin/data/models/category_model.dart';
 import 'package:hungry_fill_admin/data/models/dish_category_model.dart';
 import 'package:hungry_fill_admin/data/models/restaurant_model.dart';
@@ -52,9 +52,7 @@ await restaurantrepository.createCategory(category: category);
 
  Future<void> getCategories() async{
 
-  // final result = await restaurantrepository.getCategories();
-  // categories.addAll(result);
-  // notifyListeners();
+   
   restaurantrepository.getCategories().listen(
     (categorystream){
       categories = categorystream;
@@ -93,9 +91,7 @@ await restaurantrepository.createDishCategory(dishcategory: dishcategory , dishc
 
  Future<void> getDishCategories() async{
 
-  // final result = await restaurantrepository.getCategories();
-  // categories.addAll(result);
-  // notifyListeners();
+   
   restaurantrepository.getDishCategories().listen(
     (dishcategorystream){
       dishcategories = dishcategorystream;
@@ -105,13 +101,15 @@ await restaurantrepository.createDishCategory(dishcategory: dishcategory , dishc
  }
 
 
- Future<Uint8List?> ImagePicker() async{
+ Future<Uint8List?> imagePicker() async{
 
-  final imageresult = await restaurantrepository.ImagePicker();
+  final imageresult = await restaurantrepository.imagePicker();
   final selectedimage = imageresult!.files.first.bytes;
   notifyListeners();
   return selectedimage;
-  
+}
 
+Future<void> searchRestaurant({required Query}) async{
+  
 }
 }

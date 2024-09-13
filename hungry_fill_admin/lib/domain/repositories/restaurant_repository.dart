@@ -1,5 +1,4 @@
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/foundation.dart';
 import 'package:hungry_fill_admin/data/models/category_model.dart';
 import 'package:hungry_fill_admin/data/models/dish_category_model.dart';
 import 'package:hungry_fill_admin/data/models/restaurant_model.dart';
@@ -14,7 +13,7 @@ abstract class RestaurantRespository {
 
    Future<void> updateCategory({required CategoryModel category});
 
-   Future<FilePickerResult?> ImagePicker();
+   Future<FilePickerResult?> imagePicker();
 
   //dish wise category
    Future<void> createDishCategory({required String dishcategory ,required String dishcategoryimgeurl});

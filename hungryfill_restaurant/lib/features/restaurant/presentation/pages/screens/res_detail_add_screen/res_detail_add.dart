@@ -15,7 +15,7 @@ import 'package:hungryfill_restaurant/features/restaurant/presentation/statemana
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/provider/dish_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../../common_widgets/textform_widget.dart';
+import '../widgets/textform_widget.dart';
 
 class ResDetailAddScreen extends StatelessWidget {
   ResDetailAddScreen({super.key, this.username});
@@ -77,7 +77,7 @@ class ResDetailAddScreen extends StatelessWidget {
                         "Establish Your Restaurant",
                         style: GoogleFonts.copse(fontSize: 40),
                       ),
-                      SizedBox(height: 5),
+                     const  SizedBox(height: 5),
                       // GestureDetector(
                       //   onTap: () async {
                       //     selectedimage = await provider.ImagePicker();

@@ -49,7 +49,7 @@ Future<void> getDishes() async{
 
 // }
 
-Future<Uint8List?> ImagePicker() async{
+Future<Uint8List?> imagePicker() async{
 
   final imageresult = await dishrepository.ImagePicker();
   final selectedimage = imageresult!.files.first.bytes;
@@ -72,6 +72,13 @@ Future<void> getCategory() async{
   notifyListeners();
 }
 
+
+Future<void> searchDishes({required String query}) async{
+  final result = await searchDishesFromDb(query: query);
+  dishes.clear();
+   dishes = result;
+  notifyListeners();
+}
 
 
   

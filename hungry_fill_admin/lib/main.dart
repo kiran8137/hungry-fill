@@ -5,9 +5,6 @@ import 'package:hungry_fill_admin/data/repository/dashboard_repo/dashboard_repo_
 import 'package:hungry_fill_admin/data/repository/order_repo/order_repo_impl.dart';
 import 'package:hungry_fill_admin/data/repository/restaurant_repo/restaurant_repo_impl.dart';
 import 'package:hungry_fill_admin/data/repository/users_repo/users_repo_impl.dart';
-import 'package:hungry_fill_admin/presentation/pages/auth_screens/sign_in.dart';
-import 'package:hungry_fill_admin/presentation/pages/screens/main_screen.dart';
-import 'package:hungry_fill_admin/presentation/pages/screens/orders_screen/widget/order_detail_dialog.dart';
 import 'package:hungry_fill_admin/presentation/pages/splash_screen/splash_screen.dart';
 import 'package:hungry_fill_admin/presentation/statemanagment/provider/auth_provider.dart';
 import 'package:hungry_fill_admin/presentation/statemanagment/provider/dashboard_provider.dart';
@@ -55,7 +52,7 @@ class MyApp extends StatelessWidget {
 
       ],
       
-      child: MaterialApp(
+      child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         

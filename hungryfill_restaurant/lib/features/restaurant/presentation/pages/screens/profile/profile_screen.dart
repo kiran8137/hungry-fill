@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungryfill_restaurant/core/theme/color.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/res_user/res_user_model.dart';
-import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/widgets/header_widget.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/restaurant_user/restaurant_user_bloc.dart';
 
 class ProfileScreen extends StatefulWidget {

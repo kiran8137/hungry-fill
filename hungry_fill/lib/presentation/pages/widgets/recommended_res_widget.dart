@@ -19,7 +19,7 @@ class RecommendRestaurant extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         image: const DecorationImage(
-            image: AssetImage("assets/food-dosa.jpeg"), fit: BoxFit.fill),
+            image: AssetImage("assets/burger.jpg"), fit: BoxFit.fill),
       ),
       alignment: Alignment.bottomCenter,
       child: Container(

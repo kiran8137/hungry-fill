@@ -7,7 +7,7 @@ import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/aut
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/authentication/auth_bloc_bloc.dart';
 
 class HeaderWidget extends StatelessWidget {
-    HeaderWidget({super.key, this.index});
+    const HeaderWidget({super.key, this.index});
 
   final int? index;
 

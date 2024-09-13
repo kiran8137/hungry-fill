@@ -21,6 +21,7 @@ class OrderModel extends OrderEntity {
       super.grandtotal,
       super.orderstatus,
       super.restaurantname
+      
       }
       );
 

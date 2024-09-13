@@ -89,7 +89,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await authRepository.resetPassword(email: event.email!);
       emit(ResetPassowrdEmailSendState());
     }catch(error){
-      emit(ErrorState());
+      emit(const ErrorState());
       log(error.toString());
     }
   }

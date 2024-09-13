@@ -7,8 +7,8 @@ import 'package:hungry_fill_admin/presentation/pages/screens/dashboard_screen/da
 import 'package:hungry_fill_admin/presentation/pages/screens/orders_screen/orders_screen.dart';
 
 import 'package:hungry_fill_admin/presentation/pages/screens/restaurants_screen/restaurants.dart';
-import 'package:hungry_fill_admin/presentation/pages/common_widget_component/widgets/sidebar_items_widget.dart';
 import 'package:hungry_fill_admin/presentation/pages/screens/users_screen/users_screen.dart';
+import 'package:hungry_fill_admin/presentation/statemanagment/provider/dashboard_provider.dart';
 import 'package:hungry_fill_admin/presentation/statemanagment/provider/order_provider.dart';
 import 'package:hungry_fill_admin/presentation/statemanagment/provider/restaurant_provider.dart';
 import 'package:hungry_fill_admin/presentation/statemanagment/provider/user_provider.dart';
@@ -40,7 +40,9 @@ class _MainScreenState extends State<MainScreen> {
     Provider.of<RestaurantProvider>(context,listen: false).getCategories();
     Provider.of<RestaurantProvider>(context,listen: false).getDishCategories();
     Provider.of<OrderProvider>(context,listen: false).getOrdersList();
-     Provider.of<UserProvider>(context,listen: false).getUsersDetail();
+    Provider.of<UserProvider>(context,listen: false).getUsersDetail();
+    Provider.of<DashboardProvider>(context,listen: false).calculateTodaysRevenue();
+    Provider.of<DashboardProvider>(context,listen: false).calculateTotalEarnings();
     super.initState();
   }
 
@@ -114,7 +116,7 @@ Widget getSelectedpage({
 }) {
   switch (selectedroute) {
     case '/dashboard':
-     return   Dashboard();
+     return   const Dashboard();
      
 
      case '/orders':
@@ -124,7 +126,7 @@ Widget getSelectedpage({
     case '/users':
      return UsersScreen();
     default:
-      return Dashboard();
+      return const Dashboard();
   }
 }
 

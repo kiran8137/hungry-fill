@@ -6,7 +6,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:hungry_fill/core/restaurant_and_dish/restaurant_and_dish.dart';
 import 'package:hungry_fill/data/model/dish_category_model/dish_category_model.dart';
-import 'package:hungry_fill/data/repository/dish_repo_imp/dish_repo_impl.dart';
 import 'package:hungry_fill/domain/repositories/dish_repository/dish_repo.dart';
 
 part 'filter_event.dart';

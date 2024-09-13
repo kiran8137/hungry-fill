@@ -14,7 +14,8 @@ class OrderModel extends OrderEntity {
       required super.cartdata,
       super.grandtotal,
       super.orderstatus,
-      super.restaurantname
+      super.restaurantname,
+      super.restaurantId
       }
       );
 
@@ -29,7 +30,8 @@ class OrderModel extends OrderEntity {
           cartdata: (json['cartData'] as List<dynamic>).map((cart)=> CartModel.fromJson(json: cart as Map<String, dynamic>)).toList(),
           grandtotal: json['grandTotal'],
           orderstatus: json['orderStatus'],
-          restaurantname: json['restaurantName']
+          restaurantname: json['restaurantName'],
+          restaurantId : json['restaurantId']
 
 
         );
@@ -46,7 +48,8 @@ class OrderModel extends OrderEntity {
           'cartData' : cartdata.map((cart)=> cart.toJson()).toList(),
           'grandTotal' : grandtotal,
           'orderStatus' : orderstatus,
-          'restaurantName' : restaurantname
+          'restaurantName' : restaurantname,
+          'restaurantId' : restaurantId
         };
       }
 }

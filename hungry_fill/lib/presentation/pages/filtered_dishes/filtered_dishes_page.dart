@@ -41,7 +41,7 @@ class FilteredDishesPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Showing Result for "${dishCategoryName}"',
+                'Showing Result for "$dishCategoryName"',
                 style: GoogleFonts.archivo(
                     fontSize: 20, fontWeight: FontWeight.w600),
               ),
@@ -49,15 +49,15 @@ class FilteredDishesPage extends StatelessWidget {
               BlocBuilder<FilterBloc, FilterState>(
                 builder: (context, state) {
                   if (state is FilterDishesInitial) {
-                    return Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator());
                   }
                   if (state is FilterDishesEmpty) {
-                    return Center(
+                    return const Center(
                       child: Text('No dishes found'),
                     );
                   }
                   if (state is FilterDishesError) {
-                    return Center(
+                    return const Center(
                       child: Text(
                           "Something went wrong..! We are working on it..!"),
                     );
@@ -92,7 +92,7 @@ class FilteredDishesPage extends StatelessWidget {
                               children: [
                                 Text(
                                   '${filterDish.restaurant.restaurantname}',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -179,7 +179,7 @@ class FilteredDishesPage extends StatelessWidget {
                                                       ),
                                                       Text(
                                                         "${filterDish.dishes[index].dishprice} serve",
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                             fontSize: 15,
                                                             color:
                                                                 Color.fromARGB(
@@ -296,7 +296,7 @@ class FilteredDishesPage extends StatelessWidget {
                       },
                     );
                   } else {
-                    return Center(
+                    return const Center(
                       child: Text(
                           "Something went wrong..! We are working on it..!"),
                     );

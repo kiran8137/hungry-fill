@@ -6,7 +6,7 @@ import 'package:hungry_fill_admin/core/theme/color.dart';
  
 
 class HeaderWidget extends StatelessWidget {
-    HeaderWidget({super.key, this.index});
+    const HeaderWidget({super.key, this.index});
 
   final int? index;
 

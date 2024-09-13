@@ -13,6 +13,7 @@ import 'package:hungry_fill/data/model/address_model/address_model.dart';
 import 'package:hungry_fill/data/model/cart_model/cart_model.dart';
 import 'package:hungry_fill/data/model/order_model/order_model.dart';
 import 'package:hungry_fill/domain/repositories/order_repository/order_repository.dart';
+import 'package:intl/intl.dart';
 
 class OrderRepoImp extends OrderRepository{
 
@@ -130,17 +131,20 @@ return result;
 
 final cartdetails = await getCartDetail(restaurantid: restaurantId);
 final addressdetail = await getAddressOrderDetail(addressId: addressId);
+DateTime now = DateTime.now();
+String formattedDate =  DateFormat('dd/MM/yyyy').format(now);
 
  OrderModel ordermodel = OrderModel(
   orderid: collectionref.id,
   userid: order.userid,
-  orderdate: DateTime.now().toString(),
+  orderdate: formattedDate,
   paymentType: order.paymentType,
   paymentid: order.paymentid,
   addressSelected: addressdetail,
   cartdata: cartdetails,
   grandtotal: order.grandtotal,
-  orderstatus: order.orderstatus
+  orderstatus: order.orderstatus,
+  restaurantId: order.restaurantId
   
 );
 

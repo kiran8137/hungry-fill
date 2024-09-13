@@ -1,12 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/data/model/dish_category_model/dish_category_model.dart';
-import 'package:hungry_fill/data/repository/dish_repo_imp/dish_repo_impl.dart';
-import 'package:hungry_fill/presentation/bloc/category_bloc/category_bloc.dart';
  
-import 'package:hungry_fill/presentation/bloc/dish_bloc/dish_bloc.dart';
  
 import 'package:hungry_fill/presentation/bloc/restaurant_bloc/restaurant_bloc.dart';
 import 'package:hungry_fill/presentation/pages/filtered_dishes/filtered_dishes_page.dart';
@@ -43,7 +39,7 @@ ListView dishItems({required List<DishCategoryModel> filteroptions}) {
                 ),
           ),
                 Text(filteroption.dishcategoryname!,
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: const TextStyle(fontWeight: FontWeight.bold),
                 )
         ],
       );
@@ -118,7 +114,7 @@ ListView recommendedRestaurans(GetRestaurantSuccessState? state) {
                                             )));
                               },
                               child: Container(
-                                height: 135,
+                                height: 120,
                                 width: double.infinity,
                                 decoration: BoxDecoration(
                                   color: const Color.fromARGB(
@@ -131,19 +127,19 @@ ListView recommendedRestaurans(GetRestaurantSuccessState? state) {
                                     children: [
                                       Container(
                                         height: 135,
-                                        width: 165,
+                                        width: 130,
                                         decoration: BoxDecoration(
                                             color: Colors.red,
                                             borderRadius:
                                                 BorderRadius.circular(10),
                                             image: const DecorationImage(
                                               image: AssetImage(
-                                                  "assets/biriyani.jpg"),
+                                                  "assets/biriyani_image.jpg"),
                                               fit: BoxFit.fill,
                                             )),
                                       ),
                                       const SizedBox(
-                                        width: 3,
+                                        width: 10,
                                       ),
                                       Column(
                                         crossAxisAlignment:

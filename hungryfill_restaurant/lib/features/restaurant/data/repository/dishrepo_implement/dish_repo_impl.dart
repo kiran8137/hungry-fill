@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -19,7 +18,8 @@ String dishid = "";
 
 class DishRepoImplementation extends DishRepository {
   @override
-  Future<void> addDish({required DishModel dishmodel}) async {
+  Future<bool> addDish({required DishModel dishmodel}) async {
+    bool isAddDishComplete = false;
     try {
       final resref = FirebaseFirestore.instance
           .collection("Restaurants")
@@ -43,12 +43,17 @@ class DishRepoImplementation extends DishRepository {
           
           );
 
-      await resref.set(dish.toJson());
+      await resref.set(dish.toJson()).whenComplete(() {
+        isAddDishComplete = !isAddDishComplete;
+      },);
       // set(dishmodel.toJson());
 
       log(resref.id);
+
+      return isAddDishComplete;
     } catch (error) {
       log(error.toString());
+      throw Exception(error);
     }
   }
 
@@ -115,13 +120,11 @@ class DishRepoImplementation extends DishRepository {
   @override
   Future<FilePickerResult?> ImagePicker() async {
     //Uint8List? selectedimagefile;
-    String? filename;
     try {
      
         final pickedimage = await FilePicker.platform.pickFiles();
 
         if (pickedimage != null) {
-          filename = pickedimage.files.first.name;
           
         }
 
@@ -215,39 +218,19 @@ class DishRepoImplementation extends DishRepository {
   }
 }
 
-//  Uint8List? selectedImageInBytes;
-//  String? filename;
-
-//  Future<Uint8List?> pickImag() async{
-//   final pickedimage = await FilePicker.platform.pickFiles();
-
-// if(pickedimage!=null){
-//   filename = pickedimage.files.first.name;
-//   selectedImageInBytes = pickedimage.files.first.bytes;
-//   debugPrint('pickimage $selectedImageInBytes');
-// }
-
-// return selectedImageInBytes;
-
-// }
-
-// Future<void> saveimage() async {
-//   try {
-//     debugPrint("save imag");
-//     firebase_storage.UploadTask uploadtask;
-
-//     firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
-//         .ref()
-//         .child('dishes')
-//         .child('/+ ${filename}');
-//     final metadata =
-//         firebase_storage.SettableMetadata(contentType: 'image/jpeg');
-
-//     uploadtask = ref.putData(selectedImageInBytes!, metadata);
-//     await uploadtask.whenComplete(() => null);
-//     final imageUrl = await ref.getDownloadURL();
-//     debugPrint(imageUrl);
-//   } catch (error) {
-//     log(error.toString());
-//   }
-// }
+Future<List<DishModel>> searchDishesFromDb({required String query}) async{
+ // List<DishModel> filteredDishes = [];
+  try{
+    final result =await FirebaseFirestore.instance
+          .collection("Restaurants")
+          .doc(FirebaseAuth.instance.currentUser?.uid)
+          .collection("Dishes")
+          .get();
+      
+    final dishes = result.docs.map((dish)=>DishModel.fromJson(json: dish.data())).toList();
+     return  dishes.where((dish)=>dish.dishname!.toLowerCase().contains(query.toLowerCase())).toList();
+  }catch(error){
+    log(error.toString());
+    throw Exception(error);
+  }
+}

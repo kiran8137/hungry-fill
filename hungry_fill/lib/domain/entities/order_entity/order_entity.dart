@@ -14,6 +14,7 @@ class OrderEntity extends Equatable {
   final String? grandtotal;
   final String? orderstatus;
   final String? restaurantname;
+  final String? restaurantId;
 
  const OrderEntity(
       {
@@ -26,10 +27,11 @@ class OrderEntity extends Equatable {
       required this.addressSelected,
       required this.grandtotal,
       required this.orderstatus,
-      required this.restaurantname
+      required this.restaurantname,
+      required this.restaurantId
       });
       
         @override
         
-        List<Object?> get props => [userid , orderdate, paymentType ,paymentid, addressSelected , cartdata , grandtotal , orderstatus , restaurantname];
+        List<Object?> get props => [userid , orderdate, paymentType ,paymentid, addressSelected , cartdata , grandtotal , orderstatus , restaurantname , restaurantId];
 }

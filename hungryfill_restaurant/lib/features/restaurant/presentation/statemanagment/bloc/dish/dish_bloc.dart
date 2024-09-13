@@ -27,10 +27,14 @@ class DishBloc extends Bloc<DishEvent, DishState> {
   }
 
   FutureOr<void> addDish(DishAddEvent event, Emitter<DishState> emit) async {
-
+  
     try{
-      await dishrepository.addDish(dishmodel: event.dishmodel);
-      emit(DishAddSuccuessState());
+    emit(DishAddIntial());
+     final  result = await dishrepository.addDish(dishmodel: event.dishmodel);
+     if(result == true){
+        emit(DishAddSuccuessState());
+     }
+    
     }catch(error){
       log(error.toString());
     }

@@ -27,14 +27,10 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        leading: SizedBox(
+        leading: const SizedBox(
             width: 500,
             height: 500,
-            // child: Image.asset(
-            //  // "assets/Hung.png",
-            //   height: 500,
-            //   width: 500,
-            // )
+           
             ),
       ),
       body: Stack(

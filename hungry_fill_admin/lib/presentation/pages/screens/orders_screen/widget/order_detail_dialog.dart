@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+ 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill_admin/core/theme/color.dart';
@@ -51,7 +51,7 @@ class OrderDetailDialog extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              Container(
+              SizedBox(
                 height: 120,
                 width: double.infinity,
                 //  color: Colors.grey,
@@ -235,7 +235,7 @@ class OrderDetailDialog extends StatelessWidget {
                     color: Colors.grey),
               ),
               Consumer<OrderProvider>(
-                builder: (context, value, child) => Container(
+                builder: (context, value, child) => SizedBox(
                   width: 100,
                   height: 40,
                   child: DropdownButton<String>(
@@ -280,7 +280,7 @@ class OrderDetailDialog extends StatelessWidget {
                               fontWeight: FontWeight.w600))
                 ],
               ),
-              SizedBox(height: 30,),
+              const SizedBox(height: 30,),
               Row(
                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -295,7 +295,7 @@ class OrderDetailDialog extends StatelessWidget {
                          color: primarycolor,
                          borderRadius: BorderRadius.circular(8)
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text('Cancel',
                         style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),
                         ),
@@ -314,7 +314,7 @@ class OrderDetailDialog extends StatelessWidget {
                          color: primarycolor,
                          borderRadius: BorderRadius.circular(5)
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text('Save Changes',
                         style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),
                         ),

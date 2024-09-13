@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hungry_fill_admin/core/theme/color.dart';
 import 'package:hungry_fill_admin/presentation/pages/screens/dashboard_screen/widgets/revenue_cart_widget.dart';
-import 'package:hungry_fill_admin/presentation/pages/common_widget_component/widgets/header_widget.dart';
 import 'package:hungry_fill_admin/presentation/statemanagment/provider/dashboard_provider.dart';
 import 'package:provider/provider.dart';
 
 class Dashboard extends StatefulWidget {
-  Dashboard({super.key, this.index});
+  const Dashboard({super.key, this.index});
 
   final int? index;
 
@@ -18,17 +16,13 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   String? url;
 
-  // @override
-  // void initState() {
-  //   Provider.of<DashboardProvider>(context).getUsersCount();
-  //   super.initState();
-  // }
+   
   @override
   void didChangeDependencies() {
     Provider.of<DashboardProvider>(context).getUsersCount();
     Provider.of<DashboardProvider>(context).getOrdersCount();
      Provider.of<DashboardProvider>(context).getRestaurantCount();
-    // TODO: implement didChangeDependencies
+    
     super.didChangeDependencies();
   }
 
@@ -47,7 +41,7 @@ class _DashboardState extends State<Dashboard> {
         const SizedBox(
           height: 10,
         ),
-
+        
         Row(
           children: [
             const SizedBox(
@@ -63,7 +57,8 @@ class _DashboardState extends State<Dashboard> {
             ),
           ],
         ),
-
+        
+       const Divider(),
         const SizedBox(
           height: 45,
         ),
@@ -78,18 +73,18 @@ class _DashboardState extends State<Dashboard> {
           builder: (context, value, child) => 
               Row(
             children: [
-              RevenueCardWidget(title: 'Todays Revenue', amount: '10',image: 'assets/salary.png',),
-              SizedBox(width: 20),
+              RevenueCardWidget(title: 'Todays Revenue', amount: '${value.todaysRevenue}',image: 'assets/salary.png',),
+              const SizedBox(width: 20),
               RevenueCardWidget(title: 'Users', amount: '${value.totalUsers}',image: 'assets/user.png',),
-              SizedBox(
+              const SizedBox(
                 width: 20,
               ),
               RevenueCardWidget(title: 'Orders', amount: '${value.totalOrders}',image: 'assets/delivery.png',),
-              SizedBox(
+              const SizedBox(
                 width: 20,
               ),
               RevenueCardWidget(title: 'Restaurants', amount: '${value.totalRestaurant}',image: 'assets/restaurant.png',),
-              SizedBox(
+              const SizedBox(
                 width: 20,
               ),
              
@@ -98,7 +93,9 @@ class _DashboardState extends State<Dashboard> {
           ),
         ),
         const SizedBox(height: 10),
-         const RevenueCardWidget(title: 'One Month Earning', amount: '10',image: 'assets/wallet.png',),
+         Consumer<DashboardProvider>(
+          builder: (context, value, child) => 
+             RevenueCardWidget(title: 'One Month Earning', amount: '${value.totalEarnings}',image: 'assets/wallet.png',)),
 
         // Container(
         //   height: 100,

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungryfill_restaurant/core/theme/color.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/auth_screens/login.dart';
-import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/common_widgets/textform_widget.dart';
+import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/widgets/textform_widget.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/res_detail_add_screen/res_detail_add.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/authentication/auth_bloc_bloc.dart';
 

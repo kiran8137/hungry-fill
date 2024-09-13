@@ -31,7 +31,7 @@ class OrderRepoImpl extends OrderRepository{
      
      try{
       await FirebaseFirestore.instance.collection('OrderCollection').doc(orderId).update({"orderStatus" : newStatus}).then((_){
-        print('order status update to $newStatus');
+        debugPrint('order status update to $newStatus');
       });
 
      }catch(error){

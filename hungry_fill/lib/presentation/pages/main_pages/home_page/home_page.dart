@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
-import 'package:hungry_fill/presentation/bloc/category_bloc/category_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/filter_homepage/filter_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/restaurant_bloc/restaurant_bloc.dart';
 import 'package:hungry_fill/presentation/pages/cart_page/cart_restauants.dart';
@@ -60,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: dishItems(filteroptions: state.filteroptions),
                       );
                       }else{
-                        return SizedBox(height: 100);
+                        return const SizedBox(height: 100);
                       }
                       
                     },
@@ -93,53 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     style: GoogleFonts.abhayaLibre(
                         fontSize: 28, fontWeight: FontWeight.bold),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        width: 100,
-                        height: 30,
-                        decoration: BoxDecoration(
-                            //color: Colors.red,
-                            border: Border.all(),
-                            borderRadius: BorderRadius.circular(15)),
-                        child: Center(
-                          child: Text(
-                            "Low To High",
-                            style: GoogleFonts.alef(),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: 100,
-                        height: 30,
-                        decoration: BoxDecoration(
-                            //color: Colors.red,
-                            border: Border.all(),
-                            borderRadius: BorderRadius.circular(15)),
-                        child: Center(
-                          child: Text(
-                            "High To Low",
-                            style: GoogleFonts.alef(),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: 100,
-                        height: 30,
-                        decoration: BoxDecoration(
-                            //color: Colors.red,
-                            border: Border.all(),
-                            borderRadius: BorderRadius.circular(15)),
-                        child: Center(
-                          child: Text(
-                            "Rating 4+",
-                            style: GoogleFonts.alef(),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
+                   
                   const SizedBox(
                     height: 20,
                   ),

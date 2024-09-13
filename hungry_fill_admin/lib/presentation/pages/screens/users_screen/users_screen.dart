@@ -16,21 +16,13 @@ class UsersScreen extends StatelessWidget {
     "No.of Orders / Total Rs",
   ];
 
+  TextEditingController searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 239, 239, 239),
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: GestureDetector(
-          onTap: () async {},
-          child: Text(
-            'Users',
-            style: GoogleFonts.radioCanada(
-                fontSize: 25, fontWeight: FontWeight.w600),
-          ),
-        ),
-      ),
+      appBar: appBarCommon(title: 'Users'),
       body: Column(children: [
         const SizedBox(height: 20),
         Padding(
@@ -60,12 +52,15 @@ class UsersScreen extends StatelessWidget {
                           width: 250,
                           //color: Colors.red,
                           child: TextFormField(
+                            controller: searchController,
                             style: const TextStyle(height: 1.3),
                             decoration: InputDecoration(
                                 hintText: 'Search Order',
                                 hintStyle: const TextStyle(fontSize: 11),
                                 border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5))),
+                                  borderRadius: BorderRadius.circular(5),
+                                )),
+                            onChanged: (String? query) {},
                           ),
                         ),
                         const Icon(
@@ -79,11 +74,7 @@ class UsersScreen extends StatelessWidget {
                   ],
                 ),
               ),
-            )
-
-            //  restaurantBar(
-            //     context: context, categorycontroller: categorycontroller , dishcategorycontroller: dishcategorycontroller),
-            ),
+            )),
         const SizedBox(height: 5),
         Expanded(
             child: Padding(
@@ -101,7 +92,7 @@ class UsersScreen extends StatelessWidget {
                           const SizedBox(height: 5),
                           Padding(
                             padding: const EdgeInsets.only(top: 8, left: 15),
-                            child: Container(
+                            child: SizedBox(
                               //  color: Colors.amber,
                               height: 30,
                               width: double.infinity,
@@ -128,11 +119,7 @@ class UsersScreen extends StatelessWidget {
                               },
                             ),
                           ),
-                        ]
-                        )
-                        )
-                        )
-                        )
+                        ]))))
       ]),
     );
   }

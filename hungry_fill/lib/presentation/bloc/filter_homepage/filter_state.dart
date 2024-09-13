@@ -33,7 +33,7 @@ class FilteredDishesSuccess extends FilterState{
  const FilteredDishesSuccess({required this.filtereddish});
 
  @override
-  // TODO: implement props
+   
   List<Object> get props => [filtereddish];
 }
 

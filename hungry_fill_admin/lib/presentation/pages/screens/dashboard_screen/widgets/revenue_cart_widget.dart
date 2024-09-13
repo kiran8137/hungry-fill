@@ -38,7 +38,7 @@ class RevenueCardWidget extends StatelessWidget {
                           shape: BoxShape.circle, color: Colors.blue),
                           
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Column(
@@ -51,7 +51,7 @@ class RevenueCardWidget extends StatelessWidget {
                               fontSize: 23,
                               color: primarycolor),
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Text(
                           amount,
                           style: GoogleFonts.barlow(

@@ -1,9 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hungry_fill_admin/data/models/orders_model.dart';
-import 'package:hungry_fill_admin/data/models/restaurant_model.dart';
-import 'package:hungry_fill_admin/presentation/statemanagment/provider/order_provider.dart';
-import 'package:provider/provider.dart';
 
 class OrderDetailWidget extends StatelessWidget {
     OrderDetailWidget({
@@ -19,26 +16,26 @@ final OrderModel orderDetail;
         color: Colors.white,
         child:   Row(
           children: [
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             SizedBox(
               width: 80,
               child: Text(
                 "${index+1}",
-                style: TextStyle(fontWeight: FontWeight.w700),
+                style: const TextStyle(fontWeight: FontWeight.w700),
               ),
             ),
-            SizedBox(width: 100),
+            const SizedBox(width: 100),
             SizedBox(
               width: 150,
               child: Text("${orderDetail.orderdate}",
-              style: TextStyle(fontWeight: FontWeight.w600),
+              style: const TextStyle(fontWeight: FontWeight.w600),
               ),
             ),
-            SizedBox(width: 105),
-            Text('${orderDetail.addressSelected!.username}', style: TextStyle(fontWeight: FontWeight.w600)),
-            SizedBox(width: 220),
-            Text('${orderDetail.grandtotal}', style: TextStyle(fontWeight: FontWeight.w600)),
-            SizedBox(width: 240),
+            const SizedBox(width: 105),
+            Text('${orderDetail.addressSelected!.username}', style: const TextStyle(fontWeight: FontWeight.w600)),
+            const SizedBox(width: 220),
+            Text('${orderDetail.grandtotal}', style: const TextStyle(fontWeight: FontWeight.w600)),
+            const SizedBox(width: 240),
             SizedBox(
               width: 150,
               child: Text("${orderDetail.orderstatus}"),

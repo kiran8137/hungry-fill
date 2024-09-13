@@ -1,95 +1,101 @@
-
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:hungryfill_restaurant/core/theme/color.dart';
-import 'package:hungryfill_restaurant/features/restaurant/data/repository/dishrepo_implement/dish_repo_impl.dart';
-import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/widgets/header_widget.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/dashboard/widgets/revenue_card_widget.dart';
+import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/widgets/page_heading_widget.dart';
+import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/provider/dashboard_provider.dart';
+import 'package:provider/provider.dart';
 
-class Dashboard extends StatelessWidget {
-    Dashboard({super.key, this.index});
-  
+class Dashboard extends StatefulWidget {
+  Dashboard({super.key, this.index});
+
   final int? index;
 
+  @override
+  State<Dashboard> createState() => _DashboardState();
+}
 
+class _DashboardState extends State<Dashboard> {
   String? url;
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        
-        //HeaderWidget(index: index,),
-       // const Divider(),
-        const SizedBox(
-          height: 25,
-        ),
+  void initState() {
+   
+    super.initState();
+  }
 
-        const SizedBox(height: 10,),
+  @override
+  Widget build(BuildContext context) {
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // HeaderWidget(index: index,),
+
+        // const SizedBox(
+        //   height: 25,
+        // ),
+
+        // const SizedBox(
+        //   height: 10,
+        // ),
 
         Row(
           children: [
-
-            const SizedBox(width: 20,),
+            const SizedBox(
+              width: 20,
+            ),
             GestureDetector(
-              onTap: ()  {
+              onTap: () async{
                  
               },
-              child: Text("DASHBOARD",
-                style: GoogleFonts.inriaSans(
-                  fontWeight: FontWeight.bold, fontSize: 30
-                ),
-              ),
+              child: const PageHeading(title: "DASHBOARD",),
             ),
-
-
           ],
         ),
 
-        const SizedBox(height: 45,),
+        const Divider(),
+        const SizedBox(
+          height: 45,
+        ),
 
-        Row(
-          children: [
+        const SizedBox(
+          height: 5,
+        ),
 
-            const SizedBox(width: 15,),
-            Text("Here’s Your Revenue",
-              style: GoogleFonts.barlow(
-                fontWeight: FontWeight.w500,
-                fontSize: 28,
-                color: primarycolor
+        Consumer<DashboardProvider>(
+          builder: (context, value, child) =>   Row(
+            children: [
+              RevenueCardWidget(
+                title: 'Todays Revenue',
+                amount: '${value.todaysRevenue}',
+                image: 'assets/salary.png',
               ),
-            ),
-
-            
-          ],
+              const SizedBox(width: 20),
+              RevenueCardWidget(
+                title: 'Dishes',
+                amount: '${value.totalDishes}',
+                image: 'assets/fried-rice.png',
+              ),
+              const SizedBox(width: 20),
+              RevenueCardWidget(
+                title: 'Orders',
+                amount: '${value.totalOrders}',
+                image: 'assets/delivery.png',
+              ),
+              const SizedBox(width: 20),
+              RevenueCardWidget(
+                title: 'Total earnings',
+                amount: '${value.totalEarnings}',
+                image: 'assets/wallet.png',
+              ),
+              const SizedBox(width: 20),
+            ],
+          ),
         ),
 
-        const SizedBox(height: 5,),
-
-        SizedBox(
-          height: 150,
-         
-            
-           child: Padding(
-             padding: const EdgeInsets.all(5.0),
-             child: ListView.separated(
-              separatorBuilder: (context, index) => const SizedBox(width: 50,),
-              scrollDirection: Axis.horizontal,
-              itemCount: 4,
-              itemBuilder:(context , index)=>  const RevenueCardWidget()
-             ),
-           ),
-
-        ),
-
-        // Container(
-        //   height: 100,
-        //   width: 100,
-        // color: Colors.green,
-        //  child: Image.memory(),
-        //  )
+        
       ],
-
     );
   }
 }
+
+

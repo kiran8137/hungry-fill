@@ -30,6 +30,8 @@ class _DishScreenState extends State<DishScreen> {
     "Serves",
     "Stock"
   ];
+
+  TextEditingController searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     Provider.of<DishProvider>(context, listen: false).getDishes();
@@ -49,7 +51,7 @@ class _DishScreenState extends State<DishScreen> {
           const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.only(left: 30, right: 30),
-            child: dishListBar(context),
+            child: dishListBar(context: context , controller: searchController),
           ),
           const SizedBox(height: 5),
           Expanded(
@@ -70,7 +72,7 @@ class _DishScreenState extends State<DishScreen> {
                     const SizedBox(height: 5),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Container(
+                      child: SizedBox(
                         height: 30,
                         width: 1000,
                         // color: Colors.blue,
@@ -92,7 +94,7 @@ class _DishScreenState extends State<DishScreen> {
                                       fontWeight: FontWeight.w600,
                                       fontSize: 15),
                                 ))
-                              : Container(
+                              : SizedBox(
                                   height: 450,
                                   width: double.infinity,
                                   //width: 1000,

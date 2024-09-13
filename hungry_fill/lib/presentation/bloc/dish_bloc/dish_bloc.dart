@@ -4,7 +4,6 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:hungry_fill/core/restaurant_and_dish/restaurant_and_dish.dart';
 
 import 'package:hungry_fill/data/model/cart_model/cart_model.dart';
 

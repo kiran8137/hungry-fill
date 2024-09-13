@@ -26,9 +26,7 @@ class DishImageWidget extends StatelessWidget {
        //image: DecorationImage(image: MemoryImage(value.selectedimage!),fit: BoxFit.contain)
     ),
     child: selectedimage ==null ?
-     const Icon(Icons.add_circle,
-        color: Color.fromARGB(255, 159, 159, 159)
-        ):
+        Image.asset('assets/placeholder.jpg'):
         Image.memory(selectedimage!,
         fit: BoxFit.cover,
         )

@@ -2,12 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/repository/authrepo_implement/auth_repo_impl.dart';
+import 'package:hungryfill_restaurant/features/restaurant/data/repository/dashboard_repo/dashboard_repo_impl.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/repository/dishrepo_implement/dish_repo_impl.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/repository/order_repo/order_repo_impl.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/repository/resUser_implement/res_user_impl.dart';
-import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/dishes/widgets/add_dish_widget.dart';
-import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/dishes/widgets/edit_dish_widget.dart';
-import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/res_detail_add_screen/res_detail_add.dart';
  
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/splash_screen/splash_screen.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/authentication/auth_bloc_bloc.dart';
@@ -16,7 +14,9 @@ import 'package:hungryfill_restaurant/features/restaurant/presentation/statemana
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/dish_category/dish_category_bloc.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/orders_bloc/orders_bloc.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/restaurant_user/restaurant_user_bloc.dart';
+import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/provider/dashboard_provider.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/provider/dish_provider.dart';
+import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/provider/order_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -60,15 +60,27 @@ class MyApp extends StatelessWidget {
 
           BlocProvider(
             create: (context) => OrdersBloc(orderRepository: OrderRepoImpl())
-            )
+            ),
+            
 
 
       ],
        
-      child: ChangeNotifierProvider(
-        create: (context) => DishProvider(dishrepository: DishRepoImplementation()),
+      child: MultiProvider(
+        providers: [
+           ChangeNotifierProvider(
+        create: (context) => DishProvider(dishrepository: DishRepoImplementation())),
+          ChangeNotifierProvider(
+          create: (context)=> DashboardProvider(dashboardrepository: DashBoardRepoImpl())
+          ),
+           ChangeNotifierProvider(
+          create: (context)=> OrderProvider(orderRepository: OrderRepoImpl())
+          ),
+        ],
+     
+         
 
-        child:     MaterialApp(
+        child:     const MaterialApp(
             debugShowCheckedModeBanner: false, 
             home:
             //ResDetailAddScreen()

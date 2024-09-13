@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:file_picker/src/file_picker_result.dart';
 import 'package:flutter/material.dart';
 import 'package:hungry_fill_admin/data/models/category_model.dart';
 import 'package:hungry_fill_admin/data/models/dish_category_model.dart';
@@ -101,13 +100,13 @@ class RestaurantRepoImpl extends RestaurantRespository{
   
   @override
   Future<void> deleteDishCategory({required String dishcategoryid}) {
-    // TODO: implement deleteDishCategory
+     
     throw UnimplementedError();
   }
   
   @override
   Future<void> updateDishCategory({required CategoryModel dishcategory}) {
-    // TODO: implement updateDishCategory
+     
     throw UnimplementedError();
   }
   
@@ -126,14 +125,12 @@ class RestaurantRepoImpl extends RestaurantRespository{
   }
 
   @override
-  Future<FilePickerResult?> ImagePicker() async {
-    String? filename;
+  Future<FilePickerResult?> imagePicker() async {
     try {
      
         final pickedimage = await FilePicker.platform.pickFiles();
 
         if (pickedimage != null) {
-          filename = pickedimage.files.first.name;
           
         }
 
@@ -145,3 +142,19 @@ class RestaurantRepoImpl extends RestaurantRespository{
     }
   }
 }
+
+
+// Future<List<RestaurantModel>> searchDishesFromDb({required String query}) async{
+//  // List<DishModel> filteredDishes = [];
+//   try{
+//     final result =await FirebaseFirestore.instance
+//           .collection("Restaurants")
+          
+//           .get();
+      
+//     final dishes = result.docs.map((dish)=>REst.fromJson(json: dish.data())).toList();
+//      return  dishes.where((dish)=>dish.dishname!.toLowerCase().contains(query.toLowerCase())).toList();
+//   }catch(error){
+//     log(error.toString());
+//     throw Exception(error);
+//   }

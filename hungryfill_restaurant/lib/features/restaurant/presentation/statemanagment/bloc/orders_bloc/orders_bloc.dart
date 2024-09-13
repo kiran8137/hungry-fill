@@ -13,22 +13,22 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
   OrderRepoImpl orderRepository;
   OrdersBloc({required this.orderRepository}) : super(OrdersInitial()) {
      
-     on<GetOrdersList>(getOrderList);
+    // on<GetOrdersList>(getOrderList);
   }
 
-  FutureOr<void> getOrderList(GetOrdersList event, Emitter<OrdersState> emit)async {
-    try{
-    emit(GetOrderListIntial());
-      final result = await orderRepository.getOrdersListFromDb();
-      if(result.isNotEmpty){
-        emit(GetOrderListSuccess(orderList: result));
-      }else{
-        emit(GetOrdersListEmpty());
-      }
+  // FutureOr<void> getOrderList(GetOrdersList event, Emitter<OrdersState> emit)async {
+  //   try{
+  //   emit(GetOrderListIntial());
+  //    // final result = await orderRepository.getOrdersListFromDb();
+  //     if(result.isNotEmpty){
+  //       emit(GetOrderListSuccess(orderList: result));
+  //     }else{
+  //       emit(GetOrdersListEmpty());
+  //     }
 
-    }catch(error){
-      emit(GetOrdersListError());
-      log(error.toString());
-    }
-  }
+  //   }catch(error){
+  //     emit(GetOrdersListError());
+  //     log(error.toString());
+  //   }
+  // }
 }

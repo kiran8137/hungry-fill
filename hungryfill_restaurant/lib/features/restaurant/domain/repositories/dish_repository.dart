@@ -1,5 +1,5 @@
 
-import 'dart:typed_data';
+ 
 
 import 'package:file_picker/file_picker.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/category/category_model.dart';
@@ -9,7 +9,7 @@ import 'package:hungryfill_restaurant/features/restaurant/data/model/dish_catego
 abstract class DishRepository {
   
 
-  Future<void> addDish({required DishModel dishmodel});
+  Future<bool> addDish({required DishModel dishmodel});
 
   Stream<List<DishModel>> getDishes({required String? userid});
 

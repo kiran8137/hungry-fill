@@ -29,7 +29,7 @@ class EditDialog extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Container(
+              SizedBox(
                 height: 40,
                 width: 250,
                 child: TextFormField(
@@ -39,7 +39,7 @@ class EditDialog extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10))),
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [

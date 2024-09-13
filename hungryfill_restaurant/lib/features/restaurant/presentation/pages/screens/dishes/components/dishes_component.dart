@@ -8,8 +8,9 @@ import 'package:hungryfill_restaurant/core/theme/color.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/dishes/widgets/add_dish_widget.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/category/category_bloc.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/dish_category/dish_category_bloc.dart';
+import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/provider/dish_provider.dart';
 
-Container dishListBar(BuildContext context) {
+Container dishListBar(  {required BuildContext context , required TextEditingController controller} ) {
     return Container(
             width: double.infinity,
             height: 60,
@@ -35,12 +36,17 @@ Container dishListBar(BuildContext context) {
                         width: 250,
                         //color: Colors.red,
                         child: TextFormField(
+                          controller: controller,
                           style: const TextStyle(height: 1.3),
                           decoration: InputDecoration(
                               hintText: 'Search Restaurants',
                               hintStyle: const TextStyle(fontSize: 11),
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(5))),
+                            onChanged: (String query){
+                              //Provider.of<DishProvider>(context ,listen: false).searchDishes(query: query);
+                              context.read<DishProvider>().searchDishes(query: query);
+                            },
                         ),
                       ),
                       const Icon(

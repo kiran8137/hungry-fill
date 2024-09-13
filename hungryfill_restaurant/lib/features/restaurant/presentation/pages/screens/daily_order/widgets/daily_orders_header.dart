@@ -12,7 +12,7 @@ class DailyOrderHeader extends StatelessWidget {
       //height: 50,
       width: double.infinity,
       
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         
          
         ),
