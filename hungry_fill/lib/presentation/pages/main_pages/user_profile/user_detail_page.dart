@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/data/model/user_model/user_model.dart';
@@ -50,8 +51,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
                   });
                 },
                 child: const Icon(Icons.edit)),
-            const SizedBox(
-              width: 10,
+              SizedBox(
+              width: 10.w,
             )
           ],
         ),
@@ -63,16 +64,16 @@ class _UserDetailPageState extends State<UserDetailPage> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                       Container(
-                        height: 120,
-                        width: 120,
+                        height: 120.h,
+                        width: 120.w,
                         decoration: const BoxDecoration(
                             image: DecorationImage(
                                 image: AssetImage("assets/userprofile.jpg")),
                             color: Colors.red,
                             shape: BoxShape.circle),
                       ),
-                      const SizedBox(
-                        height: 30,
+                        SizedBox(
+                        height: 30.h,
                       ),
                       TextFormField(
                         readOnly: isedit,
@@ -81,8 +82,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10))),
                       ),
-                      const SizedBox(
-                        height: 30,
+                        SizedBox(
+                        height: 30.h,
                       ),
                       TextFormField(
                         readOnly: isedit,
@@ -91,9 +92,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10))),
                       ),
-                      const SizedBox(
-                        height: 30,
-                      ),
+                      SizedBox(
+                        height: 30.h,),
                       TextFormField(
                         readOnly: isedit,
                         controller: emailcontroller,
@@ -101,8 +101,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10))),
                       ),
-                      const SizedBox(
-                        height: 160,
+                        SizedBox(
+                        height: 158.h,
                       ),
                       !isedit
                           ? BlocListener<UsersBloc, UsersState>(
@@ -127,15 +127,15 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
                                       color: primarycolor),
-                                  height: 50,
-                                  width: 350,
-                                  child: const Row(
+                                  height: 45.h,
+                                  width: 350.w,
+                                  child:   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(' Save',
                                           style: TextStyle(
                                               color: Colors.white,
-                                              fontSize: 17)),
+                                              fontSize: 17.sp)),
                                     ],
                                   ),
                                 ).animate(

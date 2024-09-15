@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/data/model/order_model/order_model.dart';
@@ -11,7 +12,7 @@ import 'package:hungry_fill/presentation/pages/main_pages/recent_orders_page/wid
 PreferredSize preferredSizedAppBar(BuildContext context,
     {required OrderModel orderdetail}) {
   return PreferredSize(
-    preferredSize: const Size.fromHeight(80),
+    preferredSize:   Size.fromHeight(80),
     child: AppBar(
       backgroundColor: Colors.white,
       title: Column(
@@ -20,12 +21,12 @@ PreferredSize preferredSizedAppBar(BuildContext context,
           Text("Order ID : ${orderdetail.orderid}",
               style: GoogleFonts.nunitoSans(
                   color: Colors.black,
-                  fontSize: 15,
+                  fontSize: 15.sp,
                   fontWeight: FontWeight.w600)),
           Text("12:00 PM | 09/12/2000",
               style: GoogleFonts.nunitoSans(
                   color: const Color.fromARGB(255, 120, 120, 120),
-                  fontSize: 12,
+                  fontSize: 12.sp,
                   fontWeight: FontWeight.w600)),
         ],
       ),
@@ -109,7 +110,7 @@ Container billDetailsRecentOrder({required OrderModel orderdetail}) {
 Container dishDetailRecentOrder(
     {required int index, required OrderModel orderdetail}) {
   return Container(
-    height: 100,
+    height: 100.h,
     width: double.infinity,
     decoration: BoxDecoration(
         color: const Color.fromARGB(155, 248, 248, 248),
@@ -118,8 +119,8 @@ Container dishDetailRecentOrder(
       children: [
         Container(
           margin: const EdgeInsets.only(left: 15),
-          width: 60,
-          height: 60,
+          width: 60.w,
+          height: 60.h,
           decoration: BoxDecoration(
              // color: Colors.green,
               borderRadius: BorderRadius.circular(10),
@@ -129,42 +130,42 @@ Container dishDetailRecentOrder(
                   ),
                   fit: BoxFit.cover)),
         ),
-        const SizedBox(
-          width: 10,
+          SizedBox(
+          width: 10.w,
         ),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              width: 90,
+              width: 90.w,
               child: Text(
                 // cartdish.dishname!,
                 '${orderdetail.cartdata[index].dishname}',
                 maxLines: 2,
                 style: GoogleFonts.roboto(
-                    fontSize: 18, fontWeight: FontWeight.w500),
+                    fontSize: 18.sp, fontWeight: FontWeight.w500),
               ),
             ),
             Text(
               //"₹ ${cartdish.priceperquantity.toString()}",
               "₹ ${orderdetail.cartdata[index].priceperquantity}",
-              style: const TextStyle(fontSize: 14, color: Colors.grey),
+              style:   TextStyle(fontSize: 14.sp, color: Colors.grey),
             )
           ],
         ),
-        const SizedBox(
-          width: 40,
+          SizedBox(
+          width: 40.w,
         ),
-        const SizedBox(width: 30),
+          SizedBox(width: 30.w),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               '${orderdetail.cartdata[index].dishquantity}',
-              style: const TextStyle(
+              style:   TextStyle(
                   color: Colors.grey,
-                  fontSize: 23,
+                  fontSize: 23.sp,
                   fontWeight: FontWeight.w500),
             ),
           ],
@@ -190,7 +191,7 @@ Container dishDetailRecentOrder(
                                   : orderdetail.orderstatus == 'delivered'
                                       ? Colors.green
                                       : Colors.black,
-                      fontSize: 15,
+                      fontSize: 15.sp,
                       fontWeight: FontWeight.w600),
                 ),
               );

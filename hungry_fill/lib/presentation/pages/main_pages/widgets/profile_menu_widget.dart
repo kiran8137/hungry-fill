@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProfileMenuWidget extends StatelessWidget {
@@ -18,8 +19,8 @@ class ProfileMenuWidget extends StatelessWidget {
       minLeadingWidth: 0.5,
       leading: Container(
        
-        width: 25,
-        height: 25,
+        width: 25.w,
+        height: 25.h,
         decoration:   BoxDecoration(
            
           image: DecorationImage(
@@ -30,13 +31,13 @@ class ProfileMenuWidget extends StatelessWidget {
         title: Text(title,
         style: GoogleFonts.abhayaLibre(
         color: Colors.black,
-        fontSize: 22,
+        fontSize: 22.sp,
         fontWeight: FontWeight.bold
         ),
         ),
         trailing: Container(
-        width: 25,
-        height: 25,
+        width: 25.w,
+        height: 25.h,
         decoration:   trailing !=null ?
         BoxDecoration(
           image: DecorationImage(

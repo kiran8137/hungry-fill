@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BillDetailswidget extends StatelessWidget {
   const BillDetailswidget({
@@ -15,15 +16,15 @@ class BillDetailswidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(detail,
-        style: const TextStyle(
-          fontSize: 17,
+        style:   TextStyle(
+          fontSize: 17.sp,
           fontWeight: FontWeight.w500
         ),
         ),
     
         Text("₹ $amount",
-        style: const TextStyle(
-          fontSize: 17
+        style:   TextStyle(
+          fontSize: 17.sp
           
         ),
         ),

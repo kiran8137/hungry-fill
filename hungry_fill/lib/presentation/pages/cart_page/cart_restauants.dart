@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/presentation/bloc/dish_bloc/dish_bloc.dart';
  
@@ -47,7 +48,7 @@ class _CartState extends State<Cart> {
               debugPrint('${state.runtimeType}');
               return  
               ListView.separated(
-                  separatorBuilder: (context, index) => const SizedBox(height: 10),
+                  separatorBuilder: (context, index) =>   SizedBox(height: 10.h),
                   itemCount: state.restaurantsincart.length,
                   itemBuilder: (context, index) {
                     final restaurants = state.restaurantsincart[index];
@@ -57,7 +58,7 @@ class _CartState extends State<Cart> {
                       },
                       child: Container(
                         width: double.infinity,
-                        height: 80,
+                        height: 70.h,
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
@@ -76,7 +77,7 @@ class _CartState extends State<Cart> {
                                 children: [
                                   Text(restaurants.restaurantname!,
                                   style: GoogleFonts.nunitoSans(
-                                    fontSize: 20,
+                                    fontSize: 20.sp,
                                     fontWeight: FontWeight.w700
                                   ),
                                   ),

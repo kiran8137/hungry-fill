@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/core/constants/constant.dart';
@@ -9,7 +10,7 @@ import 'package:hungry_fill/presentation/pages/user_auth/log_in_screen.dart';
 //Userprofilepage card profilepage
 Container userProfileCard({required UserModel? userinfo}) {
   return Container(
-    height: 135,
+    height: 130.h,
     width: double.infinity,
     decoration: BoxDecoration(
         color: primarycolor, borderRadius: BorderRadius.circular(20)),
@@ -18,34 +19,34 @@ Container userProfileCard({required UserModel? userinfo}) {
       child: Row(
         children: [
           Container(
-            width: 95,
-            height: 95,
+            width: 95.w,
+            height: 95.h,
             decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.white,
                 image: DecorationImage(
                     image: AssetImage("assets/userprofile.jpg"))),
           ),
-          const SizedBox(width: 25),
+            SizedBox(width: 25.w),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: 20,
+                SizedBox(
+                height: 20.h,
               ),
               SizedBox(
-                width: 120,
+                width: 120.w,
                 child: Text(
                   userinfo!.username!,
                   style: GoogleFonts.abhayaLibre(
-                      fontSize: 26, color: Colors.white),
+                      fontSize: 26.sp, color: Colors.white),
                   overflow: TextOverflow.ellipsis,
                   softWrap: true,
                 ),
               ),
               Text(
                 "Edit Profile >",
-                style: GoogleFonts.aBeeZee(fontSize: 12, color: Colors.white),
+                style: GoogleFonts.aBeeZee(fontSize: 12.sp, color: Colors.white),
               ),
             ],
           )
@@ -80,7 +81,7 @@ Container totalAmountSection() {
 }
 
 
- AppBar appBarAboutPage(BuildContext context) {
+ AppBar appBarSettingsContents(BuildContext context , String title ) {
     return AppBar(
       backgroundColor: Colors.white,
       leading: GestureDetector(
@@ -88,20 +89,20 @@ Container totalAmountSection() {
           Navigator.pop(context);
         },
         child: const Icon(Icons.arrow_back_ios_new)),
-      title: Text('About',
+      title: Text(title,
       style: GoogleFonts.abhayaLibre()
       ),
       centerTitle: true,
     );
   }
 
-  Padding aboutPageContent() {
+  Padding settingPageContent({required String content}) {
     return Padding(
               padding: const EdgeInsets.all(25.0),
               child: Text(
-                aboutus,
+                content,
                 style: GoogleFonts.roboto(
-                  fontSize: 20,
+                  fontSize: 20.sp,
                   fontWeight: FontWeight.w500
                 ),
               ),

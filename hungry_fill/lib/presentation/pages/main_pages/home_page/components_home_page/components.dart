@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/data/model/dish_category_model/dish_category_model.dart';
  
@@ -14,8 +15,8 @@ import 'package:hungry_fill/presentation/pages/widgets/recommended_res_widget.da
 
 ListView dishItems({required List<DishCategoryModel> filteroptions}) {
   return ListView.separated(
-      separatorBuilder: (context, index) => const SizedBox(
-            width: 15,
+      separatorBuilder: (context, index) =>   SizedBox(
+            width: 15.w,
           ),
       scrollDirection: Axis.horizontal,
       itemCount: filteroptions.length,
@@ -29,8 +30,8 @@ ListView dishItems({required List<DishCategoryModel> filteroptions}) {
                
             },
             child: Container(
-                  height: 65,
-                  width: 65,
+                  height: 65.h,
+                  width: 65.w,
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
                        
@@ -52,8 +53,8 @@ ListView dishItems({required List<DishCategoryModel> filteroptions}) {
 
 ListView recommendedRestaurans(GetRestaurantSuccessState? state) {
   return ListView.separated(
-      separatorBuilder: (context, index) => const SizedBox(
-            width: 10,
+      separatorBuilder: (context, index) =>   SizedBox(
+            width: 10.w,
           ),
       scrollDirection: Axis.horizontal,
       itemCount: state!.restaurants.length,
@@ -92,8 +93,8 @@ ListView recommendedRestaurans(GetRestaurantSuccessState? state) {
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: state.restaurants.length,
                           separatorBuilder: (context, index) =>
-                              const SizedBox(
-                                height: 10,
+                                SizedBox(
+                                height: 10.h,
                               ),
                           itemBuilder: (context, index) {
                             final restaurant = state.restaurants[index];
@@ -114,7 +115,7 @@ ListView recommendedRestaurans(GetRestaurantSuccessState? state) {
                                             )));
                               },
                               child: Container(
-                                height: 120,
+                                height: 110.h,
                                 width: double.infinity,
                                 decoration: BoxDecoration(
                                   color: const Color.fromARGB(
@@ -126,8 +127,8 @@ ListView recommendedRestaurans(GetRestaurantSuccessState? state) {
                                   child: Row(
                                     children: [
                                       Container(
-                                        height: 135,
-                                        width: 130,
+                                        height: 135.h,
+                                        width: 130.w,
                                         decoration: BoxDecoration(
                                             color: Colors.red,
                                             borderRadius:
@@ -138,21 +139,21 @@ ListView recommendedRestaurans(GetRestaurantSuccessState? state) {
                                               fit: BoxFit.fill,
                                             )),
                                       ),
-                                      const SizedBox(
-                                        width: 10,
+                                        SizedBox(
+                                        width: 10.w,
                                       ),
                                       Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
                                           SizedBox(
-                                            width: 140,
+                                            width: 140.w,
                                             child: Text(
                                               overflow: TextOverflow.ellipsis,
                                               softWrap: true,
                                               restaurant.restaurantname!,
                                               style: GoogleFonts.amaranth(
-                                                  fontSize: 25,
+                                                  fontSize: 25.sp,
                                                   fontWeight:
                                                       FontWeight.bold),
                                             ),
@@ -160,7 +161,7 @@ ListView recommendedRestaurans(GetRestaurantSuccessState? state) {
                                           Text(
                                             restaurant.restaurantplace!,
                                             style: GoogleFonts.abhayaLibre(
-                                              fontSize: 15,
+                                              fontSize: 15.sp,
                                             ),
                                           )
                                         ],

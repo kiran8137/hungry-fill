@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/presentation/bloc/auth_bloc/login_bloc/log_in_bloc_bloc.dart';
@@ -45,7 +46,7 @@ class _LogInScreenState extends State<LogInScreen> {
                 content: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
-                    height: 50,
+                    height: 50.h,
                     decoration: BoxDecoration(
                         color: Colors.red,
                         borderRadius: BorderRadius.circular(10)),
@@ -69,45 +70,45 @@ class _LogInScreenState extends State<LogInScreen> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(
-                  height: 10,
+                  SizedBox(
+                  height: 10.h,
                 ),
                 Text(
                   'Log In',
-                  style: GoogleFonts.copse(fontSize: 70, color: primarycolor),
+                  style: GoogleFonts.copse(fontSize: 70.sp, color: primarycolor),
                 ),
-                const SizedBox(
-                  height: 70,
+                  SizedBox(
+                  height: 60.h,
                 ),
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(29),
                     color: const Color.fromARGB(57, 158, 158, 158),
                   ),
-                  height: 340,
-                  width: 396,
+                  height: 340.h,
+                  width: 396.w,
                   child: Form(
                     key: _formkey,
                     child: Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Column(
                         children: [
-                          const SizedBox(
-                            height: 40,
+                            SizedBox(
+                            height: 40.h,
                           ),
                           TextFormWidget(
                             controller: emailcontrollerlogin,
                             hinttext: "Email",
                           ),
-                          const SizedBox(
-                            height: 30,
+                            SizedBox(
+                            height: 30.h,
                           ),
                           TextFormWidget(
                             controller: passwordcontrollerlogin,
                             hinttext: 'password',
                           ),
-                          const SizedBox(
-                            height: 50,
+                            SizedBox(
+                            height: 50.h,
                           ),
                           GestureDetector(
                             onTap: () {
@@ -119,8 +120,8 @@ class _LogInScreenState extends State<LogInScreen> {
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
                                   color: primarycolor),
-                              height: 55,
-                              width: 381,
+                              height: 55.h,
+                              width: 381.w,
                               child: Center(
                                 child: Text(
                                   'Log In',
@@ -135,8 +136,8 @@ class _LogInScreenState extends State<LogInScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
+                  SizedBox(
+                  height: 10.h,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -144,14 +145,14 @@ class _LogInScreenState extends State<LogInScreen> {
                     const Text("Don't have a account ?",
                         style: TextStyle(
                             color: Color.fromARGB(255, 118, 118, 118))),
-                    const SizedBox(width: 10),
+                      SizedBox(width: 10.w),
                     GestureDetector(
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context)=> const SignInScreen()));
                       },
-                      child: const Text("Sign Up",
+                      child:   Text("Sign Up",
                           style: TextStyle(
-                            fontSize: 15,
+                            fontSize: 15.sp,
                             color: Colors.blue,
                           )),
                     )

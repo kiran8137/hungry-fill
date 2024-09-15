@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/data/model/cart_model/cart_model.dart';
@@ -15,31 +16,32 @@ Column addressDetailCheckOut(GetAddressUsingIdSuccess state) {
                               children: [
                                 
                                 SizedBox(
-                                    width: 150,
+                                
+                                    width: 150.h,
                                     child: Text(
                                       state.address.street!,
                                       style: GoogleFonts.rubik(
                                           fontWeight: FontWeight.w500,
-                                          fontSize: 20),
+                                          fontSize: 20.h),
                                     )),
                                 SizedBox(
-                                    width: 150,
+                                    width: 150.w,
                                     child: Text(
                                       '${state.address.houseNo}, ${state.address.district}, ${state.address.state}',
                                       style: GoogleFonts.rubik(
                                           fontWeight: FontWeight.w400,
-                                          fontSize: 16,
+                                          fontSize: 16.sp,
                                           color: const Color.fromARGB(
                                               255, 139, 138, 138)),
                                     )),
                                 //const SizedBox(height: 5),
                                 SizedBox(
-                                    width: 200,
+                                    width: 200.w,
                                     child: Text(
                                       'Phone No : ${state.address.userMobileNumber}',
                                       style: GoogleFonts.rubik(
                                           fontWeight: FontWeight.w400,
-                                          fontSize: 15),
+                                          fontSize: 15.sp),
                                     )),
 
                                 const SizedBox(
@@ -53,7 +55,7 @@ Column addressDetailCheckOut(GetAddressUsingIdSuccess state) {
   Container selectAddressContainer() {
     return Container(
                       width: double.infinity,
-                      height: 40,
+                      height: 40.h,
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
@@ -64,11 +66,11 @@ Column addressDetailCheckOut(GetAddressUsingIdSuccess state) {
                                 blurRadius: 7,
                                 offset: const Offset(0, 5))
                           ]),
-                      child: const Center(
+                      child:   Center(
                         child: Text(
                           'Select Addreesss',
                           style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.w500),
+                              fontSize: 15.sp, fontWeight: FontWeight.w500),
                         ),
                       ),
                     );
@@ -79,7 +81,7 @@ Column addressDetailCheckOut(GetAddressUsingIdSuccess state) {
   //dish widget in check out page
   Container dishWidgetInCheckOut(CartModel cartdish) {
     return Container(
-                              height: 100,
+                              height: 100.h,
                               width: double.infinity,
                               decoration: BoxDecoration(
                                   color: const Color.fromARGB(
@@ -89,8 +91,8 @@ Column addressDetailCheckOut(GetAddressUsingIdSuccess state) {
                                 children: [
                                   Container(
                                     margin: const EdgeInsets.only(left: 15),
-                                    width: 70,
-                                    height: 70,
+                                    width: 70.w,
+                                    height: 70.h,
                                     decoration: BoxDecoration(
                                         color: Colors.green,
                                         borderRadius:
@@ -101,8 +103,8 @@ Column addressDetailCheckOut(GetAddressUsingIdSuccess state) {
                                             ),
                                             fit: BoxFit.cover)),
                                   ),
-                                  const SizedBox(
-                                    width: 10,
+                                    SizedBox(
+                                    width: 10.w,
                                   ),
                                   Column(
                                     mainAxisAlignment:
@@ -111,37 +113,37 @@ Column addressDetailCheckOut(GetAddressUsingIdSuccess state) {
                                         CrossAxisAlignment.start,
                                     children: [
                                       SizedBox(
-                                        width: 90,
+                                        width: 90.w,
                                         child: Text(
                                           // cartdish.dishname!,
                                           '${cartdish.dishname}',
                                           maxLines: 2,
                                           style: GoogleFonts.roboto(
-                                              fontSize: 20,
+                                              fontSize: 20.sp,
                                               fontWeight: FontWeight.w500),
                                         ),
                                       ),
                                       Text(
                                         //"₹ ${cartdish.priceperquantity.toString()}",
                                         "₹ ${cartdish.priceperquantity.toString()}",
-                                        style: const TextStyle(
-                                            fontSize: 15, color: Colors.grey),
+                                        style:   TextStyle(
+                                            fontSize: 15.sp, color: Colors.grey),
                                       )
                                     ],
                                   ),
-                                  const SizedBox(
-                                    width: 40,
+                                    SizedBox(
+                                    width: 40.w,
                                   ),
-                                  const SizedBox(width: 30),
+                                    SizedBox(width: 30.w),
                                   Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.center,
                                     children: [
                                       Text(
                                         cartdish.dishquantity.toString(),
-                                        style: const TextStyle(
+                                        style:   TextStyle(
                                             color: Colors.grey,
-                                            fontSize: 25,
+                                            fontSize: 25.sp,
                                             fontWeight: FontWeight.w500),
                                       ),
                                     ],

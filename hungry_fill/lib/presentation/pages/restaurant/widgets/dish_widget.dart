@@ -2,6 +2,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/data/model/cart_model/cart_model.dart';
@@ -26,7 +27,7 @@ class Dishwidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 160,
+      height: 150.h,
       width: double.infinity,
       decoration: BoxDecoration(
           color:
@@ -38,8 +39,8 @@ class Dishwidget extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              height: 120,
-              width: 130,
+              height: 120.h,
+              width: 130.w,
               decoration: BoxDecoration(
                  
                   borderRadius:
@@ -52,8 +53,8 @@ class Dishwidget extends StatelessWidget {
                       ),
                      // child: Image.network(dish.dishimage!,fit: BoxFit.cover),
             ),
-            const SizedBox(
-              width: 10,
+              SizedBox(
+              width: 10.w,
             ),
             Padding(
               padding: const EdgeInsets.all(4.0),
@@ -62,13 +63,13 @@ class Dishwidget extends StatelessWidget {
                     CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    width: 165,
+                    width: 165.w,
                     child: Text(
                       overflow: TextOverflow.ellipsis,
                       dish.dishname!,
                       style: GoogleFonts.rubik(
                         color: dish.dishstock == 'IN'? Colors.black: const Color.fromARGB(255, 93, 92, 92),
-                          fontSize: 23,
+                          fontSize: 23.sp,
                           fontWeight: FontWeight.w600),
                     ),
                   ),
@@ -76,18 +77,18 @@ class Dishwidget extends StatelessWidget {
                     "₹${dish.dishprice!}",
                     style: GoogleFonts.aBeeZee(
                       color: dish.dishstock == 'IN'? Colors.black: const Color.fromARGB(255, 93, 92, 92),
-                        fontSize: 15,
+                        fontSize: 15.sp,
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
                     "${dish.dishserve} serve",
-                    style: const TextStyle(
-                        fontSize: 15,
+                    style:   TextStyle(
+                        fontSize: 15.sp,
                         color: Color.fromARGB(
                             255, 114, 114, 114)),
                   ),
-                  const SizedBox(
-                    height: 4,
+                    SizedBox(
+                    height: 10.h,
                   ),
                   GestureDetector(
                     onTap: () {
@@ -112,8 +113,8 @@ class Dishwidget extends StatelessWidget {
                     },
                     
                     child: Container(
-                      height: 45,
-                      width: 155,
+                      height: 40.h,
+                      width: 155.w,
                       decoration: BoxDecoration(
                         color: primarycolor,
                         borderRadius:
@@ -124,7 +125,7 @@ class Dishwidget extends StatelessWidget {
                          dish.dishstock == 'IN'? "ADD": 'Out of stock',
                           style: GoogleFonts.abrilFatface(
                               color:  dish.dishstock == 'IN'?Colors.white:const Color.fromARGB(255, 204, 203, 203),
-                              fontSize: 20,
+                              fontSize: 20.sp,
                               fontWeight:
                                   FontWeight.w400,
                                   ),

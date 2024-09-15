@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/data/model/restaurant_model/restaurant_model.dart';
 
@@ -14,8 +15,8 @@ class RecommendRestaurant extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 315,
-      width: 250,
+      height: 315.h,
+      width: 250.w,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         image: const DecorationImage(
@@ -23,8 +24,8 @@ class RecommendRestaurant extends StatelessWidget {
       ),
       alignment: Alignment.bottomCenter,
       child: Container(
-        height: 68,
-        width: 250,
+        height: 68.h,
+        width: 250.w,
         decoration: const BoxDecoration(
           color: Color.fromARGB(138, 0, 0, 0),
           borderRadius: BorderRadius.only(
@@ -39,7 +40,7 @@ class RecommendRestaurant extends StatelessWidget {
               style:
                   GoogleFonts.ubuntu(
                     fontWeight: FontWeight.w500,
-                    color: const Color.fromARGB(255, 255, 255, 255), fontSize: 30),
+                    color: const Color.fromARGB(255, 255, 255, 255), fontSize: 30.sp),
             )
           ],
         ),

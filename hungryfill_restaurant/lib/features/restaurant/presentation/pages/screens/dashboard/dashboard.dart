@@ -18,84 +18,130 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   void initState() {
-   
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // HeaderWidget(index: index,),
-
-        // const SizedBox(
-        //   height: 25,
-        // ),
-
-        // const SizedBox(
-        //   height: 10,
-        // ),
-
-        Row(
-          children: [
-            const SizedBox(
-              width: 20,
-            ),
-            GestureDetector(
-              onTap: () async{
-                 
-              },
-              child: const PageHeading(title: "DASHBOARD",),
-            ),
-          ],
-        ),
-
-        const Divider(),
-        const SizedBox(
-          height: 45,
-        ),
-
-        const SizedBox(
-          height: 5,
-        ),
-
-        Consumer<DashboardProvider>(
-          builder: (context, value, child) =>   Row(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body : LayoutBuilder(
+        builder: (context, constraints) => 
+        constraints.maxWidth > 600 ?
+         SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              RevenueCardWidget(
-                title: 'Todays Revenue',
-                amount: '${value.todaysRevenue}',
-                image: 'assets/salary.png',
+              Row(
+                children: [
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  GestureDetector(
+                    onTap: () async {},
+                    child: const PageHeading(
+                      title: "DASHBOARD",
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(width: 20),
-              RevenueCardWidget(
-                title: 'Dishes',
-                amount: '${value.totalDishes}',
-                image: 'assets/fried-rice.png',
+              const Divider(),
+              const SizedBox(
+                height: 45,
               ),
-              const SizedBox(width: 20),
-              RevenueCardWidget(
-                title: 'Orders',
-                amount: '${value.totalOrders}',
-                image: 'assets/delivery.png',
+              const SizedBox(
+                height: 5,
               ),
-              const SizedBox(width: 20),
-              RevenueCardWidget(
-                title: 'Total earnings',
-                amount: '${value.totalEarnings}',
-                image: 'assets/wallet.png',
+              Consumer<DashboardProvider>(
+                builder: (context, value, child) => Row(
+                  children: [
+                    RevenueCardWidget(
+                      title: 'Todays Revenue',
+                      amount: '${value.todaysRevenue}',
+                      image: 'assets/salary.png',
+                    ),
+                    const SizedBox(width: 20),
+                    RevenueCardWidget(
+                      title: 'Dishes',
+                      amount: '${value.totalDishes}',
+                      image: 'assets/fried-rice.png',
+                    ),
+                    const SizedBox(width: 20),
+                    RevenueCardWidget(
+                      title: 'Orders',
+                      amount: '${value.totalOrders}',
+                      image: 'assets/delivery.png',
+                    ),
+                    const SizedBox(width: 20),
+                    RevenueCardWidget(
+                      title: 'Total earnings',
+                      amount: '${value.totalEarnings}',
+                      image: 'assets/wallet.png',
+                    ),
+                    const SizedBox(width: 20),
+                  ],
+                ),
               ),
-              const SizedBox(width: 20),
+            ],
+                   ),
+         ): SingleChildScrollView(
+          child: Column(
+            children: [
+               Row(
+              children: [
+                const SizedBox(
+                  width: 20,
+                ),
+                GestureDetector(
+                  onTap: () async {},
+                  child: const PageHeading(
+                    title: "DASHBOARD",
+                  ),
+                ),
+              ],
+            ),
+            const Divider(),
+            const SizedBox(
+              height: 45,
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            Consumer<DashboardProvider>(
+              builder: (context, value, child) => Column(
+                children: [
+                  RevenueCardWidget(
+                    title: 'Todays Revenue',
+                    amount: '${value.todaysRevenue}',
+                    image: 'assets/salary.png',
+                  ),
+                  const SizedBox(height: 20),
+                  RevenueCardWidget(
+                    title: 'Dishes',
+                    amount: '${value.totalDishes}',
+                    image: 'assets/fried-rice.png',
+                  ),
+                  const SizedBox(height: 20),
+                  RevenueCardWidget(
+                    title: 'Orders',
+                    amount: '${value.totalOrders}',
+                    image: 'assets/delivery.png',
+                  ),
+                  const SizedBox(height: 20),
+                  RevenueCardWidget(
+                    title: 'Total earnings',
+                    amount: '${value.totalEarnings}',
+                    image: 'assets/wallet.png',
+                  ),
+                  const SizedBox(height: 20),
+                ],
+              ),
+            ),
             ],
           ),
-        ),
-
-        
-      ],
+        )
+      ),
     );
   }
 }
-
-

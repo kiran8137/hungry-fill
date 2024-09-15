@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/presentation/bloc/auth_bloc/sign_in_bloc/auth_bloc.dart';
@@ -42,13 +43,13 @@ class _SignInScreenState extends State<SignInScreen> {
                 content: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
-                    height: 50,
+                    height: 50.h,
                     decoration: BoxDecoration(
                         color: const Color.fromARGB(255, 255, 38, 0),
                         borderRadius: BorderRadius.circular(10)),
                     child: Center(
                       child: Text(
-                          style: GoogleFonts.aBeeZee(fontSize: 15),
+                          style: GoogleFonts.aBeeZee(fontSize: 15.sp),
                           "Already registered"),
                     ),
                   ),
@@ -69,15 +70,15 @@ class _SignInScreenState extends State<SignInScreen> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(
-                  height: 10,
+                  SizedBox(
+                  height: 10.h,
                 ),
                 Text(
                   'Sign Up',
                   style: GoogleFonts.copse(fontSize: 70, color: primarycolor),
                 ),
-                const SizedBox(
-                  height: 20,
+                  SizedBox(
+                  height: 20.h,
                 ),
                 Container(
                   decoration: BoxDecoration(
@@ -85,7 +86,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     color: const Color.fromARGB(57, 158, 158, 158),
                   ),
                   height: 470,
-                  width: 396,
+                  width: 396.w,
                   child: Form(
                     key: formkey,
                     child: Padding(
@@ -206,27 +207,7 @@ class _SignInScreenState extends State<SignInScreen> {
                              ),
                         
                             const SizedBox(height: 10,),
-                            //  GestureDetector(
-                            //   onTap: (){},
-                            //    child: Container(
-                            //       decoration: BoxDecoration(
-                            //           borderRadius: BorderRadius.circular(10),
-                            //           color: Colors.white),
-                            //       height: 45,
-                            //       width: 381,
-                            //       child: Row(
-                            //         mainAxisAlignment: MainAxisAlignment.center,
-                            //         children: [
-                            //           const Text(
-                            //             'Facebook',
-                            //             style: TextStyle(color: Color.fromARGB(255, 118, 118, 118), fontSize: 17)
-                            //           ),
-                            //            const SizedBox(width: 5,),
-                            //             Image.asset("assets/facebook.png" , height: 25,)
-                            //         ],
-                            //       ),
-                            //     ),
-                            //  ),
+                             
                         
                           ],
                         ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/presentation/bloc/filter_homepage/filter_bloc.dart';
@@ -55,29 +56,29 @@ class _HomeScreenState extends State<HomeScreen> {
                     builder: (context, state) {
                       if(state is DishesCategoryFilterOptionSuccess){
                         return  SizedBox(
-                        height: 100,
+                        height: 100.h,
                         child: dishItems(filteroptions: state.filteroptions),
                       );
                       }else{
-                        return const SizedBox(height: 100);
+                        return   SizedBox(height: 100.h);
                       }
                       
                     },
                   ),
-                  const SizedBox(height: 35),
+                    SizedBox(height: 35.h),
                   Text(
                     "Recommended Restaurants",
                     style: GoogleFonts.abhayaLibre(
-                        fontSize: 22, fontWeight: FontWeight.bold),
+                        fontSize: 22.sp, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(
-                    height: 25,
+                    SizedBox(
+                    height: 25.h,
                   ),
                   BlocBuilder<RestaurantBloc, RestaurantState>(
                     builder: (context, state) {
                       if (state is GetRestaurantSuccessState) {
                         return SizedBox(
-                            height: 160, child: recommendedRestaurans(state));
+                            height: 140.h, child: recommendedRestaurans(state));
                       } else {
                         return Center(
                           child: LoadingAnimationWidget.horizontalRotatingDots(
@@ -86,15 +87,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       }
                     },
                   ),
-                  const SizedBox(height: 10),
+                    SizedBox(height: 10.h),
                   Text(
                     "Restaurants",
                     style: GoogleFonts.abhayaLibre(
-                        fontSize: 28, fontWeight: FontWeight.bold),
+                        fontSize: 28.sp, fontWeight: FontWeight.bold),
                   ),
                    
-                  const SizedBox(
-                    height: 20,
+                    SizedBox(
+                    height: 20.h,
                   ),
                   BlocBuilder<RestaurantBloc, RestaurantState>(
                     builder: (context, state) {

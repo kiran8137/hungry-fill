@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:hungry_fill/core/constants/constant.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/user_profile/components/components.dart';
 
 class AboutPage extends StatelessWidget {
@@ -9,14 +10,14 @@ class AboutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Scaffold(
       backgroundColor: Colors.white,
-      appBar: appBarAboutPage(context),
+      appBar: appBarSettingsContents(context , 'About Us'),
 
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
-              child: aboutPageContent()
+              child: settingPageContent(content: aboutus)
               ),
           ],
         )

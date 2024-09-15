@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/core/constants/constant.dart';
@@ -25,7 +26,7 @@ SingleChildScrollView cartDishDetail(AsyncSnapshot<List<CartModel>> snapshot) {
               deleteDishInCart(cartid: cartdish.cartid!);
             },
             child: Container(
-              height: 100,
+              height: 100.h,
               width: double.infinity,
               decoration: BoxDecoration(
                   color: const Color.fromARGB(155, 248, 248, 248),
@@ -33,8 +34,8 @@ SingleChildScrollView cartDishDetail(AsyncSnapshot<List<CartModel>> snapshot) {
               child: Row(
                 children: [
                   Container(
-                    width: 70,
-                    height: 70,
+                    width: 70.w,
+                    height: 70.h,
                     decoration: BoxDecoration(
                         // color: Colors.green,
                         borderRadius: BorderRadius.circular(10),
@@ -42,28 +43,28 @@ SingleChildScrollView cartDishDetail(AsyncSnapshot<List<CartModel>> snapshot) {
                             image: NetworkImage(
                               cartdish.dishimage!,
                             ),
-                            fit: BoxFit.contain)),
+                            fit: BoxFit.cover)),
                   ),
-                  const SizedBox(
-                    width: 5,
+                    SizedBox(
+                    width: 5.w,
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        width: 90,
+                        width: 90.w,
                         child: Text(
                           cartdish.dishname!,
                           maxLines: 2,
                           style: GoogleFonts.roboto(
-                              fontSize: 18, fontWeight: FontWeight.w500),
+                              fontSize: 18.sp, fontWeight: FontWeight.w500),
                         ),
                       ),
                       Text(
                         "₹ ${cartdish.priceperquantity.toString()}",
                         style:
-                            const TextStyle(fontSize: 15, color: Colors.grey),
+                              TextStyle(fontSize: 15.sp, color: Colors.grey),
                       )
                     ],
                   ),
@@ -71,8 +72,8 @@ SingleChildScrollView cartDishDetail(AsyncSnapshot<List<CartModel>> snapshot) {
                     width: 40,
                   ),
                   Container(
-                    height: 40,
-                    width: 100,
+                    height: 35.h,
+                    width: 100.w,
                     decoration: BoxDecoration(
                         color: Colors.white,
                         border: Border.all(color: primarycolor),
@@ -97,7 +98,7 @@ SingleChildScrollView cartDishDetail(AsyncSnapshot<List<CartModel>> snapshot) {
                         Text(
                           cartdish.dishquantity.toString(),
                           style: GoogleFonts.abhayaLibre(
-                              fontSize: 20, fontWeight: FontWeight.bold),
+                              fontSize: 20.sp, fontWeight: FontWeight.bold),
                         ),
                         GestureDetector(
                           onTap: () async {

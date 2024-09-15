@@ -1,5 +1,6 @@
 
   import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/presentation/pages/cart_page/cart_restauants.dart';
@@ -45,8 +46,8 @@ SnackBar scaffoldMessenger({required String message}) {
 Text headingText({required String text}) {
     return Text(
                     text,
-                    style: const TextStyle(
-                        fontSize: 16,
+                    style:   TextStyle(
+                        fontSize: 16.sp,
                         fontWeight: FontWeight.w500,
                         color: Color.fromARGB(255, 123, 123, 123)),
                   );

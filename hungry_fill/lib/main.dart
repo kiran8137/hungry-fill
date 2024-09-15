@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hungry_fill/data/repository/auth_repo_impl/authentication_repo.dart';
 import 'package:hungry_fill/data/repository/cart_repo_imp/cart_repo_impl.dart';
 import 'package:hungry_fill/data/repository/dish_repo_imp/dish_repo_impl.dart';
@@ -76,29 +77,31 @@ class MyApp extends StatelessWidget {
 
          
       ],
-      child: MaterialApp(
-        
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-           
+      child: ScreenUtilInit(
+        child: MaterialApp(
+          
+          debugShowCheckedModeBanner: false,
+          title: 'Flutter Demo',
+          theme: ThemeData(
+             
+          ),
+          home: 
+         // MapScreen()
+          //AddAddressPage()
+          // AddressPage()
+          //AboutPage()
+          const SplashScreen()
+          //RecentOrdersDetailScreen()
+          //const OrderSuccessPage()
+           // CheckoutPage()
+          //MainPage()
+          // LogInScreen(),
+          //OtpScreen()
+          //UserProfileScreen()
+          //SignInScreen()
+          //CartPage()
+         // Cart()
         ),
-        home: 
-       // MapScreen()
-        //AddAddressPage()
-        // AddressPage()
-        //AboutPage()
-        const SplashScreen()
-        //RecentOrdersDetailScreen()
-        //const OrderSuccessPage()
-         // CheckoutPage()
-        //MainPage()
-        // LogInScreen(),
-        //OtpScreen()
-        //UserProfileScreen()
-        //SignInScreen()
-        //CartPage()
-       // Cart()
       ),
     );
   }

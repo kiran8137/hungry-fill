@@ -109,3 +109,62 @@ const aboutus = "At Hungry Fill, we believe food should be accessible, convenien
  "our app connects you with the best restaurants and dishes in your area."
  "With a user-friendly interface and real-time updates, we make it easy to browse menus,"
   "place orders, and track your food from the kitchen to your doorstepOur mission is simple: to satisfy your hunger with speed and quality. We work closely with local restaurants to ensure every meal delivered is fresh, tasty, and prepared with care.";
+
+const privacyAndPolicy =[ "1. Introduction",
+
+"At Hungry Fill, we are committed to protecting the privacy of our users. This Privacy Policy outlines the types of personal information we collect, how we use it, and the steps we take to ensure your data remains secure. By using our app, you agree to the collection and use of information in accordance with this policy.",
+
+"2. Information We Collect",
+
+"We collect the following information when you use our app:",
+
+"Personal Information: This includes your name, email address, phone number, and delivery address. We collect this data to provide you with our services, including delivery and customer support."
+"Authentication Information: We use Firebase for email authentication. Your email is used as a unique identifier for account creation and login purposes."
+"Location Data: We may collect your location information (if permitted by you) to provide you with location-based services, such as finding nearby restaurants and delivering orders to your address.",
+
+
+"3. How We Use Your Information",
+
+"We use the information we collect for the following purposes:",
+
+"To create and manage your account."
+"To deliver food orders to your address."
+"To communicate with you regarding your orders, updates, and customer support."
+"To improve our app functionality and user experience."
+"To personalize your experience by showing restaurants and offers based on your location.",
+
+
+"4. Sharing Your Information",
+
+"We do not share your personal information with third parties, except in the following cases:"
+
+"Service Providers: We may share your information with service providers (e.g., delivery partners) who perform services on our behalf."
+"Legal Requirements: If required by law, we may disclose your information to authorities.",
+
+
+"5. Security of Your Data",
+
+"We take the security of your personal data seriously. We use industry-standard encryption methods and follow best practices to protect your data against unauthorized access or disclosure. Firebase provides robust security features to safeguard your information.",
+
+"6. Data Retention",
+
+"We retain your personal data for as long as necessary to provide our services or as required by law. You may request deletion of your data by contacting us at [Insert Contact Email].",
+
+"7. Your Rights",
+
+"You have the right to:",
+
+"Access the personal data we hold about you."
+"Request corrections to any inaccuracies in your data."
+"Request deletion of your data."
+"Withdraw consent for data collection at any time (though this may affect your ability to use certain features of the app).",
+
+
+"8. Changes to This Privacy Policy",
+
+"We may update this Privacy Policy from time to time. Any changes will be posted on this page with the revised date. You are advised to review this page periodically for any updates.",
+
+"9. Contact Us",
+
+"If you have any questions or concerns about this Privacy Policy or your personal data, please contact us at:",
+ ];

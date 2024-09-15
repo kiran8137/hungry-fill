@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:hungry_fill/data/repository/auth_repo_impl/authentication_repo.dart';
@@ -10,6 +11,7 @@ import 'package:hungry_fill/presentation/bloc/user_bloc/users_bloc.dart';
 import 'package:hungry_fill/presentation/pages/address/addresses_page.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/user_profile/about_page/about_page.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/user_profile/components/components.dart';
+import 'package:hungry_fill/presentation/pages/main_pages/user_profile/privacy_policy_page/privacy_policy_page.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/user_profile/user_detail_page.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/widgets/profile_menu_widget.dart';
 import 'package:hungry_fill/presentation/pages/user_auth/log_in_screen.dart';
@@ -33,8 +35,8 @@ class UserProfileScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(
-              height: 35,
+              SizedBox(
+              height: 35.h,
             ),
             Padding(
               padding: const EdgeInsets.all(15.0),
@@ -54,8 +56,8 @@ class UserProfileScreen extends StatelessWidget {
                 child: userProfileCard(userinfo: userinfo),
               ),
             ),
-            const SizedBox(
-              height: 10,
+              SizedBox(
+              height: 10.h,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -85,8 +87,8 @@ class UserProfileScreen extends StatelessWidget {
                 )
               ],
             ),
-            const SizedBox(
-              height: 10,
+              SizedBox(
+              height: 10.h,
             ),
             GestureDetector(
               onTap: () {},
@@ -117,7 +119,12 @@ class UserProfileScreen extends StatelessWidget {
               leadingicon: 'assets/privacy.png',
               title: 'Privacy and Policy',
               trailing: "assets/next.png",
-              ontap: () {},
+              ontap: () {
+                Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                        builder: (context) => const PrivacyPolicyPage()));
+              },
             ),
             logOutOption(context)
           ],
@@ -159,8 +166,8 @@ class UserProfileScreen extends StatelessWidget {
             },
             minLeadingWidth: 0.5,
             leading: Container(
-              width: 25,
-              height: 25,
+              width: 25.w,
+              height: 25.h,
               decoration: const BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage("assets/power-off.png"))),
@@ -169,12 +176,12 @@ class UserProfileScreen extends StatelessWidget {
               "Log Out",
               style: GoogleFonts.abhayaLibre(
                   color: Colors.black,
-                  fontSize: 22,
+                  fontSize: 22.sp,
                   fontWeight: FontWeight.bold),
             ),
-            trailing: const SizedBox(
-              width: 25,
-              height: 25,
+            trailing:   SizedBox(
+              width: 25.w,
+              height: 25.h,
             ),
           );
   }

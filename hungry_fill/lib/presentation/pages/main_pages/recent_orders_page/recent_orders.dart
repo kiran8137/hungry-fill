@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hungry_fill/presentation/bloc/order_bloc/order_bloc.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/recent_orders_page/components/components_recentorders.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/recent_orders_page/recent_orders_detail.dart';
@@ -31,7 +32,7 @@ class _RecentOrderScreenState extends State<RecentOrderScreen> {
           children: [
             text('Orders'),
             const Divider(),
-            const SizedBox(height: 10),
+              SizedBox(height: 10.h),
             BlocConsumer<OrderBloc, OrderState>(
               listener: (context, state) {},
               builder: (context, state) {
@@ -66,7 +67,7 @@ class _RecentOrderScreenState extends State<RecentOrderScreen> {
                         );
                       },
                       separatorBuilder: (context, index) =>
-                          const SizedBox(height: 10),
+                            SizedBox(height: 10.h),
                       itemCount: state.orderslist.length,
                     ),
                   );

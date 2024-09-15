@@ -76,7 +76,7 @@ class _DishScreenState extends State<DishScreen> {
                         height: 30,
                         width: 1000,
                         // color: Colors.blue,
-                        child: dishDetailTable(tablecontents),
+                        child: dishDetailTable(tablecontents,),
                       ),
                     ),
 

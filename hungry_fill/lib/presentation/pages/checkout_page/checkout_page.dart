@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hungry_fill/core/functions/functions.dart';
 import 'package:hungry_fill/data/model/order_model/order_model.dart';
 import 'package:hungry_fill/presentation/bloc/address_bloc/address_bloc.dart';
@@ -135,14 +136,14 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   children: [
                     Text(
                       widget.restaurantname,
-                      style: const TextStyle(
-                          fontSize: 18,
+                      style:   TextStyle(
+                          fontSize: 18.sp,
                           fontWeight: FontWeight.w600,
                           color: Colors.black),
                     ),
                     const Divider(),
                     headingText(text: 'Delivery To'),
-                    const SizedBox(height: 5),
+                      SizedBox(height: 5.h),
                     GestureDetector(
                       onTap: () async {
                         newresult = await showModalBottomSheet(
@@ -179,12 +180,12 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         },
                       ),
                     ),
-                    const SizedBox(height: 10),
+                      SizedBox(height: 10.h),
                     const Divider(),
-                    const SizedBox(height: 5),
+                      SizedBox(height: 5.h),
                     headingText(text: 'Dishes'),
                     SizedBox(
-                      height: 200,
+                      height: 200.h,
                       width: double.infinity,
                       //color: Colors.blue,
                       child: ListView.separated(
@@ -200,11 +201,11 @@ class _CheckoutPageState extends State<CheckoutPage> {
                               const SizedBox(),
                           itemCount: state.cartmodel.length),
                     ),
-                    const SizedBox(height: 10),
+                      SizedBox(height: 10.h),
                     const Divider(),
-                    const SizedBox(height: 5),
+                      SizedBox(height: 5.h),
                     headingText(text: 'Pay Using'),
-                    const SizedBox(height: 5),
+                      SizedBox(height: 5.h),
                     GestureDetector(
                       onTap: () {
                         setState(() {
@@ -214,7 +215,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       child: payUsingOptions(
                           paymentoption: "Cash On Delivery", isCod: isCod),
                     ),
-                    const SizedBox(height: 5),
+                      SizedBox(height: 5.h),
                     isCod
                         ? GestureDetector(
                             onTap: () async {
@@ -246,8 +247,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
                            
                             )
                         : const SizedBox(),
-                    const SizedBox(
-                      height: 5,
+                      SizedBox(
+                      height: 5.h,
                     ),
                     GestureDetector(
                         onTap: () {
@@ -258,7 +259,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         child: payUsingOptions(
                             paymentoption: 'Choose a payment method',
                             isCod: isCod)),
-                    const SizedBox(height: 5),
+                      SizedBox(height: 5.h),
                     isOnline
                         ? GestureDetector(
                             onTap: () async {

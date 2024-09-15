@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/data/model/dish_model/dish_model.dart';
@@ -90,13 +91,10 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    //addDish();
-                    // categoryhDishes();
-                    //searchDishes();
-                    //categorys();
+                    
                   },
                   child: Container(
-                    height: 150,
+                    height: 140.h,
                     width: double.infinity,
                     decoration: BoxDecoration(
                         color: primarycolor,
@@ -130,9 +128,7 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                                               Icons.favorite,
                                               color: Colors.white,
                                             )
-                                      //   Icon(
-                                      //  isfav ? Icons.favorite_border: Icons.favorite,
-                                      // color: isfav? Colors.white :)
+                                      
                                       )),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -141,7 +137,7 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                                 widget.restaurantname ?? '',
                                 style: GoogleFonts.montserrat(
                                     color: Colors.white,
-                                    fontSize: 25,
+                                    fontSize: 25.sp,
                                     fontWeight: FontWeight.w600),
                               ),
                               Row(
@@ -150,7 +146,7 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                                     widget.restaurantplace ?? '',
                                     style: GoogleFonts.jost(
                                       color: Colors.white,
-                                      fontSize: 15,
+                                      fontSize: 15.sp,
                                     ),
                                   ),
 
@@ -164,7 +160,7 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                                     widget.restaurantdistrict ?? '',
                                     style: GoogleFonts.jost(
                                       color: Colors.white,
-                                      fontSize: 15,
+                                      fontSize: 15.sp,
                                     ),
                                   ),
                                 ],
@@ -176,8 +172,8 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
+                  SizedBox(
+                  height: 10.h,
                 ),
                 SearchWidget(
                   searchcontroller: searchcontroller,
@@ -201,15 +197,15 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                         child: Divider(
                       color: Colors.grey,
                     )),
-                    const SizedBox(
-                      width: 8,
+                      SizedBox(
+                      width: 8.w,
                     ),
                     Text(
                       "Dishes",
                       style: GoogleFonts.amita(),
                     ),
-                    const SizedBox(
-                      width: 8,
+                      SizedBox(
+                      width: 8.w,
                     ),
                     const Expanded(
                         child: Divider(
@@ -217,8 +213,8 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                     ))
                   ],
                 ),
-                const SizedBox(
-                  height: 20,
+                  SizedBox(
+                  height: 20.h,
                 ),
                 BlocConsumer<DishBloc, DishState>(
                   listener: (BuildContext context, DishState state) {
@@ -252,7 +248,7 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                         child: Text(
                           "😞Oops, no result found for '${searchcontroller.text}'",
                           style: GoogleFonts.abel(
-                              fontSize: 15, fontWeight: FontWeight.w600),
+                              fontSize: 15.sp, fontWeight: FontWeight.w600),
                         ),
                       );
                     }
@@ -262,7 +258,7 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                         child: Text(
                           "😞Oops, no dishes found ",
                           style: GoogleFonts.abel(
-                              fontSize: 15, fontWeight: FontWeight.w600),
+                              fontSize: 15.sp, fontWeight: FontWeight.w600),
                         ),
                       );
                     }

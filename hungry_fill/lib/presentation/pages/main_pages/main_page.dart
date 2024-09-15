@@ -3,6 +3,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/data/model/user_model/user_model.dart';
  
@@ -28,7 +29,7 @@ class _MainPageState extends State<MainPage> {
 
   final icons = const [
     ImageIcon(AssetImage("assets/home.png"),color: Colors.white,),
-    ImageIcon(AssetImage("assets/recipe-book.png"),color: Colors.white,),
+   // ImageIcon(AssetImage("assets/recipe-book.png"),color: Colors.white,),
      
     ImageIcon(AssetImage("assets/smartphone.png"),color: Colors.white,),
      
@@ -56,7 +57,7 @@ UserModel? currentuserinfo;
       
 
       bottomNavigationBar: CurvedNavigationBar(
-        height: 55,
+        height: 48.h,
         items: icons,
         index: currentpageindex,
         animationDuration: const Duration(milliseconds: 200),
@@ -99,13 +100,13 @@ Widget getSelectedScreen({required int index ,  UserModel? currentuserinfo}){
     case 0 :
      widget =   HomeScreen();
      break;
+    //  case 1:
+    //  widget =   RecipeScreen();
+    //  break;
      case 1:
-     widget =   RecipeScreen();
-     break;
-     case 2:
      widget = const RecentOrderScreen();
      break;
-     case 3:
+     case 2:
      widget = UserProfileScreen(userinfo: currentuserinfo,);
      break;
      default :
