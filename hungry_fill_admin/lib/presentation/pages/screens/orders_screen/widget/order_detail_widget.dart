@@ -32,33 +32,19 @@ final OrderModel orderDetail;
               ),
             ),
             const SizedBox(width: 105),
-            Text('${orderDetail.addressSelected!.username}', style: const TextStyle(fontWeight: FontWeight.w600)),
+            Container(
+              width: 50,
+              // color: Colors.red,
+              child: Text('${orderDetail.addressSelected!.username}', style: const TextStyle(fontWeight: FontWeight.w600))),
             const SizedBox(width: 220),
-            Text('${orderDetail.grandtotal}', style: const TextStyle(fontWeight: FontWeight.w600)),
+            Container(
+             // color: Colors.red,
+              child: Text('${orderDetail.grandtotal}', style: const TextStyle(fontWeight: FontWeight.w600))),
             const SizedBox(width: 240),
             SizedBox(
               width: 150,
               child: Text("${orderDetail.orderstatus}"),
             ),
-
-            // Consumer<OrderProvider>(
-            //   builder: (context, value, child) => 
-            //     Container(
-            //     width: 100,
-            //     height: 50,
-            //     child: DropdownButton<String>(
-            //       value: value.selectStatus,
-            //       items: value.orderStatusList.map((item){
-            //         return DropdownMenuItem<String>(
-            //           value: item,
-            //           child: Text(item)
-            //           );
-            //       }).toList(), 
-            //       onChanged: (String? val){
-            //         value.changeOrderStatus(val!);
-            //       }),
-            //   ),
-            // )
           ],
         ));
   }

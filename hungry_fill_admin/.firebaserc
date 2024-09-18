@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "default": "hungry-fill"
+  },
+  "targets": {
+    "hungry-fill": {
+      "hosting": {
+        "app": [
+          "hungryfilladmin",
+          "user-app-360b"
+        ]
+      }
+    }
+  },
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
+}

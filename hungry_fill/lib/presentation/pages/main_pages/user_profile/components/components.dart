@@ -76,7 +76,7 @@ Container totalAmountSection() {
     decoration: const BoxDecoration(
         shape: BoxShape.circle,
         color: Colors.white,
-        image: DecorationImage(image: AssetImage("assets/userprofile.jpg"))),
+        image: DecorationImage(image: AssetImage("assets/spending.png"))),
   );
 }
 
@@ -109,55 +109,55 @@ Container totalAmountSection() {
             );
   }
 
-ListTile logOutOption(BuildContext context) {
-    return ListTile(
-            onTap: () {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: Text("Are you sure want to log out...!",
-                          style: GoogleFonts.abhayaLibre()),
-                      actions: [
-                        TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: const Text("No")),
-                        TextButton(
-                            onPressed: () {
-                              const UserProfileScreen().logOutOption(context);
-                              Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const LogInScreen()),
-                                  (Route<dynamic> predicate) => false);
-                            },
-                            child: const Text("yes"))
-                      ],
-                    );
-                  });
+// ListTile logOutOption(BuildContext context) {
+//     return ListTile(
+//             onTap: () {
+//               showDialog(
+//                   context: context,
+//                   builder: (context) {
+//                     return AlertDialog(
+//                       title: Text("Are you sure want to log out...!",
+//                           style: GoogleFonts.abhayaLibre()),
+//                       actions: [
+//                         TextButton(
+//                             onPressed: () {
+//                               Navigator.pop(context);
+//                             },
+//                             child: const Text("No")),
+//                         TextButton(
+//                             onPressed: () {
+//                               const UserProfileScreen().logOutOption(context);
+//                               Navigator.pushAndRemoveUntil(
+//                                   context,
+//                                   MaterialPageRoute(
+//                                       builder: (context) =>
+//                                           const LogInScreen()),
+//                                   (Route<dynamic> predicate) => false);
+//                             },
+//                             child: const Text("yes"))
+//                       ],
+//                     );
+//                   });
               
-            },
-            minLeadingWidth: 0.5,
-            leading: Container(
-              width: 25,
-              height: 25,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("assets/power-off.png"))),
-            ),
-            title: Text(
-              "Log Out",
-              style: GoogleFonts.abhayaLibre(
-                  color: Colors.black,
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold),
-            ),
-            trailing: const SizedBox(
-              width: 25,
-              height: 25,
-            ),
-          );
-  }
+//             },
+//             minLeadingWidth: 0.5,
+//             leading: Container(
+//               width: 25,
+//               height: 25,
+//               decoration: const BoxDecoration(
+//                   image: DecorationImage(
+//                       image: AssetImage("assets/power-off.png"))),
+//             ),
+//             title: Text(
+//               "Log Out",
+//               style: GoogleFonts.abhayaLibre(
+//                   color: Colors.black,
+//                   fontSize: 22,
+//                   fontWeight: FontWeight.bold),
+//             ),
+//             trailing: const SizedBox(
+//               width: 25,
+//               height: 25,
+//             ),
+//           );
+//   }

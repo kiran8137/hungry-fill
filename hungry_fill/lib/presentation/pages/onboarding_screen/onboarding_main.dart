@@ -22,14 +22,15 @@ class _OnboardingMainState extends State<OnboardingMain> {
     return Scaffold(
       body: SafeArea(
         child: Stack(children: [
-          PageView(
-            controller: _pagecontroller,
-            children: const [
-              OnboardingScreen1(),
-              OnboardingScreen2(),
-              OnboardingScreen3(),
-            ],
-          ),
+          // PageView(
+          //   controller: _pagecontroller,
+          //   children: const [
+          //     OnboardingScreen1(),
+          //     // OnboardingScreen2(),
+          //     // OnboardingScreen3(),
+          //   ],
+          // ),
+           OnboardingScreen1(),
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: Column(
@@ -54,16 +55,16 @@ class _OnboardingMainState extends State<OnboardingMain> {
                       const SizedBox(
                         width: 2,
                       ),
-                      SmoothPageIndicator(
-                        effect: const ExpandingDotsEffect(
-                          dotHeight: 6,
-                          dotWidth: 6,
-                          //dotColor: Color.fromARGB(64, 14, 9, 45),
-                          activeDotColor: primarycolor,
-                        ),
-                        controller: _pagecontroller,
-                        count: 3,
-                      ),
+                      // SmoothPageIndicator(
+                      //   effect: const ExpandingDotsEffect(
+                      //     dotHeight: 6,
+                      //     dotWidth: 6,
+                      //     //dotColor: Color.fromARGB(64, 14, 9, 45),
+                      //     activeDotColor: primarycolor,
+                      //   ),
+                      //   controller: _pagecontroller,
+                      //   count: 3,
+                      // ),
                       const SizedBox(
                         width: 2,
                       ),

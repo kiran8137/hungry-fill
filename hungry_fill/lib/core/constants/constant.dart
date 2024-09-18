@@ -110,7 +110,8 @@ const aboutus = "At Hungry Fill, we believe food should be accessible, convenien
  "With a user-friendly interface and real-time updates, we make it easy to browse menus,"
   "place orders, and track your food from the kitchen to your doorstepOur mission is simple: to satisfy your hunger with speed and quality. We work closely with local restaurants to ensure every meal delivered is fresh, tasty, and prepared with care.";
 
-const privacyAndPolicy =[ "1. Introduction",
+const privacyAndPolicy =[ 
+  "1. Introduction",
 
 "At Hungry Fill, we are committed to protecting the privacy of our users. This Privacy Policy outlines the types of personal information we collect, how we use it, and the steps we take to ensure your data remains secure. By using our app, you agree to the collection and use of information in accordance with this policy.",
 

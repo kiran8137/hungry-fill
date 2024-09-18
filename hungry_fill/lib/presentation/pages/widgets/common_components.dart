@@ -20,14 +20,14 @@ FloatingActionButton floatingActionButton(BuildContext context) {
 
 
 //scaffoldMessenger
-SnackBar scaffoldMessenger({required String message}) {
+SnackBar scaffoldMessenger({required String message , required Color color }) {
     return SnackBar(
               content: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   height: 50,
                   decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 255, 38, 0),
+                      color: color,
                       borderRadius: BorderRadius.circular(10)),
                   child: Center(
                     child: Text(message,

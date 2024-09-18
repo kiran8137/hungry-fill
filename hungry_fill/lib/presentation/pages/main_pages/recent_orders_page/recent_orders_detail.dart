@@ -62,6 +62,7 @@ class RecentOrdersDetailScreen extends StatelessWidget {
                     context.read<OrderBloc>().add(GetOrderDetailsEvent());
                     ScaffoldMessenger.of(context).showSnackBar(
                         scaffoldMessenger(
+                          color: Colors.green,
                             message: "Order Cancelled Successfully"));
                   }
                 },

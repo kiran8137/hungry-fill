@@ -31,7 +31,7 @@ class _MainPageState extends State<MainPage> {
     ImageIcon(AssetImage("assets/home.png"),color: Colors.white,),
    // ImageIcon(AssetImage("assets/recipe-book.png"),color: Colors.white,),
      
-    ImageIcon(AssetImage("assets/smartphone.png"),color: Colors.white,),
+    ImageIcon(AssetImage("assets/paper-bag.png"),color: Colors.white,),
      
     ImageIcon(AssetImage("assets/person.png"),color: Colors.white,)
   ];

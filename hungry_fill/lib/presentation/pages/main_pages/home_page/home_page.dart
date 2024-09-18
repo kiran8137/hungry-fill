@@ -54,6 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(height: 35),
                   BlocBuilder<FilterBloc , FilterState>(
                     builder: (context, state) {
+                      debugPrint(state.runtimeType.toString());
                       if(state is DishesCategoryFilterOptionSuccess){
                         return  SizedBox(
                         height: 100.h,

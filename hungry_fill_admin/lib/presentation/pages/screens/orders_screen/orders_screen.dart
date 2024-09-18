@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:hungry_fill_admin/data/models/orders_model.dart';
 import 'package:hungry_fill_admin/presentation/pages/common_widget_component/components/components.dart';
+import 'package:hungry_fill_admin/presentation/pages/screens/orders_screen/components/components.dart';
+import 'package:hungry_fill_admin/presentation/pages/screens/orders_screen/responsive_views/components.dart';
+import 'package:hungry_fill_admin/presentation/pages/screens/orders_screen/widget/order_detail_widget_mobile.dart';
 import 'package:hungry_fill_admin/presentation/statemanagment/provider/order_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -24,48 +29,23 @@ class OrdersScreen extends StatelessWidget {
           orderListHeader(), //order page header with filter option
 
           const SizedBox(height: 5),
-          Expanded(
-              child: Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 15),
-                  child: Container(
-                      decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              topRight: Radius.circular(10))),
-                      width: double.infinity,
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: 5),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 8, left: 15),
-                              child: SizedBox(
-                                //  color: Colors.amber,
-                                height: 30,
-                                width: double.infinity,
-                                child: restaurantDetailTable(tablecontents),
-                              ),
-                            ),
-                            const Divider(),
-
-                            //order details
-                            SizedBox(
-                              height: 450,
-                              width: double.infinity,
-                              child: Consumer<OrderProvider>(
-                                builder: (context, value, child) {
-                                  return value.ordersList.isEmpty
-                                      ? const Center(
-                                          child: Text('No orders found'),
-                                        )
-                                      : orderDetail(value);
-                                },
-                              ),
-                            ),
-                          ]))))
+          Expanded(child: LayoutBuilder(
+            builder: (context, constraints) {
+              double maxWidth = constraints.maxWidth;
+              if (maxWidth > 600) {
+                return orderListWebView(tablecontents);
+              } else {
+                return orderListMobileView(value);
+              }
+            },
+          ))
         ]),
       ),
     );
   }
+
+  
+
+ 
 }
+

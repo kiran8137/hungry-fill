@@ -81,6 +81,7 @@ class MyApp extends StatelessWidget {
          
 
         child:     const MaterialApp(
+          title: 'Hungry Fill',
             debugShowCheckedModeBanner: false, 
             home:
             //ResDetailAddScreen()

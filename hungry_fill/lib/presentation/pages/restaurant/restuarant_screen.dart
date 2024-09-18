@@ -13,6 +13,7 @@ import 'package:hungry_fill/presentation/pages/dish_detail/dish_detail.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/widgets/search_widget.dart';
 import 'package:hungry_fill/presentation/pages/restaurant/components/res_components.dart';
 import 'package:hungry_fill/presentation/pages/restaurant/widgets/dish_widget.dart';
+import 'package:hungry_fill/presentation/pages/widgets/common_components.dart';
 
 import '../../bloc/category_bloc/category_bloc.dart';
 
@@ -219,6 +220,10 @@ class _RestuarantScreenState extends State<RestuarantScreen> {
                 BlocConsumer<DishBloc, DishState>(
                   listener: (BuildContext context, DishState state) {
                     if (state is AddDishToCartSuccesState) {
+                       ScaffoldMessenger.of(context).showSnackBar(
+                                    scaffoldMessenger(
+                                      color: Colors.green,
+                                        message: "Successfully Added to cart"));
                       BlocProvider.of<DishBloc>(context)
                           .add(DishGetEvent(resuserid: widget.resuerid));
                     }

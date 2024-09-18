@@ -126,15 +126,7 @@ class UserProfileScreen extends StatelessWidget {
                         builder: (context) => const PrivacyPolicyPage()));
               },
             ),
-            logOutOption(context)
-          ],
-        ),
-      ),
-    );
-  }
-
-  ListTile logOutOption(BuildContext context) {
-    return ListTile(
+            ListTile(
             onTap: () {
               showDialog(
                   context: context,
@@ -161,7 +153,8 @@ class UserProfileScreen extends StatelessWidget {
                             child: const Text("yes"))
                       ],
                     );
-                  });
+                  }
+                  );
  
             },
             minLeadingWidth: 0.5,
@@ -183,6 +176,13 @@ class UserProfileScreen extends StatelessWidget {
               width: 25.w,
               height: 25.h,
             ),
-          );
+          )
+            //logOutOption(context)
+          ],
+        ),
+      ),
+    );
   }
+
+   
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/daily_order/widgets/daily_order_detail_dialog.dart';
+import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/daily_order/widgets/daily_order_mobile_widget.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/daily_order/widgets/daily_orders_widget.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/widgets/page_heading_widget.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/provider/order_provider.dart';
@@ -77,3 +78,12 @@ ListView dailyOrdersWidget(OrderProvider value) {
       separatorBuilder: (context, index) => const Divider(),
       itemCount: value.ordersList.length);
 }
+
+Text orderDetailText({required String text}) {
+  return Text(
+    text,
+    style: GoogleFonts.roboto(color: Colors.black, fontWeight: FontWeight.w600),
+  );
+}
+
+

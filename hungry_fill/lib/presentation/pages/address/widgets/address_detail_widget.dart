@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/data/model/address_model/address_model.dart';
@@ -17,7 +17,7 @@ class AddressWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 170,
+      height: 165.h,
       width: double.infinity,
       decoration: BoxDecoration(
           color: Colors.white,
@@ -35,84 +35,68 @@ class AddressWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-                width: 150,
+                width: 150.w,
                 child: Text(
                   '${address.street}',
                   style: GoogleFonts.rubik(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 20),
+                      fontWeight: FontWeight.w500, fontSize: 20.sp),
                 )),
             SizedBox(
-                width: 220,
+                width: 220.w,
                 child: Text(
                   '${address.houseNo}, ${address.district}, ${address.state}',
                   style: GoogleFonts.rubik(
                       fontWeight: FontWeight.w400,
                       fontSize: 16,
-                      color: const Color.fromARGB(
-                          255, 139, 138, 138)),
+                      color: const Color.fromARGB(255, 139, 138, 138)),
                 )),
             //const SizedBox(height: 5),
             SizedBox(
-                width: 200,
+                width: 200.w,
                 child: Text(
                   'Phone No : ${address.userMobileNumber}',
                   style: GoogleFonts.rubik(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 15),
+                      fontWeight: FontWeight.w400, fontSize: 15.sp),
                 )),
-    
-            const SizedBox(
-              height: 15,
+
+            SizedBox(
+              height: 10.h,
             ),
-    
+
             Row(
               children: [
-                Text(
-                  'EDIT',
-                  style: GoogleFonts.rubik(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      color: primarycolor),
-                ),
-                const SizedBox(
-                  width: 15,
-                ),
                 GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     showDialog(
-                      context: context, 
-                      builder: (context){
-                        return   AlertDialog(
-                          title: const Text('Are you sure want to delete'),
-                          actions: [
-                            TextButton(
-                              onPressed: (){
-                                debugPrint('cancel');
-                                Navigator.pop(context);
-                              },
-                               child: const Text('cancel')
-                               ),
-    
-                                TextButton(
-                              onPressed: (){
-                                debugPrint('ok');
-                                BlocProvider.of<AddressBloc>(context).add(RemoveAddress(addressid: address.addressid!));
-                                Navigator.pop(context);
-                              },
-                               child:const Text('ok')
-                               ),
-                            
-                          ],
-                        );
-                      }
-                    );
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Text('Are you sure want to delete'),
+                            actions: [
+                              TextButton(
+                                  onPressed: () {
+                                    debugPrint('cancel');
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text('cancel')),
+                              TextButton(
+                                  onPressed: () {
+                                    debugPrint('ok');
+                                    BlocProvider.of<AddressBloc>(context).add(
+                                        RemoveAddress(
+                                            addressid: address.addressid!));
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text('ok')),
+                            ],
+                          );
+                        });
                   },
                   child: Text(
                     'DELETE',
                     style: GoogleFonts.rubik(
                         fontWeight: FontWeight.bold,
-                        fontSize: 15,
+                        fontSize: 15.sp,
                         color: Colors.red),
                   ),
                 )

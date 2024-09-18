@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
       
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
+        title: 'Hungry Fill',
         
         home:
           SplashScreen()

@@ -49,11 +49,13 @@ class _LogInScreenState extends State<LogInScreen> {
                     height: 50.h,
                     decoration: BoxDecoration(
                         color: Colors.red,
-                        borderRadius: BorderRadius.circular(10)),
+                        borderRadius: BorderRadius.circular(10)
+                        ),
                     child: Center(
                       child: Text(
                           style: GoogleFonts.aBeeZee(fontSize: 15),
-                          "No user found in this number"),
+                          "No user found in this number",
+                          ),
                     ),
                   ),
                 ),

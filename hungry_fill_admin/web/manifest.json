@@ -1,6 +1,6 @@
 {
-    "name": "hungry_fill_admin",
-    "short_name": "hungry_fill_admin",
+    "name": "Hungry Fill",
+    "short_name": "Hungry Fill",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

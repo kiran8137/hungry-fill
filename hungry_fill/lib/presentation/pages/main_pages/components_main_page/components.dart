@@ -27,29 +27,33 @@ AppBar appBarMain({required BuildContext context}) {
         ),
         ),
 
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            GestureDetector(
-              onTap: (){
-                 debugPrint("tapped location");
-                  //  BlocProvider.of<AddressBloc>(context)
-                  //         .add(GetAddressEvent(position: position!));
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> const MapScreen()));
-              },
-              child: Text('Location',
-              style: GoogleFonts.abhayaLibre(),
-              ),
-            ),
-            Transform(
-              alignment: FractionalOffset.center,
-              transform: Matrix4.rotationZ(
-                        6.1415926535897932 / 4,
-                      ),
-              child: const ImageIcon(AssetImage("assets/next.png"),color: Colors.black,))
+        title: SizedBox(
+          width: 100,
+          height: 100,
+          child: Image.asset('assets/Hung.png')),
+        //  Row(
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        //   children: [
+        //     GestureDetector(
+        //       onTap: (){
+        //          debugPrint("tapped location");
+        //           //  BlocProvider.of<AddressBloc>(context)
+        //           //         .add(GetAddressEvent(position: position!));
+        //         Navigator.push(context, MaterialPageRoute(builder: (context)=> const MapScreen()));
+        //       },
+        //       child: Text('Location',
+        //       style: GoogleFonts.abhayaLibre(),
+        //       ),
+        //     ),
+        //     Transform(
+        //       alignment: FractionalOffset.center,
+        //       transform: Matrix4.rotationZ(
+        //                 6.1415926535897932 / 4,
+        //               ),
+        //       child: const ImageIcon(AssetImage("assets/next.png"),color: Colors.black,))
             
-          ],
-        ),
+        //   ],
+        // ),
         centerTitle: true,
         actions:   [
             Padding(

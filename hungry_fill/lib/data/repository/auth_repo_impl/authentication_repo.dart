@@ -131,7 +131,7 @@ class AuthenticationRepoImplement extends AuthRepository {
     try {
       final result = await firestore
           .collection("Users")
-          .where("useEmail", isEqualTo: emailid)
+          .where("userEmail", isEqualTo: emailid)
           .get();
 
       if (result.docs.isEmpty) {

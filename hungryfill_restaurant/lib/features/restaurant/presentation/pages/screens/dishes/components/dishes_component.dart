@@ -10,7 +10,7 @@ import 'package:hungryfill_restaurant/features/restaurant/presentation/statemana
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/bloc/dish_category/dish_category_bloc.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/statemanagment/provider/dish_provider.dart';
 
-Container dishListBar(  {required BuildContext context , required TextEditingController controller} ) {
+Container dishListBar(  {required BuildContext context , required TextEditingController controller ,required double maxWidth} ) {
     return Container(
             width: double.infinity,
             height: 60,
@@ -29,6 +29,7 @@ Container dishListBar(  {required BuildContext context , required TextEditingCon
                     style: GoogleFonts.roboto(
                         fontSize: 20, fontWeight: FontWeight.w700),
                   ),
+                  maxWidth > 600 ?
                   Row(
                     children: [
                       SizedBox(
@@ -100,7 +101,7 @@ Container dishListBar(  {required BuildContext context , required TextEditingCon
                         ),
                       ),
                     ],
-                  ),
+                  ): const SizedBox()
                 ],
               ),
             ),

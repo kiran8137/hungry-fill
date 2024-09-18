@@ -233,6 +233,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                               if (result == null) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     scaffoldMessenger(
+                                      color: Colors.red,
                                         message: "Address Not selected"));
                               } else {
                                  
@@ -266,6 +267,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                               if (result == null) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     scaffoldMessenger(
+                                      color: Colors.red,
                                         message: "Address Not selected"));
                               } else {
                                 final usernumber = await getUserMobileNumber(

@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungryfill_restaurant/core/theme/color.dart';
 import 'package:hungryfill_restaurant/features/restaurant/data/model/res_user/res_user_model.dart';
+import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/auth_screens/login.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/daily_order/daily_orders.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/dashboard/dashboard.dart';
 import 'package:hungryfill_restaurant/features/restaurant/presentation/pages/screens/dishes/dishes.dart';
@@ -73,7 +74,34 @@ class _MainScreenState extends State<MainScreen> {
           actions:   [
             GestureDetector(
               onTap: (){
-                BlocProvider.of<AuthBloc>(context).add(SignOutEvent());
+               showDialog(
+                context: context, 
+                builder: (context){
+                  return AlertDialog(
+                    title: Text("Are you sure want to log out...!",
+                          style: GoogleFonts.abhayaLibre()),
+                      actions: [
+                        TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text("No")),
+                        TextButton(
+                            onPressed: () {
+                            BlocProvider.of<AuthBloc>(context).add(SignOutEvent());
+                 Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const LoginScreen()),
+                                  (Route<dynamic> predicate) => false);
+                            },
+                            child: const Text("yes"))
+                      ],
+                  );
+                }
+                );
+                
               },
               child: const Icon(Icons.logout,
               color: Colors.white,

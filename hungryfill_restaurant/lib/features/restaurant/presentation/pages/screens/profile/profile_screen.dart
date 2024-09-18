@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -200,7 +201,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   restaurantdistrict:
                                       restaurantdistrictcontroller.text,
                                   restaurantplace:
-                                      restaurantplacecontroller.text);
+                                      restaurantplacecontroller.text,
+                                  userid: FirebaseAuth.instance.currentUser?.uid
+                                      );
         
                               BlocProvider.of<RestaurantUserBloc>(context).add(
                                   UpdateRestaurantEvent(

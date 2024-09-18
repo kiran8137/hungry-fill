@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/data/model/cart_model/cart_model.dart';
@@ -29,6 +30,7 @@ class FilteredDishesPage extends StatelessWidget {
         leading: GestureDetector(
             onTap: () {
               Navigator.pop(context);
+              context.read<FilterBloc>().add(GetDishesCategoryFilterOptions());
             },
             child: const Icon(Icons.arrow_back_ios_new)),
       ),
@@ -43,9 +45,9 @@ class FilteredDishesPage extends StatelessWidget {
               Text(
                 'Showing Result for "$dishCategoryName"',
                 style: GoogleFonts.archivo(
-                    fontSize: 20, fontWeight: FontWeight.w600),
+                    fontSize: 20.sp, fontWeight: FontWeight.w600),
               ),
-              const SizedBox(height: 25),
+                SizedBox(height: 25.h),
               BlocBuilder<FilterBloc, FilterState>(
                 builder: (context, state) {
                   if (state is FilterDishesInitial) {
@@ -92,8 +94,8 @@ class FilteredDishesPage extends StatelessWidget {
                               children: [
                                 Text(
                                   '${filterDish.restaurant.restaurantname}',
-                                  style: const TextStyle(
-                                    fontSize: 20,
+                                  style:   TextStyle(
+                                    fontSize: 20.sp,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -106,8 +108,8 @@ class FilteredDishesPage extends StatelessWidget {
                                       scrollDirection: Axis.horizontal,
                                       itemBuilder: (context, index) {
                                         return Container(
-                                          height: 160,
-                                          width: 334,
+                                          height: 160.h,
+                                          width: 334.w,
                                           decoration: BoxDecoration(
                                             // color: dish.dishstock == 'IN'
                                             //     ? const Color.fromARGB(255, 246, 245, 245)

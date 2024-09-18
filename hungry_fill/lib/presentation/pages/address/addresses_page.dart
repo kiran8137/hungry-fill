@@ -75,7 +75,7 @@ class _AddressPageState extends State<AddressPage> {
               context.read<AddressBloc>().add(GetAddressFromDb());
             }
             if(state is RemoveAddressErrorState){
-              ScaffoldMessenger.of(context).showSnackBar(scaffoldMessenger(message: "Can't able to remvoe , please try again" )
+              ScaffoldMessenger.of(context).showSnackBar(scaffoldMessenger(message: "Can't able to remvoe , please try again" , color: Colors.red)
               );
             }
           },
