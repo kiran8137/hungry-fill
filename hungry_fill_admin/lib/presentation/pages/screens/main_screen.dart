@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_admin_scaffold/admin_scaffold.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hungry_fill_admin/core/funtions.dart';
 import 'package:hungry_fill_admin/core/theme/color.dart';
+import 'package:hungry_fill_admin/presentation/pages/auth_screens/sign_in.dart';
  
 import 'package:hungry_fill_admin/presentation/pages/screens/dashboard_screen/dashboard.dart';
 import 'package:hungry_fill_admin/presentation/pages/screens/orders_screen/orders_screen.dart';
 
 import 'package:hungry_fill_admin/presentation/pages/screens/restaurants_screen/restaurants.dart';
 import 'package:hungry_fill_admin/presentation/pages/screens/users_screen/users_screen.dart';
+import 'package:hungry_fill_admin/presentation/statemanagment/provider/auth_provider.dart';
 import 'package:hungry_fill_admin/presentation/statemanagment/provider/dashboard_provider.dart';
 import 'package:hungry_fill_admin/presentation/statemanagment/provider/order_provider.dart';
 import 'package:hungry_fill_admin/presentation/statemanagment/provider/restaurant_provider.dart';
@@ -59,6 +62,43 @@ class _MainScreenState extends State<MainScreen> {
               color: Colors.white
             ),
           ),
+           actions:   [
+            GestureDetector(
+              onTap: (){
+               showDialog(
+                context: context, 
+                builder: (context){
+                  return AlertDialog(
+                    title: Text("Are you sure want to log out...!",
+                          style: GoogleFonts.abhayaLibre()),
+                      actions: [
+                        TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text("No")),
+                        TextButton(
+                            onPressed: () async {
+                             Provider.of<AuthProvider>(context , listen: false).logout();
+                 Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const LoginScreen()),
+                                  (Route<dynamic> predicate) => false);
+                            },
+                            child: const Text("yes"))
+                      ],
+                  );
+                }
+                );
+                
+              },
+              child: const Icon(Icons.logout,
+              color: Colors.white,
+              ),
+            ),
+           ],
           // leading: Text(
           //   "Admin Panel",
           //   style: GoogleFonts.radioCanada(

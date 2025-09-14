@@ -3,11 +3,14 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/presentation/bloc/restaurant_bloc/restaurant_bloc.dart';
 import 'package:hungry_fill/presentation/pages/restaurant/restuarant_screen.dart';
 import 'package:hungry_fill/presentation/pages/whishlist/widgets/wishlist_widget.dart';
+import 'package:hungry_fill/presentation/pages/widgets/restaurant_card_widget.dart';
+import 'package:hungry_fill/widgets/custom_text.dart';
 
 class WishListPage extends StatelessWidget {
    const WishListPage({super.key});
@@ -23,13 +26,14 @@ class WishListPage extends StatelessWidget {
             onTap: () {
               Navigator.pop(context);
             },
-            child: const Icon(Icons.arrow_back)),
+            child: const Icon(Icons.arrow_back_ios)),
         backgroundColor: Colors.white,
-        title: Text(
-          'WishList',
-          style: GoogleFonts.rubik(fontSize: 20),
-        ),
-        centerTitle: true,
+        title:CustomText(
+                  text: 'WishList',
+                  fontSize: 17.sp,
+                  color: Color.fromRGBO(24, 528, 46, 1),
+                ),
+         
       ),
       body: SafeArea(
         child: BlocConsumer<RestaurantBloc, RestaurantState>(
@@ -76,52 +80,50 @@ class WishListPage extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final wishlistrestaurant = state.wishlistrestaurant[index];
                     return Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: SizedBox(
-                        height: 100,
-                        width: double.infinity,
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => RestuarantScreen(
-                                        resuerid: wishlistrestaurant.restaurantuserid,
-                                        restaurantname:
-                                            wishlistrestaurant.restaurantname,
-                                        restaurantdistrict: wishlistrestaurant
-                                            .restaurantdistrict,
-                                        restaurantplace: wishlistrestaurant
-                                            .restaurantplace)));
-                          },
-                          // child: RecommendRestaurant(restaurant: wishlistrestaurant)
-                          child: AnimationConfiguration.staggeredList(
-                            position: index,
-                            duration: const Duration(milliseconds: 900),
-                            child: SlideAnimation(
-                              verticalOffset: 50.0,
-                              child: FadeInAnimation(
-                                child:
-                                    
-                                   Dismissible(
-                                    direction: DismissDirection.endToStart,
-                                    background: const Icon(CupertinoIcons.delete),
-                                    onDismissed: (direction){
-                                      context.read<RestaurantBloc>().add(RemoveRestaurantInWishList(restaurantid: wishlistrestaurant.restaurantuserid!));
-
-                                    },
-                                    key: Key(wishlistrestaurant.restaurantuserid!),
-                                     child: WishlistWidget(
+                      padding: const EdgeInsets.all(12.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => RestuarantScreen(
+                                   // isInWishList: false,
+                                      resuerid: wishlistrestaurant.restaurantuserid,
                                       restaurantname:
                                           wishlistrestaurant.restaurantname,
-                                          
-                                      restaurantplace:
-                                          wishlistrestaurant.restaurantplace,
-                                      restaurantdistrict:
-                                          wishlistrestaurant.restaurantdistrict,
-                                       ),
-                                   ),
-                                ),
+                                      restaurantdistrict: wishlistrestaurant
+                                          .restaurantdistrict,
+                                      restaurantplace: wishlistrestaurant
+                                          .restaurantplace)));
+                        },
+                        // child: RecommendRestaurant(restaurant: wishlistrestaurant)
+                        child: AnimationConfiguration.staggeredList(
+                          position: index,
+                          duration: const Duration(milliseconds: 900),
+                          child: SlideAnimation(
+                            verticalOffset: 50.0,
+                            child: FadeInAnimation(
+                              child:
+                                  
+                                 Dismissible(
+                                  direction: DismissDirection.endToStart,
+                                  background: const Icon(CupertinoIcons.delete),
+                                  onDismissed: (direction){
+                                    context.read<RestaurantBloc>().add(RemoveRestaurantInWishList(restaurantid: wishlistrestaurant.restaurantuserid!));
+                      
+                                  },
+                                  key: Key(wishlistrestaurant.restaurantuserid!),
+                                   child: RestaurantCardWidget(restaurant: wishlistrestaurant)
+                                  //  WishlistWidget(
+                                  //   restaurantname:
+                                  //       wishlistrestaurant.restaurantname,
+                                        
+                                  //   restaurantplace:
+                                  //       wishlistrestaurant.restaurantplace,
+                                  //   restaurantdistrict:
+                                  //       wishlistrestaurant.restaurantdistrict,
+                                  //    ),
+                                 ),
                               ),
                             ),
                           ),

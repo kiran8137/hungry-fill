@@ -6,6 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/data/model/user_model/user_model.dart';
 import 'package:hungry_fill/presentation/bloc/user_bloc/users_bloc.dart';
+import 'package:hungry_fill/presentation/pages/widgets/text_form_field.dart';
+import 'package:hungry_fill/widgets/custom_text.dart';
 
 class UserDetailPage extends StatefulWidget {
   const UserDetailPage(
@@ -37,25 +39,57 @@ class _UserDetailPageState extends State<UserDetailPage> {
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: Text(
-            "Detail Page",
-            style: GoogleFonts.abhayaLibre(),
-          ),
-          centerTitle: true,
-          actions: [
-            GestureDetector(
+          
+        leading: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: const Icon(Icons.arrow_back_ios)),
+        backgroundColor: Colors.white,
+        title: CustomText(
+        text:   'Detail Page',
+          
+                fontSize: 17.sp,
+                color: Color.fromRGBO(24, 528, 46, 1),
+        ),
+         actions: [
+               GestureDetector(
                 onTap: () {
                   setState(() {
                     isedit = !isedit;
                   });
                 },
-                child: const Icon(Icons.edit)),
+                child:  CustomText(
+        text:   'Edit',
+          
+                fontSize: 14.sp,
+                color: AppColors.primaryColor,
+        ),),
               SizedBox(
               width: 10.w,
             )
-          ],
-        ),
+         ],
+      ),
+        //  AppBar(
+        //   backgroundColor: Colors.white,
+        //   title: Text(
+        //     "Detail Page",
+        //     style: GoogleFonts.abhayaLibre(),
+        //   ),
+        //   centerTitle: true,
+        //   actions: [
+        //     GestureDetector(
+        //         onTap: () {
+        //           setState(() {
+        //             isedit = !isedit;
+        //           });
+        //         },
+        //         child: const Icon(Icons.edit)),
+        //       SizedBox(
+        //       width: 10.w,
+        //     )
+        //   ],
+        // ),
         body: SafeArea(
             child: Padding(
                 padding: const EdgeInsets.all(20.0),
@@ -68,38 +102,33 @@ class _UserDetailPageState extends State<UserDetailPage> {
                         width: 120.w,
                         decoration: const BoxDecoration(
                             image: DecorationImage(
-                                image: AssetImage("assets/userprofile.jpg")),
-                            color: Colors.red,
+                                image: AssetImage("assets/person.png")),
+                            //color: Colors.red,
                             shape: BoxShape.circle),
                       ),
                         SizedBox(
                         height: 30.h,
                       ),
-                      TextFormField(
-                        readOnly: isedit,
+                       
+                      CustomTextFormWidget(
                         controller: usernamecontroller,
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10))),
-                      ),
+                         hinttext: '',
+                         readOnly: isedit,
+                         ),
                         SizedBox(
                         height: 30.h,
                       ),
-                      TextFormField(
+                      CustomTextFormWidget(
                         readOnly: isedit,
                         controller: mobilenumbercontroller,
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10))),
+                        hinttext: '',
                       ),
                       SizedBox(
                         height: 30.h,),
-                      TextFormField(
+                      CustomTextFormWidget(
                         readOnly: isedit,
                         controller: emailcontroller,
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10))),
+                         hinttext: '',
                       ),
                         SizedBox(
                         height: 158.h,
@@ -126,7 +155,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                 child: Container(
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
-                                      color: primarycolor),
+                                      color: AppColors.primaryColor),
                                   height: 45.h,
                                   width: 350.w,
                                   child:   Row(

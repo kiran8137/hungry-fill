@@ -55,7 +55,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
         width: 330,
         height: 40,
         child: FloatingActionButton.extended(
-          backgroundColor: primarycolor,
+          backgroundColor: AppColors.primaryColor,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           onPressed: () async {
@@ -107,7 +107,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
                     child: Column(
                       children: [
                         //const SizedBox(height: 10),
-                        TextFormWidget(
+                        CustomTextFormWidget(
                           controller: recipientnamecontroller,
                           hinttext: 'Recipient Name',
                           validator: (value) {
@@ -117,7 +117,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
                           },
                         ),
                         const SizedBox(height: 10),
-                        TextFormWidget(
+                        CustomTextFormWidget(
                           controller: recipientnumbercontroller,
                           hinttext: 'Recipient Number',
                           validator: (value) {
@@ -128,7 +128,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
                           },
                         ),
                         const SizedBox(height: 10),
-                        TextFormWidget(
+                        CustomTextFormWidget(
                           controller: flatnumbercontroller,
                           hinttext: 'Flat / House No / Building',
                           validator: (value) {
@@ -138,7 +138,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
                           },
                         ),
                         const SizedBox(height: 10),
-                        TextFormWidget(
+                        CustomTextFormWidget(
                           controller: addresscontroller,
                           hinttext: 'Area / Locality',
                           validator: (value) {

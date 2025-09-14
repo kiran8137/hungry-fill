@@ -1,0 +1,197 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:hungry_fill/core/color/colors.dart';
+import 'package:hungry_fill/core/constants/constant.dart';
+
+import 'package:hungry_fill/core/functions/functions.dart';
+import 'package:hungry_fill/data/model/cart_model/cart_model.dart';
+import 'package:hungry_fill/presentation/bloc/dish_bloc/dish_bloc.dart';
+import 'package:hungry_fill/presentation/pages/cart_page/cart_components/cart_components.dart';
+import 'package:hungry_fill/presentation/pages/checkout_page/checkout_page.dart';
+import 'package:hungry_fill/widgets/custom_text.dart';
+
+class CartDetailScreen extends StatefulWidget {
+  const CartDetailScreen({super.key, this.restaurantid, this.restaurantname});
+
+  final String? restaurantid;
+  final String? restaurantname;
+
+  @override
+  State<CartDetailScreen> createState() => _CartDetailScreenState();
+}
+
+class _CartDetailScreenState extends State<CartDetailScreen> {
+  late List<String> dishids = [];
+  int? carttotal = 0;
+  String? carttotalprice ;
+
+  @override
+  void initState() {
+    // BlocProvider.of<DishBloc>(context).add(GetCartEvent(restaurantid: widget.restaurantid));
+
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+       // appBar: appBar(context , widget.restaurantname!),
+        appBar:  AppBar(
+          
+          leading: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: const Icon(Icons.arrow_back_ios,  ),),
+          backgroundColor: Colors.white,
+          title: CustomText(
+                  text: 'Your Cart',
+                  fontSize: 17.sp,
+                  color: Color.fromRGBO(24, 528, 46, 1),
+                ),
+           
+        ),
+        backgroundColor: Colors.white,
+      //    floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      // floatingActionButton: SizedBox(
+      //   width: 330.w,
+      //   height: 40.h,
+      //   child: FloatingActionButton.extended(
+      //     backgroundColor: AppColors.primaryColor,
+      //     shape:
+      //         RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      //     onPressed: () async {
+      //        Navigator.push(context, MaterialPageRoute(builder: (context)=> CheckoutPage(restaurantname : widget.restaurantname! , restaurantid: widget.restaurantid!,userid: FirebaseAuth.instance.currentUser!.uid, carttotalprice: carttotalprice!,)));
+      //     },
+      //     label:  
+      //         Text(
+      //           'Procced to Check out',
+      //           style: GoogleFonts.breeSerif(color: Colors.white, fontSize: 18.sp),
+      //         ),
+           
+      //   ),
+      // ),
+        
+        
+        body: LayoutBuilder(
+          builder: (context, constraints) => 
+            BlocBuilder<DishBloc, DishState>(builder: (context, state) {
+            if (state is GetCartInitial) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          
+            return Column(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            
+                             // height: constraints.maxHeight > 700 ? 430: 310,
+                              width: double.infinity,
+                              child: StreamBuilder<List<CartModel>>(
+                                  stream: getCartInStream(restaurantid: widget.restaurantid!),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.connectionState == ConnectionState.waiting) {
+                                      return const Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    }
+                                    return cartDishDetail(snapshot);
+                                  })),
+                            
+                            
+                          //   SizedBox(
+                          //   height: 10.h,
+                          // ),
+                          // const Divider(
+                          //   color: Color.fromARGB(255, 245, 245, 245),
+                          // ),
+                          //   SizedBox(
+                          //   height: 30.h,
+                          // ),
+                          
+                          SizedBox(height: 10.h,),
+                            
+                          StreamBuilder<int>(
+                              stream: getcarttotal(
+                                userid: FirebaseAuth.instance.currentUser?.uid,
+                                restaurantid: widget.restaurantid,
+                              ),
+                              builder: (context, snapshot) {
+                                
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                }
+                                if(snapshot.hasData){
+                                  carttotalprice = (snapshot.data! + packagingcharge + deliveycharge).toString();
+                                  debugPrint(" cart total $carttotalprice");
+                                }
+                                return Container(
+                                
+                                decoration: BoxDecoration(
+                                   color: const Color.fromARGB(155, 248, 248, 248),
+                                   borderRadius: BorderRadius.circular(10)
+                                ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: billDetails(snapshot),
+                                  ));
+                              },
+                              )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> CheckoutPage(restaurantname : widget.restaurantname! , restaurantid: widget.restaurantid!,userid: FirebaseAuth.instance.currentUser!.uid, carttotalprice: carttotalprice!,)));
+                    },
+                    child: Container(
+                               
+                                height: 50.h,
+                                // 40,
+                                
+                                //140,
+                                decoration: BoxDecoration(
+                                  color: AppColors.primaryColor,
+                                  borderRadius:
+                                      BorderRadius.circular(10),
+                                ),
+                                child: const Center(
+                                  child: CustomText(
+                                    text:  "CHECK OUT" ,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                    
+                                  ),
+                                ),
+                              ),
+                  ),
+                ),
+                  SizedBox(height: 10.h,)
+              ],
+            );
+          }),
+        ));
+  }
+
+ 
+  
+
+  
+}

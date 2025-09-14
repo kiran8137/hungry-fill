@@ -28,7 +28,7 @@ class _MapScreenState extends State<MapScreen> {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () async {},
-          backgroundColor: primarycolor,
+          backgroundColor: AppColors.primaryColor,
           child: const Icon(
             Icons.my_location,
             color: Colors.white,

@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/data/model/address_model/address_model.dart';
 import 'package:hungry_fill/presentation/bloc/address_bloc/address_bloc.dart';
+import 'package:hungry_fill/widgets/custom_text.dart';
 
 class AddressWidget extends StatelessWidget {
   const AddressWidget({
@@ -17,55 +18,35 @@ class AddressWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 165.h,
+      
       width: double.infinity,
       decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
+          color: Color.fromRGBO(240, 245, 250, 1),
+          borderRadius: BorderRadius.circular(15),
           boxShadow: [
-            BoxShadow(
-                color: Colors.black.withOpacity(0.20),
-                spreadRadius: 0,
-                blurRadius: 7,
-                offset: const Offset(0, 5))
+            // BoxShadow(
+            //     color: Colors.black.withOpacity(0.20),
+            //     spreadRadius: 0,
+            //     blurRadius: 7,
+            //     offset: const Offset(0, 5))
           ]),
       child: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-                width: 150.w,
-                child: Text(
-                  '${address.street}',
-                  style: GoogleFonts.rubik(
-                      fontWeight: FontWeight.w500, fontSize: 20.sp),
-                )),
-            SizedBox(
-                width: 220.w,
-                child: Text(
-                  '${address.houseNo}, ${address.district}, ${address.state}',
-                  style: GoogleFonts.rubik(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16,
-                      color: const Color.fromARGB(255, 139, 138, 138)),
-                )),
-            //const SizedBox(height: 5),
-            SizedBox(
-                width: 200.w,
-                child: Text(
-                  'Phone No : ${address.userMobileNumber}',
-                  style: GoogleFonts.rubik(
-                      fontWeight: FontWeight.w400, fontSize: 15.sp),
-                )),
-
-            SizedBox(
-              height: 10.h,
-            ),
-
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                GestureDetector(
+                SizedBox(
+                    width: 150.w,
+                    child: CustomText(
+                     text: '${address.street}',
+                     fontSize: 16.sp,
+                     color: Color.fromRGBO(50, 52, 62, 1),
+                    )),
+
+                     GestureDetector(
                   onTap: () {
                     showDialog(
                         context: context,
@@ -92,16 +73,29 @@ class AddressWidget extends StatelessWidget {
                           );
                         });
                   },
-                  child: Text(
-                    'DELETE',
-                    style: GoogleFonts.rubik(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15.sp,
-                        color: Colors.red),
-                  ),
+                  child: Icon(Icons.delete_outline, color: AppColors.primaryColor,)
                 )
               ],
-            )
+            ),
+            SizedBox(
+                width: 220.w,
+                child: CustomText(
+                  fontSize: 14.sp,
+                  text: '${address.houseNo}, ${address.district}, ${address.state}',
+                  color: Color.fromRGBO(50, 52, 62, 1),
+                )),
+            //const SizedBox(height: 5),
+            SizedBox(
+                width: 200.w,
+                child: CustomText(
+                  text: 'Phone No : ${address.userMobileNumber}',
+                  fontSize: 14.sp,
+                   color: Color.fromRGBO(50, 52, 62, 1)
+                )),
+
+            SizedBox(
+              height: 10.h,
+            ),
           ],
         ),
       ),

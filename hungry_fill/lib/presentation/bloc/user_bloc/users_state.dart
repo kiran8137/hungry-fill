@@ -19,6 +19,7 @@ final class UserLoadedState extends UsersState{
   List<Object> get props => [userdetails];
 }
 
+final class UserLoadedError extends UsersState{}
 
 final class UserAuthenticatedStatus extends UsersState{}
 

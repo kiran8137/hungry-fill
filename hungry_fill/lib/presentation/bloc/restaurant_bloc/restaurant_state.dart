@@ -28,9 +28,17 @@ final class GetRestaurantsInWishListSucces extends RestaurantState{
 
   
 }
+final class GetRestaurantsInWishListEmtyState extends RestaurantState{}
 
 final class GetRestaurantsInWishListErrorState extends RestaurantState{}
 
 final class RemoveRestaurantsInWishListSucces extends RestaurantState{}
 
+final class SearchRestaurantSuccess extends RestaurantState{
+  final List<RestaurantModel> restaurants;
 
+  const SearchRestaurantSuccess({required this.restaurants});
+  
+}
+
+final class SearchRestaurantEmptyState extends RestaurantState{}

@@ -17,7 +17,7 @@ Container addAddressDetailsButton({required String text}) {
                               width: 250,
                               height: 55,
                               decoration: BoxDecoration(
-                                  color: primarycolor,
+                                  color: AppColors.primaryColor,
                                   borderRadius: BorderRadius.circular(25)),
                               child: Center(
                                 child: Text(
@@ -36,21 +36,21 @@ Container getCurrentLocationButton({required String text}) {
                     width: 160,
                     decoration: BoxDecoration(
                         color: Colors.white,
-                        border: Border.all(color: primarycolor),
+                        border: Border.all(color: AppColors.primaryColor),
                         borderRadius: BorderRadius.circular(5)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        const Icon(
+                          Icon(
                           Icons.my_location,
-                          color: primarycolor,
+                          color: AppColors.primaryColor,
                           size: 20,
                         ),
                         Text(
                           text,
                           style: GoogleFonts.roboto(
                               fontWeight: FontWeight.w400,
-                              color: primarycolor,
+                              color: AppColors.primaryColor,
                               fontSize: 15),
                         )
                       ],

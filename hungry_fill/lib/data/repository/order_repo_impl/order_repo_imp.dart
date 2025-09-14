@@ -144,8 +144,8 @@ String formattedDate =  DateFormat('dd/MM/yyyy').format(now);
   cartdata: cartdetails,
   grandtotal: order.grandtotal,
   orderstatus: order.orderstatus,
-  restaurantId: order.restaurantId
-  
+  restaurantId: order.restaurantId,
+  restaurantname: order.restaurantname
 );
 
 await collectionref.set(ordermodel.toJson()).then((_){

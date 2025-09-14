@@ -11,6 +11,10 @@ abstract class RestaurantRepository{
   Future<RestaurantModel> getRestaurantUsingId({required String restaurantid});
 
   Future<void> removeRestaurantFromWishist({required restaurantid});
+
+  Future<List<RestaurantModel>> searchRestaurants({required String query});
+
+  
 }
 
 

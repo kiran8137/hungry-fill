@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:hungry_fill_admin/core/funtions.dart';
 import 'package:hungry_fill_admin/data/repository/auth_repo/auth_repo_impl.dart';
 
 class AuthProvider extends ChangeNotifier{
@@ -28,4 +29,10 @@ class AuthProvider extends ChangeNotifier{
     notifyListeners();
     return userresult; 
   }
+
+Future<void> logout()async{
+ await signOut();
+ authrepository.setUserLoggedStatus(islogged: false);
+}
+   
 }

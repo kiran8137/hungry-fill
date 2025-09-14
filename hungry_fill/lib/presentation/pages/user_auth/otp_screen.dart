@@ -55,7 +55,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   ),
                   Text(
                     'OTP Verification',
-                    style: GoogleFonts.copse(fontSize: 30, color: primarycolor),
+                    style: GoogleFonts.copse(fontSize: 30, color: AppColors.primaryColor),
                   ),
                   const SizedBox(
                     height: 10,
@@ -103,7 +103,7 @@ class _OtpScreenState extends State<OtpScreen> {
                             child: Container(
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
-                                  color: primarycolor),
+                                  color: AppColors.primaryColor),
                               height: 55,
                               width: 210,
                               child: Center(

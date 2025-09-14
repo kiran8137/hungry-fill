@@ -63,6 +63,6 @@ Future<void> resentOtpSent({
    required int? forceresendingtoken
 });
 
-
+Future<bool> resetPassword({required String email});
 
 }

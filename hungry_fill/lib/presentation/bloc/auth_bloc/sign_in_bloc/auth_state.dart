@@ -60,4 +60,31 @@ class UserNotRegistered extends AuthState{}
 
 class ResentOtpSentState extends AuthState{}
 
-   
+class HideTextSuccessState extends AuthState{
+  final bool isTextHide;
+
+  const HideTextSuccessState({required this.isTextHide});
+
+   @override
+ 
+  List<Object?> get props => [isTextHide];
+}
+
+class ChangeAuthTypeSuccess extends AuthState{
+  final bool isLogIn;
+
+const  ChangeAuthTypeSuccess({required this.isLogIn});
+
+@override
+  // TODO: implement props
+  List<Object?> get props => [isLogIn];
+  
+}
+
+class SendResetPasswordEmailSuccess extends AuthState{
+
+}
+
+class SendResetPasswordEmailError extends AuthState{
+
+}

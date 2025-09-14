@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/dish_bloc/dish_bloc.dart';
+import 'package:hungry_fill/presentation/pages/widgets/text_form_field.dart';
 
 class SearchWidget extends StatelessWidget {
   const SearchWidget({
@@ -14,23 +15,14 @@ class SearchWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return CustomTextFormWidget(
       
       controller: searchcontroller,
-      decoration: InputDecoration(
-        hintText: "Search Restaurants , foods",
-        hintStyle:  const TextStyle(fontStyle: FontStyle.normal,color: Color.fromARGB(164, 158, 158, 158)),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-          borderSide: const BorderSide(color: Colors.white)
-        ),
-        fillColor: const Color.fromARGB(62, 207, 204, 204),
-        filled: true
-      ),
+      hinttext: "Search Restaurants , foods",
       onChanged: (value){
         if(value.isNotEmpty){
           BlocProvider.of<DishBloc>(context).add(SearchDishEvent(dishname: value, userid: resuserid));
-        }else{
+        }else if(value.isEmpty || value == ''){
            BlocProvider.of<DishBloc>(context)
         .add(DishGetEvent(resuserid: resuserid));
         }

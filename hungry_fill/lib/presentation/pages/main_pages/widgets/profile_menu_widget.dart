@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hungry_fill/widgets/custom_text.dart';
 
 class ProfileMenuWidget extends StatelessWidget {
   const ProfileMenuWidget({
-    super.key, required this.leadingicon, required this.title, this.trailing, required this.ontap,
+    super.key, required this.leadingicon, required this.title, this.trailing, required this.ontap, this.leadingIconColor,
   });
  final String leadingicon;
+ final Color? leadingIconColor;
  final String title;
  final String? trailing;
  final VoidCallback ontap;
@@ -19,25 +21,26 @@ class ProfileMenuWidget extends StatelessWidget {
       minLeadingWidth: 0.5,
       leading: Container(
        
-        width: 25.w,
-        height: 25.h,
+        width: 40.w,
+        height: 40.h,
         decoration:   BoxDecoration(
-           
-          image: DecorationImage(
-            image: AssetImage(leadingicon) 
-          )
+          color: Colors.white,
+          shape: BoxShape.circle,
+          // image: DecorationImage(
+             
+          //   image: AssetImage(leadingicon,) 
+          // )
         ),
+        child: Image.asset(leadingicon, color: leadingIconColor,),
         ),
-        title: Text(title,
-        style: GoogleFonts.abhayaLibre(
-        color: Colors.black,
-        fontSize: 22.sp,
-        fontWeight: FontWeight.bold
-        ),
+        title: CustomText(
+         text:  title,
+         fontSize: 16.sp,
+         color: Color.fromRGBO(50, 52, 62, 1),
         ),
         trailing: Container(
-        width: 25.w,
-        height: 25.h,
+        width: 15.w,
+        height: 15.h,
         decoration:   trailing !=null ?
         BoxDecoration(
           image: DecorationImage(

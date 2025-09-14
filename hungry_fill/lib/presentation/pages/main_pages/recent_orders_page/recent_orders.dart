@@ -5,6 +5,7 @@ import 'package:hungry_fill/presentation/bloc/order_bloc/order_bloc.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/recent_orders_page/components/components_recentorders.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/recent_orders_page/recent_orders_detail.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/recent_orders_page/widgets/orders_list_widget.dart';
+import 'package:hungry_fill/widgets/custom_text.dart';
 
 class RecentOrderScreen extends StatefulWidget {
   const RecentOrderScreen({super.key});
@@ -23,6 +24,19 @@ class _RecentOrderScreenState extends State<RecentOrderScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: const Icon(Icons.arrow_back_ios)),
+        backgroundColor: Colors.white,
+        title:  CustomText(
+                  text: 'Orders',
+                  fontSize: 17.sp,
+                  color: Color.fromRGBO(24, 528, 46, 1),
+                ),
+      ),
       backgroundColor: Colors.white,
       body: SafeArea(
           child: Padding(
@@ -30,8 +44,8 @@ class _RecentOrderScreenState extends State<RecentOrderScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            text('Orders'),
-            const Divider(),
+           
+             
               SizedBox(height: 10.h),
             BlocConsumer<OrderBloc, OrderState>(
               listener: (context, state) {},
@@ -67,7 +81,7 @@ class _RecentOrderScreenState extends State<RecentOrderScreen> {
                         );
                       },
                       separatorBuilder: (context, index) =>
-                            SizedBox(height: 10.h),
+                             Divider(),
                       itemCount: state.orderslist.length,
                     ),
                   );

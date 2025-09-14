@@ -4,7 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/presentation/bloc/dish_bloc/dish_bloc.dart';
  
-import 'package:hungry_fill/presentation/pages/cart_page/cart_page.dart';
+import 'package:hungry_fill/presentation/pages/cart_page/cart_detail_screen.dart';
+import 'package:hungry_fill/widgets/custom_text.dart';
 
 class Cart extends StatefulWidget {
   const Cart({super.key});
@@ -31,8 +32,12 @@ class _CartState extends State<Cart> {
             },
             child: const Icon(Icons.arrow_back_ios)),
           backgroundColor: Colors.white,
-          title: const Text("Cart"),
-          centerTitle: true,
+          title: CustomText(
+                  text: 'Cart',
+                  fontSize: 17.sp,
+                  color: Color.fromRGBO(24, 528, 46, 1),
+                ),
+           
         ),
         backgroundColor: Colors.white,
         body: SafeArea(
@@ -54,7 +59,7 @@ class _CartState extends State<Cart> {
                     final restaurants = state.restaurantsincart[index];
                     return InkWell(
                       onTap: (){
-                        Navigator.push(context, (MaterialPageRoute(builder: (context)=> CartPage(restaurantid: restaurants.restaurantuserid, restaurantname: restaurants.restaurantname,))));
+                        Navigator.push(context, (MaterialPageRoute(builder: (context)=> CartDetailScreen(restaurantid: restaurants.restaurantuserid, restaurantname: restaurants.restaurantname,))));
                       },
                       child: Container(
                         width: double.infinity,
@@ -75,12 +80,14 @@ class _CartState extends State<Cart> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(restaurants.restaurantname!,
-                                  style: GoogleFonts.nunitoSans(
-                                    fontSize: 20.sp,
-                                    fontWeight: FontWeight.w700
-                                  ),
-                                  ),
+                                  SizedBox(
+                    width: 150.w,
+                    child: CustomText(
+                     text: '${restaurants.restaurantname}',
+                     fontSize: 16.sp,
+                     fontWeight: FontWeight.bold,
+                     color: Color.fromRGBO(50, 52, 62, 1),
+                    )),
                                   const Icon(Icons.arrow_forward_ios,
                                   size: 15,
                                   

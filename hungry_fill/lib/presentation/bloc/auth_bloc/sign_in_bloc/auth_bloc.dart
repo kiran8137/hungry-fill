@@ -26,7 +26,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     on<SignInEvent>(signIn);
     on<LogInEvent>(logIn);
-
+    on<HideTextEvent>(hideText);
+    on<ChangeAuthType>(changeAuthType);
+    on<SendResetPasswordEmail>(sendResetPasswordEmail);
   }
 
 
@@ -160,7 +162,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   FutureOr<void> logIn(LogInEvent event, Emitter<AuthState> emit)async {
-
+     emit(AuthInitial());
     try{
 
       
@@ -182,5 +184,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }catch(error){
       log(error.toString());
     }
+  }
+
+   
+
+  FutureOr<void> hideText(HideTextEvent event, Emitter<AuthState> emit) {
+    emit(HideTextSuccessState(isTextHide: event.currentBool ));
+  }
+
+  FutureOr<void> changeAuthType(ChangeAuthType event, Emitter<AuthState> emit){
+    emit(ChangeAuthTypeSuccess(isLogIn: event.isLogIn ? false : true));
+  }
+
+  FutureOr<void> sendResetPasswordEmail(SendResetPasswordEmail event, Emitter<AuthState> emit) async{
+    final result = await authrepository.resetPassword(email: event.email);
+    result ? emit(SendResetPasswordEmailSuccess()) : emit(SendResetPasswordEmailError());
   }
 }

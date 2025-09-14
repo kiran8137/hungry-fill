@@ -100,3 +100,27 @@ class LogInEvent extends AuthEvent{
 
   
 }
+
+class HideTextEvent extends AuthEvent{
+  final bool currentBool;
+
+  HideTextEvent({required this.currentBool});
+  
+  @override
+  // TODO: implement props
+  List<Object?> get props => [currentBool];
+}
+
+class ChangeAuthType extends AuthEvent{
+  final bool isLogIn;
+
+  ChangeAuthType({required this.isLogIn});
+  
+}
+
+class SendResetPasswordEmail extends AuthEvent{
+  final String email;
+
+  SendResetPasswordEmail({required this.email});
+  
+}

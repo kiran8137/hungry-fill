@@ -215,7 +215,7 @@ class FilteredDishesPage extends StatelessWidget {
                                                           width: 155,
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: primarycolor,
+                                                            color: AppColors.primaryColor,
                                                             borderRadius:
                                                                 BorderRadius
                                                                     .circular(
@@ -270,6 +270,7 @@ class FilteredDishesPage extends StatelessWidget {
                                                   restaurantname: filterDish.restaurant.restaurantname,
                                                   restaurantdistrict: filterDish.restaurant.restaurantdistrict,
                                                   restaurantplace: filterDish.restaurant.restaurantplace,
+                                                  //isInWishList: false, //TODO add wishlist
                                                 )));
                                   },
                                   child: SizedBox(

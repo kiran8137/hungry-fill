@@ -88,7 +88,7 @@ class OrderSuccessPage extends StatelessWidget {
                           height: 35,
                           width: 150,
                           decoration: BoxDecoration(
-                             color: primarycolor,
+                             color: AppColors.primaryColor,
                              borderRadius: BorderRadius.circular(5)
                           ),
                           child: const Icon(Icons.arrow_back , color: Colors.white,),

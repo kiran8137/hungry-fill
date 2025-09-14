@@ -9,7 +9,7 @@ import 'package:hungry_fill/presentation/bloc/restaurant_bloc/restaurant_bloc.da
 import 'package:hungry_fill/presentation/pages/map/map_screen.dart';
 import 'package:hungry_fill/presentation/pages/whishlist/whishlist_page.dart';
 
-AppBar appBarMain({required BuildContext context}) {
+Widget appBarMain({required BuildContext context}) {
     return AppBar(
       leading: const SizedBox(),
       backgroundColor: Colors.white,

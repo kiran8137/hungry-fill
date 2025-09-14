@@ -17,6 +17,7 @@ import 'package:hungry_fill/presentation/bloc/auth_bloc/sign_in_bloc/auth_bloc.d
 import 'package:hungry_fill/presentation/bloc/category_bloc/category_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/dish_bloc/dish_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/filter_homepage/filter_bloc.dart';
+import 'package:hungry_fill/presentation/bloc/onboarding_screen_bloc/onboarding_screen_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/order_bloc/order_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/restaurant_bloc/restaurant_bloc.dart';
 import 'package:hungry_fill/presentation/bloc/user_bloc/users_bloc.dart';
@@ -39,6 +40,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+          create: (context) => OnboardingScreenBloc()),
         BlocProvider(
           create:(context)=> AuthBloc(AuthenticationRepoImplement(firebaseauth: FirebaseAuth.instance ,firestore: FirebaseFirestore.instance ))
           ),

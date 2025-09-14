@@ -197,6 +197,17 @@ class AuthenticationRepoImplement extends AuthRepository {
      }
   }
   
+  @override
+  Future<bool> resetPassword({required String email}) async{
+    try{
+      await firebaseauth.sendPasswordResetEmail(email: email);
+      return false;
+    }catch(e){
+      debugPrint(e.toString());
+      return false;
+    }
+  }
+  
   
   
   

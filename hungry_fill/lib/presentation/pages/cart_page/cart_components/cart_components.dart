@@ -9,6 +9,7 @@ import 'package:hungry_fill/data/model/cart_model/cart_model.dart';
 import 'package:hungry_fill/data/repository/cart_repo_imp/cart_repo_impl.dart';
 import 'package:hungry_fill/presentation/bloc/dish_bloc/dish_bloc.dart';
 import 'package:hungry_fill/presentation/pages/cart_page/widgets/bill_details_widgets.dart';
+import 'package:hungry_fill/widgets/custom_text.dart';
 
 SingleChildScrollView cartDishDetail(AsyncSnapshot<List<CartModel>> snapshot) {
   return SingleChildScrollView(
@@ -29,13 +30,13 @@ SingleChildScrollView cartDishDetail(AsyncSnapshot<List<CartModel>> snapshot) {
               height: 100.h,
               width: double.infinity,
               decoration: BoxDecoration(
-                  color: const Color.fromARGB(155, 248, 248, 248),
+                 // color: const Color.fromARGB(155, 248, 248, 248),
                   borderRadius: BorderRadius.circular(10)),
               child: Row(
                 children: [
                   Container(
-                    width: 70.w,
-                    height: 70.h,
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    height: 100.h,
                     decoration: BoxDecoration(
                         // color: Colors.green,
                         borderRadius: BorderRadius.circular(10),
@@ -49,34 +50,36 @@ SingleChildScrollView cartDishDetail(AsyncSnapshot<List<CartModel>> snapshot) {
                     width: 5.w,
                   ),
                   Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
-                        width: 90.w,
-                        child: Text(
-                          cartdish.dishname!,
-                          maxLines: 2,
-                          style: GoogleFonts.roboto(
-                              fontSize: 18.sp, fontWeight: FontWeight.w500),
-                        ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: 90.w,
+                            child: CustomText(
+                              text:cartdish.dishname!,
+                               fontSize: 18.sp,
+                              color: Color.fromRGBO(50, 52, 62, 1),
+                            ),
+                          ),
+                           CustomText(
+                       text:  "₹ ${cartdish.priceperquantity.toString()}",
+                       fontSize: 20.sp,
+                       fontWeight: FontWeight.bold,
+                       color: Color.fromRGBO(50, 52, 62, 1),
                       ),
-                      Text(
-                        "₹ ${cartdish.priceperquantity.toString()}",
-                        style:
-                              TextStyle(fontSize: 15.sp, color: Colors.grey),
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    width: 40,
-                  ),
-                  Container(
+                        ],
+                      ),
+                     
+
+                      Container(
                     height: 35.h,
                     width: 100.w,
                     decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: primarycolor),
+                        //color: Colors.white,
+                         
                         borderRadius: BorderRadius.circular(8)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -89,16 +92,21 @@ SingleChildScrollView cartDishDetail(AsyncSnapshot<List<CartModel>> snapshot) {
                                   cartid: cartdish.cartid!);
                             }
                           },
-                          child: const Icon(
-                            Icons.remove,
-                            size: 20,
-                            color: primarycolor,
+                          child:   CircleAvatar(
+                            radius: 12,
+                            backgroundColor: AppColors.primaryColor,
+                            child: Icon(
+                              Icons.remove,
+                              size: 20,
+                              color: Colors.white
+                            ),
                           ),
                         ),
-                        Text(
-                          cartdish.dishquantity.toString(),
-                          style: GoogleFonts.abhayaLibre(
-                              fontSize: 20.sp, fontWeight: FontWeight.bold),
+                        CustomText(
+                         text: cartdish.dishquantity.toString(),
+                         fontSize: 16.sp,
+                         fontWeight: FontWeight.bold,
+                         color: Color.fromRGBO(50, 52, 62, 1),
                         ),
                         GestureDetector(
                           onTap: () async {
@@ -107,15 +115,25 @@ SingleChildScrollView cartDishDetail(AsyncSnapshot<List<CartModel>> snapshot) {
                                 dishquantity: cartdish.dishquantity!,
                                 cartid: cartdish.cartid!);
                           },
-                          child: const Icon(
-                            Icons.add,
-                            size: 20,
-                            color: primarycolor,
+                          child:   CircleAvatar(
+                            radius: 12,
+                             backgroundColor: AppColors.primaryColor,
+                            child: Icon(
+                              Icons.add,
+                              size: 20,
+                              color:  Colors.white,
+                            ),
                           ),
                         ),
                       ],
                     ),
                   ),
+                    ],
+                  ),
+                  const SizedBox(
+                    width: 40,
+                  ),
+                  
                 ],
               ),
             ),
@@ -163,7 +181,7 @@ Container cartFloatingActionButton() {
     width: 250,
     height: 60,
     decoration: BoxDecoration(
-        color: primarycolor, borderRadius: BorderRadius.circular(25)),
+        color: AppColors.primaryColor, borderRadius: BorderRadius.circular(25)),
     child: Center(
       child: Text(
         "Procced to Check out",
@@ -176,6 +194,11 @@ Container cartFloatingActionButton() {
 Column billDetails(AsyncSnapshot<int> snapshot) {
   return Column(
     children: [
+       BillDetailswidget(
+        detail: "Total Amount",
+        amount: "${snapshot.data! + packagingcharge + deliveycharge}",
+      ),
+      const SizedBox(height: 15),
       BillDetailswidget(detail: "Item total", amount: "${snapshot.data}"),
       const SizedBox(height: 15),
       const BillDetailswidget(detail: "packaging charges", amount: "10"),
@@ -184,7 +207,7 @@ Column billDetails(AsyncSnapshot<int> snapshot) {
         detail: "delivery charges",
         amount: "30",
       ),
-      const SizedBox(height: 50),
+       const SizedBox(height: 50),
       BillDetailswidget(
         detail: "Total Amount",
         amount: "${snapshot.data! + packagingcharge + deliveycharge}",

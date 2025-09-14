@@ -86,6 +86,18 @@ class RestaurantRepoImp extends RestaurantRepository {
     }
     
   }
+  
+  @override
+  Future<List<RestaurantModel>> searchRestaurants({required query})async {
+    try{
+      final snapShot = await FirebaseFirestore.instance.collection('Restaurants').get();
+      List<RestaurantModel> restaurants = snapShot.docs.map((restaurant) => RestaurantModel.fromJson(doc: restaurant) ).toList();
+      return restaurants.where((restaurant)=> (restaurant.restaurantname ?? "").toLowerCase().contains(query.toString().toLowerCase())).toList();
+    }catch(error){
+      debugPrint(error.toString());
+     throw Exception(error.toString());
+    }
+  }
 }
 
 //  Future<void> removeRestaurantWishList({required String restaurantid}) async{

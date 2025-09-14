@@ -8,47 +8,56 @@ import 'package:hungry_fill/data/model/cart_model/cart_model.dart';
 import 'package:hungry_fill/presentation/bloc/address_bloc/address_bloc.dart';
 import 'dart:math' as math;
 
+import 'package:hungry_fill/widgets/custom_text.dart';
+
 
 //address in checkoutpage
-Column addressDetailCheckOut(GetAddressUsingIdSuccess state) {
-    return Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                
-                                SizedBox(
-                                
-                                    width: 150.h,
-                                    child: Text(
-                                      state.address.street!,
-                                      style: GoogleFonts.rubik(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 20.h),
-                                    )),
-                                SizedBox(
-                                    width: 150.w,
-                                    child: Text(
-                                      '${state.address.houseNo}, ${state.address.district}, ${state.address.state}',
-                                      style: GoogleFonts.rubik(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 16.sp,
-                                          color: const Color.fromARGB(
-                                              255, 139, 138, 138)),
-                                    )),
-                                //const SizedBox(height: 5),
-                                SizedBox(
-                                    width: 200.w,
-                                    child: Text(
-                                      'Phone No : ${state.address.userMobileNumber}',
-                                      style: GoogleFonts.rubik(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 15.sp),
-                                    )),
-
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                              ],
-                            );
+Widget addressDetailCheckOut(GetAddressUsingIdSuccess state) {
+    return Container(
+       width: double.infinity,
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Color.fromRGBO(246, 248, 250, 1),
+                        borderRadius: BorderRadius.circular(10),),
+      child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  
+                                  SizedBox(
+                                  
+                                      width: 150.h,
+                                      child: Text(
+                                        state.address.street!,
+                                        style: GoogleFonts.rubik(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 20.h),
+                                      )),
+                                  SizedBox(
+                                      width: 150.w,
+                                      child: Text(
+                                        '${state.address.houseNo}, ${state.address.district}, ${state.address.state}',
+                                        style: GoogleFonts.rubik(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 16.sp,
+                                            color: const Color.fromARGB(
+                                                255, 139, 138, 138)),
+                                      )),
+                                  //const SizedBox(height: 5),
+                                  SizedBox(
+                                      width: 200.w,
+                                      child: Text(
+                                        'Phone No : ${state.address.userMobileNumber}',
+                                        style: GoogleFonts.rubik(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 15.sp),
+                                      )),
+      
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                ],
+                              ),
+    );
   }
 
 //select address container 
@@ -81,29 +90,33 @@ Column addressDetailCheckOut(GetAddressUsingIdSuccess state) {
   //dish widget in check out page
   Container dishWidgetInCheckOut(CartModel cartdish) {
     return Container(
-                              height: 100.h,
+                              //height: 100.h,
                               width: double.infinity,
                               decoration: BoxDecoration(
                                   color: const Color.fromARGB(
                                       155, 248, 248, 248),
                                   borderRadius: BorderRadius.circular(10)),
                               child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Container(
-                                    margin: const EdgeInsets.only(left: 15),
-                                    width: 70.w,
-                                    height: 70.h,
-                                    decoration: BoxDecoration(
-                                        color: Colors.green,
-                                        borderRadius:
-                                            BorderRadius.circular(10),
-                                        image: DecorationImage(
-                                            image: NetworkImage(
-                                              cartdish.dishimage!,
-                                            ),
-                                            fit: BoxFit.cover)),
-                                  ),
-                                    SizedBox(
+                                  Row(
+                                    children: [
+                                      Container(
+                                       // margin: const EdgeInsets.only(left: 15),
+                                        width: 40.w,
+                                        height: 40.h,
+                                        decoration: BoxDecoration(
+                                            color: Colors.green,
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            image: DecorationImage(
+                                                image: NetworkImage(
+                                                  cartdish.dishimage!,
+                                                ),
+                                                fit: BoxFit.cover)),
+                                      ),
+
+                                       SizedBox(
                                     width: 10.w,
                                   ),
                                   Column(
@@ -113,39 +126,48 @@ Column addressDetailCheckOut(GetAddressUsingIdSuccess state) {
                                         CrossAxisAlignment.start,
                                     children: [
                                       SizedBox(
-                                        width: 90.w,
-                                        child: Text(
+                                       // width: 90.w,
+                                        child: CustomText(
                                           // cartdish.dishname!,
-                                          '${cartdish.dishname}',
+                                         text:'${cartdish.dishname}',
                                           maxLines: 2,
-                                          style: GoogleFonts.roboto(
-                                              fontSize: 20.sp,
-                                              fontWeight: FontWeight.w500),
+                                           fontSize: 18.sp,
+                                           fontWeight: FontWeight.w600,
+                              color: Color.fromRGBO(50, 52, 62, 1),
                                         ),
                                       ),
-                                      Text(
-                                        //"₹ ${cartdish.priceperquantity.toString()}",
-                                        "₹ ${cartdish.priceperquantity.toString()}",
-                                        style:   TextStyle(
-                                            fontSize: 15.sp, color: Colors.grey),
-                                      )
+                                    CustomText(
+                                        text :cartdish.dishquantity.toString(),
+                                        fontSize: 14.sp,
+                                        color: Color.fromRGBO(160, 165, 186, 1),
+                                      ),
                                     ],
                                   ),
-                                    SizedBox(
-                                    width: 40.w,
+                                    ],
                                   ),
+                                   
+                                  //   SizedBox(
+                                  //   width: 40.w,
+                                  // ),
                                     SizedBox(width: 30.w),
                                   Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.center,
                                     children: [
-                                      Text(
-                                        cartdish.dishquantity.toString(),
-                                        style:   TextStyle(
-                                            color: Colors.grey,
-                                            fontSize: 25.sp,
-                                            fontWeight: FontWeight.w500),
-                                      ),
+                                      // Text(
+                                      //   cartdish.dishquantity.toString(),
+                                      //   style:   TextStyle(
+                                      //       color: Colors.grey,
+                                      //       fontSize: 25.sp,
+                                      //       fontWeight: FontWeight.w500),
+                                      // ),
+                                        CustomText(
+                                        //"₹ ${cartdish.priceperquantity.toString()}",
+                                         text: "₹ ${cartdish.priceperquantity.toString()}",
+                                         fontSize: 15.sp,
+                                           fontWeight: FontWeight.w500,
+                              color: Color.fromRGBO(50, 52, 62, 1),
+                                      )
                                     ],
                                   )
                                 ],
@@ -163,12 +185,13 @@ Column addressDetailCheckOut(GetAddressUsingIdSuccess state) {
                           borderRadius: BorderRadius.circular(5),
                           border: Border.all(
                               color: isCod
-                                  ? primarycolor
+                                  ? AppColors.primaryColor
                                   : const Color.fromARGB(
                                       255, 166, 165, 165))),
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Transform.rotate(
                               angle: 90 * math.pi / 180,
@@ -178,10 +201,11 @@ Column addressDetailCheckOut(GetAddressUsingIdSuccess state) {
                               ),
                             ),
                             const SizedBox(width: 5),
-                            Text(paymentoption,
-                                style: GoogleFonts.rubik(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 15)),
+                            CustomText(
+                              text : paymentoption,
+                              fontSize: 15.sp,
+                              color: Color.fromRGBO(70, 78, 87, 1),
+                                 ),
                           ],
                         ),
                       ),
@@ -208,18 +232,24 @@ Row totalBillInAppBar({required String text , required String carttotalprice}) {
 
  Container conformPaymentButton({required String text}) {
     return Container(
-                            height: 40,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: primarycolor,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Text(text,
-                                  style: GoogleFonts.breeSerif(
-                                      color: Colors.white, fontSize: 18)),
-                            ),
-                          );
+                               
+                                height: 50.h,
+                                // 40,
+                                
+                                //140,
+                                decoration: BoxDecoration(
+                                  color: AppColors.primaryColor,
+                                  borderRadius:
+                                      BorderRadius.circular(10),
+                                ),
+                                child:   Center(
+                                  child: CustomText(
+                                    text:  text ,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                    
+                                  ),
+                                ),
+                              );
   }
   

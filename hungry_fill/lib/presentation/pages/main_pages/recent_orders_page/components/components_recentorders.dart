@@ -3,10 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
+import 'package:hungry_fill/core/constants/constant.dart';
 import 'package:hungry_fill/data/model/order_model/order_model.dart';
 import 'package:hungry_fill/presentation/bloc/order_bloc/order_bloc.dart';
 import 'package:hungry_fill/presentation/pages/cart_page/widgets/bill_details_widgets.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/recent_orders_page/widgets/cancel_button.dart';
+import 'package:hungry_fill/widgets/custom_text.dart';
 
 //appbar
 PreferredSize preferredSizedAppBar(BuildContext context,
@@ -18,16 +20,17 @@ PreferredSize preferredSizedAppBar(BuildContext context,
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Order ID : ${orderdetail.orderid}",
-              style: GoogleFonts.nunitoSans(
-                  color: Colors.black,
-                  fontSize: 15.sp,
-                  fontWeight: FontWeight.w600)),
-          Text("12:00 PM | 09/12/2000",
-              style: GoogleFonts.nunitoSans(
-                  color: const Color.fromARGB(255, 120, 120, 120),
-                  fontSize: 12.sp,
-                  fontWeight: FontWeight.w600)),
+          CustomText(
+              text: "Order ID : ${orderdetail.orderid}",
+              fontSize: 14.sp,
+              color: Colors.black,
+             ),
+          CustomText(
+            text:"12:00 PM | 09/12/2000",
+            color: const Color.fromARGB(255, 120, 120, 120),
+            fontSize: 12.sp,
+
+              ),
         ],
       ),
       leading: GestureDetector(
@@ -70,7 +73,7 @@ Future<dynamic> cancelDialog(BuildContext context, OrderModel orderdetail) {
 //bill details
 Container billDetailsRecentOrder({required OrderModel orderdetail}) {
   return Container(
-    height: 100,
+    //height: 100,
     width: double.infinity,
     decoration: BoxDecoration(
         color:
@@ -86,6 +89,25 @@ Container billDetailsRecentOrder({required OrderModel orderdetail}) {
             amount: "${orderdetail.grandtotal}",
           ),
           const Divider(),
+          BillDetailswidget(
+                              detail: "Item total",
+                              amount:
+                                  "${int.parse(orderdetail.grandtotal.toString()) - (packagingcharge + deliveycharge)}"),
+                          const SizedBox(height: 15),
+                          const BillDetailswidget(
+                              detail: "packaging charges", amount: "10"),
+                          const SizedBox(height: 15),
+                          const BillDetailswidget(
+                            detail: "delivery charges",
+                            amount: "30",
+                          ),
+                          SizedBox(height: 15,),
+                          // const SizedBox(height: 50),
+                          // BillDetailswidget(
+                          //   detail: "Total Amount",
+                          //   amount:
+                          //       "${int.parse(orderdetail.grandtotal.toString()) + packagingcharge + deliveycharge}",
+                          // ),
           Row(
             children: [
               orderdetail.paymentType == 'Cash On Delivery'
@@ -225,7 +247,7 @@ Container dishDetailRecentOrder(
                           onTap: () {
                             cancelDialog(context , orderdetail);
                           },
-                          child: const CancelButton(buttontext: 'Cancel Order', buttoncolor: primarycolor, buttontextcolor: Colors.white ,),
+                          child:   CancelButton(buttontext: 'Cancel Order', buttoncolor: AppColors.primaryColor, buttontextcolor: Colors.white ,),
                         )
                       : orderdetail.orderstatus == 'cancelled'
                           ? const CancelButton(buttontext: 'Order cancelled', buttoncolor: Colors.grey, buttontextcolor:  Colors.black )

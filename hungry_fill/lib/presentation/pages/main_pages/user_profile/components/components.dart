@@ -6,52 +6,50 @@ import 'package:hungry_fill/core/constants/constant.dart';
 import 'package:hungry_fill/data/model/user_model/user_model.dart';
 import 'package:hungry_fill/presentation/pages/main_pages/user_profile/user_profile.dart';
 import 'package:hungry_fill/presentation/pages/user_auth/log_in_screen.dart';
+import 'package:hungry_fill/widgets/custom_text.dart';
 
 //Userprofilepage card profilepage
 Container userProfileCard({required UserModel? userinfo}) {
   return Container(
-    height: 130.h,
+    padding: EdgeInsets.all(10),
     width: double.infinity,
     decoration: BoxDecoration(
-        color: primarycolor, borderRadius: BorderRadius.circular(20)),
-    child: Padding(
-      padding: const EdgeInsets.all(15.0),
-      child: Row(
-        children: [
-          Container(
-            width: 95.w,
-            height: 95.h,
-            decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white,
-                image: DecorationImage(
-                    image: AssetImage("assets/userprofile.jpg"))),
-          ),
-            SizedBox(width: 25.w),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-                SizedBox(
-                height: 20.h,
+      
+          borderRadius: BorderRadius.circular(20)),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          width: 95.w,
+          height: 95.h,
+          decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              
+              image: DecorationImage(
+                  image: AssetImage("assets/person.png"))),
+        ),
+          SizedBox(width: 25.w),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+              
+            SizedBox(
+              width: 120.w,
+              child: CustomText(
+                text:  userinfo!.username!,
+                fontSize: 20.sp,
+                fontWeight: FontWeight.bold,
+                color: Color.fromRGBO(50, 52, 62, 1),
               ),
-              SizedBox(
-                width: 120.w,
-                child: Text(
-                  userinfo!.username!,
-                  style: GoogleFonts.abhayaLibre(
-                      fontSize: 26.sp, color: Colors.white),
-                  overflow: TextOverflow.ellipsis,
-                  softWrap: true,
-                ),
-              ),
-              Text(
-                "Edit Profile >",
-                style: GoogleFonts.aBeeZee(fontSize: 12.sp, color: Colors.white),
-              ),
-            ],
-          )
-        ],
-      ),
+            ),
+            CustomText(
+              text: 'view >',
+              fontSize: 14.sp,
+              color: Color.fromRGBO(160, 165, 185, 1),
+              )
+          ],
+        )
+      ],
     ),
   );
 }

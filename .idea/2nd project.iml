@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/hungry_fill/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/hungry_fill/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/hungry_fill/build" />
+      <excludeFolder url="file://$MODULE_DIR$/hungry_fill_admin/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/hungry_fill_admin/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/hungry_fill_admin/build" />
+      <excludeFolder url="file://$MODULE_DIR$/hungryfill_restaurant/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/hungryfill_restaurant/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/hungryfill_restaurant/build" />
+      <excludeFolder url="file://$MODULE_DIR$/hungryfill_restaurant/build/web/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/hungryfill_restaurant/build/web/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/hungryfill_restaurant/build/web/build" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

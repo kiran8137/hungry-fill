@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hungry_fill/widgets/custom_text.dart';
 
 class OnboardingScreen1 extends StatelessWidget {
   const OnboardingScreen1({super.key});
@@ -18,19 +20,27 @@ class OnboardingScreen1 extends StatelessWidget {
             child: Image.asset('assets/3697355.png'),
           ),
 
-          const SizedBox(
-            child: Text('Explore,Order and Enjoy',
-            style: TextStyle(fontSize: 27,fontWeight: FontWeight.bold),
+            SizedBox(
+            child: CustomText(
+             text:  'All your favorites',
+             fontSize: 24.sp,
+             fontWeight: FontWeight.w900,
+             color: Color.fromRGBO(50, 52, 62, 1),
             ),
             
-          ),
+                      ),
 
-           const  SizedBox(
-            child: Text('Your Favorite Meals',
-            style: TextStyle(fontSize: 27,fontWeight: FontWeight.bold),
-            ),
-            
-          )
+           Padding(
+             padding: const EdgeInsets.symmetric(horizontal: 12),
+             child: CustomText(
+               text:  'Get all your loved foods in one once place,you just place the orer we do the rest',
+               fontSize: 16.sp,
+                overflow: TextOverflow.visible,
+                maxLines: 2,
+               color: Color.fromRGBO(100, 105, 130, 1),
+               textAlign: TextAlign.center,
+              ),
+           ),
         ],
       )),
     );

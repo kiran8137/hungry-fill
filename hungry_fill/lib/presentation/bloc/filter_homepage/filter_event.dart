@@ -18,3 +18,4 @@ class GetFilteredDishes extends FilterEvent{
    
   List<Object> get props => [dishCategoryId];
 }
+

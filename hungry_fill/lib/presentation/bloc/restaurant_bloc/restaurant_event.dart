@@ -33,3 +33,14 @@ class RemoveRestaurantInWishList extends RestaurantEvent{
 
   
 }
+
+class SearchRestaurantEvent extends RestaurantEvent {
+  final String restaurantName;
+
+const  SearchRestaurantEvent({required this.restaurantName});
+
+@override
+  // TODO: implement props
+  List<Object> get props => [restaurantName];
+  
+}

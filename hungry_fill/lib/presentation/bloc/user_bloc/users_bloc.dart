@@ -28,7 +28,7 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
       if (currentuser != null) {
         emit(UserLoadedState(userdetails: currentuser));
       } else {
-        log("no user ");
+         emit(UserLoadedError());
       }
     } catch (error) {
       log(error.toString());

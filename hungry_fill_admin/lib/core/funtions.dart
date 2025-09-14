@@ -2,6 +2,7 @@
 import 'dart:developer';
  
  
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
@@ -29,3 +30,15 @@ Future<String> saveImageToStorage({required String filename , required Uint8List
     throw Exception(error.toString());
   }
 }
+
+
+
+Future<void> signOut()async {
+     
+     try{
+      await FirebaseAuth.instance.signOut();
+     }catch(error){
+      log(error.toString());
+     }
+  }
+  

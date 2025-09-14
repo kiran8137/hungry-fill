@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/presentation/pages/cart_page/cart_restauants.dart';
+import 'package:hungry_fill/widgets/custom_text.dart';
 
 
 
@@ -12,7 +13,7 @@ import 'package:hungry_fill/presentation/pages/cart_page/cart_restauants.dart';
 FloatingActionButton floatingActionButton(BuildContext context) {
     return FloatingActionButton.extended(
       label: const Icon(Icons.shopping_cart,color: Colors.white,),
-      backgroundColor: primarycolor,
+      backgroundColor: AppColors.primaryColor,
       onPressed: (){
         Navigator.push(context, MaterialPageRoute(builder: (context)=> const Cart()));
       });
@@ -43,12 +44,11 @@ SnackBar scaffoldMessenger({required String message , required Color color }) {
   }
 
 
-Text headingText({required String text}) {
-    return Text(
-                    text,
-                    style:   TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w500,
-                        color: Color.fromARGB(255, 123, 123, 123)),
+Widget headingText({required String text}) {
+    return CustomText(
+                    text: text,
+                    fontSize: 16.sp,
+                    color: Color.fromRGBO(50, 52, 62, 1),
+                     
                   );
   }

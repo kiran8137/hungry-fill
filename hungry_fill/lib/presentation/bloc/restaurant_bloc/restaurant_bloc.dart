@@ -18,7 +18,7 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
     on<AddRestaurantToWishList>(addRestaurantToWishList);
     on<GetRestaurantsInWishList>(getRestaurantInWishList);
     on<RemoveRestaurantInWishList>(removeRestaurantFromWishlist);
-    
+    on<SearchRestaurantEvent>(searchRestaurant);
   }
 
 
@@ -67,9 +67,9 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
       if(restaurants.isNotEmpty){
         emit(GetRestaurantsInWishListSucces(wishlistrestaurant: restaurants));
       }else{
-        emit(GetRestaurantsInWishListErrorState());
+        emit(GetRestaurantsInWishListEmtyState());
       }
-
+      
     }catch(error){
       log(error.toString());
     }
@@ -80,8 +80,22 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
     try{
       await restaurantrepository.removeRestaurantFromWishist(restaurantid: event.restaurantid);
       emit(RemoveRestaurantsInWishListSucces());
+       //await getRestaurantInWishList(GetRestaurantsInWishList(), emit);
     }catch(error){
       log(error.toString());
+    }
+  }
+
+  FutureOr<void> searchRestaurant(SearchRestaurantEvent event, Emitter<RestaurantState> emit) async{
+    try{
+       List<RestaurantModel> result = await restaurantrepository.searchRestaurants(query: event.restaurantName);
+       if(result.isNotEmpty){
+        emit(SearchRestaurantSuccess(restaurants: result));
+       }else{
+        emit(SearchRestaurantEmptyState());
+       }
+    }catch(e){
+      log(e.toString());
     }
   }
 }

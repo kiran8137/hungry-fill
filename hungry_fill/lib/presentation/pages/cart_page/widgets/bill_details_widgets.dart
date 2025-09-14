@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hungry_fill/widgets/custom_text.dart';
 
 class BillDetailswidget extends StatelessWidget {
   const BillDetailswidget({
@@ -15,18 +16,16 @@ class BillDetailswidget extends StatelessWidget {
     return   Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(detail,
-        style:   TextStyle(
-          fontSize: 17.sp,
-          fontWeight: FontWeight.w500
-        ),
+        CustomText(
+        text : detail,
+        fontSize: 14.sp,
+        color: Color.fromRGBO(160, 165, 186, 1)
         ),
     
-        Text("₹ $amount",
-        style:   TextStyle(
-          fontSize: 17.sp
-          
-        ),
+        CustomText(
+        text:  "₹ $amount",
+        fontSize: 15.sp,
+        color: Color.fromRGBO(24, 28, 46, 1),
         ),
     
     
