@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hungry_fill/core/color/colors.dart';
 import 'package:hungry_fill/core/constants/assets.dart';
+import 'package:hungry_fill/core/functions/fcm.dart';
 import 'package:hungry_fill/data/model/user_model/user_model.dart';
 
 import 'package:hungry_fill/presentation/bloc/filter_homepage/filter_bloc.dart';
@@ -197,11 +198,16 @@ class _MainPageState extends State<MainPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomText(
-                        text: 'hey kiran, good morning',
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromRGBO(30, 29, 29, 1),
+                      GestureDetector(
+                        onTap: ()async {
+                       // await NotificationService().showNotificationo(title: 'Hungryfill', body: 'testing');
+                        },
+                        child: CustomText(
+                          text: 'hey kiran, good morning',
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromRGBO(30, 29, 29, 1),
+                        ),
                       ),
                       SizedBox(height: 15.h),
                       Column(

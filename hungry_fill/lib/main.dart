@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hungry_fill/core/functions/fcm.dart';
 import 'package:hungry_fill/data/repository/auth_repo_impl/authentication_repo.dart';
 import 'package:hungry_fill/data/repository/cart_repo_imp/cart_repo_impl.dart';
 import 'package:hungry_fill/data/repository/dish_repo_imp/dish_repo_impl.dart';
@@ -29,6 +30,8 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
 );
+await NotificationService().initializeNotification();
+await FirebaseMessageServices().initializeFcm();
   runApp(const MyApp());
 }
 

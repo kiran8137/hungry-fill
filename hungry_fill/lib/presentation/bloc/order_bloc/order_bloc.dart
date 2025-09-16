@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hungry_fill/core/functions/fcm.dart';
 import 'package:hungry_fill/data/model/cart_model/cart_model.dart';
 import 'package:hungry_fill/data/model/order_model/order_model.dart';
  
@@ -38,7 +39,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     try{
       orderrepositoy.placeOrder(order: event.order, restaurantId: event.restaurantId , addressId: event.addressid);
       emit(PlaceOrderSuccess());
-        
+      await NotificationService().showNotificationo(title: 'Successfully Ordered', body: 'Order will reach soon to you door step');
     }catch(error){
       log(error.toString());
     }
